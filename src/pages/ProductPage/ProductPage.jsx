@@ -1,9 +1,10 @@
 import { Box, Button, Flex, Heading, Section, Text } from "@radix-ui/themes";
 import Slider from "../../components/Slider/Slider.jsx";
 import ProductAccordion from "../../components/ProductAccordion/ProductAccordion.jsx";
+import AboutProduct from "../../components/AboutProduct/AboutProduct.jsx";
+import SelectColor from "../../components/SelectColor/SelectColor.jsx";
 
 import css from "./ProductPage.module.css";
-import AboutProduct from "../../components/AboutProduct/AboutProduct.jsx";
 
 export default function ProductPage() {
   return (
@@ -19,6 +20,7 @@ export default function ProductPage() {
               $100
             </Text>
             <ProductAccordion />
+            <SelectColor />
             <Flex justify="center">
               <Button className={css.buyBtn} size="3" mt="5" mb="4" color="black">
                 ADD TO CART

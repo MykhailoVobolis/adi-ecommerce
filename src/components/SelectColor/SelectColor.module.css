@@ -1,0 +1,13 @@
+/* reset */
+button {
+  all: unset;
+}
+
+.selectColorForm {
+  margin-bottom: 10px;
+}
+
+.RadioGroupRoot {
+  display: flex;
+  gap: 14px;
+}
