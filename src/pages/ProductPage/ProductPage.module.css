@@ -1,12 +1,12 @@
 .pageContainer {
   background-color: var(--accent-1);
-  height: calc(100vh - 80px);
-  padding: 0;
+  height: 720px;
+  padding: 0px;
 }
 
 .descContainer {
   padding: 30px;
-  max-width: 50%;
+  width: 50%;
 }
 
 .buyBtn {

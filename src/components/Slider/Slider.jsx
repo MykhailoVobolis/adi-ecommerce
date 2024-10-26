@@ -23,7 +23,6 @@ export default function Slider() {
     { src: "/src/assets/img/adidas7.avif", alt: "Product Image 7" },
     { src: "/src/assets/img/adidas8.avif", alt: "Product Image 8" },
     { src: "/src/assets/img/adidas9.avif", alt: "Product Image 9" },
-    { src: "/src/assets/img/adidas10.avif", alt: "Product Image 10" },
   ];
 
   return (
@@ -45,7 +44,7 @@ export default function Slider() {
       <Swiper
         onSwiper={setThumbsSwiper}
         spaceBetween={12}
-        slidesPerView={10}
+        slidesPerView={9}
         freeMode={true}
         watchSlidesProgress={true}
         modules={[FreeMode, Navigation, Thumbs]}
