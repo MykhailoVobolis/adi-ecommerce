@@ -1,0 +1,17 @@
+.header {
+  max-width: 100%;
+  background-color: var(--main-white-color);
+  position: sticky;
+  top: 0px;
+  z-index: 999;
+}
+
+.navContainer {
+  max-width: 1184px;
+  margin-left: auto;
+  margin-right: auto;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px 16px;
+}

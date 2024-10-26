@@ -1,0 +1,56 @@
+.sliderContainer {
+  width: 50%;
+  height: auto;
+}
+
+.mainImage {
+  width: 100%;
+}
+
+.mySwiper {
+  width: 70%;
+  margin-top: -75px;
+  box-sizing: border-box;
+}
+
+.secondaryImage {
+  width: 100%;
+  border: solid 1px var(--accent-9);
+  cursor: pointer;
+}
+
+.mySwiper .swiper-slide {
+  opacity: 0.4;
+}
+
+.mySwiper .swiper-slide-thumb-active {
+  border-bottom: solid 2px var(--accent-12);
+  opacity: 1;
+}
+
+.swiper-button-next,
+.swiper-button-prev {
+  font-weight: bold;
+  color: var(--accent-12);
+  transition: color var(--animation);
+}
+
+.swiper-button-next:hover,
+.swiper-button-prev:hover {
+  color: var(--main-white-color);
+}
+
+.swiper-button-next::after,
+.swiper-button-prev::after {
+  font-size: 16px;
+  padding: 10px 14px;
+  border: solid 1px var(--accent-9);
+  background-color: var(--main-white-color);
+  transition: background-color var(--animation);
+}
+
+.swiper-button-next:hover::after,
+.swiper-button-prev:hover::after {
+  background-color: var(--main-black-color);
+  border-color: var(--main-black-color);
+}
