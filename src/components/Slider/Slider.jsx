@@ -41,7 +41,7 @@ export default function Slider({ product, curentColor }) {
         onSwiper={(swiper) => {
           if (swiper && !swiper.destroyed) {
             setThumbsSwiper(swiper);
-            setTimeout(() => swiper.update(), 0);
+            setTimeout(() => swiper.update(), 200);
           }
         }}
         spaceBetween={12}
