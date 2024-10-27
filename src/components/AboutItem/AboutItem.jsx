@@ -6,7 +6,7 @@ export default function About({ title, description, image, reverse }) {
     <Flex direction={reverse && "row-reverse"}>
       <Flex className={css.content} direction="column" align="center" justify="center">
         <Box maxWidth="392px">
-          <Heading as="h2" size="6" mb="4" weight="regular" style={{ textTransform: "uppercase" }}>
+          <Heading as="h2" size="6" mb="4" weight="bold" style={{ textTransform: "uppercase" }}>
             {title}
           </Heading>
           <Text as="p" size="3" weight="regular">

@@ -25,20 +25,24 @@ const AccordionContent = React.forwardRef(({ children, className, ...props }, fo
 
 AccordionContent.displayName = "AccordionContent";
 
-export default function ProductAccordion() {
+export default function ProductAccordion({ product }) {
+  const {
+    description: {
+      main: { title: mainTitle, text: mainText },
+    },
+    details,
+  } = product;
+
   return (
     <Accordion.Root className={css.AccordionRoot} type="single" defaultValue={"item-1"} collapsible="true">
       <Accordion.Item className={css.AccordionItem} value="item-1">
         <AccordionTrigger>Description</AccordionTrigger>
         <AccordionContent>
-          <Heading as="h2" size="6" mb="4" style={{ textTransform: "uppercase" }}>
-            Casual shoes with a sporty back story
+          <Heading as="h2" size="6" mb="4" weight="bold" style={{ textTransform: "uppercase" }}>
+            {mainTitle}
           </Heading>
           <Text as="p" size="3" weight="regular">
-            Rediscover a legend from the archives. The adidas SL 72 shoes were originally released in 1972 to give
-            runners an edge on the track. Decades later, their design still turns heads. This version features a nylon
-            upper with suede overlays that provides retro style. Your feet stay cushioned thanks to an EVA midsole while
-            a grippy outsole keeps you grounded.
+            {mainText}
           </Text>
         </AccordionContent>
       </Accordion.Item>
@@ -46,10 +50,9 @@ export default function ProductAccordion() {
       <Accordion.Item className={css.AccordionItem} value="item-2">
         <AccordionTrigger>Details</AccordionTrigger>
         <AccordionContent>
-          The upper is made of nylon with suede inserts for durability and a stylish look, while the synthetic lining
-          ensures comfort and wear resistance. The EVA midsole provides lightweight cushioning, and the standard fit
-          suits different foot types. The grippy, rugged rubber outsole offers excellent traction, and the laces allow
-          for secure fastening. This model is available in Cloud White / Core Black / Spark, model code - IH4823.
+          <Text tas="p" size="3" weight="regular">
+            {details}
+          </Text>
         </AccordionContent>
       </Accordion.Item>
     </Accordion.Root>
