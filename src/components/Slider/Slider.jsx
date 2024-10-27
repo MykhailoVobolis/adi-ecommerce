@@ -42,7 +42,7 @@ export default function Slider({ product }) {
       </Swiper>
 
       <Swiper
-        onSwiper={setThumbsSwiper}
+        onSwiper={(swiper) => setThumbsSwiper(swiper)}
         spaceBetween={12}
         slidesPerView={9}
         freeMode={true}
