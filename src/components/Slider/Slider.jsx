@@ -13,29 +13,7 @@ import "./swiperStyles.css";
 export default function Slider({ product, curentColor }) {
   const [thumbsSwiper, setThumbsSwiper] = useState(null);
 
-  const {
-    images: {
-      variants: {
-        white: { color: whiteColor, images: whiteImages },
-        blue: { color: blueColor, images: blueImages },
-        green: { color: greenColor, images: greenImages },
-      },
-    },
-  } = product;
-
-  let slides;
-
-  switch (curentColor) {
-    case whiteColor:
-      slides = whiteImages;
-      break;
-    case blueColor:
-      slides = blueImages;
-      break;
-    case greenColor:
-      slides = greenImages;
-      break;
-  }
+  const slides = product.images.variants[curentColor]?.images || [];
 
   useEffect(() => {
     if (thumbsSwiper) {
@@ -60,12 +38,11 @@ export default function Slider({ product, curentColor }) {
       </Swiper>
 
       <Swiper
-        // onSwiper={setThumbsSwiper}
         onSwiper={(swiper) => {
-          setThumbsSwiper(swiper); // Зберігаємо посилання на слайдер
+          setThumbsSwiper(swiper);
           setTimeout(() => {
-            swiper.update(); // Виконуємо оновлення з затримкою
-          }, 0); // Використовуємо 0, щоб дозволити JavaScript завершити поточні задачі
+            swiper.update();
+          }, 0);
         }}
         spaceBetween={12}
         slidesPerView={9}
