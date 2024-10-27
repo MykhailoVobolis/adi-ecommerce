@@ -19,14 +19,14 @@ export default function Slider({ product, curentColor }) {
     if (thumbsSwiper) {
       thumbsSwiper.update();
     }
-  }, [thumbsSwiper]);
+  }, [thumbsSwiper, curentColor]);
 
   return (
     <Box className="sliderContainer">
       <Swiper
         loop={true}
         navigation={true}
-        thumbs={thumbsSwiper ? { swiper: thumbsSwiper } : undefined}
+        thumbs={thumbsSwiper && !thumbsSwiper.destroyed ? { swiper: thumbsSwiper } : undefined}
         modules={[FreeMode, Navigation, Thumbs, Keyboard]}
         keyboard={{ enabled: true }}
         className="mySwiper2">
@@ -39,10 +39,10 @@ export default function Slider({ product, curentColor }) {
 
       <Swiper
         onSwiper={(swiper) => {
-          setThumbsSwiper(swiper);
-          setTimeout(() => {
-            swiper.update();
-          }, 0);
+          if (swiper && !swiper.destroyed) {
+            setThumbsSwiper(swiper);
+            setTimeout(() => swiper.update(), 0);
+          }
         }}
         spaceBetween={12}
         slidesPerView={9}
