@@ -1,7 +1,7 @@
 import { Swiper, SwiperSlide } from "swiper/react";
 import { FreeMode, Navigation, Thumbs, Keyboard } from "swiper/modules";
 import { Box } from "@radix-ui/themes";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 import "swiper/css";
 import "swiper/css/free-mode";
@@ -25,6 +25,12 @@ export default function Slider({ product }) {
 
   const slides = whiteImages;
 
+  useEffect(() => {
+    if (thumbsSwiper) {
+      thumbsSwiper.update();
+    }
+  }, [thumbsSwiper]);
+
   return (
     <Box className="sliderContainer">
       <Swiper
@@ -42,7 +48,7 @@ export default function Slider({ product }) {
       </Swiper>
 
       <Swiper
-        onSwiper={(swiper) => setThumbsSwiper(swiper)}
+        onSwiper={setThumbsSwiper}
         spaceBetween={12}
         slidesPerView={9}
         freeMode={true}
