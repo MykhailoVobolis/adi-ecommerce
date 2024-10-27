@@ -10,7 +10,7 @@ import "swiper/css/thumbs";
 
 import "./swiperStyles.css";
 
-export default function Slider({ product }) {
+export default function Slider({ product, curentColor }) {
   const [thumbsSwiper, setThumbsSwiper] = useState(null);
 
   const {
@@ -23,7 +23,19 @@ export default function Slider({ product }) {
     },
   } = product;
 
-  const slides = whiteImages;
+  let slides;
+
+  switch (curentColor) {
+    case whiteColor:
+      slides = whiteImages;
+      break;
+    case blueColor:
+      slides = blueImages;
+      break;
+    case greenColor:
+      slides = greenImages;
+      break;
+  }
 
   useEffect(() => {
     if (thumbsSwiper) {
