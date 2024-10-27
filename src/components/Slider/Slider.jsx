@@ -60,7 +60,13 @@ export default function Slider({ product, curentColor }) {
       </Swiper>
 
       <Swiper
-        onSwiper={setThumbsSwiper}
+        // onSwiper={setThumbsSwiper}
+        onSwiper={(swiper) => {
+          setThumbsSwiper(swiper); // Зберігаємо посилання на слайдер
+          setTimeout(() => {
+            swiper.update(); // Виконуємо оновлення з затримкою
+          }, 0); // Використовуємо 0, щоб дозволити JavaScript завершити поточні задачі
+        }}
         spaceBetween={12}
         slidesPerView={9}
         freeMode={true}
