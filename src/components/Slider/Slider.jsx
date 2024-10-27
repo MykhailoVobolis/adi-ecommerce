@@ -26,7 +26,7 @@ export default function Slider({ product, curentColor }) {
       <Swiper
         loop={true}
         navigation={true}
-        thumbs={thumbsSwiper && !thumbsSwiper.destroyed ? { swiper: thumbsSwiper } : undefined}
+        thumbs={thumbsSwiper ? { swiper: thumbsSwiper } : undefined}
         modules={[FreeMode, Navigation, Thumbs, Keyboard]}
         keyboard={{ enabled: true }}
         className="mySwiper2">
