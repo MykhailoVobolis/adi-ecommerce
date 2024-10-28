@@ -15,19 +15,15 @@ export default function Slider({ product, curentColor }) {
 
   const slides = product.images.variants[curentColor]?.images || [];
 
-  useEffect(() => {
-    if (thumbsSwiper) {
-      thumbsSwiper.update();
-    }
-  }, [thumbsSwiper, curentColor]);
+  const isProduction = process.env.NODE_ENV === "production";
+  const thumbsConfig = isProduction ? { swiper: thumbsSwiper } : thumbsSwiper ? { swiper: thumbsSwiper } : undefined;
 
   return (
     <Box className="sliderContainer">
       <Swiper
         loop={true}
         navigation={true}
-        thumbs={{ swiper: thumbsSwiper }}
-        // thumbs={thumbsSwiper ? { swiper: thumbsSwiper } : undefined}
+        thumbs={thumbsConfig}
         modules={[FreeMode, Navigation, Thumbs, Keyboard, Zoom]}
         keyboard={{ enabled: true }}
         zoom={{ maxRatio: 4, minRatio: 1 }}
