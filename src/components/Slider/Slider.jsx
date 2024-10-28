@@ -2,6 +2,7 @@ import { Swiper, SwiperSlide } from "swiper/react";
 import { FreeMode, Navigation, Thumbs, Keyboard, Zoom } from "swiper/modules";
 import { Box } from "@radix-ui/themes";
 import { useState } from "react";
+import { useMedia } from "react-use";
 
 import "swiper/css";
 import "swiper/css/free-mode";
@@ -12,6 +13,8 @@ import "./swiperStyles.css";
 
 export default function Slider({ product, curentColor }) {
   const [thumbsSwiper, setThumbsSwiper] = useState(null);
+
+  const isTablet = useMedia("(min-width: 768px)");
 
   const slides = product.images.variants[curentColor]?.images || [];
 
@@ -38,7 +41,7 @@ export default function Slider({ product, curentColor }) {
       <Swiper
         onSwiper={setThumbsSwiper}
         spaceBetween={12}
-        slidesPerView={9}
+        slidesPerView={isTablet ? 9 : 5}
         freeMode={true}
         watchSlidesProgress={true}
         modules={[FreeMode, Navigation, Thumbs]}
