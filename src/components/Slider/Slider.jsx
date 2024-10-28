@@ -1,7 +1,7 @@
 import { Swiper, SwiperSlide } from "swiper/react";
 import { FreeMode, Navigation, Thumbs, Keyboard, Zoom } from "swiper/modules";
 import { Box } from "@radix-ui/themes";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 
 import "swiper/css";
 import "swiper/css/free-mode";

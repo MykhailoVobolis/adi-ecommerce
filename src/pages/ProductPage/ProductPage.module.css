@@ -1,12 +1,10 @@
 .pageContainer {
   background-color: var(--accent-1);
-  height: 720px;
   padding: 0px;
 }
 
 .descContainer {
-  padding: 30px;
-  width: 50%;
+  padding: 20px;
 }
 
 .buyBtn {
@@ -15,4 +13,15 @@
   border-radius: 0;
   background-color: var(--main-black-color);
   cursor: pointer;
+}
+
+@media screen and (min-width: 768px) {
+  .pageContainer {
+    height: 720px;
+  }
+
+  .descContainer {
+    padding: 30px;
+    width: 50%;
+  }
 }
