@@ -40,12 +40,7 @@ export default function Slider({ product, curentColor }) {
       </Swiper>
 
       <Swiper
-        onSwiper={(swiper) => {
-          if (swiper && !swiper.destroyed) {
-            setThumbsSwiper(swiper);
-            setTimeout(() => swiper.update(), 200);
-          }
-        }}
+        onSwiper={setThumbsSwiper}
         spaceBetween={12}
         slidesPerView={9}
         freeMode={true}
