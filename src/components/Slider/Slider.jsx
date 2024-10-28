@@ -1,5 +1,5 @@
 import { Swiper, SwiperSlide } from "swiper/react";
-import { FreeMode, Navigation, Thumbs, Keyboard } from "swiper/modules";
+import { FreeMode, Navigation, Thumbs, Keyboard, Zoom } from "swiper/modules";
 import { Box } from "@radix-ui/themes";
 import { useEffect, useState } from "react";
 
@@ -26,12 +26,14 @@ export default function Slider({ product, curentColor }) {
       <Swiper
         loop={true}
         navigation={true}
-        thumbs={thumbsSwiper ? { swiper: thumbsSwiper } : undefined}
-        modules={[FreeMode, Navigation, Thumbs, Keyboard]}
+        thumbs={{ swiper: thumbsSwiper }}
+        // thumbs={thumbsSwiper ? { swiper: thumbsSwiper } : undefined}
+        modules={[FreeMode, Navigation, Thumbs, Keyboard, Zoom]}
         keyboard={{ enabled: true }}
+        zoom={{ maxRatio: 4, minRatio: 1 }}
         className="mySwiper2">
         {slides.map((slide, index) => (
-          <SwiperSlide key={index}>
+          <SwiperSlide key={index} zoom>
             <img className="mainImage" src={slide.src} alt={slide.alt} />
           </SwiperSlide>
         ))}
