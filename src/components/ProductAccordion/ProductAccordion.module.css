@@ -7,17 +7,18 @@ h3 {
 .AccordionRoot {
   background-color: var(--accent-1);
   width: 100%;
+  margin-bottom: 10px;
 }
 
 .AccordionItem {
   overflow: hidden;
   margin-top: 1px;
-  border-bottom: solid 1px var(--accent-6);
+  border-bottom: solid 1px var(--accent-5);
 }
 
 .AccordionItem:first-child {
   margin-top: 0;
-  border-top: solid 1px var(--accent-6);
+  border-top: solid 1px var(--accent-5);
 }
 
 .AccordionItem:focus-within {
@@ -81,5 +82,11 @@ h3 {
   }
   to {
     height: 0;
+  }
+}
+
+@media screen and (min-width: 768px) {
+  .AccordionRoot {
+    margin-bottom: 10px;
   }
 }

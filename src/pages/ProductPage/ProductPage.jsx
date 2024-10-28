@@ -27,21 +27,27 @@ export default function ProductPage() {
       <Section className={css.pageContainer}>
         <Flex>
           <Flex minWidth="0" direction={isTablet ? "row" : "column-reverse"}>
-            <Slider product={product} curentColor={curentColor} />
-            <Box className={css.descContainer}>
-              <Heading as="h1" size="8" mb="4" style={{ textTransform: "uppercase" }}>
-                {productName}
-              </Heading>
-              <Text as="p" size="6" mb="6" weight="bold">
-                ${price}
-              </Text>
-              <ProductAccordion product={product} />
-              <SelectColor changeColor={changeColor} />
-              <Flex justify="center">
-                <Button className={css.buyBtn} size="3" mt="5" mb="4" color="black">
-                  ADD TO CART
-                </Button>
-              </Flex>
+            {isTablet && <Slider product={product} curentColor={curentColor} />}
+            <Box className={css.aboutContainer}>
+              <Box className={css.descContainer}>
+                <Heading as="h1" size="8" mb="4" style={{ textTransform: "uppercase" }}>
+                  {productName}
+                </Heading>
+                <Text as="p" size="6" mb="6" weight="bold">
+                  ${price}
+                </Text>
+              </Box>
+              {!isTablet && <Slider product={product} curentColor={curentColor} />}
+              <Box className={css.secondAboutContainer}>
+                {!isTablet && <SelectColor changeColor={changeColor} />}
+                <ProductAccordion product={product} />
+                {isTablet && <SelectColor changeColor={changeColor} />}
+                <Flex justify="center">
+                  <Button className={css.buyBtn} size="3" mt="5" mb="4">
+                    ADD TO CART
+                  </Button>
+                </Flex>
+              </Box>
             </Box>
           </Flex>
         </Flex>

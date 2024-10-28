@@ -1,0 +1,10 @@
+.footer {
+  background-color: var(--accent-12);
+  padding: 28px 0;
+}
+
+.footerContainer {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
