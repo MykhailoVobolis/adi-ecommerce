@@ -13,6 +13,11 @@
   border-radius: 0;
   background-color: var(--main-black-color);
   cursor: pointer;
+  transition: color var(--animation);
+}
+
+.buyBtn:hover {
+  color: var(--accent-10);
 }
 
 @media screen and (min-width: 768px) {
