@@ -5,6 +5,7 @@ import css from "./App.module.css";
 
 const ProductPage = lazy(() => import("../../pages/ProductPage/ProductPage.jsx"));
 const CartPage = lazy(() => import("../../pages/CartPage/CartPage.jsx"));
+const NotFoundPage = lazy(() => import("../../pages/NotFoundPage/NotFoundPage.jsx"));
 
 export default function App() {
   return (
@@ -12,6 +13,7 @@ export default function App() {
       <Routes>
         <Route path="/" element={<ProductPage />} />
         <Route path="/cart" element={<CartPage />} />
+        <Route path="*" element={<NotFoundPage />} />
       </Routes>
     </Layout>
   );
