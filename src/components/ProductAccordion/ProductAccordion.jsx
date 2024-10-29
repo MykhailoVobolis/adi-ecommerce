@@ -38,8 +38,8 @@ export default function ProductAccordion({ product }) {
       <Accordion.Item className={css.AccordionItem} value="item-1">
         <AccordionTrigger>Description</AccordionTrigger>
         <AccordionContent>
-          <Heading as="h2" size="6" mb="4" weight="bold" style={{ textTransform: "uppercase" }}>
-            {mainTitle}
+          <Heading as="h2" size="6" mb="4" weight="bold">
+            {mainTitle.toUpperCase()}
           </Heading>
           <Text as="p" size="3" weight="regular">
             {mainText}

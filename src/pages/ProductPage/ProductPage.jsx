@@ -30,8 +30,8 @@ export default function ProductPage() {
             {isTablet && <Slider product={product} curentColor={curentColor} />}
             <Box className={css.aboutContainer}>
               <Box className={css.descContainer}>
-                <Heading as="h1" size="8" mb="4" style={{ textTransform: "uppercase" }}>
-                  {productName}
+                <Heading as="h1" size="8" mb="4">
+                  {productName.toUpperCase()}
                 </Heading>
                 <Text as="p" size="6" mb="6" weight="bold">
                   ${price}
