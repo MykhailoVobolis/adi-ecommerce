@@ -1,6 +1,7 @@
 import * as RadioGroup from "@radix-ui/react-radio-group";
-import { Text } from "@radix-ui/themes";
 import RadioInput from "../RadioInput/RadioInput.jsx";
+import { nanoid } from "nanoid";
+import { Text } from "@radix-ui/themes";
 import { useFormik } from "formik";
 
 import css from "./SelectColor.module.css";
@@ -9,6 +10,7 @@ export default function SelectColor({ changeColor, productImagesVariants }) {
   const { variants } = productImagesVariants;
 
   const previewVariants = Object.values(variants).map((variant) => ({
+    _id: nanoid(),
     color: variant.color,
     image: variant.images[0],
   }));
@@ -29,14 +31,14 @@ export default function SelectColor({ changeColor, productImagesVariants }) {
           Colors available
         </Text>
         <RadioGroup.Root className={css.RadioGroupRoot} defaultValue="white" aria-label="View density">
-          {previewVariants.map((variant, index) => (
+          {previewVariants.map(({ _id, color, image }) => (
             <RadioInput
-              key={index}
-              value={variant.color}
-              label={`${variant.color.charAt(0).toUpperCase()}${variant.color.slice(1)}`} // Capitalized
+              key={_id}
+              value={color}
+              label={`${color.charAt(0).toUpperCase()}${color.slice(1)}`} // Capitalized
               setFieldValue={formik.setFieldValue}
               handleSubmit={formik.handleSubmit}
-              image={variant.image}
+              image={image}
             />
           ))}
         </RadioGroup.Root>

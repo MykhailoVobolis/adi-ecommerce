@@ -7,8 +7,8 @@ export default function Footer() {
     <Box as="footer" className={css.footer}>
       <Box className={css.footerContainer}>
         <Text as="p" size="2" style={{ color: "var(--accent-10)" }}>
-          © 2024 | All images and materials are the property of adidas and are used for informational purposes only. We
-          do not claim any ownership.
+          © 2025 | All images and materials are the property of adidas America, Inc. and are used for informational
+          purposes only. We do not claim any ownership.
         </Text>
       </Box>
     </Box>
