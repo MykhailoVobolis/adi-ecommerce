@@ -16,7 +16,7 @@ export default function ProductPage() {
 
   const isTablet = useMedia("(min-width: 768px)");
 
-  const { productName, price } = product;
+  const { productName, price, images } = product;
 
   const changeColor = (color) => {
     setCurentColor(color);
@@ -24,7 +24,7 @@ export default function ProductPage() {
 
   return (
     <>
-      <Section className={css.pageContainer}>
+      <Section className={css.container}>
         <Flex>
           <Flex minWidth="0" direction={isTablet ? "row" : "column-reverse"}>
             {isTablet && <Slider product={product} curentColor={curentColor} />}
@@ -39,9 +39,9 @@ export default function ProductPage() {
               </Box>
               {!isTablet && <Slider product={product} curentColor={curentColor} />}
               <Box className={css.secondAboutContainer}>
-                {!isTablet && <SelectColor changeColor={changeColor} />}
+                {!isTablet && <SelectColor changeColor={changeColor} productImagesVariants={images} />}
                 <ProductAccordion product={product} />
-                {isTablet && <SelectColor changeColor={changeColor} />}
+                {isTablet && <SelectColor changeColor={changeColor} productImagesVariants={images} />}
                 <Flex justify="center">
                   <Button className={css.buyBtn} size="3" mt="5" mb="4">
                     ADD TO CART

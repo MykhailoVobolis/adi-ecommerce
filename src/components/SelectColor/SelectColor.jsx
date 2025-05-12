@@ -5,7 +5,14 @@ import { useFormik } from "formik";
 
 import css from "./SelectColor.module.css";
 
-export default function SelectColor({ changeColor }) {
+export default function SelectColor({ changeColor, productImagesVariants }) {
+  const { variants } = productImagesVariants;
+
+  const previewVariants = Object.values(variants).map((variant) => ({
+    color: variant.color,
+    image: variant.images[0],
+  }));
+
   const formik = useFormik({
     initialValues: {
       color: "white",
@@ -22,24 +29,16 @@ export default function SelectColor({ changeColor }) {
           Colors available
         </Text>
         <RadioGroup.Root className={css.RadioGroupRoot} defaultValue="white" aria-label="View density">
-          <RadioInput
-            value={"white"}
-            lable={"White"}
-            setFieldValue={formik.setFieldValue}
-            handleSubmit={formik.handleSubmit}
-          />
-          <RadioInput
-            value={"blue"}
-            lable={"Blue"}
-            setFieldValue={formik.setFieldValue}
-            handleSubmit={formik.handleSubmit}
-          />
-          <RadioInput
-            value={"green"}
-            lable={"Green"}
-            setFieldValue={formik.setFieldValue}
-            handleSubmit={formik.handleSubmit}
-          />
+          {previewVariants.map((variant, index) => (
+            <RadioInput
+              key={index}
+              value={variant.color}
+              label={`${variant.color.charAt(0).toUpperCase()}${variant.color.slice(1)}`} // Capitalized
+              setFieldValue={formik.setFieldValue}
+              handleSubmit={formik.handleSubmit}
+              image={variant.image}
+            />
+          ))}
         </RadioGroup.Root>
       </form>
     </>

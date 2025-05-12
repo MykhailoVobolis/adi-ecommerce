@@ -9,8 +9,8 @@ export default function NavigationList() {
 
   return (
     <TabNav.Root className={css.navMenu}>
-      <TabNav.Link asChild active={pathname === "/"}>
-        <Link href="/" size={"1"}>
+      <TabNav.Link asChild active={pathname === "/product"}>
+        <Link href="/product" size={"1"}>
           PRODUCT
         </Link>
       </TabNav.Link>

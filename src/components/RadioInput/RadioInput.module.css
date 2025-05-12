@@ -4,9 +4,9 @@
 }
 
 .RadioGroupItem {
-  width: 36px;
-  height: 36px;
-  border: solid 1px var(--accent-11);
+  width: 60px;
+  height: 60px;
+  /* border: solid 1px var(--accent-11); */
   cursor: pointer;
   transition: transform var(--animation);
   position: relative;
@@ -15,9 +15,9 @@
 .RadioGroupItem:hover::after {
   content: "";
   position: absolute;
-  left: -1px;
-  bottom: -3px;
-  width: 38px;
+  left: 0px;
+  bottom: -2px;
+  width: 60px;
   height: 2px;
   background-color: var(--accent-12);
 }
@@ -28,27 +28,18 @@
   justify-content: center;
   width: 100%;
   height: 100%;
-  position: relative;
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 2;
 }
 
 .RadioGroupIndicator::after {
   content: "";
   position: absolute;
-  left: -1px;
-  bottom: -3px;
-  width: 38px;
+  left: 0px;
+  bottom: -2px;
+  width: 60px;
   height: 2px;
   background-color: var(--accent-12);
-}
-
-.RadioGroupItem[value="white"] {
-  background-color: #e5e5e5;
-}
-
-.RadioGroupItem[value="blue"] {
-  background-color: #accaf0;
-}
-
-.RadioGroupItem[value="green"] {
-  background-color: #9fae94;
 }

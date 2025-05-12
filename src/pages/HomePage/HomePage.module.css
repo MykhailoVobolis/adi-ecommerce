@@ -1,0 +1,38 @@
+.sectionContainer {
+  padding: 0px;
+}
+
+.hero {
+  background-image: url("/img/background/hero-bg.webp");
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: 50% 50%;
+  min-width: 320px;
+  max-width: 100%;
+  margin-left: auto;
+  margin-right: auto;
+  padding: 300px 40px 0px 40px;
+  height: 640px;
+}
+
+@media screen and (min-resolution: 192dpi), screen and (min-resolution: 2dppx), screen and (min-devide-pixel-ratio: 2) {
+  .hero {
+    background-image: url("/img/background/hero-bg@2x.webp");
+  }
+}
+
+.descContainer {
+  max-width: 491px;
+}
+
+.heading {
+  color: var(--main-white-color);
+  font-size: 140px;
+  font-weight: 400;
+  line-height: 0.85;
+  font-family: Bebas;
+}
+
+.spase {
+  margin-right: 0.38em;
+}

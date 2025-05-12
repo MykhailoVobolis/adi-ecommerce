@@ -1,4 +1,5 @@
 import { Suspense } from "react";
+import { Box } from "@radix-ui/themes";
 import AppBar from "../AppBar/AppBar.jsx";
 import Footer from "../Footer/Footer.jsx";
 
@@ -6,12 +7,12 @@ import css from "./Layout.module.css";
 
 export default function Layout({ children }) {
   return (
-    <div className={css.pageContainer}>
+    <Box className={css.pageContainer}>
       <AppBar />
-      <main className={css.mainContainer}>
+      <Box as="main" className={css.mainContainer}>
         <Suspense fallback={<div></div>}>{children}</Suspense>
-      </main>
+      </Box>
       <Footer />
-    </div>
+    </Box>
   );
 }
