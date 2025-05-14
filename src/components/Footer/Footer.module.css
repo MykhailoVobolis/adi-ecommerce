@@ -1,6 +1,6 @@
 .footer {
   background-color: var(--accent-12);
-  padding: 28px 16px;
+  padding: 22px 16px;
 }
 
 .footerContainer {
@@ -11,8 +11,7 @@
 
 @media screen and (min-width: 768px) {
   .footer {
-    background-color: var(--accent-12);
-    padding: 28px 40px;
+    padding: 22px 40px;
   }
 
   .footerContainer {

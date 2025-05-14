@@ -12,6 +12,6 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 8px 40px;
+  padding: 0px 40px;
   border-bottom: solid 1px var(--accent-5);
 }

@@ -16,10 +16,22 @@ export default function ProductPage() {
 
   const isTablet = useMedia("(min-width: 768px)");
 
-  const { productName, price, images } = product;
+  const { _id, productName, price, images } = product;
 
   const changeColor = (color) => {
     setCurentColor(color);
+  };
+
+  const handleClick = () => {
+    const cartItem = {
+      _id: _id,
+      productName: productName,
+      price: price,
+      color: curentColor,
+      quantity: 1,
+      image: product.images.variants[curentColor].images[0],
+    };
+    console.log("Product added to cart:", cartItem);
   };
 
   return (
@@ -43,7 +55,7 @@ export default function ProductPage() {
                 <ProductAccordion product={product} />
                 {isTablet && <SelectColor changeColor={changeColor} productImagesVariants={images} />}
                 <Flex justify="center">
-                  <Button className={css.buyBtn} size="3" mt="5" mb="4">
+                  <Button className={css.buyBtn} size="3" mt="5" mb="4" onClick={handleClick}>
                     ADD TO CART
                   </Button>
                 </Flex>

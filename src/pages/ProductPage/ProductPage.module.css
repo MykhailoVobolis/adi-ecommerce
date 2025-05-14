@@ -14,13 +14,15 @@
   width: 100%;
   height: 45px;
   border-radius: 0;
+  border: solid 1px var(--accent-12);
   background-color: var(--accent-12);
   cursor: pointer;
-  transition: color var(--animation);
+  transition: color var(--animation), background-color var(--animation);
 }
 
 .buyBtn:hover {
-  color: var(--accent-10);
+  color: var(--accent-12);
+  background-color: var(--accent-0);
 }
 
 @media screen and (min-width: 768px) {

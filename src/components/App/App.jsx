@@ -6,6 +6,7 @@ const HomePage = lazy(() => import("../../pages/HomePage/HomePage.jsx"));
 const ProductPage = lazy(() => import("../../pages/ProductPage/ProductPage.jsx"));
 const CartPage = lazy(() => import("../../pages/CartPage/CartPage.jsx"));
 const NotFoundPage = lazy(() => import("../../pages/NotFoundPage/NotFoundPage.jsx"));
+const FavoritesPage = lazy(() => import("../../pages/FavoritesPage/FavoritesPage.jsx"));
 
 export default function App() {
   return (
@@ -14,6 +15,7 @@ export default function App() {
         <Route path="/" element={<HomePage />} />
         <Route path="product" element={<ProductPage />} />
         <Route path="cart" element={<CartPage />} />
+        <Route path="favorites" element={<FavoritesPage />} />
         <Route path="*" element={<NotFoundPage />} />
       </Routes>
     </Layout>

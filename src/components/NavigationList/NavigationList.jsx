@@ -1,24 +1,25 @@
-import { Link, TabNav } from "@radix-ui/themes";
-import "@radix-ui/themes/styles.css";
-import { useLocation } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 
+import "@radix-ui/themes/styles.css";
 import css from "./NavigationList.module.css";
 
 export default function NavigationList() {
-  const { pathname } = useLocation();
+  const navItems = [
+    { to: "/men", label: "MEN" },
+    { to: "/women", label: "WOMEN" },
+    { to: "/kids", label: "KIDS" },
+    { to: "/product", label: "PRODUCT" },
+  ];
 
   return (
-    <TabNav.Root className={css.navMenu}>
-      <TabNav.Link asChild active={pathname === "/product"}>
-        <Link href="/product" size={"1"}>
-          PRODUCT
-        </Link>
-      </TabNav.Link>
-      <TabNav.Link asChild active={pathname === "/cart"}>
-        <Link href="/cart" size={"1"}>
-          CART
-        </Link>
-      </TabNav.Link>
-    </TabNav.Root>
+    <ul className={css.navMenu}>
+      {navItems.map(({ to, label, icon }) => (
+        <li key={to}>
+          <NavLink to={to} className={css.link}>
+            {label || icon}
+          </NavLink>
+        </li>
+      ))}
+    </ul>
   );
 }

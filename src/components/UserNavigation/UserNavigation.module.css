@@ -1,0 +1,14 @@
+.userNavMenu {
+  display: flex;
+  gap: 24px;
+  align-items: center;
+}
+
+.link {
+  color: var(--accent-a12);
+}
+
+.userNavMenu li {
+  height: 24px;
+  line-height: 1;
+}

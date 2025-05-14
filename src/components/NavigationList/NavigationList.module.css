@@ -1,3 +1,32 @@
 .navMenu {
+  display: flex;
   gap: 40px;
+  align-items: center;
+}
+
+.link {
+  position: relative;
+  color: var(--accent-a12);
+  text-decoration: none;
+  font-size: 14px;
+  font-weight: 700;
+  letter-spacing: 1.87px;
+  transition: color var(--animation);
+}
+
+.link::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: -6px;
+  width: 100%;
+  height: 2px;
+  background-color: var(--accent-a12);
+  transform: scaleX(0);
+  transform-origin: center;
+  transition: transform var(--animation);
+}
+
+.link:hover::after {
+  transform: scaleX(1);
 }
