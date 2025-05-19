@@ -1,7 +1,8 @@
 import * as RadioGroup from "@radix-ui/react-radio-group";
-import RadioInput from "../RadioInput/RadioInput.jsx";
 import { nanoid } from "nanoid";
 import { Text } from "@radix-ui/themes";
+
+import RadioInput from "../RadioInput/RadioInput.jsx";
 
 import css from "./ColorPicker.module.css";
 
@@ -33,8 +34,10 @@ export default function ColorPicker({ changeColor, productImagesVariants, select
             key={_id}
             value={color}
             label={`${color.charAt(0).toUpperCase()}${color.slice(1)}`}
-            image={image}
-          />
+            className={css.colorPickerItem}
+            indicatorClassName={css.activeIndicator}>
+            <img src={image.src} alt={`${image.alt || image.color} color`} className={css.colorImage} />
+          </RadioInput>
         ))}
       </RadioGroup.Root>
     </div>
