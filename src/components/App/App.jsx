@@ -1,5 +1,6 @@
 import { Route, Routes } from "react-router-dom";
 import { lazy } from "react";
+import { Toaster } from "react-hot-toast";
 import Layout from "../Layout/Layout.jsx";
 
 const HomePage = lazy(() => import("../../pages/HomePage/HomePage.jsx"));
@@ -10,14 +11,17 @@ const FavoritesPage = lazy(() => import("../../pages/FavoritesPage/FavoritesPage
 
 export default function App() {
   return (
-    <Layout>
-      <Routes>
-        <Route path="/" element={<HomePage />} />
-        <Route path="product" element={<ProductPage />} />
-        <Route path="cart" element={<CartPage />} />
-        <Route path="favorites" element={<FavoritesPage />} />
-        <Route path="*" element={<NotFoundPage />} />
-      </Routes>
-    </Layout>
+    <>
+      <Layout>
+        <Routes>
+          <Route path="/" element={<HomePage />} />
+          <Route path="product" element={<ProductPage />} />
+          <Route path="cart" element={<CartPage />} />
+          <Route path="favorites" element={<FavoritesPage />} />
+          <Route path="*" element={<NotFoundPage />} />
+        </Routes>
+      </Layout>
+      <Toaster position="top-right" />
+    </>
   );
 }

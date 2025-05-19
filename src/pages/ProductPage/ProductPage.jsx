@@ -1,4 +1,5 @@
 import { Box, Button, Flex, Heading, Section, Separator, Text } from "@radix-ui/themes";
+import toast from "react-hot-toast";
 import Slider from "../../components/Slider/Slider.jsx";
 import ProductAccordion from "../../components/ProductAccordion/ProductAccordion.jsx";
 import AboutProduct from "../../components/AboutProduct/AboutProduct.jsx";
@@ -29,6 +30,11 @@ export default function ProductPage() {
   };
 
   const handleClick = () => {
+    if (!selectedSize) {
+      toast.error("Please select a size before adding to cart.");
+      return;
+    }
+
     const cartItem = {
       _id: _id,
       productName: productName,
@@ -39,6 +45,7 @@ export default function ProductPage() {
       image: product.images.variants[selectedColor].images[0],
     };
     console.log("Product added to cart:", cartItem);
+    toast.success("Product added to cart!");
   };
 
   return (
