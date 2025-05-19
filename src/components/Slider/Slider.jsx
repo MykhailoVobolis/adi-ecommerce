@@ -11,12 +11,12 @@ import "swiper/css/thumbs";
 
 import "./swiperStyles.css";
 
-export default function Slider({ product, curentColor }) {
+export default function Slider({ product, selectedColor }) {
   const [thumbsSwiper, setThumbsSwiper] = useState(null);
 
   const isTablet = useMedia("(min-width: 768px)");
 
-  const slides = product.images.variants[curentColor]?.images || [];
+  const slides = product.images.variants[selectedColor]?.images || [];
 
   const isProduction = process.env.NODE_ENV === "production";
   const thumbsConfig = isProduction ? { swiper: thumbsSwiper } : thumbsSwiper ? { swiper: thumbsSwiper } : undefined;

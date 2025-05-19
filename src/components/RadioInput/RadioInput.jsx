@@ -5,11 +5,9 @@ export default function RadioInput({ value, label, image }) {
   const { alt, src } = image;
 
   return (
-    <div className={css.RadioInputContainer}>
-      <RadioGroup.Item className={css.RadioGroupItem} value={value} aria-label={label}>
-        <img src={src} alt={`${alt || label} color`} />
-        <RadioGroup.Indicator className={css.RadioGroupIndicator} />
-      </RadioGroup.Item>
-    </div>
+    <RadioGroup.Item className={css.RadioGroupItem} value={value} aria-label={label}>
+      <img src={src} alt={`${alt || label} color`} />
+      <RadioGroup.Indicator className={css.RadioGroupIndicator} />
+    </RadioGroup.Item>
   );
 }

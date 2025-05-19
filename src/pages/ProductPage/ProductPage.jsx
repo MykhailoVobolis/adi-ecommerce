@@ -1,8 +1,9 @@
-import { Box, Button, Flex, Heading, Section, Text } from "@radix-ui/themes";
+import { Box, Button, Flex, Heading, Section, Separator, Text } from "@radix-ui/themes";
 import Slider from "../../components/Slider/Slider.jsx";
 import ProductAccordion from "../../components/ProductAccordion/ProductAccordion.jsx";
 import AboutProduct from "../../components/AboutProduct/AboutProduct.jsx";
-import SelectColor from "../../components/SelectColor/SelectColor.jsx";
+import ColorPicker from "../../components/ColorPicker/ColorPicker.jsx";
+import SizePicker from "../../components/SizePicker/SizePicker.jsx";
 import { products } from "../../assets/db/products_list.js";
 import { useState } from "react";
 import { useMedia } from "react-use";
@@ -12,14 +13,19 @@ import css from "./ProductPage.module.css";
 const product = products[0];
 
 export default function ProductPage() {
-  const [curentColor, setCurentColor] = useState("white");
+  const [selectedColor, setSelectedColor] = useState("white");
+  const [selectedSize, setSelectedSize] = useState("");
 
   const isTablet = useMedia("(min-width: 768px)");
 
-  const { _id, productName, price, images } = product;
+  const { _id, productName, price, sizes, images } = product;
 
   const changeColor = (color) => {
-    setCurentColor(color);
+    setSelectedColor(color);
+  };
+
+  const changeSize = (size) => {
+    setSelectedSize(size);
   };
 
   const handleClick = () => {
@@ -27,9 +33,10 @@ export default function ProductPage() {
       _id: _id,
       productName: productName,
       price: price,
-      color: curentColor,
+      color: selectedColor,
+      size: selectedSize,
       quantity: 1,
-      image: product.images.variants[curentColor].images[0],
+      image: product.images.variants[selectedColor].images[0],
     };
     console.log("Product added to cart:", cartItem);
   };
@@ -39,7 +46,7 @@ export default function ProductPage() {
       <Section className={css.container}>
         <Flex>
           <Flex minWidth="0" direction={isTablet ? "row" : "column-reverse"}>
-            {isTablet && <Slider product={product} curentColor={curentColor} />}
+            {isTablet && <Slider product={product} selectedColor={selectedColor} />}
             <Box className={css.aboutContainer}>
               <Box className={css.descContainer}>
                 <Heading as="h1" size="8" mb="4">
@@ -49,13 +56,29 @@ export default function ProductPage() {
                   ${price}
                 </Text>
               </Box>
-              {!isTablet && <Slider product={product} curentColor={curentColor} />}
+              {!isTablet && <Slider product={product} selectedColor={selectedColor} />}
               <Box className={css.secondAboutContainer}>
-                {!isTablet && <SelectColor changeColor={changeColor} productImagesVariants={images} />}
+                {!isTablet && <ColorPicker changeColor={changeColor} productImagesVariants={images} />}
                 <ProductAccordion product={product} />
-                {isTablet && <SelectColor changeColor={changeColor} productImagesVariants={images} />}
+                <Flex className={css.selectContainer}>
+                  {isTablet && (
+                    <ColorPicker
+                      changeColor={changeColor}
+                      productImagesVariants={images}
+                      selectedColor={selectedColor}
+                    />
+                  )}
+                  <Separator
+                    className="SeparatorRoot"
+                    size="2"
+                    decorative
+                    orientation="vertical"
+                    style={{ height: "100%", margin: "20px 20px 0 20px" }}
+                  />
+                  <SizePicker sizes={sizes} selectedSize={selectedSize} onChange={changeSize} />
+                </Flex>
                 <Flex justify="center">
-                  <Button className={css.buyBtn} size="3" mt="5" mb="4" onClick={handleClick}>
+                  <Button className={css.buyBtn} size="3" mt="4" mb="4" onClick={handleClick}>
                     ADD TO CART
                   </Button>
                 </Flex>

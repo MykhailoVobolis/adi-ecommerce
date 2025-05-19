@@ -1,12 +1,6 @@
-.RadioInputContainer {
-  display: flex;
-  align-items: center;
-}
-
 .RadioGroupItem {
-  width: 60px;
-  height: 60px;
-  /* border: solid 1px var(--accent-11); */
+  width: 68px;
+  height: 68px;
   cursor: pointer;
   transition: transform var(--animation);
   position: relative;
@@ -16,9 +10,9 @@
   content: "";
   position: absolute;
   left: 0px;
-  bottom: -2px;
-  width: 60px;
-  height: 2px;
+  bottom: 0px;
+  width: 68px;
+  height: 4px;
   background-color: var(--accent-12);
 }
 
@@ -38,8 +32,8 @@
   content: "";
   position: absolute;
   left: 0px;
-  bottom: -2px;
-  width: 60px;
-  height: 2px;
+  bottom: 0px;
+  width: 68px;
+  height: 4px;
   background-color: var(--accent-12);
 }

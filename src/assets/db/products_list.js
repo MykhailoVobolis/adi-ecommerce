@@ -3,6 +3,7 @@ export const products = [
     _id: "slfjkvenmc49403d",
     productName: "SL 72 RS Shoes",
     price: 100,
+    sizes: [5.5, 6, 6.5, 7, 7.5, 8, 8.5, 9, 9.5, 10],
     description: {
       main: {
         title: "Casual shoes with a sporty back story",

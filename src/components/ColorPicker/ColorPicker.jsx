@@ -2,11 +2,10 @@ import * as RadioGroup from "@radix-ui/react-radio-group";
 import RadioInput from "../RadioInput/RadioInput.jsx";
 import { nanoid } from "nanoid";
 import { Text } from "@radix-ui/themes";
-import { useForm } from "react-hook-form";
 
-import css from "./SelectColor.module.css";
+import css from "./ColorPicker.module.css";
 
-export default function SelectColor({ changeColor, productImagesVariants }) {
+export default function ColorPicker({ changeColor, productImagesVariants, selectedColor }) {
   const { variants } = productImagesVariants;
 
   const previewVariants = Object.values(variants).map((variant) => ({
@@ -15,27 +14,14 @@ export default function SelectColor({ changeColor, productImagesVariants }) {
     image: variant.images[0],
   }));
 
-  const { register, handleSubmit, setValue, watch } = useForm({
-    defaultValues: {
-      color: "white",
-    },
-  });
-
   const handleColorChange = (value) => {
-    setValue("color", value);
-    handleSubmit(onSubmit)();
+    changeColor(value);
   };
-
-  const onSubmit = (data) => {
-    changeColor(data.color);
-  };
-
-  const selectedColor = watch("color");
 
   return (
-    <form onSubmit={handleSubmit(onSubmit)} className={css.selectColorForm}>
-      <Text as="p" size="3" mt="5" mb="3" weight="bold">
-        Colors available
+    <div className={css.colorPickerContainer}>
+      <Text as="p" size="3" mt="2" mb="3" weight="bold">
+        Colors
       </Text>
       <RadioGroup.Root
         className={css.RadioGroupRoot}
@@ -48,10 +34,9 @@ export default function SelectColor({ changeColor, productImagesVariants }) {
             value={color}
             label={`${color.charAt(0).toUpperCase()}${color.slice(1)}`}
             image={image}
-            register={register}
           />
         ))}
       </RadioGroup.Root>
-    </form>
+    </div>
   );
 }

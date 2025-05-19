@@ -2,17 +2,20 @@ button {
   all: unset;
 }
 
-.selectColorForm {
+.colorPickerContainer {
   margin-bottom: 30px;
 }
 
 .RadioGroupRoot {
+  height: 140px;
+  width: 284px;
   display: flex;
-  gap: 14px;
+  flex-wrap: wrap;
+  gap: 4px;
 }
 
 @media screen and (min-width: 768px) {
-  .selectColorForm {
+  .colorPickerContainer {
     margin-bottom: 10px;
   }
 }
