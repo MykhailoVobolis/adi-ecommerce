@@ -6,20 +6,26 @@ import AboutProduct from "../../components/AboutProduct/AboutProduct.jsx";
 import ColorPicker from "../../components/ColorPicker/ColorPicker.jsx";
 import SizePicker from "../../components/SizePicker/SizePicker.jsx";
 import { products } from "../../assets/db/products_list.js";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useMedia } from "react-use";
+import { useDispatch, useSelector } from "react-redux";
+import { setProductOptions } from "../../redux/products/slice.js";
+import { selectSelectedOptionsById } from "../../redux/products/selectors.js";
 
 import css from "./ProductPage.module.css";
 
 const product = products[0];
 
 export default function ProductPage() {
-  const [selectedColor, setSelectedColor] = useState("white");
-  const [selectedSize, setSelectedSize] = useState("");
+  const { _id, productName, price, sizes, images } = product;
+
+  const currentProductOptions = useSelector(selectSelectedOptionsById(_id));
+
+  const [selectedColor, setSelectedColor] = useState(currentProductOptions?.color || "white");
+  const [selectedSize, setSelectedSize] = useState(currentProductOptions?.size || "");
+  const dispatch = useDispatch();
 
   const isTablet = useMedia("(min-width: 768px)");
-
-  const { _id, productName, price, sizes, images } = product;
 
   const changeColor = (color) => {
     setSelectedColor(color);
@@ -47,6 +53,10 @@ export default function ProductPage() {
     console.log("Product added to cart:", cartItem);
     toast.success("Product added to cart!");
   };
+
+  useEffect(() => {
+    dispatch(setProductOptions({ productId: _id, color: selectedColor, size: selectedSize }));
+  }, [selectedColor, selectedSize, _id, dispatch]);
 
   return (
     <>
