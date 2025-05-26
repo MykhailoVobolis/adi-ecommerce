@@ -1,11 +1,11 @@
 import { Container, Heading, Section, Text } from "@radix-ui/themes";
 import { useSelector } from "react-redux";
-import { selectSelectedFavoriteProducts } from "../../redux/favorites/selectors.js";
+import { selectFavoriteProducts } from "../../redux/favorites/selectors.js";
 
 import css from "./FavoritesPage.module.css";
 
 export default function FavoritesPage() {
-  const favoriteProducts = useSelector(selectSelectedFavoriteProducts);
+  const favoriteProducts = useSelector(selectFavoriteProducts);
 
   const count = favoriteProducts?.length || 0;
 

@@ -19,3 +19,7 @@
   color: var(--accent-12);
   background-color: var(--accent-0);
 }
+
+.totalPrise {
+  font-weight: 700;
+}
