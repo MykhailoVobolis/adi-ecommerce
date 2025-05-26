@@ -3,6 +3,7 @@ import { persistStore, persistReducer, FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, 
 import storage from "redux-persist/lib/storage";
 import { productsReduser } from "./products/slice.js";
 import { favoritesReducer } from "./favorites/slice.js";
+import { cartReducer } from "./cart/slice.js";
 
 // Збереження токіна в Local Storage
 // const authPersistConfig = {
@@ -25,14 +26,22 @@ const favoritesPersistConfig = {
   whitelist: ["favoriteProducts"],
 };
 
+const cartPersistConfig = {
+  key: "cart",
+  storage,
+  whitelist: ["cartData"],
+};
+
 const persistedProductsReducer = persistReducer(productsPersistConfig, productsReduser);
 const persistedFavoritesReducer = persistReducer(favoritesPersistConfig, favoritesReducer);
+const persistedCartReducer = persistReducer(cartPersistConfig, cartReducer);
 
 export const store = configureStore({
   reducer: {
     // auth: persistedAuthReducer,
     products: persistedProductsReducer,
     favorites: persistedFavoritesReducer,
+    cart: persistedCartReducer,
   },
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware({

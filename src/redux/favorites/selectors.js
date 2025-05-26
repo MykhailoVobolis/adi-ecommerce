@@ -1,1 +1,1 @@
-export const selectSelectedFavoriteProducts = (state) => state.favorites.favoriteProducts;
+export const selectFavoriteProducts = (state) => state.favorites.favoriteProducts;

@@ -6,7 +6,8 @@ import { useDispatch, useSelector } from "react-redux";
 import { setProductOptions } from "../../redux/products/slice.js";
 import { selectSelectedOptionsById } from "../../redux/products/selectors.js";
 import { addFavorite, removeFavorite } from "../../redux/favorites/slice.js";
-import { selectSelectedFavoriteProducts } from "../../redux/favorites/selectors.js";
+import { selectFavoriteProducts } from "../../redux/favorites/selectors.js";
+import { addProductsToCart } from "../../redux/cart/slice.js";
 
 import toast from "react-hot-toast";
 import Slider from "../../components/Slider/Slider.jsx";
@@ -28,7 +29,7 @@ export default function ProductPage() {
   const { _id, productName, price, sizes, images } = product;
 
   const currentProductOptions = useSelector(selectSelectedOptionsById(_id));
-  const favoriteProducts = useSelector(selectSelectedFavoriteProducts);
+  const favoriteProducts = useSelector(selectFavoriteProducts);
 
   const [selectedColor, setSelectedColor] = useState(currentProductOptions?.color || "white");
   const [selectedSize, setSelectedSize] = useState(currentProductOptions?.size || "");
@@ -49,7 +50,7 @@ export default function ProductPage() {
       return;
     }
 
-    const cartItem = {
+    const productToAdd = {
       _id: _id,
       productName: productName,
       price: price,
@@ -58,11 +59,13 @@ export default function ProductPage() {
       quantity: 1,
       image: product.images.variants[selectedColor].images[0],
     };
-    console.log("Product added to cart:", cartItem);
+
+    dispatch(addProductsToCart(productToAdd));
+    console.log("Product added to cart:", productToAdd);
     toast.success("Product added to cart!");
   };
 
-  const handleAddToFavorite = () => {
+  const handleToggleFavorite = () => {
     if (isFavoriteProduct) {
       dispatch(removeFavorite(product));
     } else {
@@ -86,7 +89,7 @@ export default function ProductPage() {
                   <Heading as="h1" size="8" mb="4">
                     {productName.toUpperCase()}
                   </Heading>
-                  <Text as="p" size="6" mb="6" weight="bold">
+                  <Text as="p" size="6" mb="5" weight="bold">
                     ${price}
                   </Text>
                 </Box>
@@ -115,7 +118,7 @@ export default function ProductPage() {
                   </Flex>
                   <Flex className={css.btnsContainer}>
                     <AddToCartButton onAddToCartClick={handleAddToCart} />
-                    <AddToFavoriteButton onAddToFavoriteClick={handleAddToFavorite} isFavorite={isFavoriteProduct} />
+                    <AddToFavoriteButton onAddToFavoriteClick={handleToggleFavorite} isFavorite={isFavoriteProduct} />
                   </Flex>
                 </Box>
               </Box>

@@ -8,7 +8,7 @@ export default function CartPage() {
   return (
     <Section size="4">
       <Container size={{ initial: "1", sm: "2", md: "3", lg: "4", xl: "5" }}>
-        <Heading as="h1" size="8" mt="9" mb="6" weight="bold">
+        <Heading as="h1" size="8" mt="9" mb="4" weight="bold">
           YOUR BAG IS EMPTY
         </Heading>
         <Text as="p" size="3" mb="5">

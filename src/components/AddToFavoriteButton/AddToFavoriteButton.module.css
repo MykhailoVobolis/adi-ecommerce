@@ -7,5 +7,4 @@
   color: var(--accent-12);
   background-color: var(--accent-0);
   cursor: pointer;
-  transition: color var(--animation), background-color var(--animation);
 }
