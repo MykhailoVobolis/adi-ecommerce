@@ -1,0 +1,16 @@
+.buyBtn {
+  width: 100%;
+  max-width: 603px;
+  height: 45px;
+  gap: 15px;
+  border-radius: 0;
+  border: solid 1px var(--accent-12);
+  background-color: var(--accent-12);
+  cursor: pointer;
+  transition: color var(--animation), background-color var(--animation);
+}
+
+.buyBtn:hover {
+  color: var(--accent-12);
+  background-color: var(--accent-0);
+}

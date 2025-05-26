@@ -1,10 +1,10 @@
 import NavigationList from "../NavigationList/NavigationList.jsx";
 import CustomLogoIcon from "../CustomLogoIcon.jsx";
+import UserNavigation from "../UserNavigation/UserNavigation.jsx";
 
 import { Link } from "@radix-ui/themes";
 
 import css from "./Navigation.module.css";
-import UserNavigation from "../UserNavigation/UserNavigation.jsx";
 
 export default function Navigation() {
   return (

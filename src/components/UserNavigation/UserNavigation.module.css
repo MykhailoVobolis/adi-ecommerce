@@ -12,3 +12,7 @@
   height: 24px;
   line-height: 1;
 }
+
+.iconWithBadge {
+  position: relative;
+}
