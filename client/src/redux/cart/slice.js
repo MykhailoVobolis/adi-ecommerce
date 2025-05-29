@@ -1,4 +1,4 @@
-import { createSlice } from "@reduxjs/toolkit";
+import { createSlice } from '@reduxjs/toolkit';
 
 const initialState = {
   cartData: {
@@ -12,14 +12,14 @@ const initialState = {
 };
 
 const cartSlice = createSlice({
-  name: "cart",
+  name: 'cart',
   initialState: initialState,
   reducers: {
     addProductsToCart: (state, action) => {
       const newItem = action.payload;
 
       const existingItem = state.cartData.products.find(
-        (item) => item._id === newItem._id && item.size === newItem.size && item.color === newItem.color
+        (item) => item._id === newItem._id && item.size === newItem.size && item.color === newItem.color,
       );
 
       if (existingItem) {
@@ -31,20 +31,20 @@ const cartSlice = createSlice({
       state.cartData.totalQuantityProducts = state.cartData.products.reduce((total, item) => total + item.quantity, 0);
       state.cartData.totalPrice = state.cartData.products.reduce(
         (total, item) => total + item.price * item.quantity,
-        0
+        0,
       );
     },
     removeProductCart: (state, action) => {
       const { _id, size, color } = action.payload;
 
       state.cartData.products = state.cartData.products.filter(
-        (product) => product._id !== _id || product.size !== size || product.color !== color
+        (product) => product._id !== _id || product.size !== size || product.color !== color,
       );
 
       state.cartData.totalQuantityProducts = state.cartData.products.reduce((total, item) => total + item.quantity, 0);
       state.cartData.totalPrice = state.cartData.products.reduce(
         (total, item) => total + item.price * item.quantity,
-        0
+        0,
       );
     },
   },

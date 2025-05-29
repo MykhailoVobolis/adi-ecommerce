@@ -1,4 +1,4 @@
-import { createSelector } from "@reduxjs/toolkit";
+import { createSelector } from '@reduxjs/toolkit';
 
 export const selectSelectedOptions = (state) => state.products.selectedOptions;
 

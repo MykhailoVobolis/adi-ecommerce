@@ -1,28 +1,28 @@
-import { Box, Flex, Heading, Section, Separator, Text } from "@radix-ui/themes";
-import { products } from "../../assets/db/products_list.js";
-import { useEffect, useState } from "react";
-import { useMedia } from "react-use";
-import { useDispatch, useSelector } from "react-redux";
-import { setProductOptions } from "../../redux/products/slice.js";
-import { selectSelectedOptionsById } from "../../redux/products/selectors.js";
-import { addFavorite, removeFavorite } from "../../redux/favorites/slice.js";
-import { selectFavoriteProducts } from "../../redux/favorites/selectors.js";
-import { addProductsToCart } from "../../redux/cart/slice.js";
+import { Box, Flex, Heading, Section, Separator, Text } from '@radix-ui/themes';
+import { products } from '../../assets/db/products_list.js';
+import { useEffect, useState } from 'react';
+import { useMedia } from 'react-use';
+import { useDispatch, useSelector } from 'react-redux';
+import { setProductOptions } from '../../redux/products/slice.js';
+import { selectSelectedOptionsById } from '../../redux/products/selectors.js';
+import { addFavorite, removeFavorite } from '../../redux/favorites/slice.js';
+import { selectFavoriteProducts } from '../../redux/favorites/selectors.js';
+import { addProductsToCart } from '../../redux/cart/slice.js';
 
-import toast from "react-hot-toast";
-import Slider from "../../components/Slider/Slider.jsx";
-import ProductAccordion from "../../components/ProductAccordion/ProductAccordion.jsx";
-import AboutProduct from "../../components/AboutProduct/AboutProduct.jsx";
-import ColorPicker from "../../components/ColorPicker/ColorPicker.jsx";
-import SizePicker from "../../components/SizePicker/SizePicker.jsx";
-import AddToCartButton from "../../components/AddToCartButton/AddToCartButton.jsx";
-import AddToFavoriteButton from "../../components/AddToFavoriteButton/AddToFavoriteButton.jsx";
+import toast from 'react-hot-toast';
+import Slider from '../../components/Slider/Slider.jsx';
+import ProductAccordion from '../../components/ProductAccordion/ProductAccordion.jsx';
+import AboutProduct from '../../components/AboutProduct/AboutProduct.jsx';
+import ColorPicker from '../../components/ColorPicker/ColorPicker.jsx';
+import SizePicker from '../../components/SizePicker/SizePicker.jsx';
+import AddToCartButton from '../../components/AddToCartButton/AddToCartButton.jsx';
+import AddToFavoriteButton from '../../components/AddToFavoriteButton/AddToFavoriteButton.jsx';
 
-import css from "./ProductPage.module.css";
+import css from './ProductPage.module.css';
 
 export default function ProductPage() {
   const dispatch = useDispatch();
-  const isTablet = useMedia("(min-width: 768px)");
+  const isTablet = useMedia('(min-width: 768px)');
 
   const [product, setProduct] = useState(products[0]);
 
@@ -31,8 +31,8 @@ export default function ProductPage() {
   const currentProductOptions = useSelector(selectSelectedOptionsById(_id));
   const favoriteProducts = useSelector(selectFavoriteProducts);
 
-  const [selectedColor, setSelectedColor] = useState(currentProductOptions?.color || "white");
-  const [selectedSize, setSelectedSize] = useState(currentProductOptions?.size || "");
+  const [selectedColor, setSelectedColor] = useState(currentProductOptions?.color || 'white');
+  const [selectedSize, setSelectedSize] = useState(currentProductOptions?.size || '');
 
   const isFavoriteProduct = favoriteProducts.some((favItem) => favItem._id === product._id);
 
@@ -46,7 +46,7 @@ export default function ProductPage() {
 
   const handleAddToCart = () => {
     if (!selectedSize) {
-      toast.error("Please select a size before adding to cart.");
+      toast.error('Please select a size before adding to cart.');
       return;
     }
 
@@ -61,8 +61,8 @@ export default function ProductPage() {
     };
 
     dispatch(addProductsToCart(productToAdd));
-    console.log("Product added to cart:", productToAdd);
-    toast.success("Product added to cart!");
+    console.log('Product added to cart:', productToAdd);
+    toast.success('Product added to cart!');
   };
 
   const handleToggleFavorite = () => {
@@ -81,7 +81,7 @@ export default function ProductPage() {
     <>
       <Section className={css.container}>
         <Flex>
-          <Flex minWidth="0" direction={isTablet ? "row" : "column-reverse"}>
+          <Flex minWidth="0" direction={isTablet ? 'row' : 'column-reverse'}>
             {isTablet && <Slider product={product} selectedColor={selectedColor} />}
             <Box className={css.aboutContainer}>
               <Box>
@@ -112,7 +112,7 @@ export default function ProductPage() {
                       size="2"
                       decorative
                       orientation="vertical"
-                      style={{ height: "100%", margin: "20px 20px 0 20px" }}
+                      style={{ height: '100%', margin: '20px 20px 0 20px' }}
                     />
                     <SizePicker sizes={sizes} selectedSize={selectedSize} onChange={changeSize} />
                   </Flex>
