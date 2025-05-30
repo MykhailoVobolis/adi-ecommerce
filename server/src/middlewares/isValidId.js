@@ -2,10 +2,10 @@ import { isValidObjectId } from 'mongoose';
 import createHttpError from 'http-errors';
 
 export const isValidId = (req, res, next) => {
-  const { taskId } = req.params;
+  const { productId } = req.params;
 
-  if (!isValidObjectId(taskId)) {
-    return next(createHttpError(404, `${taskId} not valid id`));
+  if (!isValidObjectId(productId)) {
+    return next(createHttpError(404, `${productId} not valid id`));
   }
 
   next();

@@ -1,0 +1,158 @@
+{
+  "productName": "SL 72 RS Shoes",
+  "price": 100,
+  "targetAudience": "MEN",
+  "sizes": [5.5, 6, 6.5, 7, 7.5, 8, 8.5, 9, 9.5, 10],
+  "description": {
+    "main": {
+      "title": "Casual shoes with a sporty back story",
+      "text": "Rediscover a legend from the archives. The adidas SL 72 shoes were originally released in 1972 to give runners an edge on the track. Decades later, their design still turns heads. This version features a nylon upper with suede overlays that provides retro style. Your feet stay cushioned thanks to an EVA midsole while a grippy outsole keeps you grounded."
+    },
+    "additional1": {
+      "title": "Classic Casual Style with a Retro Twist",
+      "text": "The adidas SL 72 adds a touch of retro charm to any outfit, combining iconic design with casual versatility. It is perfect for creating a laid-back yet distinctive look that stands out every day."
+    },
+    "additional2": {
+      "title": "Effortless Style, Timeless Appeal",
+      "text": "An easygoing, classic look that effortlessly elevates everyday wear. With its timeless design, these sneakers add just the right touch of retro-inspired charm to any casual ensemble."
+    }
+  },
+  "details": "The upper is made of nylon with suede inserts for durability and a stylish look, while the synthetic lining ensures comfort and wear resistance. The EVA midsole provides lightweight cushioning, and the standard fit suits different foot types. The grippy, rugged rubber outsole offers excellent traction, and the laces allow for secure fastening. This model is available in Cloud White / Core Black / Spark, model code - IH4823.",
+  "images": {
+    "general": [
+      {
+        "src": "https://res.cloudinary.com/dfevedfwb/image/upload/v1748606820/SL_72_RS_Shoes_Desc_01_hau5gz.avif",
+        "alt": "Description Image 1"
+      },
+      {
+        "src": "https://res.cloudinary.com/dfevedfwb/image/upload/v1748606820/SL_72_RS_Shoes_Desc_02_celhu6.avif",
+        "alt": "Description Image 2"
+      }
+    ],
+    "variants": {
+      "white": {
+        "color": "white",
+        "images": [
+          {
+            "src": "https://res.cloudinary.com/dfevedfwb/image/upload/v1748606823/SL_72_RS_Shoes_White_01_dqj3wm.avif",
+            "alt": "Product Image 1"
+          },
+          {
+            "src": "https://res.cloudinary.com/dfevedfwb/image/upload/v1748606823/SL_72_RS_Shoes_White_02_b3auve.avif",
+            "alt": "Product Image 2"
+          },
+          {
+            "src": "https://res.cloudinary.com/dfevedfwb/image/upload/v1748606823/SL_72_RS_Shoes_White_03_schaed.avif",
+            "alt": "Product Image 3"
+          },
+          {
+            "src": "https://res.cloudinary.com/dfevedfwb/image/upload/v1748606823/SL_72_RS_Shoes_White_04_wnjprm.avif",
+            "alt": "Product Image 4"
+          },
+          {
+            "src": "https://res.cloudinary.com/dfevedfwb/image/upload/v1748606826/SL_72_RS_Shoes_White_05_wiojam.avif",
+            "alt": "Product Image 5"
+          },
+          {
+            "src": "https://res.cloudinary.com/dfevedfwb/image/upload/v1748606826/SL_72_RS_Shoes_White_06_geuz2j.avif",
+            "alt": "Product Image 6"
+          },
+          {
+            "src": "https://res.cloudinary.com/dfevedfwb/image/upload/v1748606827/SL_72_RS_Shoes_White_07_ivhdhf.avif",
+            "alt": "Product Image 7"
+          },
+          {
+            "src": "https://res.cloudinary.com/dfevedfwb/image/upload/v1748606827/SL_72_RS_Shoes_White_08_mqza00.avif",
+            "alt": "Product Image 8"
+          },
+          {
+            "src": "https://res.cloudinary.com/dfevedfwb/image/upload/v1748606827/SL_72_RS_Shoes_White_09_rztyfk.avif",
+            "alt": "Product Image 9"
+          }
+        ]
+      },
+      "blue": {
+        "color": "blue",
+        "images": [
+          {
+            "src": "https://res.cloudinary.com/dfevedfwb/image/upload/v1748606817/SL_72_RS_Shoes_Blue_01_y70amp.avif",
+            "alt": "Product Image 1"
+          },
+          {
+            "src": "https://res.cloudinary.com/dfevedfwb/image/upload/v1748606818/SL_72_RS_Shoes_Blue_02_dyqylo.avif",
+            "alt": "Product Image 2"
+          },
+          {
+            "src": "https://res.cloudinary.com/dfevedfwb/image/upload/v1748606818/SL_72_RS_Shoes_Blue_03_ewhydu.avif",
+            "alt": "Product Image 3"
+          },
+          {
+            "src": "https://res.cloudinary.com/dfevedfwb/image/upload/v1748606818/SL_72_RS_Shoes_Blue_04_ebmy58.avif",
+            "alt": "Product Image 4"
+          },
+          {
+            "src": "https://res.cloudinary.com/dfevedfwb/image/upload/v1748606818/SL_72_RS_Shoes_Blue_05_f5txlv.avif",
+            "alt": "Product Image 5"
+          },
+          {
+            "src": "https://res.cloudinary.com/dfevedfwb/image/upload/v1748606818/SL_72_RS_Shoes_Blue_06_za6wuq.avif",
+            "alt": "Product Image 6"
+          },
+          {
+            "src": "https://res.cloudinary.com/dfevedfwb/image/upload/v1748606818/SL_72_RS_Shoes_Blue_07_fgu19g.avif",
+            "alt": "Product Image 7"
+          },
+          {
+            "src": "https://res.cloudinary.com/dfevedfwb/image/upload/v1748606820/SL_72_RS_Shoes_Blue_08_i4krl8.avif",
+            "alt": "Product Image 8"
+          },
+          {
+            "src": "https://res.cloudinary.com/dfevedfwb/image/upload/v1748606820/SL_72_RS_Shoes_Blue_09_vpjd3t.avif",
+            "alt": "Product Image 9"
+          }
+        ]
+      },
+      "green": {
+        "color": "green",
+        "images": [
+          {
+            "src": "https://res.cloudinary.com/dfevedfwb/image/upload/v1748606820/SL_72_RS_Shoes_Green_01_suofwi.avif",
+            "alt": "Product Image 1"
+          },
+          {
+            "src": "https://res.cloudinary.com/dfevedfwb/image/upload/v1748606820/SL_72_RS_Shoes_Green_02_d9h8e6.avif",
+            "alt": "Product Image 2"
+          },
+          {
+            "src": "https://res.cloudinary.com/dfevedfwb/image/upload/v1748606821/SL_72_RS_Shoes_Green_03_pqnxp4.avif",
+            "alt": "Product Image 3"
+          },
+          {
+            "src": "https://res.cloudinary.com/dfevedfwb/image/upload/v1748606821/SL_72_RS_Shoes_Green_04_uap5g9.avif",
+            "alt": "Product Image 4"
+          },
+          {
+            "src": "https://res.cloudinary.com/dfevedfwb/image/upload/v1748606822/SL_72_RS_Shoes_Green_05_y0nbhv.avif",
+            "alt": "Product Image 5"
+          },
+          {
+            "src": "https://res.cloudinary.com/dfevedfwb/image/upload/v1748606821/SL_72_RS_Shoes_Green_06_wk8bhi.avif",
+            "alt": "Product Image 6"
+          },
+          {
+            "src": "https://res.cloudinary.com/dfevedfwb/image/upload/v1748606821/SL_72_RS_Shoes_Green_07_msh2u4.avif",
+            "alt": "Product Image 7"
+          },
+          {
+            "src": "https://res.cloudinary.com/dfevedfwb/image/upload/v1748606821/SL_72_RS_Shoes_Green_08_mvx96l.avif",
+            "alt": "Product Image 8"
+          },
+          {
+            "src": "https://res.cloudinary.com/dfevedfwb/image/upload/v1748606822/SL_72_RS_Shoes_Green_09_dau4q6.avif",
+            "alt": "Product Image 9"
+          }
+        ]
+      }
+    }
+  }
+}
