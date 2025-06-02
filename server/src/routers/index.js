@@ -3,8 +3,9 @@ import productsRouter from './products.js';
 
 const router = Router();
 
-router.use('/men', productsRouter);
-router.use('/women', productsRouter);
-router.use('/kids', productsRouter);
+router.use('/products/men', productsRouter);
+router.use('/products/women', productsRouter);
+router.use('/products/kids', productsRouter);
+router.use('/products', productsRouter);
 
 export default router;

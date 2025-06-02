@@ -50,7 +50,7 @@ const productSchema = new Schema(
   {
     productName: { type: String, required: true },
     price: { type: Number, required: true },
-    targetAudience: { type: String, enum: ['MEN', 'WOMEN', 'CHILDREN'], required: true },
+    category: { type: String, enum: ['MEN', 'WOMEN', 'CHILDREN'], required: true },
     sizes: { type: [Number], required: true },
     description: { type: descriptionSchema, required: true },
     details: { type: String, required: true },

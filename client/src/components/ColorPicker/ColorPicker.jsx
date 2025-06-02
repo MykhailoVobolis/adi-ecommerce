@@ -9,9 +9,9 @@ import css from './ColorPicker.module.css';
 export default function ColorPicker({ changeColor, productImagesVariants, selectedColor }) {
   const { variants } = productImagesVariants;
 
-  const previewVariants = Object.values(variants).map((variant) => ({
+  const previewVariants = Object.entries(variants).map(([variantKey, variant]) => ({
     _id: nanoid(),
-    color: variant.color,
+    color: variantKey,
     image: variant.images[0],
   }));
 

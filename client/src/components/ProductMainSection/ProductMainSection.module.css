@@ -1,0 +1,41 @@
+.container {
+  padding: 0px;
+}
+
+.descContainer {
+  padding: 20px 20px 0 20px;
+}
+
+.secondAboutContainer {
+  padding: 0 20px 56px 20px;
+}
+
+.selectContainer {
+  height: 190px;
+  padding-bottom: 26px;
+}
+
+.btnsContainer {
+  max-width: 100%;
+  gap: 12px;
+}
+
+@media screen and (min-width: 768px) {
+  .container {
+    height: 720px;
+  }
+
+  .aboutContainer {
+    width: 50%;
+    height: 100%;
+    padding: 30px 30px 0 30px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+  }
+
+  .descContainer,
+  .secondAboutContainer {
+    padding: 0;
+  }
+}

@@ -1,14 +1,14 @@
-import { NavLink } from "react-router-dom";
+import { NavLink } from 'react-router-dom';
 
-import "@radix-ui/themes/styles.css";
-import css from "./NavigationList.module.css";
+import '@radix-ui/themes/styles.css';
+import css from './NavigationList.module.css';
 
 export default function NavigationList() {
   const navItems = [
-    { to: "/men", label: "MEN" },
-    { to: "/women", label: "WOMEN" },
-    { to: "/kids", label: "KIDS" },
-    { to: "/product", label: "PRODUCT" },
+    { to: '/products/men', label: 'MEN' },
+    { to: '/products/women', label: 'WOMEN' },
+    { to: '/products/kids', label: 'KIDS' },
+    // { to: '/product', label: 'PRODUCT' },
   ];
 
   return (

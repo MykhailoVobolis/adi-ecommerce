@@ -3,7 +3,7 @@ export const products = [
     _id: 'slfjkvenmc49403d',
     productName: 'SL 72 RS Shoes',
     price: 100,
-    targetAudience: 'MEN', // або "WOMEN" або "CHILDREN"
+    category: 'MEN', // або "WOMEN" або "CHILDREN"
     sizes: [5.5, 6, 6.5, 7, 7.5, 8, 8.5, 9, 9.5, 10],
     description: {
       main: {
@@ -27,7 +27,7 @@ export const products = [
         { src: '/img/adidas11.avif', alt: 'Product Image 11' },
       ],
       variants: {
-        white: {
+        main: {
           color: 'white',
           images: [
             { src: '/img/adidas1.avif', alt: 'Product Image 1' },

@@ -1,18 +1,15 @@
 import { ProductsCollection } from '../db/models/product.js';
 import { calculatePaginationData } from '../utils/calculatePaginationData.js';
 
-// Сервіс-функція яка отримує всі продукти з бази данних за значенням targetAudience
-export const getAllProductsByTargetAudience = async ({ page = 1, perPage = 12, filter = {} }) => {
+// Сервіс-функція яка отримує всі продукти з бази данних за значенням сategory
+export const getAllProductsByСategory = async ({ page = 1, perPage = 12, filter = {} }) => {
   const limit = perPage;
   const skip = (page - 1) * perPage;
 
   const productsQuery = ProductsCollection.find();
 
-  if (filter.targetAudience) {
-    productsQuery
-      .where('targetAudience')
-      .regex(new RegExp(filter.targetAudience, 'i'))
-      .collation({ locale: 'en', strength: 2 }); // ігнорує регістр введеного значення
+  if (filter.category) {
+    productsQuery.where('category').regex(new RegExp(filter.category, 'i')).collation({ locale: 'en', strength: 2 }); // ігнорує регістр введеного значення
   }
 
   /* Використання Promise.all для поліпшення продуктивності */

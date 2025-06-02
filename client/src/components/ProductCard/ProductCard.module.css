@@ -1,0 +1,7 @@
+.productName {
+  text-transform: uppercase;
+}
+
+.productOptions {
+  color: var(--accent-10);
+}

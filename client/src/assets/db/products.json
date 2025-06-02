@@ -1,7 +1,7 @@
 {
   "productName": "SL 72 RS Shoes",
   "price": 100,
-  "targetAudience": "MEN",
+  "category": "MEN",
   "sizes": [5.5, 6, 6.5, 7, 7.5, 8, 8.5, 9, 9.5, 10],
   "description": {
     "main": {
@@ -30,7 +30,7 @@
       }
     ],
     "variants": {
-      "white": {
+      "main": {
         "color": "white",
         "images": [
           {

@@ -9,14 +9,18 @@ const favoritesSlice = createSlice({
   initialState: initialState,
   reducers: {
     addFavorite: (state, action) => {
-      const exists = state.favoriteProducts.some((product) => product._id === action.payload._id);
+      const exists = state.favoriteProducts.some(
+        (product) => product._id === action.payload._id && product.selectedColor === action.payload.selectedColor,
+      );
 
       if (!exists) {
         state.favoriteProducts.push(action.payload);
       }
     },
     removeFavorite: (state, action) => {
-      state.favoriteProducts = state.favoriteProducts.filter((product) => product._id !== action.payload._id);
+      state.favoriteProducts = state.favoriteProducts.filter(
+        (product) => !(product._id === action.payload._id && product.selectedColor === action.payload.selectedColor),
+      );
     },
   },
 });

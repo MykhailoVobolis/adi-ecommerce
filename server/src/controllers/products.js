@@ -1,20 +1,20 @@
 import createHttpError from 'http-errors';
-import { getAllProductsByTargetAudience, getProductById } from '../services/products.js';
+import { getAllProductsByСategory, getProductById } from '../services/products.js';
 import { parsePaginationParams } from '../utils/parsePaginationParams.js';
 
-// Контроллер отримання колекції всіх продуктів за значенням targetAudience
+// Контроллер отримання колекції всіх продуктів за значенням сategory
 export const getProductsController = async (req, res, _next) => {
   const { page, perPage } = parsePaginationParams(req.query);
 
-  // Отримуємо значення targetAudience з базового URL
+  // Отримуємо значення сategory з базового URL
   const path = req.baseUrl;
-  const targetAudience = path.split('/')[1];
+  const category = path.split('/')[2];
 
   const filter = {
-    targetAudience,
+    category,
   };
 
-  const products = await getAllProductsByTargetAudience({
+  const products = await getAllProductsByСategory({
     page,
     perPage,
     filter,
