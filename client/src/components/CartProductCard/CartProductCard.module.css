@@ -1,12 +1,11 @@
 .productBox {
-  max-width: calc((100% - 12px) / 4);
-}
-
-.productBox:hover {
+  max-width: 728px;
   border: 1px solid var(--accent-12);
+  position: relative;
 }
 
-.productName {
+.productName,
+.sizeProduct {
   text-transform: uppercase;
 }
 

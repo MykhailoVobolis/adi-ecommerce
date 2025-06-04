@@ -8,7 +8,6 @@ export default function NavigationList() {
     { to: '/products/men', label: 'MEN' },
     { to: '/products/women', label: 'WOMEN' },
     { to: '/products/kids', label: 'KIDS' },
-    // { to: '/product', label: 'PRODUCT' },
   ];
 
   return (

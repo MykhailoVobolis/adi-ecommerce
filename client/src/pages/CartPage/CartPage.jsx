@@ -1,10 +1,12 @@
-import { Container, Heading, Section, Text } from "@radix-ui/themes";
-import { Link } from "react-router-dom";
-import { HiOutlineArrowNarrowRight } from "react-icons/hi";
-import { useSelector } from "react-redux";
-import { selectCartData } from "../../redux/cart/selectors.js";
+import { Container, Heading, Section, Text } from '@radix-ui/themes';
+import { Link } from 'react-router-dom';
+import { HiOutlineArrowNarrowRight } from 'react-icons/hi';
+import { useSelector } from 'react-redux';
+import { selectCartData } from '../../redux/cart/selectors.js';
 
-import css from "./CartPage.module.css";
+import CartProductsList from '../../components/CartProductsList/CartProductsList.jsx';
+
+import css from './CartPage.module.css';
 
 export default function CartPage() {
   const cartData = useSelector(selectCartData);
@@ -12,7 +14,7 @@ export default function CartPage() {
 
   return (
     <Section size="4">
-      <Container size={{ initial: "1", sm: "2", md: "3", lg: "4", xl: "5" }}>
+      <Container size={{ initial: '1', sm: '2', md: '3', lg: '4', xl: '5' }}>
         {totalQuantityProducts > 0 ? (
           <>
             <Heading as="h1" size="8" mb="4" weight="bold">
@@ -21,7 +23,7 @@ export default function CartPage() {
             <Text as="p" size="3" mb="2">
               TOTAL: ({totalQuantityProducts} items) <span className={css.totalPrise}>${totalPrice.toFixed(2)}</span>
             </Text>
-            <Text as="p" size="3" mb="5">
+            <Text as="p" size="3" mb="7">
               Items in your bag are not reserved — check out now to make them yours.
             </Text>
           </>
@@ -33,12 +35,13 @@ export default function CartPage() {
             <Text as="p" size="3" mb="5">
               Once you add something to your bag, it will appear here. Ready to get started?
             </Text>
-            <Link to={"/"} className={css.getStartedLink}>
+            <Link to={'/'} className={css.getStartedLink}>
               <span>GET STARTED</span>
               <HiOutlineArrowNarrowRight size={24} />
             </Link>
           </>
         )}
+        <CartProductsList products={products} />
       </Container>
     </Section>
   );

@@ -1,0 +1,13 @@
+.removeBtn {
+  padding: 0;
+  width: 45px;
+  height: 45px;
+  color: var(--accent-12);
+  background-color: var(--accent-0);
+  cursor: pointer;
+  transition: color var(--animation);
+}
+
+.removeBtn:hover {
+  color: var(--accent-11);
+}

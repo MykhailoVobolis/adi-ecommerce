@@ -7,4 +7,19 @@
   color: var(--accent-12);
   background-color: var(--accent-0);
   cursor: pointer;
+  transition: color var(--animation);
+}
+
+.inProductCard {
+  border: none;
+  background-color: transparent;
+}
+
+.toFavoriteBtn:hover,
+.inProductCard:hover {
+  color: var(--accent-11);
+}
+
+.active:hover {
+  color: var(--accent-12);
 }

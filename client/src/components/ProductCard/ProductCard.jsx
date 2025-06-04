@@ -12,7 +12,7 @@ export default function ProductCard({ product, category }) {
   return (
     <li>
       <Link to={`/products/${category}/${_id}`}>
-        <Box maxWidth="calc((100% - 12px) / 4)">
+        <Box className={css.productBox}>
           <Card size="2">
             <Inset clip="padding-box" side="top" pb="current">
               <img

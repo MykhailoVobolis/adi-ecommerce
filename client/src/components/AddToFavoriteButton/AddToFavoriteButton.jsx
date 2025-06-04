@@ -1,12 +1,19 @@
-import { Button } from "@radix-ui/themes";
-import { LiaHeart } from "react-icons/lia";
-import { LiaHeartSolid } from "react-icons/lia";
+import { Button } from '@radix-ui/themes';
+import { LiaHeart, LiaHeartSolid } from 'react-icons/lia';
+import clsx from 'clsx';
 
-import css from "./AddToFavoriteButton.module.css";
+import css from './AddToFavoriteButton.module.css';
 
-export default function AddToFavoriteButton({ onAddToFavoriteClick, isFavorite }) {
+export default function AddToFavoriteButton({ onAddToFavoriteClick, isFavorite, isInProductCard = false }) {
   return (
-    <Button className={css.toFavoriteBtn} size="3" mt="4" onClick={onAddToFavoriteClick}>
+    <Button
+      className={clsx(css.toFavoriteBtn, {
+        [css.inProductCard]: isInProductCard,
+        [css.active]: isFavorite,
+      })}
+      size="3"
+      onClick={onAddToFavoriteClick}
+    >
       {isFavorite ? <LiaHeartSolid size={24} /> : <LiaHeart size={24} />}
     </Button>
   );
