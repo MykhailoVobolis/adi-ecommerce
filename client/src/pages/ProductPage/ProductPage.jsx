@@ -66,6 +66,7 @@ export default function ProductPage() {
       color: selectedColor,
       size: selectedSize,
       quantity: 1,
+      colorName: curentProduct.images.variants[selectedColor].color,
       image: curentProduct.images.variants[selectedColor].images[0],
     };
 

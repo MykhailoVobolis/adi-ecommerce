@@ -1,47 +1,37 @@
-import { Container, Heading, Section, Text } from '@radix-ui/themes';
-import { Link } from 'react-router-dom';
-import { HiOutlineArrowNarrowRight } from 'react-icons/hi';
+import { Box, Container, Flex, Section } from '@radix-ui/themes';
 import { useSelector } from 'react-redux';
 import { selectCartData } from '../../redux/cart/selectors.js';
 
 import CartProductsList from '../../components/CartProductsList/CartProductsList.jsx';
-
-import css from './CartPage.module.css';
+import OrderSummary from '../../components/OrderSummary/OrderSummary.jsx';
+import CheckoutButton from '../../components/CheckoutButton/CheckoutButton.jsx';
+import CartHeaderInfo from '../../components/CartHeaderInfo/CartHeaderInfo.jsx';
 
 export default function CartPage() {
   const cartData = useSelector(selectCartData);
   const { products, totalPrice, totalQuantityProducts } = cartData;
 
+  const handleCheckout = () => {
+    console.log('Proceed to checkout');
+  };
+
   return (
     <Section size="4">
       <Container size={{ initial: '1', sm: '2', md: '3', lg: '4', xl: '5' }}>
-        {totalQuantityProducts > 0 ? (
-          <>
-            <Heading as="h1" size="8" mb="4" weight="bold">
-              YOUR BAG
-            </Heading>
-            <Text as="p" size="3" mb="2">
-              TOTAL: ({totalQuantityProducts} items) <span className={css.totalPrise}>${totalPrice.toFixed(2)}</span>
-            </Text>
-            <Text as="p" size="3" mb="7">
-              Items in your bag are not reserved — check out now to make them yours.
-            </Text>
-          </>
-        ) : (
-          <>
-            <Heading as="h1" size="8" mt="9" mb="4" weight="bold">
-              YOUR BAG IS EMPTY
-            </Heading>
-            <Text as="p" size="3" mb="5">
-              Once you add something to your bag, it will appear here. Ready to get started?
-            </Text>
-            <Link to={'/'} className={css.getStartedLink}>
-              <span>GET STARTED</span>
-              <HiOutlineArrowNarrowRight size={24} />
-            </Link>
-          </>
-        )}
-        <CartProductsList products={products} />
+        <Flex justify="between" mb="7">
+          <Box>
+            <CartHeaderInfo totalQuantityProducts={totalQuantityProducts} totalPrice={totalPrice} />
+            <CartProductsList products={products} />
+          </Box>
+          {totalQuantityProducts > 0 && (
+            <OrderSummary
+              totalPrice={totalPrice}
+              totalQuantityProducts={totalQuantityProducts}
+              onCheckout={handleCheckout}
+            />
+          )}
+        </Flex>
+        {totalQuantityProducts > 0 && <CheckoutButton onCheckout={handleCheckout} />}
       </Container>
     </Section>
   );

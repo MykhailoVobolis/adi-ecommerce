@@ -1,15 +1,15 @@
-.buyBtn {
-  width: 100%;
+.checkoutBtn {
+  width: 365px;
   max-width: 603px;
   height: 45px;
-  gap: 15px;
+  justify-content: space-between;
   border: solid 1px var(--accent-12);
   background-color: var(--accent-12);
   cursor: pointer;
   transition: color var(--animation), background-color var(--animation);
 }
 
-.buyBtn:hover {
+.checkoutBtn:hover {
   color: var(--accent-12);
   background-color: var(--accent-0);
 }

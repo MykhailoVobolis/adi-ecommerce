@@ -1,0 +1,16 @@
+.selectTrigger {
+  all: unset;
+  height: 50px;
+  width: 100px;
+  border: solid 1px var(--accent-12);
+  font-size: 14px;
+  font-weight: 700;
+  outline: transparent;
+  outline-offset: 4px;
+  padding: 0 12px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  box-sizing: border-box;
+  cursor: pointer;
+}

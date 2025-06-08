@@ -1,20 +1,19 @@
 import { Link } from 'react-router-dom';
 import { Box, Card, Flex, Inset, Text } from '@radix-ui/themes';
 import { useDispatch } from 'react-redux';
-import { removeProductCart } from '../../redux/cart/slice.js';
+import { removeProductCart, updateProductQuantity } from '../../redux/cart/slice.js';
 import { useIsFavoriteProduct } from '../../hooks/useIsFavoriteProduct.js';
 import { useToggleFavoriteProduct } from '../../hooks/useToggleFavoriteProduct.js';
 
 import ButtonBarOfProductCard from '../ButtonBarOfProductCard/ButtonBarOfProductCard.jsx';
+import SelectQuantity from '../SelectQuantity/SelectQuantity.jsx';
 
 import css from './CartProductCard.module.css';
 
 export default function CartProductCard({ product }) {
   const dispatch = useDispatch();
 
-  //   const favoriteProducts = useSelector(selectFavoriteProducts);
-
-  const { _id: productId, category, image, price, productName, size, color } = product;
+  const { _id: productId, category, image, price, productName, size, color, colorName, quantity } = product;
   const imageUrl = image.src;
 
   const handleRemoveFromCart = () => {
@@ -25,11 +24,24 @@ export default function CartProductCard({ product }) {
 
   const handleToggleFavorite = useToggleFavoriteProduct(isFavoriteProduct, product, color);
 
+  const handleQuantityChange = (value) => {
+    const newQuantity = Number(value);
+
+    dispatch(
+      updateProductQuantity({
+        _id: productId,
+        color: color,
+        size: size,
+        quantity: newQuantity,
+      }),
+    );
+  };
+
   return (
     <li>
       <Box className={css.productBox}>
-        <Card>
-          <Flex direction={{ initial: 'column', sm: 'row' }} gap="4">
+        <Card size="2">
+          <Flex direction={{ initial: 'column', sm: 'row' }} gap="3">
             <Link to={`/products/${category}/${productId}`} state={{ color: color, size: size }}>
               <Inset side="left" clip="padding-box" pr="current">
                 <img
@@ -45,28 +57,34 @@ export default function CartProductCard({ product }) {
                 />
               </Inset>
             </Link>
-            <Box>
-              <Flex>
-                <Flex justify="between" mb="3" width="400px">
-                  <Link to={`/products/${category}/${productId}`} state={{ color: color, size: size }}>
-                    <Text as="p" size="3" className={css.productName}>
-                      {productName}
+            <Flex direction="column" justify="between">
+              <Box>
+                <Flex>
+                  <Flex justify="between" width="400px">
+                    <Link to={`/products/${category}/${productId}`} state={{ color: color, size: size }}>
+                      <Text as="p" size="3" className={css.productName}>
+                        {productName}
+                      </Text>
+                    </Link>
+                    <Text as="p" size="3">
+                      ${price.toFixed(2)}
                     </Text>
-                  </Link>
-                  <Text as="p" size="3">
-                    ${price}
-                  </Text>
+                  </Flex>
+                  <ButtonBarOfProductCard
+                    handleRemoveFromCart={handleRemoveFromCart}
+                    handleToggleFavorite={handleToggleFavorite}
+                    isFavoriteProduct={isFavoriteProduct}
+                  />
                 </Flex>
-                <ButtonBarOfProductCard
-                  handleRemoveFromCart={handleRemoveFromCart}
-                  handleToggleFavorite={handleToggleFavorite}
-                  isFavoriteProduct={isFavoriteProduct}
-                />
-              </Flex>
-              <Text as="p" size="3" className={css.sizeProduct}>
-                size: {size} uk
-              </Text>
-            </Box>
+                <Text as="p" size="3" mb="3" className={css.optionProduct}>
+                  {colorName}
+                </Text>
+                <Text as="p" size="3" className={css.optionProduct}>
+                  size: {size} uk
+                </Text>
+              </Box>
+              <SelectQuantity quantity={quantity} handleQuantityChange={handleQuantityChange} />
+            </Flex>
           </Flex>
         </Card>
       </Box>
