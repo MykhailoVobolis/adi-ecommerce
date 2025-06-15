@@ -5,12 +5,12 @@ import SummaryItem from '../SummaryItem/SummaryItem.jsx';
 
 import css from './OrderSummary.module.css';
 
-export default function OrderSummary({ totalPrice, totalQuantityProducts, onCheckout, discount = 0 }) {
+export default function OrderSummary({ totalPrice, totalQuantityProducts, onCheckout, discount = 0, isDelivery }) {
   return (
     <Flex direction="column" gap="7">
       <Box className={css.orderSummaryWrapper}>
         <Heading className={css.titleOrderSummary} as="h2" size="5" weight="bold" mb="5">
-          Order Summary
+          {isDelivery ? <span>Your Order</span> : <span>Order Summary</span>}
         </Heading>
         <SummaryItem
           label={`${totalQuantityProducts} ${totalQuantityProducts === 1 ? 'item' : 'items'}`}
@@ -21,7 +21,7 @@ export default function OrderSummary({ totalPrice, totalQuantityProducts, onChec
         <Separator my="4" size="2" />
         <SummaryItem label="Total" value={`$${totalPrice}`} bold />
       </Box>
-      <CheckoutButton onCheckout={onCheckout} />
+      {!isDelivery && <CheckoutButton onCheckout={onCheckout} />}
     </Flex>
   );
 }

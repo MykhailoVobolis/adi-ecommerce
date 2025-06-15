@@ -19,7 +19,7 @@
     "@radix-ui/react-tabs": "^1.1.1",
     "@radix-ui/themes": "^3.1.4",
     "@reduxjs/toolkit": "^2.8.2",
-    "axios": "^1.9.0",
+    "axios": "^1.10.0",
     "classnames": "^2.5.1",
     "clsx": "^2.1.1",
     "modern-normalize": "^3.0.0",

@@ -9,6 +9,7 @@ const CartPage = lazy(() => import('../../pages/CartPage/CartPage.jsx'));
 const NotFoundPage = lazy(() => import('../../pages/NotFoundPage/NotFoundPage.jsx'));
 const FavoritesPage = lazy(() => import('../../pages/FavoritesPage/FavoritesPage.jsx'));
 const ProductCategoryPage = lazy(() => import('../../pages/ProductCategoryPage/ProductCategoryPage.jsx'));
+const DeliveryPage = lazy(() => import('../../pages/DeliveryPage/DeliveryPage.jsx'));
 
 export default function App() {
   return (
@@ -18,8 +19,9 @@ export default function App() {
           <Route path="/" element={<HomePage />} />
           <Route path="cart" element={<CartPage />} />
           <Route path="favorites" element={<FavoritesPage />} />
-          <Route path="/products/:category" element={<ProductCategoryPage />} />
-          <Route path="/products/:category/:productId" element={<ProductPage />} />
+          <Route path="products/:category" element={<ProductCategoryPage />} />
+          <Route path="products/:category/:productId" element={<ProductPage />} />
+          <Route path="delivery" element={<DeliveryPage />} />
           <Route path="*" element={<NotFoundPage />} />
         </Routes>
       </Layout>

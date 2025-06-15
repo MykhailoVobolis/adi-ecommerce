@@ -1,9 +1,10 @@
-import { configureStore } from "@reduxjs/toolkit";
-import { persistStore, persistReducer, FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER } from "redux-persist";
-import storage from "redux-persist/lib/storage";
-import { productsReduser } from "./products/slice.js";
-import { favoritesReducer } from "./favorites/slice.js";
-import { cartReducer } from "./cart/slice.js";
+import { configureStore } from '@reduxjs/toolkit';
+import { persistStore, persistReducer, FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER } from 'redux-persist';
+import storage from 'redux-persist/lib/storage';
+import { productsReduser } from './products/slice.js';
+import { favoritesReducer } from './favorites/slice.js';
+import { cartReducer } from './cart/slice.js';
+import { deliveryReducer } from './delivery/slice.js';
 
 // Збереження токіна в Local Storage
 // const authPersistConfig = {
@@ -15,21 +16,21 @@ import { cartReducer } from "./cart/slice.js";
 // const persistedAuthReducer = persistReducer(authPersistConfig, authReduser);
 
 const productsPersistConfig = {
-  key: "products",
+  key: 'products',
   storage,
-  whitelist: ["selectedOptions"],
+  whitelist: ['selectedOptions'],
 };
 
 const favoritesPersistConfig = {
-  key: "favorites",
+  key: 'favorites',
   storage,
-  whitelist: ["favoriteProducts"],
+  whitelist: ['favoriteProducts'],
 };
 
 const cartPersistConfig = {
-  key: "cart",
+  key: 'cart',
   storage,
-  whitelist: ["cartData"],
+  whitelist: ['cartData'],
 };
 
 const persistedProductsReducer = persistReducer(productsPersistConfig, productsReduser);
@@ -42,6 +43,7 @@ export const store = configureStore({
     products: persistedProductsReducer,
     favorites: persistedFavoritesReducer,
     cart: persistedCartReducer,
+    delivery: deliveryReducer,
   },
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware({

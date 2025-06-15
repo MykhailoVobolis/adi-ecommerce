@@ -1,8 +1,8 @@
-import { Container, Heading, Section, Text } from "@radix-ui/themes";
-import { useSelector } from "react-redux";
-import { selectFavoriteProducts } from "../../redux/favorites/selectors.js";
+import { Container, Heading, Section, Text } from '@radix-ui/themes';
+import { useSelector } from 'react-redux';
+import { selectFavoriteProducts } from '../../redux/favorites/selectors.js';
 
-import css from "./FavoritesPage.module.css";
+import css from './FavoritesPage.module.css';
 
 export default function FavoritesPage() {
   const favoriteProducts = useSelector(selectFavoriteProducts);
@@ -11,7 +11,7 @@ export default function FavoritesPage() {
 
   return (
     <Section size="4">
-      <Container size={{ initial: "1", sm: "2", md: "3", lg: "4", xl: "5" }}>
+      <Container size={{ initial: '1', sm: '2', md: '3', lg: '4', xl: '5' }}>
         <Heading as="h1" size="8" mt="9" mb="4" weight="bold">
           MY WISHLIST
         </Heading>
