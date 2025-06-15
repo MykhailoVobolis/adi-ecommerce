@@ -4,17 +4,23 @@ import { useEffect, useMemo, useRef, useState } from 'react';
 import { TextField } from '@radix-ui/themes';
 import { MagnifyingGlassIcon } from '@radix-ui/react-icons';
 import { useDispatch } from 'react-redux';
-import { setFilterCities } from '../../redux/delivery/slice.js';
+import { setFilterCities, setSelectedCity } from '../../redux/delivery/slice.js';
 
 import SelectDropdownList from '../SelectDropdownList/SelectDropdownList.jsx';
 
 import css from './CitySelect.module.css';
 
-export default function CitySelect({ cities }) {
+export default function CitySelect({ cities, selectedCity }) {
   const dispatch = useDispatch();
   const [query, setQuery] = useState('');
   const [isOpen, setIsOpen] = useState(false);
   const wrapperRef = useRef(null);
+
+  useEffect(() => {
+    if (selectedCity) {
+      setQuery(`${selectedCity?.SettlementTypeDescription.slice(0, 1) || ''}. ${selectedCity?.Description || ''}`);
+    }
+  }, [selectedCity]);
 
   const handleChange = (e) => {
     const value = e.target.value;
@@ -37,7 +43,7 @@ export default function CitySelect({ cities }) {
   );
 
   const handleSelect = (city) => {
-    setQuery(city);
+    dispatch(setSelectedCity(city));
     setIsOpen(false);
   };
 
@@ -71,6 +77,7 @@ export default function CitySelect({ cities }) {
   }, []);
 
   const openDrop = () => {
+    setQuery('');
     setIsOpen(true);
   };
 
@@ -78,7 +85,7 @@ export default function CitySelect({ cities }) {
     <div className={css.selectWrapper} ref={wrapperRef}>
       <TextField.Root
         className={css.textField}
-        value={query}
+        value={query || ''}
         size="3"
         placeholder="City"
         variant="surface"

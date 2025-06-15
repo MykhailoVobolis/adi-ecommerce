@@ -21,6 +21,13 @@ const initialState = {
     name: '',
     page: 1,
   },
+  deliveryAddress: {
+    selectedCity: null,
+    selectedDepartment: '',
+    selectedStreet: '',
+    selectedHouseNumber: '',
+    selectedApartmentNumber: '',
+  },
 };
 
 const deliverySlice = createSlice({
@@ -29,6 +36,9 @@ const deliverySlice = createSlice({
   reducers: {
     setFilterCities: (state, action) => {
       state.filterCities.name = action.payload;
+    },
+    setSelectedCity: (state, action) => {
+      state.deliveryAddress.selectedCity = action.payload;
     },
   },
   extraReducers: (builder) => {
@@ -44,5 +54,5 @@ const deliverySlice = createSlice({
   },
 });
 
-export const { setFilterCities } = deliverySlice.actions;
+export const { setFilterCities, setSelectedCity } = deliverySlice.actions;
 export const deliveryReducer = deliverySlice.reducer;

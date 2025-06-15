@@ -6,7 +6,7 @@ export default function SelectDropdownItem({ city, onSelect }) {
   const settlementType = SettlementTypeDescription.slice(0, 1);
 
   return (
-    <li className={css.dropdownItem} key={Ref} onClick={() => onSelect(Description)}>
+    <li className={css.dropdownItem} key={Ref} onClick={() => onSelect(city)}>
       <p className={css.cityName}>
         {settlementType}. {Description}
       </p>
