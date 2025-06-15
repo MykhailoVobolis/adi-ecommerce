@@ -1,10 +1,11 @@
-import { Box, Container, Flex, Heading, Section } from '@radix-ui/themes';
+import { Container, Flex, Section } from '@radix-ui/themes';
 import { useDispatch, useSelector } from 'react-redux';
 import { selectCartData } from '../../redux/cart/selectors.js';
 import { useEffect } from 'react';
 import { fetchDeliveryCities } from '../../redux/delivery/operations.js';
 import { selectDeliveryCities, selectFilterCities } from '../../redux/delivery/selectors.js';
 
+import DeliveryOptions from '../../components/DeliveryOptions/DeliveryOptions.jsx';
 import OrderSummary from '../../components/OrderSummary/OrderSummary.jsx';
 
 import css from './DeliveryPage.module.css';
@@ -27,14 +28,7 @@ export default function DeliveryPage() {
     <Section size="4">
       <Container size={{ initial: '1', sm: '2', md: '3', lg: '4', xl: '5' }}>
         <Flex justify="between" mb="7">
-          <Box>
-            <Heading as="h1" size="7" mb="4" weight="bold">
-              CHOOSE A DELIVERY METHOD
-            </Heading>
-            {/* <Heading as="h1" size="8" mt="9" mb="4" weight="bold">
-          CHOOSE A DELIVERY ADDRESS
-        </Heading> */}
-          </Box>
+          <DeliveryOptions cities={cities} />
           {totalQuantityProducts > 0 && (
             <OrderSummary totalPrice={totalPrice} totalQuantityProducts={totalQuantityProducts} isDelivery="true" />
           )}

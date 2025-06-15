@@ -1,7 +1,7 @@
 import { getAllCities } from '../services/delivery.js';
 
 export const getCitiesController = async (req, res) => {
-  const { CityName = '', Page = 1 } = req.query;
+  const { name: CityName = '', page: Page = 1 } = req.query;
 
   const cities = await getAllCities({ CityName, Page });
 

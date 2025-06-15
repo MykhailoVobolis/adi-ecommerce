@@ -68,3 +68,12 @@ img {
   display: block;
   max-width: 100%;
 }
+
+.rt-BaseCard::before,
+.rt-BaseCard::after {
+  inset: 0 !important;
+}
+
+.rt-Card:where(.rt-variant-surface)::before {
+  background-color: transparent;
+}

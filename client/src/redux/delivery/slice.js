@@ -26,6 +26,11 @@ const initialState = {
 const deliverySlice = createSlice({
   name: 'delivery',
   initialState: initialState,
+  reducers: {
+    setFilterCities: (state, action) => {
+      state.filterCities.name = action.payload;
+    },
+  },
   extraReducers: (builder) => {
     builder
       .addCase(fetchDeliveryCities.pending, handlePending)
@@ -39,4 +44,5 @@ const deliverySlice = createSlice({
   },
 });
 
+export const { setFilterCities } = deliverySlice.actions;
 export const deliveryReducer = deliverySlice.reducer;

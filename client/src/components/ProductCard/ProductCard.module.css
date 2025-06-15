@@ -1,4 +1,5 @@
 .productBox {
+  border: 1px solid transparent;
   max-width: calc((100% - 12px) / 4);
 }
 
