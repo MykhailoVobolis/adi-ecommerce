@@ -6,7 +6,7 @@ import css from './DeliveryOptions.module.css';
 
 // const cities = ['Київ', 'Львів', 'Одеса', 'Харків', 'Дніпро', 'Чернівці', 'Тернопіль'];
 
-export default function DeliveryOptions({ cities, deliveryAddress }) {
+export default function DeliveryOptions({ cities, totalCount, deliveryAddress }) {
   const { selectedCity } = deliveryAddress;
 
   return (
@@ -17,7 +17,7 @@ export default function DeliveryOptions({ cities, deliveryAddress }) {
       {/* <Heading as="h1" size="8" mt="9" mb="4" weight="bold">
           CHOOSE A DELIVERY ADDRESS
         </Heading> */}
-      <CitySelect cities={cities} selectedCity={selectedCity} />
+      <CitySelect cities={cities} totalCount={totalCount} selectedCity={selectedCity} />
     </Box>
   );
 }

@@ -1,6 +1,6 @@
 import debounce from 'lodash.debounce';
 
-import { useEffect, useMemo, useRef, useState } from 'react';
+import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import { TextField } from '@radix-ui/themes';
 import { MagnifyingGlassIcon } from '@radix-ui/react-icons';
 import { useDispatch } from 'react-redux';
@@ -10,21 +10,28 @@ import SelectDropdownList from '../SelectDropdownList/SelectDropdownList.jsx';
 
 import css from './CitySelect.module.css';
 
-export default function CitySelect({ cities, selectedCity }) {
+export default function CitySelect({ cities, totalCount, selectedCity }) {
   const dispatch = useDispatch();
   const [query, setQuery] = useState('');
   const [isOpen, setIsOpen] = useState(false);
+  const [page, setPage] = useState(1);
+  const [isFetching, setIsFetching] = useState(false);
+
   const wrapperRef = useRef(null);
+  const observerRef = useRef();
+
+  const hasMore = cities.length < totalCount;
 
   useEffect(() => {
-    if (selectedCity) {
-      setQuery(`${selectedCity?.SettlementTypeDescription.slice(0, 1) || ''}. ${selectedCity?.Description || ''}`);
+    if (selectedCity && selectedCity.Description) {
+      setQuery(`${selectedCity.SettlementTypeDescription?.slice(0, 1) || ''}. ${selectedCity.Description || ''}`);
     }
   }, [selectedCity]);
 
   const handleChange = (e) => {
     const value = e.target.value;
     setQuery(value);
+    setPage(1);
     debouncedSearch(value.trim());
   };
 
@@ -32,14 +39,14 @@ export default function CitySelect({ cities, selectedCity }) {
     () =>
       debounce((value) => {
         if (value === '') {
-          dispatch(setFilterCities(''));
+          dispatch(setFilterCities({ name: '', page: 1 }));
           return;
         }
 
         if (value.length < 2) return;
-        dispatch(setFilterCities(value));
+        dispatch(setFilterCities({ name: value, page: page }));
       }, 500),
-    [dispatch],
+    [dispatch, page],
   );
 
   const handleSelect = (city) => {
@@ -81,6 +88,26 @@ export default function CitySelect({ cities, selectedCity }) {
     setIsOpen(true);
   };
 
+  useEffect(() => {
+    if (page > 1) {
+      dispatch(setFilterCities({ name: query, page }));
+    } else {
+      // Очищуємо список при новому пошуку
+      dispatch(setFilterCities({ name: '', page: 1 }));
+    }
+  }, [dispatch, page, query]);
+
+  const handleLoadMore = useCallback(() => {
+    if (isFetching || !hasMore) return;
+
+    setIsFetching(true);
+    setPage((prev) => prev + 1);
+  }, [isFetching, hasMore]);
+
+  useEffect(() => {
+    setIsFetching(false);
+  }, [cities.length]);
+
   return (
     <div className={css.selectWrapper} ref={wrapperRef}>
       <TextField.Root
@@ -96,7 +123,15 @@ export default function CitySelect({ cities, selectedCity }) {
           <MagnifyingGlassIcon height="24" width="24" />
         </TextField.Slot>
       </TextField.Root>
-      {isOpen && <SelectDropdownList cities={cities} handleSelect={handleSelect} />}
+      {isOpen && (
+        <SelectDropdownList
+          cities={cities}
+          handleSelect={handleSelect}
+          observerRef={observerRef}
+          hasMore={hasMore}
+          onLoadMore={handleLoadMore}
+        />
+      )}
     </div>
   );
 }

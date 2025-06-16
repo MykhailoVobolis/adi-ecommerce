@@ -35,7 +35,8 @@ const deliverySlice = createSlice({
   initialState: initialState,
   reducers: {
     setFilterCities: (state, action) => {
-      state.filterCities.name = action.payload;
+      state.filterCities.name = action.payload.name;
+      state.filterCities.page = action.payload.page;
     },
     setSelectedCity: (state, action) => {
       state.deliveryAddress.selectedCity = action.payload;
@@ -47,8 +48,19 @@ const deliverySlice = createSlice({
       .addCase(fetchDeliveryCities.fulfilled, (state, action) => {
         state.loading = false;
         state.error = null;
-        state.deliveryCities.cities = action.payload.data;
-        state.deliveryCities.totalCount = action.payload.info.totalCount;
+        // state.deliveryCities.cities = action.payload.data;
+        // state.deliveryCities.totalCount = action.payload.info.totalCount;
+        const newCities = action.payload.data;
+        const totalCount = action.payload.info.totalCount;
+        const currentPage = state.filterCities.page;
+
+        if (currentPage === 1) {
+          state.deliveryCities.cities = newCities;
+        } else {
+          state.deliveryCities.cities = [...state.deliveryCities.cities, ...newCities];
+        }
+
+        state.deliveryCities.totalCount = totalCount;
       })
       .addCase(fetchDeliveryCities.rejected, handleRejected);
   },

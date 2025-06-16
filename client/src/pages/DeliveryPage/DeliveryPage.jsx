@@ -28,7 +28,7 @@ export default function DeliveryPage() {
     <Section size="4">
       <Container size={{ initial: '1', sm: '2', md: '3', lg: '4', xl: '5' }}>
         <Flex justify="between" mb="7">
-          <DeliveryOptions cities={cities} deliveryAddress={deliveryAddress} />
+          <DeliveryOptions cities={cities} deliveryAddress={deliveryAddress} totalCount={totalCount} />
           {totalQuantityProducts > 0 && (
             <OrderSummary totalPrice={totalPrice} totalQuantityProducts={totalQuantityProducts} isDelivery="true" />
           )}
