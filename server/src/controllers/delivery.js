@@ -11,7 +11,7 @@ export const getCitiesController = async (req, res) => {
     const popularResults = await Promise.all(
       popularCityNames.map(async (name) => {
         const city = await getAllCities({ CityName: name, Page: 1 });
-        const uniqueCity = city.data.find((item) => item.Region === '');
+        const uniqueCity = city.data.find((item) => item.Description === name && item.Region === '');
 
         return uniqueCity;
       }),
