@@ -3,5 +3,10 @@
 }
 
 .deliveryOptionDescription {
+  margin-top: 38px;
+}
+
+.noDeliveryMessage {
   margin-top: 20px;
+  font-weight: 700;
 }

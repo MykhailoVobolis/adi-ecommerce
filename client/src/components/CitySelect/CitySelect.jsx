@@ -1,9 +1,9 @@
 import debounce from 'lodash.debounce';
 
 import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
+import { useDispatch } from 'react-redux';
 import { TextField } from '@radix-ui/themes';
 import { MagnifyingGlassIcon } from '@radix-ui/react-icons';
-import { useDispatch } from 'react-redux';
 import { clearWarehousesTypes, setFilterCities, setSelectedCity } from '../../redux/delivery/slice.js';
 import { fetchWarehousesOfCity } from '../../redux/delivery/operations.js';
 
@@ -11,7 +11,7 @@ import SelectDropdownList from '../SelectDropdownList/SelectDropdownList.jsx';
 
 import css from './CitySelect.module.css';
 
-export default function CitySelect({ cities, totalCount, selectedCity }) {
+export default function CitySelect({ cities, totalCount, selectedCity, setSelectedMethod }) {
   const dispatch = useDispatch();
   const [query, setQuery] = useState('');
   const [isOpen, setIsOpen] = useState(false);
@@ -53,6 +53,7 @@ export default function CitySelect({ cities, totalCount, selectedCity }) {
   const handleSelect = (city) => {
     dispatch(setSelectedCity(city));
     setIsOpen(false);
+    setSelectedMethod('');
     dispatch(fetchWarehousesOfCity(city.Ref));
   };
 
@@ -87,6 +88,7 @@ export default function CitySelect({ cities, totalCount, selectedCity }) {
 
   const openDrop = () => {
     setQuery('');
+    dispatch(setSelectedCity(''));
     setIsOpen(true);
     dispatch(clearWarehousesTypes());
   };
@@ -119,6 +121,7 @@ export default function CitySelect({ cities, totalCount, selectedCity }) {
         size="3"
         placeholder="City"
         variant="surface"
+        name="city"
         onClick={openDrop}
         onChange={handleChange}
       >

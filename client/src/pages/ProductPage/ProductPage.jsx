@@ -5,7 +5,6 @@ import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { setProductOptions } from '../../redux/products/slice.js';
 import { selectCurentProduct, selectLoading, selectSelectedOptionsById } from '../../redux/products/selectors.js';
-import { addFavorite, removeFavorite } from '../../redux/favorites/slice.js';
 import { addProductsToCart } from '../../redux/cart/slice.js';
 import { fetchProductById } from '../../redux/products/operations.js';
 import { useIsFavoriteProduct } from '../../hooks/useIsFavoriteProduct.js';
@@ -82,7 +81,7 @@ export default function ProductPage() {
 
   return (
     <>
-      {isLoading && <Loader />}
+      {isLoading && <Loader heightValue={'calc(100vh - 64px)'} />}
       {Object.keys(curentProduct).length > 0 && (
         <Box as="div">
           <ProductMainSection

@@ -27,7 +27,7 @@ export default function ProductCategoryPage() {
   const products = byCategory?.[category]?.data || [];
 
   return isLoading ? (
-    <Loader />
+    <Loader heightValue={'calc(100vh - 64px)'} />
   ) : (
     <Section size="4">
       <Container size={{ initial: '1', sm: '2', md: '3', lg: '4', xl: '5' }}>

@@ -79,6 +79,8 @@ const deliverySlice = createSlice({
         state.deliveryAddress.warehousesTypes.hasBranch = action.payload.hasBranch;
         state.deliveryAddress.warehousesTypes.hasPostomat = action.payload.hasPostomat;
         state.deliveryAddress.warehousesTypes.hasCourier = action.payload.hasCourier;
+        state.loading = false;
+        state.error = null;
       })
       .addCase(fetchWarehousesOfCity.rejected, handleRejected);
   },
