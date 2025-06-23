@@ -3,7 +3,12 @@ import { useDispatch, useSelector } from 'react-redux';
 import { selectCartData } from '../../redux/cart/selectors.js';
 import { useEffect } from 'react';
 import { fetchDeliveryCities } from '../../redux/delivery/operations.js';
-import { selectDeliveryAddress, selectDeliveryCities, selectFilterCities } from '../../redux/delivery/selectors.js';
+import {
+  selectDeliveryAddress,
+  selectDeliveryCities,
+  selectDeliveryWarehouseTypes,
+  selectFilterCities,
+} from '../../redux/delivery/selectors.js';
 
 import DeliveryOptions from '../../components/DeliveryOptions/DeliveryOptions.jsx';
 import OrderSummary from '../../components/OrderSummary/OrderSummary.jsx';
@@ -16,6 +21,7 @@ export default function DeliveryPage() {
   const deliveryCities = useSelector(selectDeliveryCities);
   const filterParams = useSelector(selectFilterCities);
   const deliveryAddress = useSelector(selectDeliveryAddress);
+  const warehouseTypes = useSelector(selectDeliveryWarehouseTypes);
 
   const { products, totalPrice, totalQuantityProducts } = cartData;
   const { cities, totalCount } = deliveryCities;
@@ -28,7 +34,12 @@ export default function DeliveryPage() {
     <Section size="4">
       <Container size={{ initial: '1', sm: '2', md: '3', lg: '4', xl: '5' }}>
         <Flex justify="between" mb="7">
-          <DeliveryOptions cities={cities} deliveryAddress={deliveryAddress} totalCount={totalCount} />
+          <DeliveryOptions
+            cities={cities}
+            deliveryAddress={deliveryAddress}
+            totalCount={totalCount}
+            warehouseTypes={warehouseTypes}
+          />
           {totalQuantityProducts > 0 && (
             <OrderSummary totalPrice={totalPrice} totalQuantityProducts={totalQuantityProducts} isDelivery="true" />
           )}

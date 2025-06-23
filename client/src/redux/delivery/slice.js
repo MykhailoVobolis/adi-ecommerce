@@ -1,5 +1,5 @@
 import { createSlice } from '@reduxjs/toolkit';
-import { fetchDeliveryCities } from './operations.js';
+import { fetchDeliveryCities, fetchWarehousesOfCity } from './operations.js';
 
 const handlePending = (state) => {
   state.loading = true;
@@ -23,6 +23,11 @@ const initialState = {
   },
   deliveryAddress: {
     selectedCity: null,
+    warehousesTypes: {
+      hasBranch: null,
+      hasPostomat: null,
+      hasCourier: null,
+    },
     selectedDepartment: '',
     selectedStreet: '',
     selectedHouseNumber: '',
@@ -41,6 +46,13 @@ const deliverySlice = createSlice({
     setSelectedCity: (state, action) => {
       state.deliveryAddress.selectedCity = action.payload;
     },
+    clearWarehousesTypes: (state, action) => {
+      state.deliveryAddress.warehousesTypes = {
+        hasBranch: null,
+        hasPostomat: null,
+        hasCourier: null,
+      };
+    },
   },
   extraReducers: (builder) => {
     builder
@@ -48,8 +60,6 @@ const deliverySlice = createSlice({
       .addCase(fetchDeliveryCities.fulfilled, (state, action) => {
         state.loading = false;
         state.error = null;
-        // state.deliveryCities.cities = action.payload.data;
-        // state.deliveryCities.totalCount = action.payload.info.totalCount;
         const newCities = action.payload.data;
         const totalCount = action.payload.info.totalCount;
         const currentPage = state.filterCities.page;
@@ -62,9 +72,17 @@ const deliverySlice = createSlice({
 
         state.deliveryCities.totalCount = totalCount;
       })
-      .addCase(fetchDeliveryCities.rejected, handleRejected);
+      .addCase(fetchDeliveryCities.rejected, handleRejected)
+
+      .addCase(fetchWarehousesOfCity.pending, handlePending)
+      .addCase(fetchWarehousesOfCity.fulfilled, (state, action) => {
+        state.deliveryAddress.warehousesTypes.hasBranch = action.payload.hasBranch;
+        state.deliveryAddress.warehousesTypes.hasPostomat = action.payload.hasPostomat;
+        state.deliveryAddress.warehousesTypes.hasCourier = action.payload.hasCourier;
+      })
+      .addCase(fetchWarehousesOfCity.rejected, handleRejected);
   },
 });
 
-export const { setFilterCities, setSelectedCity } = deliverySlice.actions;
+export const { setFilterCities, setSelectedCity, clearWarehousesTypes } = deliverySlice.actions;
 export const deliveryReducer = deliverySlice.reducer;

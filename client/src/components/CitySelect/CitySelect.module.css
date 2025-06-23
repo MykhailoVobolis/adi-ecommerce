@@ -1,3 +1,7 @@
+.selectWrapper {
+  position: relative;
+}
+
 .textField {
   position: relative;
   height: 50px;

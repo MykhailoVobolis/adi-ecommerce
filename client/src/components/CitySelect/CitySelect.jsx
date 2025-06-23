@@ -4,7 +4,8 @@ import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import { TextField } from '@radix-ui/themes';
 import { MagnifyingGlassIcon } from '@radix-ui/react-icons';
 import { useDispatch } from 'react-redux';
-import { setFilterCities, setSelectedCity } from '../../redux/delivery/slice.js';
+import { clearWarehousesTypes, setFilterCities, setSelectedCity } from '../../redux/delivery/slice.js';
+import { fetchWarehousesOfCity } from '../../redux/delivery/operations.js';
 
 import SelectDropdownList from '../SelectDropdownList/SelectDropdownList.jsx';
 
@@ -52,6 +53,7 @@ export default function CitySelect({ cities, totalCount, selectedCity }) {
   const handleSelect = (city) => {
     dispatch(setSelectedCity(city));
     setIsOpen(false);
+    dispatch(fetchWarehousesOfCity(city.Ref));
   };
 
   useEffect(() => {
@@ -86,6 +88,7 @@ export default function CitySelect({ cities, totalCount, selectedCity }) {
   const openDrop = () => {
     setQuery('');
     setIsOpen(true);
+    dispatch(clearWarehousesTypes());
   };
 
   useEffect(() => {

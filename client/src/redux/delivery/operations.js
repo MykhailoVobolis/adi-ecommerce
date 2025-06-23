@@ -14,3 +14,18 @@ export const fetchDeliveryCities = createAsyncThunk('delivery/fetchCities', asyn
     return thunkAPI.rejectWithValue({ message: errorMessage });
   }
 });
+
+export const fetchWarehousesOfCity = createAsyncThunk('delivery/fetchWarehouses', async (filterParams, thunkAPI) => {
+  try {
+    const response = await instance.get('/delivery/warehouses', {
+      params: {
+        CityRef: filterParams,
+      },
+    });
+
+    return response.data.data;
+  } catch (error) {
+    const errorMessage = handleError(error);
+    return thunkAPI.rejectWithValue({ message: errorMessage });
+  }
+});
