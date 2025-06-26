@@ -26,16 +26,15 @@ export const getAllCities = async ({ CityName, Page }) => {
   return response.data;
 };
 
-export const getWarehousesOfCity = async ({ CityRef, TypeOfWarehouseRef }) => {
+export const getWarehousesOfCity = async ({ CityRef, FindByString }) => {
   const response = await instance.post('', {
     apiKey,
     modelName: 'AddressGeneral',
     calledMethod: 'getWarehouses',
     methodProperties: {
-      FindByString: '',
+      FindByString,
       CityRef,
       Language: 'UA',
-      TypeOfWarehouseRef,
     },
   });
 

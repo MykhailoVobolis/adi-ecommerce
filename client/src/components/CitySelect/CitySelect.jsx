@@ -4,14 +4,19 @@ import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { TextField } from '@radix-ui/themes';
 import { MagnifyingGlassIcon } from '@radix-ui/react-icons';
-import { clearWarehousesTypes, setFilterCities, setSelectedCity } from '../../redux/delivery/slice.js';
-import { fetchWarehousesOfCity } from '../../redux/delivery/operations.js';
+import {
+  clearWarehousesTypes,
+  setFilterCities,
+  setSelectedCity,
+  setSelectedMethod,
+} from '../../redux/delivery/slice.js';
+import { fetchDeliveryMethodsOfCity } from '../../redux/delivery/operations.js';
 
 import SelectDropdownList from '../SelectDropdownList/SelectDropdownList.jsx';
 
 import css from './CitySelect.module.css';
 
-export default function CitySelect({ cities, totalCount, selectedCity, setSelectedMethod }) {
+export default function CitySelect({ cities, totalCount, selectedCity }) {
   const dispatch = useDispatch();
   const [query, setQuery] = useState('');
   const [isOpen, setIsOpen] = useState(false);
@@ -53,8 +58,8 @@ export default function CitySelect({ cities, totalCount, selectedCity, setSelect
   const handleSelect = (city) => {
     dispatch(setSelectedCity(city));
     setIsOpen(false);
-    setSelectedMethod('');
-    dispatch(fetchWarehousesOfCity(city.Ref));
+    dispatch(setSelectedMethod(''));
+    dispatch(fetchDeliveryMethodsOfCity(city.Ref));
   };
 
   useEffect(() => {

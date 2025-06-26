@@ -1,10 +1,14 @@
+import { useEffect, useRef } from 'react';
 import { Box, Heading } from '@radix-ui/themes';
-import { useState } from 'react';
 import { LiaTruckSolid } from 'react-icons/lia';
 import { LiaMapMarkerSolid } from 'react-icons/lia';
-import { useSelector } from 'react-redux';
-import { selectLoading } from '../../redux/delivery/selectors.js';
+import { useDispatch, useSelector } from 'react-redux';
+import { selectDeliveryAddress, selectLoading } from '../../redux/delivery/selectors.js';
+import { setSelectedMethod } from '../../redux/delivery/slice.js';
+import { fetchWarehousesOfCity } from '../../redux/delivery/operations.js';
 
+import DeliveryBranchForm from '../DeliveryBranchForm/DeliveryBranchForm.jsx';
+import DeliveryCourierForm from '../DeliveryCourierForm/DeliveryCourierForm.jsx';
 import CitySelect from '../CitySelect/CitySelect.jsx';
 import DeliveryMethodSelector from '../DeliveryMethodSelector/DeliveryMethodSelector.jsx';
 import Loader from '../Loader/Loader.jsx';
@@ -36,11 +40,14 @@ const options = [
 ];
 
 export default function DeliveryOptions({ cities, totalCount, deliveryAddress, warehouseTypes }) {
-  const [selectedMethod, setSelectedMethod] = useState('');
+  const dispatch = useDispatch();
   const isLoading = useSelector(selectLoading);
+  const { selectedMethod } = useSelector(selectDeliveryAddress);
 
   const { selectedCity } = deliveryAddress;
   const { hasBranch, hasPostomat, hasCourier } = warehouseTypes;
+
+  const formRef = useRef(null);
 
   const filteredOptions = options.filter((option) => {
     if (option.value === 'branch') return hasBranch;
@@ -50,23 +57,43 @@ export default function DeliveryOptions({ cities, totalCount, deliveryAddress, w
   });
 
   const isReady = hasBranch !== null || hasPostomat !== null || hasCourier !== null;
+  const isBranch = selectedMethod === 'branch';
+  const isPostomat = selectedMethod === 'postomat';
+  const isCourier = selectedMethod === 'courier';
 
   const handleSelect = (value) => {
-    setSelectedMethod(value);
-    console.log('Selected delivery:', value);
+    dispatch(setSelectedMethod(value));
+
+    const filterParams = {
+      page: 1,
+      cityRef: selectedCity.Ref,
+      CategoryOfWarehouse: value,
+    };
+
+    if (value !== 'courier') {
+      dispatch(fetchWarehousesOfCity(filterParams));
+    } else {
+      // в противному випадку викликати запит на список вулиць
+    }
   };
+
+  useEffect(() => {
+    if ((isBranch || isPostomat || isCourier) && formRef.current) {
+      const headerOffset = 80;
+      const top = formRef.current.getBoundingClientRect().top + window.scrollY - headerOffset;
+      window.scrollTo({
+        top: top,
+        behavior: 'smooth',
+      });
+    }
+  }, [isBranch, isPostomat, isCourier]);
 
   return (
     <Box className={css.optionWrapper}>
       <Heading as="h1" size="7" mb="4" weight="bold">
         {!selectedMethod && selectedCity ? 'CHOOSE A DELIVERY METHOD' : 'CHOOSE A DELIVERY ADDRESS'}
       </Heading>
-      <CitySelect
-        cities={cities}
-        totalCount={totalCount}
-        selectedCity={selectedCity}
-        setSelectedMethod={setSelectedMethod}
-      />
+      <CitySelect cities={cities} totalCount={totalCount} selectedCity={selectedCity} />
       <p className={css.deliveryOptionDescription}>
         The specification and delivery term depend on the delivery method. At the next moment you can clarify this
         information.
@@ -78,6 +105,10 @@ export default function DeliveryOptions({ cities, totalCount, deliveryAddress, w
       {isReady && filteredOptions.length === 0 && (
         <p className={css.noDeliveryMessage}>No delivery options available</p>
       )}
+      <Box ref={formRef}>
+        {(isBranch || isPostomat) && isReady && <DeliveryBranchForm />}
+        {isCourier && isReady && <DeliveryCourierForm />}
+      </Box>
     </Box>
   );
 }

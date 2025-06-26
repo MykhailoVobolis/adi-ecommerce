@@ -33,23 +33,75 @@ export const getCitiesController = async (req, res) => {
   });
 };
 
-export const getWarehousesOfCityController = async (req, res) => {
-  const { CityRef = '', TypeOfWarehouseRef = '' } = req.query;
+export const getDeliveryMethodsOfCityController = async (req, res) => {
+  const { CityRef = '', Page = '', FindByString = '' } = req.query;
 
-  const warehousesResponse = await getWarehousesOfCity({ CityRef, TypeOfWarehouseRef });
-  const warehouses = warehousesResponse.data || [];
+  const methodsResponse = await getWarehousesOfCity({ CityRef, Page, FindByString });
+  const methods = methodsResponse.data || [];
 
-  const hasBranch = warehouses.some((i) => i.CategoryOfWarehouse === 'Branch' || 'Store');
-  const hasPostomat = warehouses.some((i) => i.CategoryOfWarehouse === 'Postomat');
+  const hasBranch = methods.some((i) => i.CategoryOfWarehouse === 'Branch' || 'Store');
+  const hasPostomat = methods.some((i) => i.CategoryOfWarehouse === 'Postomat');
   const hasCourier = hasBranch;
 
   res.status(200).json({
     status: 200,
-    message: 'Successfully found warehouses types!',
+    message: 'Successfully found delivery methods!',
     data: {
       hasBranch,
       hasPostomat,
       hasCourier,
     },
+  });
+};
+
+export const getWarehousesOfCityController = async (req, res) => {
+  const { CityRef = '', Page = '', FindByString = '', CategoryOfWarehouse } = req.query;
+
+  const page = Number(Page) || 1;
+  const limit = 100;
+
+  const warehousesResponse = await getWarehousesOfCity({ CityRef, FindByString });
+
+  let warehouses = warehousesResponse.data;
+
+  if (CategoryOfWarehouse) {
+    const category = CategoryOfWarehouse.toLowerCase();
+
+    warehouses = warehouses.filter((warehouse) => {
+      const warehouseCategory = warehouse.CategoryOfWarehouse?.toLowerCase();
+
+      switch (category) {
+        case 'postomat':
+          return warehouseCategory === 'postomat';
+
+        case 'branch':
+          return warehouseCategory !== 'postomat';
+
+        default:
+          return true;
+      }
+    });
+  }
+
+  // Пагінація
+  const totalCount = warehouses.length;
+  const totalPages = Math.ceil(totalCount / limit);
+  const hasNext = page * limit < totalCount;
+  const hasPrev = page > 1;
+
+  const paginated = warehouses.slice((page - 1) * limit, page * limit);
+
+  res.status(200).json({
+    status: 200,
+    message: 'Successfully found warehouses!',
+    meta: {
+      totalCount,
+      totalPages,
+      hasNext,
+      hasPrev,
+      page,
+      limit,
+    },
+    data: paginated,
   });
 };
