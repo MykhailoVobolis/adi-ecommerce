@@ -1,16 +1,17 @@
-import debounce from 'lodash.debounce';
-
-import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
+import { useCallback, useEffect, useRef, useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { TextField } from '@radix-ui/themes';
 import { MagnifyingGlassIcon } from '@radix-ui/react-icons';
 import {
-  clearWarehousesTypes,
+  // clearWarehousesTypes,
   setFilterCities,
   setSelectedCity,
   setSelectedMethod,
 } from '../../redux/delivery/slice.js';
-import { fetchDeliveryMethodsOfCity } from '../../redux/delivery/operations.js';
+import { fetchDeliveryCities, fetchDeliveryMethodsOfCity } from '../../redux/delivery/operations.js';
+import { useDropdownClose } from '../../hooks/useDropdownClose.js';
+import { useSearch } from '../../hooks/useSearch.js';
+import { usePaginated } from '../../hooks/usePaginated.js';
 
 import SelectDropdownList from '../SelectDropdownList/SelectDropdownList.jsx';
 
@@ -18,42 +19,42 @@ import css from './CitySelect.module.css';
 
 export default function CitySelect({ cities, totalCount, selectedCity }) {
   const dispatch = useDispatch();
-  const [query, setQuery] = useState('');
   const [isOpen, setIsOpen] = useState(false);
-  const [page, setPage] = useState(1);
-  const [isFetching, setIsFetching] = useState(false);
-
+  const [isFocused, setIsFocused] = useState(false);
   const wrapperRef = useRef(null);
   const observerRef = useRef();
 
-  const hasMore = cities.length < totalCount;
+  const handleFocus = () => setIsFocused(true);
+  const handleBlur = () => setIsFocused(false);
+
+  const onSearch = useCallback(
+    (value, page) => {
+      dispatch(setFilterCities({ name: value, page }));
+    },
+    [dispatch],
+  );
+
+  const { query, setQuery, handleChange } = useSearch(onSearch);
+  const { page, setPage, hasMore, handleLoadMore } = usePaginated({
+    dataLength: cities.length,
+    totalCount,
+  });
+
+  const visibleCity = selectedCity
+    ? `${selectedCity.SettlementTypeDescription?.slice(0, 1) || ''}. ${selectedCity.Description || ''}`
+    : '';
 
   useEffect(() => {
     if (selectedCity && selectedCity.Description) {
-      setQuery(`${selectedCity.SettlementTypeDescription?.slice(0, 1) || ''}. ${selectedCity.Description || ''}`);
+      setQuery(visibleCity);
     }
-  }, [selectedCity]);
+  }, [selectedCity, setQuery, visibleCity]);
 
-  const handleChange = (e) => {
+  const handleInputChange = (e) => {
     const value = e.target.value;
-    setQuery(value);
     setPage(1);
-    debouncedSearch(value.trim());
+    handleChange(value, page);
   };
-
-  const debouncedSearch = useMemo(
-    () =>
-      debounce((value) => {
-        if (value === '') {
-          dispatch(setFilterCities({ name: '', page: 1 }));
-          return;
-        }
-
-        if (value.length < 2) return;
-        dispatch(setFilterCities({ name: value, page: page }));
-      }, 500),
-    [dispatch, page],
-  );
 
   const handleSelect = (city) => {
     dispatch(setSelectedCity(city));
@@ -62,73 +63,48 @@ export default function CitySelect({ cities, totalCount, selectedCity }) {
     dispatch(fetchDeliveryMethodsOfCity(city.Ref));
   };
 
-  useEffect(() => {
-    return () => debouncedSearch.cancel();
-  }, [debouncedSearch]);
-
-  useEffect(() => {
-    function handleClick(event) {
-      if (!wrapperRef.current) return;
-
-      if (!wrapperRef.current.contains(event.target)) {
-        setIsOpen(false);
-      }
-    }
-
-    function handleKeyDown(event) {
-      if (event.key === 'Escape') {
-        setIsOpen(false);
-        document.activeElement?.blur();
-      }
-    }
-
-    document.addEventListener('click', handleClick);
-    document.addEventListener('keydown', handleKeyDown);
-
-    return () => {
-      document.removeEventListener('click', handleClick);
-      document.removeEventListener('keydown', handleKeyDown);
-    };
-  }, []);
-
   const openDrop = () => {
+    if (selectedCity) {
+      const searchCityName = getSearchCity(selectedCity.Description);
+      const filterParams = { name: searchCityName, page: 1 };
+
+      dispatch(fetchDeliveryCities(filterParams));
+    }
+
     setQuery('');
-    dispatch(setSelectedCity(''));
     setIsOpen(true);
-    dispatch(clearWarehousesTypes());
+    // dispatch(clearWarehousesTypes());
   };
+
+  const getSearchCity = (cityString) => {
+    if (!cityString) return '';
+    return cityString.split(' ')[0];
+  };
+
+  useDropdownClose({ wrapperRef, setIsOpen });
 
   useEffect(() => {
     if (page > 1) {
-      dispatch(setFilterCities({ name: query, page }));
+      dispatch(setFilterCities({ name: '', page }));
     } else {
       // Очищуємо список при новому пошуку
       dispatch(setFilterCities({ name: '', page: 1 }));
     }
   }, [dispatch, page, query]);
 
-  const handleLoadMore = useCallback(() => {
-    if (isFetching || !hasMore) return;
-
-    setIsFetching(true);
-    setPage((prev) => prev + 1);
-  }, [isFetching, hasMore]);
-
-  useEffect(() => {
-    setIsFetching(false);
-  }, [cities.length]);
-
   return (
     <div className={css.selectWrapper} ref={wrapperRef}>
       <TextField.Root
         className={css.textField}
-        value={query || ''}
+        value={isFocused ? query : visibleCity}
         size="3"
         placeholder="City"
         variant="surface"
         name="city"
         onClick={openDrop}
-        onChange={handleChange}
+        onChange={handleInputChange}
+        onFocus={handleFocus}
+        onBlur={handleBlur}
       >
         <TextField.Slot side="right">
           <MagnifyingGlassIcon height="24" width="24" />

@@ -66,8 +66,9 @@ const deliverySlice = createSlice({
         const newCities = action.payload.data;
         const totalCount = action.payload.info.totalCount;
         const currentPage = state.filterCities.page;
+        const selectedCity = state.deliveryAddress.selectedCity;
 
-        if (currentPage === 1) {
+        if (currentPage === 1 || selectedCity) {
           state.deliveryCities.cities = newCities;
         } else {
           state.deliveryCities.cities = [...state.deliveryCities.cities, ...newCities];
