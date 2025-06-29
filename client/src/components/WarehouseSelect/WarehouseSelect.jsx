@@ -2,22 +2,16 @@ import { useCallback, useEffect, useRef, useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { TextField } from '@radix-ui/themes';
 import { MagnifyingGlassIcon } from '@radix-ui/react-icons';
-import {
-  setFilterCities,
-  setSelectedCity,
-  setSelectedMethod,
-  setSelectedWarehouse,
-} from '../../redux/delivery/slice.js';
-import { fetchDeliveryCities, fetchDeliveryMethodsOfCity } from '../../redux/delivery/operations.js';
+import { setFilterWarehouses, setSelectedWarehouse } from '../../redux/delivery/slice.js';
 import { useDropdownClose } from '../../hooks/useDropdownClose.js';
 import { useSearch } from '../../hooks/useSearch.js';
 import { usePaginated } from '../../hooks/usePaginated.js';
 
-import SelectDropdownList from '../SelectDropdownList/SelectDropdownList.jsx';
+import WarehouseDropdownList from '../WarehouseDropdownList/WarehouseDropdownList.jsx';
 
-import css from './CitySelect.module.css';
+import css from './WarehouseSelect.module.css';
 
-export default function CitySelect({ cities, totalCount, selectedCity }) {
+export default function WarehouseSelect({ warehouses, totalCount, selectedWarehouse }) {
   const dispatch = useDispatch();
   const [isOpen, setIsOpen] = useState(false);
   const [isFocused, setIsFocused] = useState(false);
@@ -29,30 +23,23 @@ export default function CitySelect({ cities, totalCount, selectedCity }) {
 
   const onSearch = useCallback(
     (value, page) => {
-      dispatch(setFilterCities({ name: value, page }));
+      dispatch(setFilterWarehouses({ name: value, page }));
     },
     [dispatch],
   );
 
   const { query, setQuery, handleChange } = useSearch(onSearch);
   const { page, setPage, hasMore, handleLoadMore } = usePaginated({
-    dataLength: cities.length,
+    dataLength: warehouses.length,
     totalCount,
   });
 
-  const visible = selectedCity
-    ? `${selectedCity.SettlementTypeDescription?.slice(0, 1) || ''}. ${selectedCity.Description || ''}`
-    : '';
+  const visible = selectedWarehouse ? selectedWarehouse.Description : '';
 
   useEffect(() => {
-    if (!selectedCity?.Description) return;
+    if (!selectedWarehouse?.Description) return;
     setQuery(visible);
-
-    const shortName = selectedCity.Description.trim().split(' ')[0];
-    const filterParams = { name: shortName, page: 1 };
-
-    dispatch(fetchDeliveryCities(filterParams));
-  }, [dispatch, selectedCity]);
+  }, [selectedWarehouse]);
 
   const handleInputChange = (e) => {
     const value = e.target.value;
@@ -60,12 +47,10 @@ export default function CitySelect({ cities, totalCount, selectedCity }) {
     handleChange(value, page);
   };
 
-  const handleSelect = (city) => {
-    dispatch(setSelectedCity(city));
-    dispatch(setSelectedWarehouse(null));
+  const handleSelect = (warehouse) => {
+    dispatch(setSelectedWarehouse(warehouse));
+    dispatch(setFilterWarehouses({ name: '' }));
     setIsOpen(false);
-    dispatch(setSelectedMethod(''));
-    dispatch(fetchDeliveryMethodsOfCity(city.Ref));
   };
 
   const openDrop = () => {
@@ -76,7 +61,7 @@ export default function CitySelect({ cities, totalCount, selectedCity }) {
   useDropdownClose({ wrapperRef, setIsOpen });
 
   useEffect(() => {
-    dispatch(setFilterCities({ name: '', page }));
+    dispatch(setFilterWarehouses({ name: '', page }));
   }, [dispatch, page]);
 
   return (
@@ -85,9 +70,9 @@ export default function CitySelect({ cities, totalCount, selectedCity }) {
         className={css.textField}
         value={isFocused ? query : visible}
         size="3"
-        placeholder="City"
+        placeholder="Branch number"
         variant="surface"
-        name="city"
+        name="branch"
         onClick={openDrop}
         onChange={handleInputChange}
         onFocus={handleFocus}
@@ -98,8 +83,8 @@ export default function CitySelect({ cities, totalCount, selectedCity }) {
         </TextField.Slot>
       </TextField.Root>
       {isOpen && (
-        <SelectDropdownList
-          cities={cities}
+        <WarehouseDropdownList
+          warehouses={warehouses}
           handleSelect={handleSelect}
           observerRef={observerRef}
           hasMore={hasMore}

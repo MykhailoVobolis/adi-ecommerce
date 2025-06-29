@@ -46,7 +46,7 @@ export const fetchWarehousesOfCity = createAsyncThunk('delivery/fetchWarehouses'
       },
     });
 
-    return response.data.data;
+    return response.data;
   } catch (error) {
     const errorMessage = handleError(error);
     return thunkAPI.rejectWithValue({ message: errorMessage });

@@ -1,5 +1,5 @@
 import { createSlice } from '@reduxjs/toolkit';
-import { fetchDeliveryCities, fetchDeliveryMethodsOfCity } from './operations.js';
+import { fetchDeliveryCities, fetchDeliveryMethodsOfCity, fetchWarehousesOfCity } from './operations.js';
 
 const handlePending = (state) => {
   state.loading = true;
@@ -19,8 +19,18 @@ const initialState = {
     name: '',
     page: 1,
   },
+  warehousesOfCity: {
+    warehouses: [],
+    totalCount: null,
+  },
+  filterWarehouses: {
+    name: '',
+    page: 1,
+    category: '',
+  },
   deliveryAddress: {
     selectedCity: null,
+    selectedWarehouse: null,
     warehousesTypes: {
       hasBranch: null,
       hasPostomat: null,
@@ -46,6 +56,21 @@ const deliverySlice = createSlice({
     },
     setSelectedCity: (state, action) => {
       state.deliveryAddress.selectedCity = action.payload;
+    },
+    setFilterWarehouses: (state, action) => {
+      const { name, page, category } = action.payload;
+      if (name !== undefined) {
+        state.filterWarehouses.name = name;
+      }
+      if (page !== undefined) {
+        state.filterWarehouses.page = page;
+      }
+      if (category !== undefined) {
+        state.filterWarehouses.category = category;
+      }
+    },
+    setSelectedWarehouse: (state, action) => {
+      state.deliveryAddress.selectedWarehouse = action.payload;
     },
     clearWarehousesTypes: (state) => {
       state.deliveryAddress.warehousesTypes = {
@@ -86,9 +111,33 @@ const deliverySlice = createSlice({
         state.loading = false;
         state.error = null;
       })
-      .addCase(fetchDeliveryMethodsOfCity.rejected, handleRejected);
+      .addCase(fetchDeliveryMethodsOfCity.rejected, handleRejected)
+
+      .addCase(fetchWarehousesOfCity.fulfilled, (state, action) => {
+        state.loading = false;
+        state.error = null;
+        const newWarehouses = action.payload.data;
+        const totalCount = action.payload.meta.totalCount;
+        const currentPage = state.filterWarehouses.page;
+
+        if (currentPage === 1) {
+          state.warehousesOfCity.warehouses = newWarehouses;
+        } else {
+          state.warehousesOfCity.warehouses = [...state.warehousesOfCity.warehouses, ...newWarehouses];
+        }
+
+        state.warehousesOfCity.totalCount = totalCount;
+      })
+      .addCase(fetchWarehousesOfCity.rejected, handleRejected);
   },
 });
 
-export const { setFilterCities, setSelectedCity, clearWarehousesTypes, setSelectedMethod } = deliverySlice.actions;
+export const {
+  setFilterCities,
+  setSelectedCity,
+  clearWarehousesTypes,
+  setSelectedMethod,
+  setSelectedWarehouse,
+  setFilterWarehouses,
+} = deliverySlice.actions;
 export const deliveryReducer = deliverySlice.reducer;

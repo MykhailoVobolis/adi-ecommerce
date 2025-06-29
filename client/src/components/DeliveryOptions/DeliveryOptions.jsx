@@ -3,8 +3,8 @@ import { Box, Heading } from '@radix-ui/themes';
 import { LiaTruckSolid } from 'react-icons/lia';
 import { LiaMapMarkerSolid } from 'react-icons/lia';
 import { useDispatch, useSelector } from 'react-redux';
-import { selectDeliveryAddress, selectLoading } from '../../redux/delivery/selectors.js';
-import { setSelectedMethod } from '../../redux/delivery/slice.js';
+import { selectDeliveryAddress, selectFilterWarehouses, selectLoading } from '../../redux/delivery/selectors.js';
+import { setFilterWarehouses, setSelectedMethod, setSelectedWarehouse } from '../../redux/delivery/slice.js';
 import { fetchWarehousesOfCity } from '../../redux/delivery/operations.js';
 
 import DeliveryBranchForm from '../DeliveryBranchForm/DeliveryBranchForm.jsx';
@@ -39,13 +39,14 @@ const options = [
   },
 ];
 
-export default function DeliveryOptions({ cities, totalCount, deliveryAddress, warehouseTypes }) {
+export default function DeliveryOptions({ deliveryCities, deliveryAddress, warehouseTypes, warehousesOfCity }) {
   const dispatch = useDispatch();
   const isLoading = useSelector(selectLoading);
   const { selectedMethod } = useSelector(selectDeliveryAddress);
 
-  const { selectedCity } = deliveryAddress;
+  const { selectedCity, selectedWarehouse } = deliveryAddress;
   const { hasBranch, hasPostomat, hasCourier } = warehouseTypes;
+  const { cities, totalCount } = deliveryCities;
 
   const formRef = useRef(null);
 
@@ -61,17 +62,25 @@ export default function DeliveryOptions({ cities, totalCount, deliveryAddress, w
   const isPostomat = selectedMethod === 'postomat';
   const isCourier = selectedMethod === 'courier';
 
-  const handleSelect = (value) => {
-    dispatch(setSelectedMethod(value));
+  const { name, page, category } = useSelector(selectFilterWarehouses);
+
+  useEffect(() => {
+    if (!selectedCity?.Ref || category === 'courier') return;
 
     const filterParams = {
-      page: 1,
+      page,
       cityRef: selectedCity.Ref,
-      CategoryOfWarehouse: value,
+      CategoryOfWarehouse: category,
+      warehouseName: name,
     };
+    dispatch(fetchWarehousesOfCity(filterParams));
+  }, [dispatch, page, name, category, selectedCity?.Ref]);
 
+  const handleSelect = (value) => {
+    dispatch(setSelectedMethod(value));
     if (value !== 'courier') {
-      dispatch(fetchWarehousesOfCity(filterParams));
+      dispatch(setSelectedWarehouse(null));
+      dispatch(setFilterWarehouses({ name: '', page: 1, category: value }));
     } else {
       // в противному випадку викликати запит на список вулиць
     }
@@ -106,7 +115,9 @@ export default function DeliveryOptions({ cities, totalCount, deliveryAddress, w
         <p className={css.noDeliveryMessage}>No delivery options available</p>
       )}
       <Box ref={formRef}>
-        {(isBranch || isPostomat) && isReady && <DeliveryBranchForm />}
+        {(isBranch || isPostomat) && isReady && (
+          <DeliveryBranchForm warehousesOfCity={warehousesOfCity} selectedWarehouse={selectedWarehouse} />
+        )}
         {isCourier && isReady && <DeliveryCourierForm />}
       </Box>
     </Box>

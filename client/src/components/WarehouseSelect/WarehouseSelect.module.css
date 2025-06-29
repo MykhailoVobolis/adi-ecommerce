@@ -1,0 +1,13 @@
+.selectWrapper {
+  position: relative;
+}
+
+.textField {
+  position: relative;
+  height: 50px;
+  background: transparent;
+  border: 1px solid var(--accent-12);
+  outline: transparent;
+  outline-offset: 4px;
+  box-shadow: none;
+}

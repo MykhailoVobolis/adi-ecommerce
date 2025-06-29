@@ -7,3 +7,7 @@ export const selectFilterCities = (state) => state.delivery.filterCities;
 export const selectDeliveryAddress = (state) => state.delivery.deliveryAddress;
 
 export const selectDeliveryWarehouseTypes = (state) => state.delivery.deliveryAddress.warehousesTypes;
+
+export const selectWarehousesOfCity = (state) => state.delivery.warehousesOfCity;
+
+export const selectFilterWarehouses = (state) => state.delivery.filterWarehouses;
