@@ -2,12 +2,7 @@ import { useCallback, useEffect, useRef, useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { TextField } from '@radix-ui/themes';
 import { MagnifyingGlassIcon } from '@radix-ui/react-icons';
-import {
-  // clearWarehousesTypes,
-  setFilterCities,
-  setSelectedCity,
-  setSelectedMethod,
-} from '../../redux/delivery/slice.js';
+import { setFilterCities, setSelectedCity, setSelectedMethod } from '../../redux/delivery/slice.js';
 import { fetchDeliveryCities, fetchDeliveryMethodsOfCity } from '../../redux/delivery/operations.js';
 import { useDropdownClose } from '../../hooks/useDropdownClose.js';
 import { useSearch } from '../../hooks/useSearch.js';
@@ -40,15 +35,19 @@ export default function CitySelect({ cities, totalCount, selectedCity }) {
     totalCount,
   });
 
-  const visibleCity = selectedCity
+  const visible = selectedCity
     ? `${selectedCity.SettlementTypeDescription?.slice(0, 1) || ''}. ${selectedCity.Description || ''}`
     : '';
 
   useEffect(() => {
-    if (selectedCity && selectedCity.Description) {
-      setQuery(visibleCity);
-    }
-  }, [selectedCity, setQuery, visibleCity]);
+    if (!selectedCity?.Description) return;
+    setQuery(visible);
+
+    const shortName = selectedCity.Description.trim().split(' ')[0];
+    const filterParams = { name: shortName, page: 1 };
+
+    dispatch(fetchDeliveryCities(filterParams));
+  }, [dispatch, selectedCity]);
 
   const handleInputChange = (e) => {
     const value = e.target.value;
@@ -64,39 +63,21 @@ export default function CitySelect({ cities, totalCount, selectedCity }) {
   };
 
   const openDrop = () => {
-    if (selectedCity) {
-      const searchCityName = getSearchCity(selectedCity.Description);
-      const filterParams = { name: searchCityName, page: 1 };
-
-      dispatch(fetchDeliveryCities(filterParams));
-    }
-
     setQuery('');
     setIsOpen(true);
-    // dispatch(clearWarehousesTypes());
-  };
-
-  const getSearchCity = (cityString) => {
-    if (!cityString) return '';
-    return cityString.split(' ')[0];
   };
 
   useDropdownClose({ wrapperRef, setIsOpen });
 
   useEffect(() => {
-    if (page > 1) {
-      dispatch(setFilterCities({ name: '', page }));
-    } else {
-      // Очищуємо список при новому пошуку
-      dispatch(setFilterCities({ name: '', page: 1 }));
-    }
-  }, [dispatch, page, query]);
+    dispatch(setFilterCities({ name: '', page }));
+  }, [dispatch, page]);
 
   return (
     <div className={css.selectWrapper} ref={wrapperRef}>
       <TextField.Root
         className={css.textField}
-        value={isFocused ? query : visibleCity}
+        value={isFocused ? query : visible}
         size="3"
         placeholder="City"
         variant="surface"
