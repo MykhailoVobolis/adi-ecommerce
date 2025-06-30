@@ -26,7 +26,6 @@ const initialState = {
   filterWarehouses: {
     name: '',
     page: 1,
-    category: '',
   },
   deliveryAddress: {
     selectedCity: null,
@@ -58,15 +57,12 @@ const deliverySlice = createSlice({
       state.deliveryAddress.selectedCity = action.payload;
     },
     setFilterWarehouses: (state, action) => {
-      const { name, page, category } = action.payload;
+      const { name, page } = action.payload;
       if (name !== undefined) {
         state.filterWarehouses.name = name;
       }
       if (page !== undefined) {
         state.filterWarehouses.page = page;
-      }
-      if (category !== undefined) {
-        state.filterWarehouses.category = category;
       }
     },
     setSelectedWarehouse: (state, action) => {

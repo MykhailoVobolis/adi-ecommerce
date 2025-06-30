@@ -3,6 +3,7 @@ import { useDispatch } from 'react-redux';
 import { TextField } from '@radix-ui/themes';
 import { MagnifyingGlassIcon } from '@radix-ui/react-icons';
 import {
+  clearWarehousesTypes,
   setFilterCities,
   setSelectedCity,
   setSelectedMethod,
@@ -63,6 +64,7 @@ export default function CitySelect({ cities, totalCount, selectedCity }) {
   const handleSelect = (city) => {
     dispatch(setSelectedCity(city));
     dispatch(setSelectedWarehouse(null));
+    dispatch(clearWarehousesTypes());
     setIsOpen(false);
     dispatch(setSelectedMethod(''));
     dispatch(fetchDeliveryMethodsOfCity(city.Ref));

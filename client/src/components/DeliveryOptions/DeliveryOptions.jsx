@@ -62,25 +62,25 @@ export default function DeliveryOptions({ deliveryCities, deliveryAddress, wareh
   const isPostomat = selectedMethod === 'postomat';
   const isCourier = selectedMethod === 'courier';
 
-  const { name, page, category } = useSelector(selectFilterWarehouses);
+  const { name, page } = useSelector(selectFilterWarehouses);
 
   useEffect(() => {
-    if (!selectedCity?.Ref || category === 'courier') return;
+    if (!selectedCity?.Ref || selectedMethod === 'courier' || !selectedMethod) return;
 
     const filterParams = {
       page,
       cityRef: selectedCity.Ref,
-      CategoryOfWarehouse: category,
+      CategoryOfWarehouse: selectedMethod,
       warehouseName: name,
     };
     dispatch(fetchWarehousesOfCity(filterParams));
-  }, [dispatch, page, name, category, selectedCity?.Ref]);
+  }, [dispatch, page, name, selectedMethod, selectedCity?.Ref]);
 
   const handleSelect = (value) => {
     dispatch(setSelectedMethod(value));
     if (value !== 'courier') {
       dispatch(setSelectedWarehouse(null));
-      dispatch(setFilterWarehouses({ name: '', page: 1, category: value }));
+      dispatch(setFilterWarehouses({ name: '', page: 1 }));
     } else {
       // в противному випадку викликати запит на список вулиць
     }
