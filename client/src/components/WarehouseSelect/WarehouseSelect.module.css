@@ -11,6 +11,7 @@
   outline: transparent;
   outline-offset: 4px;
   box-shadow: none;
+  transition: border 0.15s linear;
 }
 
 .inputError {

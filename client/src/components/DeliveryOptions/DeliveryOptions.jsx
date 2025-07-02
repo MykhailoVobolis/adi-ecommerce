@@ -120,6 +120,7 @@ export default function DeliveryOptions({ deliveryCities, deliveryAddress, wareh
             warehousesOfCity={warehousesOfCity}
             selectedWarehouse={selectedWarehouse}
             selectedCityName={selectedCity.Description}
+            selectedMethod={selectedMethod}
           />
         )}
         {isCourier && isReady && <DeliveryCourierForm />}

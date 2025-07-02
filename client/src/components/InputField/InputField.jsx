@@ -11,7 +11,10 @@ export default function InputField({ name, type = 'text', placeholder, setValue,
   const {
     register,
     formState: { errors, touchedFields },
+    watch,
   } = useFormContext();
+
+  const fieldValue = watch(name);
 
   const hasError = !!errors[name];
   const isSuccess = touchedFields[name] && !hasError;
@@ -24,6 +27,7 @@ export default function InputField({ name, type = 'text', placeholder, setValue,
             [css.inputError]: hasError,
             [css.inputSuccess]: isSuccess,
           })}
+          value={fieldValue || ''}
           id={name}
           mask="+{380} 00 000 00 00"
           placeholder={placeholder}

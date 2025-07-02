@@ -3,6 +3,7 @@ import { yupResolver } from '@hookform/resolvers/yup';
 import { deliverySchema } from '../../utils/validationSchemas.js';
 import { Box, Flex, Text } from '@radix-ui/themes';
 import { HiOutlineArrowNarrowRight } from 'react-icons/hi';
+import { useEffect } from 'react';
 
 import InputField from '../InputField/InputField.jsx';
 import WarehouseSelect from '../WarehouseSelect/WarehouseSelect.jsx';
@@ -10,16 +11,36 @@ import InputErrorMessage from '../InputErrorMessage/InputErrorMessage.jsx';
 
 import css from './DeliveryForm.module.css';
 
-export default function DeliveryForm({ onSubmit, warehouses, selectedWarehouse, totalCount, selectedCityName }) {
+export default function DeliveryForm({
+  onSubmit,
+  warehouses,
+  selectedWarehouse,
+  totalCount,
+  selectedCityName,
+  selectedMethod,
+}) {
   const methods = useForm({
     resolver: yupResolver(deliverySchema),
     mode: 'onTouched',
     reValidateMode: 'onChange',
   });
 
+  useEffect(() => {
+    if (!selectedWarehouse) {
+      methods.reset({
+        warehouseNumber: '',
+        firstName: '',
+        lastName: '',
+        phone: '',
+        email: '',
+      });
+      methods.clearErrors();
+    }
+  }, [selectedMethod, selectedWarehouse, methods]);
+
   return (
     <FormProvider {...methods}>
-      <form onSubmit={methods.handleSubmit(onSubmit)} className={css.form}>
+      <form onSubmit={methods.handleSubmit(onSubmit)}>
         <Controller
           name="warehouseNumber"
           control={methods.control}

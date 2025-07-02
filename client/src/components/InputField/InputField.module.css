@@ -6,6 +6,7 @@
   outline-offset: 4px;
   box-shadow: none;
   width: 352px;
+  transition: border 0.15s linear;
 }
 
 .inputPhone {
@@ -19,6 +20,7 @@
   box-sizing: border-box;
   padding: 0 12px;
   width: 352px;
+  transition: border 0.15s linear;
 }
 
 .inputError {

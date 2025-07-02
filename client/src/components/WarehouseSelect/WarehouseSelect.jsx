@@ -50,8 +50,11 @@ export default function WarehouseSelect({
   const visible = selectedWarehouse ? selectValue : '';
 
   useEffect(() => {
-    if (!selectedWarehouse?.Description) return;
-    setQuery(visible);
+    if (!selectedWarehouse?.Description) {
+      setQuery('');
+    } else {
+      setQuery(selectedWarehouse.Description);
+    }
   }, [selectedWarehouse]);
 
   const handleInputChange = (e) => {

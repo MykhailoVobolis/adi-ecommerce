@@ -4,7 +4,7 @@ import DeliveryForm from '../DeliveryForm/DeliveryForm.jsx';
 
 import css from './DeliveryBranchForm.module.css';
 
-export default function DeliveryBranchForm({ warehousesOfCity, selectedWarehouse, selectedCityName }) {
+export default function DeliveryBranchForm({ warehousesOfCity, selectedWarehouse, selectedCityName, selectedMethod }) {
   const { warehouses, totalCount } = warehousesOfCity;
 
   const handleSubmit = (data) => {
@@ -24,6 +24,7 @@ export default function DeliveryBranchForm({ warehousesOfCity, selectedWarehouse
         selectedWarehouse={selectedWarehouse}
         totalCount={totalCount}
         selectedCityName={selectedCityName}
+        selectedMethod={selectedMethod}
       />
     </Box>
   );
