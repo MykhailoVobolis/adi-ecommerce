@@ -20,3 +20,11 @@
   padding: 0 12px;
   width: 352px;
 }
+
+.inputError {
+  border-bottom: 2px solid #e32b2b;
+}
+
+.inputSuccess {
+  border-bottom: 2px solid #00aa55;
+}

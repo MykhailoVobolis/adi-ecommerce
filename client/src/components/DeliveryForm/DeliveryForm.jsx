@@ -14,7 +14,7 @@ export default function DeliveryForm({ onSubmit, warehouses, selectedWarehouse, 
   const methods = useForm({
     resolver: yupResolver(deliverySchema),
     mode: 'onTouched',
-    reValidateMode: 'onSubmit',
+    reValidateMode: 'onChange',
   });
 
   return (
@@ -24,7 +24,7 @@ export default function DeliveryForm({ onSubmit, warehouses, selectedWarehouse, 
           name="warehouseNumber"
           control={methods.control}
           defaultValue={selectedWarehouse ? selectedWarehouse.Description : ''}
-          render={({ field }) => (
+          render={({ field, fieldState }) => (
             <Box position="relative">
               <WarehouseSelect
                 warehouses={warehouses}
@@ -33,6 +33,8 @@ export default function DeliveryForm({ onSubmit, warehouses, selectedWarehouse, 
                 selectValue={field.value}
                 onChange={field.onChange}
                 onBlur={field.onBlur}
+                hasError={!!fieldState.error}
+                isSuccess={methods.formState.touchedFields['warehouseNumber'] && !fieldState.error}
               />
               <InputErrorMessage errors={methods.formState.errors} name="warehouseNumber" />
             </Box>

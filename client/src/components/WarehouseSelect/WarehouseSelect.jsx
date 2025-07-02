@@ -1,3 +1,4 @@
+import clsx from 'clsx';
 import { useCallback, useEffect, useRef, useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { TextField } from '@radix-ui/themes';
@@ -11,7 +12,16 @@ import WarehouseDropdownList from '../WarehouseDropdownList/WarehouseDropdownLis
 
 import css from './WarehouseSelect.module.css';
 
-export default function WarehouseSelect({ warehouses, totalCount, selectedWarehouse, selectValue, onChange, onBlur }) {
+export default function WarehouseSelect({
+  warehouses,
+  totalCount,
+  selectedWarehouse,
+  selectValue,
+  onChange,
+  onBlur,
+  hasError,
+  isSuccess,
+}) {
   const dispatch = useDispatch();
   const [isOpen, setIsOpen] = useState(false);
   const [isFocused, setIsFocused] = useState(false);
@@ -71,7 +81,10 @@ export default function WarehouseSelect({ warehouses, totalCount, selectedWareho
   return (
     <div className={css.selectWrapper} ref={wrapperRef}>
       <TextField.Root
-        className={css.textField}
+        className={clsx(css.textField, {
+          [css.inputError]: hasError,
+          [css.inputSuccess]: isSuccess,
+        })}
         value={isFocused ? query : visible}
         size="3"
         placeholder="Branch number *"

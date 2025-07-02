@@ -16,5 +16,5 @@ export const deliverySchema = yup.object().shape({
   email: yup
     .string()
     .required('Please enter your email address')
-    .matches(regex.emailRegexp, 'Invalid email. Example: user@mail.com'),
+    .matches(regex.emailRegexp, 'Invalid email address. Example: user@mail.com'),
 });
