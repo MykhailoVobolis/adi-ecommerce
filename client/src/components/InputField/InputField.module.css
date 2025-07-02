@@ -1,0 +1,22 @@
+.textField {
+  height: 50px;
+  background: transparent;
+  border: 1px solid var(--accent-12);
+  outline: transparent;
+  outline-offset: 4px;
+  box-shadow: none;
+  width: 352px;
+}
+
+.inputPhone {
+  all: unset;
+  height: 50px;
+  background: transparent;
+  border: 1px solid var(--accent-12);
+  outline: transparent;
+  outline-offset: 4px;
+  font-family: inherit;
+  box-sizing: border-box;
+  padding: 0 12px;
+  width: 352px;
+}

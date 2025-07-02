@@ -116,7 +116,11 @@ export default function DeliveryOptions({ deliveryCities, deliveryAddress, wareh
       )}
       <Box ref={formRef}>
         {(isBranch || isPostomat) && isReady && (
-          <DeliveryBranchForm warehousesOfCity={warehousesOfCity} selectedWarehouse={selectedWarehouse} />
+          <DeliveryBranchForm
+            warehousesOfCity={warehousesOfCity}
+            selectedWarehouse={selectedWarehouse}
+            selectedCityName={selectedCity.Description}
+          />
         )}
         {isCourier && isReady && <DeliveryCourierForm />}
       </Box>

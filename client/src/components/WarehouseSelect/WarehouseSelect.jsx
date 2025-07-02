@@ -11,7 +11,7 @@ import WarehouseDropdownList from '../WarehouseDropdownList/WarehouseDropdownLis
 
 import css from './WarehouseSelect.module.css';
 
-export default function WarehouseSelect({ warehouses, totalCount, selectedWarehouse }) {
+export default function WarehouseSelect({ warehouses, totalCount, selectedWarehouse, selectValue, onChange, onBlur }) {
   const dispatch = useDispatch();
   const [isOpen, setIsOpen] = useState(false);
   const [isFocused, setIsFocused] = useState(false);
@@ -19,7 +19,10 @@ export default function WarehouseSelect({ warehouses, totalCount, selectedWareho
   const observerRef = useRef();
 
   const handleFocus = () => setIsFocused(true);
-  const handleBlur = () => setIsFocused(false);
+  const handleBlur = () => {
+    setIsFocused(false);
+    onBlur?.();
+  };
 
   const onSearch = useCallback(
     (value, page) => {
@@ -34,7 +37,7 @@ export default function WarehouseSelect({ warehouses, totalCount, selectedWareho
     totalCount,
   });
 
-  const visible = selectedWarehouse ? selectedWarehouse.Description : '';
+  const visible = selectedWarehouse ? selectValue : '';
 
   useEffect(() => {
     if (!selectedWarehouse?.Description) return;
@@ -50,6 +53,7 @@ export default function WarehouseSelect({ warehouses, totalCount, selectedWareho
   const handleSelect = (warehouse) => {
     dispatch(setSelectedWarehouse(warehouse));
     dispatch(setFilterWarehouses({ name: '' }));
+    onChange?.(warehouse.Description);
     setIsOpen(false);
   };
 
@@ -70,7 +74,7 @@ export default function WarehouseSelect({ warehouses, totalCount, selectedWareho
         className={css.textField}
         value={isFocused ? query : visible}
         size="3"
-        placeholder="Branch number"
+        placeholder="Branch number *"
         variant="surface"
         name="branch"
         onClick={openDrop}

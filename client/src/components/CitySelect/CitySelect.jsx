@@ -87,7 +87,7 @@ export default function CitySelect({ cities, totalCount, selectedCity }) {
         className={css.textField}
         value={isFocused ? query : visible}
         size="3"
-        placeholder="City"
+        placeholder="City *"
         variant="surface"
         name="city"
         onClick={openDrop}
