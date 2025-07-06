@@ -1,5 +1,10 @@
 import { createSlice } from '@reduxjs/toolkit';
-import { fetchDeliveryCities, fetchDeliveryMethodsOfCity, fetchWarehousesOfCity } from './operations.js';
+import {
+  fetchDeliveryCities,
+  fetchDeliveryCost,
+  fetchDeliveryMethodsOfCity,
+  fetchWarehousesOfCity,
+} from './operations.js';
 
 const handlePending = (state) => {
   state.loading = true;
@@ -41,6 +46,13 @@ const initialState = {
     selectedHouseNumber: '',
     selectedApartmentNumber: '',
   },
+  deliveryCost: {
+    pickupPointCost: null,
+    courierDeliveryCost: null,
+    costRedelivery: null,
+    selectedDeliveryCost: null,
+  },
+
   loading: false,
   error: null,
 };
@@ -77,6 +89,11 @@ const deliverySlice = createSlice({
     },
     setSelectedMethod: (state, action) => {
       state.deliveryAddress.selectedMethod = action.payload;
+    },
+    setSelectedDeliveryCost: (state, action) => {
+      state.deliveryCost.selectedDeliveryCost = action.payload
+        ? (parseFloat(action.payload.replace(',', '.')) / 41).toFixed(2)
+        : null;
     },
   },
   extraReducers: (builder) => {
@@ -124,7 +141,27 @@ const deliverySlice = createSlice({
 
         state.warehousesOfCity.totalCount = totalCount;
       })
-      .addCase(fetchWarehousesOfCity.rejected, handleRejected);
+      .addCase(fetchWarehousesOfCity.rejected, handleRejected)
+
+      .addCase(fetchDeliveryCost.fulfilled, (state, action) => {
+        if (action.payload.deliveryCost.success) {
+          const deliveryType = action.payload.serviceType;
+          const costData = action.payload.deliveryCost.data[0];
+
+          const format = (value) => (typeof value === 'number' ? value.toFixed(2).replace('.', ',') : '0,00');
+
+          if (deliveryType === 'WarehouseWarehouse') {
+            state.deliveryCost.pickupPointCost = format(costData.Cost);
+          }
+
+          if (deliveryType === 'WarehouseDoors') {
+            state.deliveryCost.courierDeliveryCost = format(costData.Cost);
+          }
+
+          state.deliveryCost.costRedelivery = format(costData.CostRedelivery);
+        }
+      })
+      .addCase(fetchDeliveryCost.rejected, handleRejected);
   },
 });
 
@@ -135,5 +172,6 @@ export const {
   setSelectedMethod,
   setSelectedWarehouse,
   setFilterWarehouses,
+  setSelectedDeliveryCost,
 } = deliverySlice.actions;
 export const deliveryReducer = deliverySlice.reducer;

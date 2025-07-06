@@ -9,7 +9,7 @@ import {
   setSelectedMethod,
   setSelectedWarehouse,
 } from '../../redux/delivery/slice.js';
-import { fetchDeliveryCities, fetchDeliveryMethodsOfCity } from '../../redux/delivery/operations.js';
+import { fetchDeliveryCities, fetchDeliveryCost, fetchDeliveryMethodsOfCity } from '../../redux/delivery/operations.js';
 import { useDropdownClose } from '../../hooks/useDropdownClose.js';
 import { useSearch } from '../../hooks/useSearch.js';
 import { usePaginated } from '../../hooks/usePaginated.js';
@@ -18,7 +18,7 @@ import SelectDropdownList from '../SelectDropdownList/SelectDropdownList.jsx';
 
 import css from './CitySelect.module.css';
 
-export default function CitySelect({ cities, totalCount, selectedCity }) {
+export default function CitySelect({ cities, totalCount, selectedCity, totalPrice, totalQuantityProducts }) {
   const dispatch = useDispatch();
   const [isOpen, setIsOpen] = useState(false);
   const [isFocused, setIsFocused] = useState(false);
@@ -67,7 +67,18 @@ export default function CitySelect({ cities, totalCount, selectedCity }) {
     dispatch(clearWarehousesTypes());
     setIsOpen(false);
     dispatch(setSelectedMethod(''));
-    dispatch(fetchDeliveryMethodsOfCity(city.Ref));
+
+    const baseOptions = {
+      cost: totalPrice,
+      amount: totalQuantityProducts,
+      cityRecipient: city.Ref,
+    };
+
+    Promise.all([
+      dispatch(fetchDeliveryCost({ ...baseOptions, serviceType: 'WarehouseWarehouse' })),
+      dispatch(fetchDeliveryCost({ ...baseOptions, serviceType: 'WarehouseDoors' })),
+      dispatch(fetchDeliveryMethodsOfCity(city.Ref)),
+    ]);
   };
 
   const openDrop = () => {

@@ -52,3 +52,22 @@ export const fetchWarehousesOfCity = createAsyncThunk('delivery/fetchWarehouses'
     return thunkAPI.rejectWithValue({ message: errorMessage });
   }
 });
+
+export const fetchDeliveryCost = createAsyncThunk('delivery/fetchDeliveryCost', async (sendingOptions, thunkAPI) => {
+  const { cost, cityRecipient, serviceType = 'WarehouseWarehouse', amount } = sendingOptions;
+  try {
+    const response = await instance.get('/delivery/cost', {
+      params: {
+        CityRecipient: cityRecipient,
+        ServiceType: serviceType,
+        Cost: cost,
+        SeatsAmount: amount,
+      },
+    });
+
+    return response.data;
+  } catch (error) {
+    const errorMessage = handleError(error);
+    return thunkAPI.rejectWithValue({ message: errorMessage });
+  }
+});

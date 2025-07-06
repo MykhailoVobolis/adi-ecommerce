@@ -6,6 +6,10 @@ const initialState = {
     totalPrice: 0,
     totalQuantityProducts: 0,
     totalUniqueProducts: 0,
+    delivery: {
+      method: '',
+      cost: null,
+    },
   },
   loading: false,
   error: null,
@@ -58,8 +62,12 @@ const cartSlice = createSlice({
         recalculateCartTotals(state);
       }
     },
+
+    addDeliveryParams: (state, action) => {
+      state.cartData.delivery = action.payload;
+    },
   },
 });
 
-export const { addProductsToCart, removeProductCart, updateProductQuantity } = cartSlice.actions;
+export const { addProductsToCart, removeProductCart, updateProductQuantity, addDeliveryParams } = cartSlice.actions;
 export const cartReducer = cartSlice.reducer;

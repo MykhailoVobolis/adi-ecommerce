@@ -3,7 +3,9 @@ import { LiaCheckSolid } from 'react-icons/lia';
 
 import css from './DeliveryMethodSelector.module.css';
 
-export default function DeliveryMethodSelector({ options, handleSelect, selectedMethod }) {
+export default function DeliveryMethodSelector({ options, handleSelect, selectedMethod, deliveryCost, totalPrice }) {
+  const { pickupPointCost, courierDeliveryCost } = deliveryCost;
+
   return (
     <ul className={css.delyverySelectList}>
       {options.map((option) => (
@@ -23,7 +25,15 @@ export default function DeliveryMethodSelector({ options, handleSelect, selected
             <Box>
               <Flex className={css.titleWrapper}>
                 <p className={css.methodTitle}>{option.title}</p>
-                <p>{option.price}</p>
+                {totalPrice >= 300 ? (
+                  <p>{option.price}</p>
+                ) : (
+                  <p>
+                    {option.value === 'branch' || option.value === 'postomat'
+                      ? `${pickupPointCost ?? 0} грн.`
+                      : `${courierDeliveryCost ?? 0} грн.`}
+                  </p>
+                )}
               </Flex>
               <Flex className={css.descriptionWrqpper}>
                 <span>{option.checkIcon}</span>

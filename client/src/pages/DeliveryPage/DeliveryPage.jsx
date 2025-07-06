@@ -2,10 +2,11 @@ import { Container, Flex, Section } from '@radix-ui/themes';
 import { useDispatch, useSelector } from 'react-redux';
 import { selectCartData } from '../../redux/cart/selectors.js';
 import { useEffect } from 'react';
-import { fetchDeliveryCities } from '../../redux/delivery/operations.js';
+import { fetchDeliveryCities, fetchDeliveryCost } from '../../redux/delivery/operations.js';
 import {
   selectDeliveryAddress,
   selectDeliveryCities,
+  selectDeliveryCost,
   selectDeliveryWarehouseTypes,
   selectFilterCities,
   selectWarehousesOfCity,
@@ -24,12 +25,29 @@ export default function DeliveryPage() {
   const deliveryAddress = useSelector(selectDeliveryAddress);
   const warehouseTypes = useSelector(selectDeliveryWarehouseTypes);
   const warehousesOfCity = useSelector(selectWarehousesOfCity);
+  const deliveryCost = useSelector(selectDeliveryCost);
 
   const { products, totalPrice, totalQuantityProducts } = cartData;
+  const { selectedCity } = deliveryAddress;
 
   useEffect(() => {
     dispatch(fetchDeliveryCities(filterParams));
   }, [dispatch, filterParams]);
+
+  useEffect(() => {
+    if (!selectedCity?.Ref) return;
+
+    const baseOptions = {
+      cost: totalPrice,
+      amount: totalQuantityProducts,
+      cityRecipient: selectedCity.Ref,
+    };
+
+    Promise.all([
+      dispatch(fetchDeliveryCost({ ...baseOptions, serviceType: 'WarehouseWarehouse' })),
+      dispatch(fetchDeliveryCost({ ...baseOptions, serviceType: 'WarehouseDoors' })),
+    ]);
+  }, [dispatch, totalQuantityProducts]);
 
   return (
     <Section size="4">
@@ -40,6 +58,9 @@ export default function DeliveryPage() {
             deliveryAddress={deliveryAddress}
             warehouseTypes={warehouseTypes}
             warehousesOfCity={warehousesOfCity}
+            totalPrice={totalPrice}
+            totalQuantityProducts={totalQuantityProducts}
+            deliveryCost={deliveryCost}
           />
           {totalQuantityProducts > 0 && (
             <OrderSummary totalPrice={totalPrice} totalQuantityProducts={totalQuantityProducts} isDelivery="true" />

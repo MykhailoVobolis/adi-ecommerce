@@ -4,7 +4,12 @@ import { LiaTruckSolid } from 'react-icons/lia';
 import { LiaMapMarkerSolid } from 'react-icons/lia';
 import { useDispatch, useSelector } from 'react-redux';
 import { selectDeliveryAddress, selectFilterWarehouses, selectLoading } from '../../redux/delivery/selectors.js';
-import { setFilterWarehouses, setSelectedMethod, setSelectedWarehouse } from '../../redux/delivery/slice.js';
+import {
+  setFilterWarehouses,
+  setSelectedDeliveryCost,
+  setSelectedMethod,
+  setSelectedWarehouse,
+} from '../../redux/delivery/slice.js';
 import { fetchWarehousesOfCity } from '../../redux/delivery/operations.js';
 
 import DeliveryBranchForm from '../DeliveryBranchForm/DeliveryBranchForm.jsx';
@@ -20,26 +25,34 @@ const options = [
     value: 'branch',
     title: 'Доставка на відділення «Нова пошта»',
     price: 'Безкоштовно',
-    infoText: 'Безкоштовна доставка при замовленні від 2500 грн.',
+    infoText: 'Безкоштовна доставка при замовленні від 300 $',
     checkIcon: <LiaMapMarkerSolid size={24} />,
   },
   {
     value: 'courier',
     title: 'Кур’єрська доставка «Нова пошта»',
     price: 'Безкоштовно',
-    infoText: 'Безкоштовна доставка при замовленні від 2500 грн.',
+    infoText: 'Безкоштовна доставка при замовленні від 300 $',
     checkIcon: <LiaTruckSolid size={24} />,
   },
   {
     value: 'postomat',
     title: 'Доставка в поштомат «Нова пошта»',
     price: 'Безкоштовно',
-    infoText: 'Безкоштовна доставка при замовленні від 2500 грн.',
+    infoText: 'Безкоштовна доставка при замовленні від 300 $',
     checkIcon: <LiaMapMarkerSolid size={24} />,
   },
 ];
 
-export default function DeliveryOptions({ deliveryCities, deliveryAddress, warehouseTypes, warehousesOfCity }) {
+export default function DeliveryOptions({
+  deliveryCities,
+  deliveryAddress,
+  warehouseTypes,
+  warehousesOfCity,
+  totalPrice,
+  totalQuantityProducts,
+  deliveryCost,
+}) {
   const dispatch = useDispatch();
   const isLoading = useSelector(selectLoading);
   const { selectedMethod } = useSelector(selectDeliveryAddress);
@@ -47,6 +60,7 @@ export default function DeliveryOptions({ deliveryCities, deliveryAddress, wareh
   const { selectedCity, selectedWarehouse } = deliveryAddress;
   const { hasBranch, hasPostomat, hasCourier } = warehouseTypes;
   const { cities, totalCount } = deliveryCities;
+  const { courierDeliveryCost, pickupPointCost } = deliveryCost;
 
   const formRef = useRef(null);
 
@@ -76,6 +90,17 @@ export default function DeliveryOptions({ deliveryCities, deliveryAddress, wareh
     dispatch(fetchWarehousesOfCity(filterParams));
   }, [dispatch, page, name, selectedMethod, selectedCity?.Ref]);
 
+  useEffect(() => {
+    if (!selectedMethod) {
+      dispatch(setSelectedDeliveryCost(null));
+      return;
+    }
+
+    const selectedDeliveryCost = selectedMethod === 'courier' ? courierDeliveryCost : pickupPointCost;
+
+    dispatch(setSelectedDeliveryCost(selectedDeliveryCost));
+  }, [selectedMethod, courierDeliveryCost, pickupPointCost, dispatch]);
+
   const handleSelect = (value) => {
     dispatch(setSelectedMethod(value));
     if (value !== 'courier') {
@@ -102,14 +127,26 @@ export default function DeliveryOptions({ deliveryCities, deliveryAddress, wareh
       <Heading as="h1" size="7" mb="4" weight="bold">
         {!selectedMethod && selectedCity ? 'CHOOSE A DELIVERY METHOD' : 'CHOOSE A DELIVERY ADDRESS'}
       </Heading>
-      <CitySelect cities={cities} totalCount={totalCount} selectedCity={selectedCity} />
+      <CitySelect
+        cities={cities}
+        totalCount={totalCount}
+        selectedCity={selectedCity}
+        totalPrice={totalPrice}
+        totalQuantityProducts={totalQuantityProducts}
+      />
       <p className={css.deliveryOptionDescription}>
         The specification and delivery term depend on the delivery method. At the next moment you can clarify this
         information.
       </p>
       {isLoading && <Loader heightValue={'100%'} />}
       {isReady && filteredOptions.length > 0 && (
-        <DeliveryMethodSelector options={filteredOptions} handleSelect={handleSelect} selectedMethod={selectedMethod} />
+        <DeliveryMethodSelector
+          options={filteredOptions}
+          handleSelect={handleSelect}
+          selectedMethod={selectedMethod}
+          deliveryCost={deliveryCost}
+          totalPrice={totalPrice}
+        />
       )}
       {isReady && filteredOptions.length === 0 && (
         <p className={css.noDeliveryMessage}>No delivery options available</p>
