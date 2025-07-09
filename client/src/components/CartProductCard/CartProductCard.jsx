@@ -76,10 +76,10 @@ export default function CartProductCard({ product }) {
                     isFavoriteProduct={isFavoriteProduct}
                   />
                 </Flex>
-                <Text as="p" size="3" mb="3" className={css.optionProduct}>
+                <Text as="p" size="3" mb="3" className={css.productOption}>
                   {colorName}
                 </Text>
-                <Text as="p" size="3" className={css.optionProduct}>
+                <Text as="p" size="3" className={css.productOption}>
                   size: {size} uk
                 </Text>
               </Box>

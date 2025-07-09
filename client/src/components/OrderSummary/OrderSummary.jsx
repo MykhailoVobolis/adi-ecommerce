@@ -25,7 +25,7 @@ export default function OrderSummary({ totalPrice, totalQuantityProducts, onChec
   return (
     <Flex direction="column" gap="7">
       <Box className={css.orderSummaryWrapper}>
-        <Heading className={css.titleOrderSummary} as="h2" size="5" weight="bold" mb="5">
+        <Heading className={css.title} as="h2" size="5" weight="bold" mb="5">
           {isDelivery ? <span>Your Order</span> : <span>Order Summary</span>}
         </Heading>
         <SummaryItem

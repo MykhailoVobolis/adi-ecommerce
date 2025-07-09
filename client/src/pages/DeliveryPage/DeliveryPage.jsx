@@ -14,6 +14,7 @@ import {
 
 import DeliveryOptions from '../../components/DeliveryOptions/DeliveryOptions.jsx';
 import OrderSummary from '../../components/OrderSummary/OrderSummary.jsx';
+import CheckoutCart from '../../components/CheckoutCart/CheckoutCart.jsx';
 
 import css from './DeliveryPage.module.css';
 
@@ -63,7 +64,10 @@ export default function DeliveryPage() {
             deliveryCost={deliveryCost}
           />
           {totalQuantityProducts > 0 && (
-            <OrderSummary totalPrice={totalPrice} totalQuantityProducts={totalQuantityProducts} isDelivery="true" />
+            <Flex direction="column">
+              <OrderSummary totalPrice={totalPrice} totalQuantityProducts={totalQuantityProducts} isDelivery="true" />
+              <CheckoutCart products={products} />
+            </Flex>
           )}
         </Flex>
       </Container>
