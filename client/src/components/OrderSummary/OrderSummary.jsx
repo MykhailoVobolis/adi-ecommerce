@@ -36,7 +36,7 @@ export default function OrderSummary({ totalPrice, totalQuantityProducts, onChec
         {isDeliveryPage && (
           <SummaryItem
             label="Delivery"
-            value={totalPrice >= 300 ? 'FREE' : selectedDeliveryCost ? `$${selectedDeliveryCost}` : '–'}
+            value={selectedDeliveryCost ? (totalPrice >= 300 ? 'FREE' : `$${selectedDeliveryCost}`) : '–'}
           />
         )}
         <Separator my="4" size="2" />
