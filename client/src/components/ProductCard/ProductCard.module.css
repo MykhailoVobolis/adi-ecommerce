@@ -1,6 +1,7 @@
 .productBox {
   border: 1px solid transparent;
   max-width: calc((100% - 12px) / 4);
+  position: relative;
 }
 
 .productBox:hover {
@@ -13,4 +14,10 @@
 
 .productOptions {
   color: var(--accent-10);
+}
+
+.toFavoritBtnWrapper {
+  position: absolute;
+  top: 4px;
+  right: 4px;
 }

@@ -1,19 +1,28 @@
 import { Box, Card, Inset, Strong, Text } from '@radix-ui/themes';
 import { Link } from 'react-router-dom';
+import { useIsFavoriteProduct } from '../../hooks/useIsFavoriteProduct.js';
+import { useToggleFavoriteProduct } from '../../hooks/useToggleFavoriteProduct.js';
+
+import AddToFavoriteButton from '../AddToFavoriteButton/AddToFavoriteButton.jsx';
 
 import css from './ProductCard.module.css';
 
 export default function ProductCard({ product, category }) {
-  const { _id, productName, price, images } = product;
+  const { _id: productId, price, productName, images } = product;
 
   const countColors = Object.keys(images.variants).length;
   const imageUrl = images.variants.main.images[0].src;
+  const color = Object.keys(images.variants)[0];
+
+  const isFavoriteProduct = useIsFavoriteProduct(productId, color);
+
+  const handleToggleFavorite = useToggleFavoriteProduct(isFavoriteProduct, product, color);
 
   return (
     <li>
-      <Link to={`/products/${category}/${_id}`}>
-        <Box className={css.productBox}>
-          <Card size="2">
+      <Box className={css.productBox}>
+        <Card size="2">
+          <Link to={`/products/${category}/${productId}`}>
             <Inset clip="padding-box" side="top" pb="current">
               <img
                 src={imageUrl}
@@ -36,9 +45,16 @@ export default function ProductCard({ product, category }) {
             <Text as="p" size="2" className={css.productOptions}>
               {countColors} colors
             </Text>
-          </Card>
+          </Link>
+        </Card>
+        <Box className={css.toFavoritBtnWrapper}>
+          <AddToFavoriteButton
+            onAddToFavoriteClick={handleToggleFavorite}
+            isFavorite={isFavoriteProduct}
+            isInProductCard={true}
+          />
         </Box>
-      </Link>
+      </Box>
     </li>
   );
 }
