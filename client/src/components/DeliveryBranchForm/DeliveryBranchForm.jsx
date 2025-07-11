@@ -1,31 +1,71 @@
-import { Box, Heading } from '@radix-ui/themes';
+import { useForm, FormProvider, Controller } from 'react-hook-form';
+import { yupResolver } from '@hookform/resolvers/yup';
+import { branchDeliverySchema } from '../../utils/validationSchemas.js';
+import { Box } from '@radix-ui/themes';
+import { useEffect } from 'react';
 
-import DeliveryForm from '../DeliveryForm/DeliveryForm.jsx';
+import WarehouseSelect from '../WarehouseSelect/WarehouseSelect.jsx';
+import InputErrorMessage from '../InputErrorMessage/InputErrorMessage.jsx';
+import LocalityInfo from '../LocalityInfo/LocalityInfo.jsx';
+import CustomerContactsForm from '../CustomerContactsForm/CustomerContactsForm.jsx';
+import SubmitDeliveryButton from '../SubmitDeliveryButton/SubmitDeliveryButton.jsx';
 
 import css from './DeliveryBranchForm.module.css';
 
-export default function DeliveryBranchForm({ warehousesOfCity, selectedWarehouse, selectedCityName, selectedMethod }) {
-  const { warehouses, totalCount } = warehousesOfCity;
+export default function DeliveryBranchForm({
+  onSubmit,
+  warehouses,
+  selectedWarehouse,
+  totalCount,
+  selectedCityName,
+  selectedMethod,
+}) {
+  const methods = useForm({
+    resolver: yupResolver(branchDeliverySchema),
+    mode: 'onTouched',
+    reValidateMode: 'onChange',
+  });
 
-  const handleSubmit = (data) => {
-    console.log('Form data:', data);
-    // Тут можеш робити dispatch або щось ще
-  };
+  useEffect(() => {
+    if (!selectedWarehouse) {
+      methods.reset({
+        warehouseNumber: '',
+        firstName: '',
+        lastName: '',
+        phone: '',
+        email: '',
+      });
+      methods.clearErrors();
+    }
+  }, [selectedMethod, selectedWarehouse, methods]);
 
   return (
-    <Box>
-      <Heading as="h2" size="7" mb="3" weight="bold">
-        BRANCH ADDRESS
-      </Heading>
-      <p className={css.description}>Please specify the address where it is convenient for you to pick up the order.</p>
-      <DeliveryForm
-        onSubmit={handleSubmit}
-        warehouses={warehouses}
-        selectedWarehouse={selectedWarehouse}
-        totalCount={totalCount}
-        selectedCityName={selectedCityName}
-        selectedMethod={selectedMethod}
-      />
-    </Box>
+    <FormProvider {...methods}>
+      <form onSubmit={methods.handleSubmit(onSubmit)}>
+        <Controller
+          name="warehouseNumber"
+          control={methods.control}
+          defaultValue={selectedWarehouse ? selectedWarehouse.Description : ''}
+          render={({ field, fieldState }) => (
+            <Box position="relative">
+              <WarehouseSelect
+                warehouses={warehouses}
+                selectedWarehouse={selectedWarehouse}
+                totalCount={totalCount}
+                selectValue={field.value}
+                onChange={field.onChange}
+                onBlur={field.onBlur}
+                hasError={!!fieldState.error}
+                isSuccess={methods.formState.touchedFields['warehouseNumber'] && !fieldState.error}
+              />
+              <InputErrorMessage errors={methods.formState.errors} name="warehouseNumber" />
+            </Box>
+          )}
+        />
+        <LocalityInfo cityName={selectedCityName} />
+        <CustomerContactsForm setValue={methods.setValue} />
+        <SubmitDeliveryButton />
+      </form>
+    </FormProvider>
   );
 }

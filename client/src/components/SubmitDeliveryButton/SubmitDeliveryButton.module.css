@@ -1,8 +1,3 @@
-.inputContainer {
-  justify-content: space-between;
-  margin-bottom: 28px;
-}
-
 .submitBtn {
   display: flex;
   align-items: center;
@@ -23,8 +18,4 @@
 .submitBtn:hover {
   color: var(--accent-12);
   background-color: var(--accent-0);
-}
-
-.locality {
-  font-weight: 700;
 }

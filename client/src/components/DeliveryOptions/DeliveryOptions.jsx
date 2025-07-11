@@ -3,17 +3,24 @@ import { Box, Heading } from '@radix-ui/themes';
 import { LiaTruckSolid } from 'react-icons/lia';
 import { LiaMapMarkerSolid } from 'react-icons/lia';
 import { useDispatch, useSelector } from 'react-redux';
-import { selectDeliveryAddress, selectFilterWarehouses, selectLoading } from '../../redux/delivery/selectors.js';
 import {
+  selectDeliveryAddress,
+  selectFilterStreets,
+  selectFilterWarehouses,
+  selectLoading,
+} from '../../redux/delivery/selectors.js';
+import {
+  setFilterStreets,
   setFilterWarehouses,
   setSelectedDeliveryCost,
   setSelectedMethod,
+  setSelectedStreet,
   setSelectedWarehouse,
 } from '../../redux/delivery/slice.js';
-import { fetchWarehousesOfCity } from '../../redux/delivery/operations.js';
+import { fetchStreetsOfCity, fetchWarehousesOfCity } from '../../redux/delivery/operations.js';
 
-import DeliveryBranchForm from '../DeliveryBranchForm/DeliveryBranchForm.jsx';
-import DeliveryCourierForm from '../DeliveryCourierForm/DeliveryCourierForm.jsx';
+import BranchDeliverySection from '../BranchDeliverySection/BranchDeliverySection.jsx';
+import CourierDeliverySection from '../CourierDeliverySection/CourierDeliverySection.jsx';
 import CitySelect from '../CitySelect/CitySelect.jsx';
 import DeliveryMethodSelector from '../DeliveryMethodSelector/DeliveryMethodSelector.jsx';
 import Loader from '../Loader/Loader.jsx';
@@ -49,6 +56,7 @@ export default function DeliveryOptions({
   deliveryAddress,
   warehouseTypes,
   warehousesOfCity,
+  streetsOfCity,
   totalPrice,
   totalQuantityProducts,
   deliveryCost,
@@ -57,7 +65,7 @@ export default function DeliveryOptions({
   const isLoading = useSelector(selectLoading);
   const { selectedMethod } = useSelector(selectDeliveryAddress);
 
-  const { selectedCity, selectedWarehouse } = deliveryAddress;
+  const { selectedCity, selectedWarehouse, selectedStreet } = deliveryAddress;
   const { hasBranch, hasPostomat, hasCourier } = warehouseTypes;
   const { cities, totalCount } = deliveryCities;
   const { courierDeliveryCost, pickupPointCost } = deliveryCost;
@@ -77,18 +85,32 @@ export default function DeliveryOptions({
   const isCourier = selectedMethod === 'courier';
 
   const { name, page } = useSelector(selectFilterWarehouses);
+  const { name: streetQuery, page: streetPage } = useSelector(selectFilterStreets);
 
   useEffect(() => {
     if (!selectedCity?.Ref || selectedMethod === 'courier' || !selectedMethod) return;
 
     const filterParams = {
       page,
-      cityRef: selectedCity.Ref,
+      CityRef: selectedCity.Ref,
       CategoryOfWarehouse: selectedMethod,
       warehouseName: name,
     };
+
     dispatch(fetchWarehousesOfCity(filterParams));
   }, [dispatch, page, name, selectedMethod, selectedCity?.Ref]);
+
+  useEffect(() => {
+    if (!selectedCity?.Ref || selectedMethod !== 'courier') return;
+
+    const filterParams = {
+      Page: streetPage,
+      CityRef: selectedCity.Ref,
+      streetName: streetQuery,
+    };
+
+    dispatch(fetchStreetsOfCity(filterParams));
+  }, [dispatch, selectedMethod, selectedCity?.Ref, streetPage, streetQuery]);
 
   useEffect(() => {
     if (!selectedMethod) {
@@ -108,6 +130,8 @@ export default function DeliveryOptions({
       dispatch(setFilterWarehouses({ name: '', page: 1 }));
     } else {
       // в противному випадку викликати запит на список вулиць
+      dispatch(setSelectedStreet(null));
+      dispatch(setFilterStreets({ name: '', page: 1 }));
     }
   };
 
@@ -121,6 +145,11 @@ export default function DeliveryOptions({
       });
     }
   }, [isBranch, isPostomat, isCourier]);
+
+  const handleSubmit = (data) => {
+    console.log('Form data:', data);
+    // Тут можеш робити dispatch або щось ще
+  };
 
   return (
     <Box className={css.optionWrapper}>
@@ -153,14 +182,23 @@ export default function DeliveryOptions({
       )}
       <Box ref={formRef}>
         {(isBranch || isPostomat) && isReady && (
-          <DeliveryBranchForm
+          <BranchDeliverySection
             warehousesOfCity={warehousesOfCity}
             selectedWarehouse={selectedWarehouse}
             selectedCityName={selectedCity.Description}
             selectedMethod={selectedMethod}
+            handleSubmit={handleSubmit}
           />
         )}
-        {isCourier && isReady && <DeliveryCourierForm />}
+        {isCourier && isReady && (
+          <CourierDeliverySection
+            streetsOfCity={streetsOfCity}
+            selectedStreet={selectedStreet}
+            selectedCityName={selectedCity.Description}
+            selectedMethod={selectedMethod}
+            handleSubmit={handleSubmit}
+          />
+        )}
       </Box>
     </Box>
   );

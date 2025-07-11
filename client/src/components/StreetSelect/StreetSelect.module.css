@@ -1,0 +1,23 @@
+.selectWrapper {
+  position: relative;
+  margin-bottom: 30px;
+}
+
+.textField {
+  position: relative;
+  height: 50px;
+  background: transparent;
+  border: 1px solid var(--accent-12);
+  outline: transparent;
+  outline-offset: 4px;
+  box-shadow: none;
+  transition: border 0.15s linear;
+}
+
+.inputError {
+  border-bottom: 2px solid #e32b2b;
+}
+
+.inputSuccess {
+  border-bottom: 2px solid #00aa55;
+}

@@ -3,32 +3,26 @@ import { useCallback, useEffect, useRef, useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { TextField } from '@radix-ui/themes';
 import { MagnifyingGlassIcon } from '@radix-ui/react-icons';
-import { setFilterWarehouses, setSelectedWarehouse } from '../../redux/delivery/slice.js';
+import { setFilterStreets, setSelectedStreet } from '../../redux/delivery/slice.js';
 import { useDropdownClose } from '../../hooks/useDropdownClose.js';
 import { useSearch } from '../../hooks/useSearch.js';
 import { usePaginated } from '../../hooks/usePaginated.js';
 
 import AutocompleteDropdownList from '../AutocompleteDropdownList/AutocompleteDropdownList.jsx';
 
-import css from './WarehouseSelect.module.css';
+import css from './StreetSelect.module.css';
 
-export default function WarehouseSelect({
-  warehouses,
-  totalCount,
-  selectedWarehouse,
-  selectValue,
-  onChange,
-  onBlur,
-  hasError,
-  isSuccess,
-}) {
+export default function StreetSelect({ streets, totalCount, selectedStreet, onChange, onBlur, hasError, isSuccess }) {
   const dispatch = useDispatch();
   const [isOpen, setIsOpen] = useState(false);
   const [isFocused, setIsFocused] = useState(false);
   const wrapperRef = useRef(null);
   const observerRef = useRef();
 
-  const handleFocus = () => setIsFocused(true);
+  const handleFocus = () => {
+    setQuery('');
+    setIsFocused(true);
+  };
   const handleBlur = () => {
     setIsFocused(false);
     onBlur?.();
@@ -36,26 +30,26 @@ export default function WarehouseSelect({
 
   const onSearch = useCallback(
     (value, page) => {
-      dispatch(setFilterWarehouses({ name: value, page }));
+      dispatch(setFilterStreets({ name: value, page }));
     },
     [dispatch],
   );
 
   const { query, setQuery, handleChange } = useSearch(onSearch);
   const { page, setPage, hasMore, handleLoadMore } = usePaginated({
-    dataLength: warehouses.length,
+    dataLength: streets.length,
     totalCount,
   });
 
-  const visible = selectedWarehouse ? selectValue : '';
+  const visible = selectedStreet ? `${selectedStreet.StreetsType} ${selectedStreet.Description}` : '';
 
   useEffect(() => {
-    if (!selectedWarehouse?.Description) {
+    if (!selectedStreet?.Description) {
       setQuery('');
     } else {
-      setQuery(selectedWarehouse.Description);
+      setQuery(selectedStreet.Description);
     }
-  }, [selectedWarehouse]);
+  }, [selectedStreet]);
 
   const handleInputChange = (e) => {
     const value = e.target.value;
@@ -63,10 +57,10 @@ export default function WarehouseSelect({
     handleChange(value, page);
   };
 
-  const handleSelect = (warehouse) => {
-    dispatch(setSelectedWarehouse(warehouse));
-    dispatch(setFilterWarehouses({ name: '' }));
-    onChange?.(warehouse.Description);
+  const handleSelect = (street) => {
+    dispatch(setSelectedStreet(street));
+    dispatch(setFilterStreets({ name: '' }));
+    onChange?.(street.Description);
     setIsOpen(false);
   };
 
@@ -78,7 +72,7 @@ export default function WarehouseSelect({
   useDropdownClose({ wrapperRef, setIsOpen });
 
   useEffect(() => {
-    dispatch(setFilterWarehouses({ name: '', page }));
+    dispatch(setFilterStreets({ name: '', page }));
   }, [dispatch, page]);
 
   return (
@@ -90,9 +84,9 @@ export default function WarehouseSelect({
         })}
         value={isFocused ? query : visible}
         size="3"
-        placeholder="Branch number *"
+        placeholder="Street name *"
         variant="surface"
-        name="branch"
+        name="street"
         onClick={openDrop}
         onChange={handleInputChange}
         onFocus={handleFocus}
@@ -104,8 +98,8 @@ export default function WarehouseSelect({
       </TextField.Root>
       {isOpen && (
         <AutocompleteDropdownList
-          selectType="warehouse"
-          items={warehouses}
+          selectType="street"
+          items={streets}
           handleSelect={handleSelect}
           observerRef={observerRef}
           hasMore={hasMore}

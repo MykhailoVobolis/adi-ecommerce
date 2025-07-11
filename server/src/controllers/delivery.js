@@ -1,4 +1,4 @@
-import { getAllCities, getDeliveryCost, getWarehousesOfCity } from '../services/delivery.js';
+import { getAllCities, getDeliveryCost, getStreetOfCity, getWarehousesOfCity } from '../services/delivery.js';
 
 export const getCitiesController = async (req, res) => {
   const { name: CityName = '', page: Page = 1 } = req.query;
@@ -116,5 +116,17 @@ export const getDeliveryCostController = async (req, res) => {
     message: 'Successfully got delivery cost!',
     deliveryCost,
     serviceType: ServiceType,
+  });
+};
+
+export const getStreetOfCityController = async (req, res) => {
+  const { CityRef, streetName, Page = 1 } = req.query;
+
+  const streets = await getStreetOfCity({ CityRef, streetName, Page });
+
+  res.status(200).json({
+    status: 200,
+    message: 'Successfully found streets!',
+    data: streets,
   });
 };

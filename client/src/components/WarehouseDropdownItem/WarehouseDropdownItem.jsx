@@ -1,4 +1,5 @@
 import { forwardRef } from 'react';
+
 import css from './WarehouseDropdownItem.module.css';
 
 const WarehouseDropdownItem = forwardRef(({ warehouse, onSelect }, ref) => {

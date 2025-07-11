@@ -69,3 +69,19 @@ export const getDeliveryCost = async ({
 
   return response.data;
 };
+
+export const getStreetOfCity = async ({ CityRef, streetName, Page }) => {
+  const response = await instance.post('', {
+    apiKey,
+    modelName: 'AddressGeneral',
+    calledMethod: 'getStreet',
+    methodProperties: {
+      CityRef,
+      FindByString: streetName,
+      Page,
+      Limit: '100',
+    },
+  });
+
+  return response.data;
+};

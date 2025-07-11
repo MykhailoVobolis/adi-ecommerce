@@ -10,6 +10,10 @@ export const selectDeliveryWarehouseTypes = (state) => state.delivery.deliveryAd
 
 export const selectWarehousesOfCity = (state) => state.delivery.warehousesOfCity;
 
+export const selectStreetsOfCity = (state) => state.delivery.streetsOfCity;
+
 export const selectFilterWarehouses = (state) => state.delivery.filterWarehouses;
 
 export const selectDeliveryCost = (state) => state.delivery.deliveryCost;
+
+export const selectFilterStreets = (state) => state.delivery.filterStreets;

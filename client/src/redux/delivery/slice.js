@@ -3,6 +3,7 @@ import {
   fetchDeliveryCities,
   fetchDeliveryCost,
   fetchDeliveryMethodsOfCity,
+  fetchStreetsOfCity,
   fetchWarehousesOfCity,
 } from './operations.js';
 
@@ -28,13 +29,22 @@ const initialState = {
     warehouses: [],
     totalCount: null,
   },
+  streetsOfCity: {
+    streets: [],
+    totalCount: null,
+  },
   filterWarehouses: {
+    name: '',
+    page: 1,
+  },
+  filterStreets: {
     name: '',
     page: 1,
   },
   deliveryAddress: {
     selectedCity: null,
     selectedWarehouse: null,
+    selectedStreet: null,
     warehousesTypes: {
       hasBranch: null,
       hasPostomat: null,
@@ -42,7 +52,7 @@ const initialState = {
     },
     selectedMethod: '',
     selectedDepartment: '',
-    selectedStreet: '',
+    selectedStreet: null,
     selectedHouseNumber: '',
     selectedApartmentNumber: '',
   },
@@ -79,6 +89,18 @@ const deliverySlice = createSlice({
     },
     setSelectedWarehouse: (state, action) => {
       state.deliveryAddress.selectedWarehouse = action.payload;
+    },
+    setFilterStreets: (state, action) => {
+      const { name, page } = action.payload;
+      if (name !== undefined) {
+        state.filterStreets.name = name;
+      }
+      if (page !== undefined) {
+        state.filterStreets.page = page;
+      }
+    },
+    setSelectedStreet: (state, action) => {
+      state.deliveryAddress.selectedStreet = action.payload;
     },
     clearWarehousesTypes: (state) => {
       state.deliveryAddress.warehousesTypes = {
@@ -143,6 +165,23 @@ const deliverySlice = createSlice({
       })
       .addCase(fetchWarehousesOfCity.rejected, handleRejected)
 
+      .addCase(fetchStreetsOfCity.fulfilled, (state, action) => {
+        state.loading = false;
+        state.error = null;
+        const newStreets = action.payload.data;
+        const totalCount = action.payload.info.totalCount;
+        const currentPage = state.filterStreets.page;
+
+        if (currentPage === 1) {
+          state.streetsOfCity.streets = newStreets;
+        } else {
+          state.streetsOfCity.streets = [...state.streetsOfCity.streets, ...newStreets];
+        }
+
+        state.streetsOfCity.totalCount = totalCount;
+      })
+      .addCase(fetchStreetsOfCity.rejected, handleRejected)
+
       .addCase(fetchDeliveryCost.fulfilled, (state, action) => {
         if (action.payload.deliveryCost.success) {
           const deliveryType = action.payload.serviceType;
@@ -173,5 +212,7 @@ export const {
   setSelectedWarehouse,
   setFilterWarehouses,
   setSelectedDeliveryCost,
+  setFilterStreets,
+  setSelectedStreet,
 } = deliverySlice.actions;
 export const deliveryReducer = deliverySlice.reducer;

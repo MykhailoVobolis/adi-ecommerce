@@ -9,6 +9,7 @@ import {
   selectDeliveryCost,
   selectDeliveryWarehouseTypes,
   selectFilterCities,
+  selectStreetsOfCity,
   selectWarehousesOfCity,
 } from '../../redux/delivery/selectors.js';
 
@@ -26,6 +27,7 @@ export default function DeliveryPage() {
   const deliveryAddress = useSelector(selectDeliveryAddress);
   const warehouseTypes = useSelector(selectDeliveryWarehouseTypes);
   const warehousesOfCity = useSelector(selectWarehousesOfCity);
+  const streetsOfCity = useSelector(selectStreetsOfCity);
   const deliveryCost = useSelector(selectDeliveryCost);
 
   const { products, totalPrice, totalQuantityProducts } = cartData;
@@ -59,6 +61,7 @@ export default function DeliveryPage() {
             deliveryAddress={deliveryAddress}
             warehouseTypes={warehouseTypes}
             warehousesOfCity={warehousesOfCity}
+            streetsOfCity={streetsOfCity}
             totalPrice={totalPrice}
             totalQuantityProducts={totalQuantityProducts}
             deliveryCost={deliveryCost}
