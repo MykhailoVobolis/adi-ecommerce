@@ -6,7 +6,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { selectFilterStreets, selectFilterWarehouses, selectLoading } from '../../redux/delivery/selectors.js';
 import { setFilterStreets, setFilterWarehouses } from '../../redux/delivery/slice.js';
 import { selectDeliveryAddress } from '../../redux/checkout/selectors.js';
-import { setSelectedDeliveryCost, setSelectedMethod, setSelectedWarehouse } from '../../redux/checkout/slice.js';
+import { setSelectedDeliveryCost, setSelectedMethod } from '../../redux/checkout/slice.js';
 import { fetchStreetsOfCity, fetchWarehousesOfCity } from '../../redux/delivery/operations.js';
 
 import BranchDeliverySection from '../BranchDeliverySection/BranchDeliverySection.jsx';
@@ -62,12 +62,12 @@ export default function DeliveryOptions({
 
   const formRef = useRef(null);
 
-  const filteredOptions = options.filter((option) => {
-    if (option.value === 'branch') return hasBranch;
-    if (option.value === 'postomat') return hasPostomat;
-    if (option.value === 'courier') return hasCourier;
-    return false;
-  });
+  const filteredOptions = options.filter(
+    (option) =>
+      (option.value === 'branch' && hasBranch) ||
+      (option.value === 'postomat' && hasPostomat) ||
+      (option.value === 'courier' && hasCourier),
+  );
 
   const isReady = hasBranch !== null || hasPostomat !== null || hasCourier !== null;
   const isBranch = selectedMethod === 'branch';
@@ -116,7 +116,6 @@ export default function DeliveryOptions({
   const handleSelect = (value) => {
     dispatch(setSelectedMethod(value));
     if (value !== 'courier') {
-      dispatch(setSelectedWarehouse(null));
       dispatch(setFilterWarehouses({ name: '', page: 1 }));
     } else {
       // в противному випадку викликати запит на список вулиць
@@ -137,7 +136,7 @@ export default function DeliveryOptions({
 
   const handleSubmit = (data) => {
     console.log('Form data:', data);
-    // Тут можеш робити dispatch або щось ще
+    // Тут можемо робити dispatch або перехід на сторінку payment
   };
 
   return (

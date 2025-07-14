@@ -23,6 +23,9 @@ export default function DeliveryBranchForm({
   selectedMethod,
 }) {
   const customer = useSelector(selectCustomer);
+  const { selectedBranch, selectedPostomat } = selectedWarehouse;
+
+  const isBranch = selectedMethod === 'branch';
 
   const methods = useForm({
     resolver: yupResolver(branchDeliverySchema),
@@ -33,13 +36,18 @@ export default function DeliveryBranchForm({
       lastName: customer?.lastName || '',
       phone: customer?.phone || '',
       email: customer?.email || '',
-      warehouseNumber: selectedWarehouse?.Description || '',
+      warehouseNumber: isBranch ? selectedBranch?.Description || '' : selectedPostomat?.Description || '',
     },
   });
 
   useEffect(() => {
     const shouldReset =
-      customer?.firstName || customer?.lastName || customer?.email || customer?.phone || selectedWarehouse;
+      customer?.firstName ||
+      customer?.lastName ||
+      customer?.email ||
+      customer?.phone ||
+      selectedBranch ||
+      selectedPostomat;
 
     if (shouldReset) {
       methods.reset(
@@ -48,7 +56,7 @@ export default function DeliveryBranchForm({
           lastName: customer.lastName || '',
           email: customer.email || '',
           phone: customer.phone || '',
-          warehouseNumber: selectedWarehouse?.Description || '',
+          warehouseNumber: isBranch ? selectedBranch?.Description || '' : selectedPostomat?.Description || '',
         },
         {
           keepErrors: true,
@@ -57,12 +65,13 @@ export default function DeliveryBranchForm({
         },
       );
 
-      const fieldsToTouch = {};
-      if (customer.firstName) fieldsToTouch.firstName = true;
-      if (customer.lastName) fieldsToTouch.lastName = true;
-      if (customer.email) fieldsToTouch.email = true;
-      if (customer.phone) fieldsToTouch.phone = true;
-      if (selectedWarehouse?.Description) fieldsToTouch.warehouseNumber = true;
+      const fieldsToTouch = {
+        ...(customer.firstName && { firstName: true }),
+        ...(customer.lastName && { lastName: true }),
+        ...(customer.email && { email: true }),
+        ...(customer.phone && { phone: true }),
+        ...((selectedBranch?.Description || selectedPostomat?.Description) && { warehouseNumber: true }),
+      };
 
       Object.entries(fieldsToTouch).forEach(([field]) => {
         methods.setValue(field, methods.getValues(field), {
@@ -71,7 +80,7 @@ export default function DeliveryBranchForm({
         });
       });
     }
-  }, [customer, selectedWarehouse, selectedMethod, methods]);
+  }, [customer, selectedBranch, selectedPostomat, selectedMethod, methods]);
 
   return (
     <FormProvider {...methods}>
@@ -79,18 +88,21 @@ export default function DeliveryBranchForm({
         <Controller
           name="warehouseNumber"
           control={methods.control}
-          defaultValue={selectedWarehouse ? selectedWarehouse.Description : ''}
+          defaultValue={isBranch ? selectedBranch?.Description || '' : selectedPostomat?.Description || ''}
           render={({ field, fieldState }) => (
             <Box position="relative">
               <WarehouseSelect
                 warehouses={warehouses}
-                selectedWarehouse={selectedWarehouse}
+                selectedBranch={selectedBranch}
+                selectedPostomat={selectedPostomat}
+                isBranch={isBranch}
                 totalCount={totalCount}
                 selectValue={field.value}
                 onChange={field.onChange}
                 onBlur={field.onBlur}
                 hasError={!!fieldState.error}
                 isSuccess={fieldState.isTouched && !fieldState.error}
+                selectedMethod={selectedMethod}
               />
               <InputErrorMessage errors={methods.formState.errors} name="warehouseNumber" />
             </Box>

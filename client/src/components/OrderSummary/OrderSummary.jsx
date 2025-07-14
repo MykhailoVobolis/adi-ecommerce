@@ -45,7 +45,7 @@ export default function OrderSummary({ totalPrice, totalQuantityProducts, onChec
           bold
         />
       </Box>
-      {!isDelivery && <CheckoutButton onCheckout={onCheckout} />}
+      {!isDelivery && <CheckoutButton />}
     </Flex>
   );
 }

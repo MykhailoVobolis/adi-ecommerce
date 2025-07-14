@@ -11,10 +11,6 @@ export default function CartPage() {
   const cartData = useSelector(selectCartData);
   const { products, totalPrice, totalQuantityProducts } = cartData;
 
-  const handleCheckout = () => {
-    console.log('Proceed to checkout');
-  };
-
   return (
     <Section size="4">
       <Container size={{ initial: '1', sm: '2', md: '3', lg: '4', xl: '5' }}>
@@ -24,14 +20,10 @@ export default function CartPage() {
             <CartProductsList products={products} />
           </Box>
           {totalQuantityProducts > 0 && (
-            <OrderSummary
-              totalPrice={totalPrice}
-              totalQuantityProducts={totalQuantityProducts}
-              onCheckout={handleCheckout}
-            />
+            <OrderSummary totalPrice={totalPrice} totalQuantityProducts={totalQuantityProducts} />
           )}
         </Flex>
-        {totalQuantityProducts > 0 && <CheckoutButton onCheckout={handleCheckout} />}
+        {totalQuantityProducts > 0 && <CheckoutButton />}
       </Container>
     </Section>
   );

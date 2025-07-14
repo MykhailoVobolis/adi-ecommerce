@@ -8,10 +8,11 @@ import { useDropdownClose } from '../../hooks/useDropdownClose.js';
 import { useSearch } from '../../hooks/useSearch.js';
 import { usePaginated } from '../../hooks/usePaginated.js';
 import {
+  setSelectedBranch,
   setSelectedCity,
   setSelectedMethod,
+  setSelectedPostomat,
   setSelectedStreet,
-  setSelectedWarehouse,
 } from '../../redux/checkout/slice.js';
 
 import SelectDropdownList from '../SelectDropdownList/SelectDropdownList.jsx';
@@ -63,7 +64,10 @@ export default function CitySelect({ cities, totalCount, selectedCity, totalPric
 
   const handleSelect = (city) => {
     dispatch(setSelectedCity(city));
-    dispatch(setSelectedWarehouse(null));
+
+    dispatch(setSelectedBranch(null));
+    dispatch(setSelectedPostomat(null));
+
     dispatch(setSelectedStreet(null));
     dispatch(clearWarehousesTypes());
     setIsOpen(false);

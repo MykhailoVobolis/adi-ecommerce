@@ -4,7 +4,7 @@ import { useDispatch } from 'react-redux';
 import { TextField } from '@radix-ui/themes';
 import { MagnifyingGlassIcon } from '@radix-ui/react-icons';
 import { setFilterWarehouses } from '../../redux/delivery/slice.js';
-import { setSelectedWarehouse } from '../../redux/checkout/slice.js';
+import { setSelectedBranch, setSelectedPostomat } from '../../redux/checkout/slice.js';
 import { useDropdownClose } from '../../hooks/useDropdownClose.js';
 import { useSearch } from '../../hooks/useSearch.js';
 import { usePaginated } from '../../hooks/usePaginated.js';
@@ -16,12 +16,15 @@ import css from './WarehouseSelect.module.css';
 export default function WarehouseSelect({
   warehouses,
   totalCount,
-  selectedWarehouse,
+  selectedBranch,
+  selectedPostomat,
+  isBranch,
   selectValue,
   onChange,
   onBlur,
   hasError,
   isSuccess,
+  selectedMethod,
 }) {
   const dispatch = useDispatch();
   const [isOpen, setIsOpen] = useState(false);
@@ -48,15 +51,27 @@ export default function WarehouseSelect({
     totalCount,
   });
 
-  const visible = selectedWarehouse ? selectValue : '';
+  useEffect(() => {
+    setPage(1);
+  }, [selectedMethod]);
+
+  const visible = isBranch ? (selectedBranch ? selectValue : '') : selectedPostomat ? selectValue : '';
 
   useEffect(() => {
-    if (!selectedWarehouse?.Description) {
-      setQuery('');
+    if (isBranch) {
+      if (!selectedBranch?.Description) {
+        setQuery('');
+      } else {
+        setQuery(selectedBranch.Description);
+      }
     } else {
-      setQuery(selectedWarehouse.Description);
+      if (!selectedPostomat?.Description) {
+        setQuery('');
+      } else {
+        setQuery(selectedPostomat.Description);
+      }
     }
-  }, [selectedWarehouse]);
+  }, [selectedBranch, selectedPostomat]);
 
   const handleInputChange = (e) => {
     const value = e.target.value;
@@ -65,7 +80,8 @@ export default function WarehouseSelect({
   };
 
   const handleSelect = (warehouse) => {
-    dispatch(setSelectedWarehouse(warehouse));
+    if (selectedMethod === 'branch') dispatch(setSelectedBranch(warehouse));
+    if (selectedMethod === 'postomat') dispatch(setSelectedPostomat(warehouse));
     dispatch(setFilterWarehouses({ name: '' }));
     onChange?.(warehouse.Description);
     setIsOpen(false);

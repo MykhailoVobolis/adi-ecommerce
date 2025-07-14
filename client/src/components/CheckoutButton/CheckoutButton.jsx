@@ -3,9 +3,9 @@ import { Link } from 'react-router-dom';
 
 import css from './CheckoutButton.module.css';
 
-export default function CheckoutButton({ onCheckout }) {
+export default function CheckoutButton() {
   return (
-    <Link className={css.checkoutBtn} to="/delivery" onClick={onCheckout}>
+    <Link className={css.checkoutBtn} to="/delivery">
       <span>CHECKOUT</span>
       <HiOutlineArrowNarrowRight size={24} />
     </Link>

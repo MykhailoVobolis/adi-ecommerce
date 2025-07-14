@@ -3,11 +3,10 @@ import { createSlice } from '@reduxjs/toolkit';
 const initialState = {
   deliveryAddress: {
     selectedCity: null,
-    selectedWarehouse: null,
-    // selectedWarehouse: {
-    //   selectedBranch: null,
-    //   selectedPostomat: null,
-    // },
+    selectedWarehouse: {
+      selectedBranch: null,
+      selectedPostomat: null,
+    },
     selectedStreet: null,
     buildingUnit: null,
     apartmentUnit: null,
@@ -37,9 +36,15 @@ const checkoutSlice = createSlice({
     setSelectedMethod: (state, action) => {
       state.deliveryAddress.selectedMethod = action.payload;
     },
-    setSelectedWarehouse: (state, action) => {
-      state.deliveryAddress.selectedWarehouse = action.payload;
+
+    setSelectedBranch: (state, action) => {
+      state.deliveryAddress.selectedWarehouse.selectedBranch = action.payload;
     },
+
+    setSelectedPostomat: (state, action) => {
+      state.deliveryAddress.selectedWarehouse.selectedPostomat = action.payload;
+    },
+
     setSelectedStreet: (state, action) => {
       state.deliveryAddress.selectedStreet = action.payload;
     },
@@ -74,7 +79,8 @@ const checkoutSlice = createSlice({
 export const {
   setSelectedCity,
   setSelectedMethod,
-  setSelectedWarehouse,
+  setSelectedBranch,
+  setSelectedPostomat,
   setSelectedStreet,
   setSelectedDeliveryCost,
   setCustomerField,
