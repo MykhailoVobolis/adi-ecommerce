@@ -41,26 +41,15 @@ const initialState = {
     name: '',
     page: 1,
   },
-  deliveryAddress: {
-    selectedCity: null,
-    selectedWarehouse: null,
-    selectedStreet: null,
-    warehousesTypes: {
-      hasBranch: null,
-      hasPostomat: null,
-      hasCourier: null,
-    },
-    selectedMethod: '',
-    selectedDepartment: '',
-    selectedStreet: null,
-    selectedHouseNumber: '',
-    selectedApartmentNumber: '',
+  warehousesTypes: {
+    hasBranch: null,
+    hasPostomat: null,
+    hasCourier: null,
   },
   deliveryCost: {
     pickupPointCost: null,
     courierDeliveryCost: null,
     costRedelivery: null,
-    selectedDeliveryCost: null,
   },
 
   loading: false,
@@ -75,9 +64,6 @@ const deliverySlice = createSlice({
       state.filterCities.name = action.payload.name;
       state.filterCities.page = action.payload.page;
     },
-    setSelectedCity: (state, action) => {
-      state.deliveryAddress.selectedCity = action.payload;
-    },
     setFilterWarehouses: (state, action) => {
       const { name, page } = action.payload;
       if (name !== undefined) {
@@ -86,9 +72,6 @@ const deliverySlice = createSlice({
       if (page !== undefined) {
         state.filterWarehouses.page = page;
       }
-    },
-    setSelectedWarehouse: (state, action) => {
-      state.deliveryAddress.selectedWarehouse = action.payload;
     },
     setFilterStreets: (state, action) => {
       const { name, page } = action.payload;
@@ -99,23 +82,12 @@ const deliverySlice = createSlice({
         state.filterStreets.page = page;
       }
     },
-    setSelectedStreet: (state, action) => {
-      state.deliveryAddress.selectedStreet = action.payload;
-    },
     clearWarehousesTypes: (state) => {
-      state.deliveryAddress.warehousesTypes = {
+      state.warehousesTypes = {
         hasBranch: null,
         hasPostomat: null,
         hasCourier: null,
       };
-    },
-    setSelectedMethod: (state, action) => {
-      state.deliveryAddress.selectedMethod = action.payload;
-    },
-    setSelectedDeliveryCost: (state, action) => {
-      state.deliveryCost.selectedDeliveryCost = action.payload
-        ? (parseFloat(action.payload.replace(',', '.')) / 41).toFixed(2)
-        : null;
     },
   },
   extraReducers: (builder) => {
@@ -123,10 +95,11 @@ const deliverySlice = createSlice({
       .addCase(fetchDeliveryCities.fulfilled, (state, action) => {
         state.loading = false;
         state.error = null;
-        const newCities = action.payload.data;
-        const totalCount = action.payload.info.totalCount;
+
         const currentPage = state.filterCities.page;
-        const selectedCity = state.deliveryAddress.selectedCity;
+        const newCities = action.payload.data.data;
+        const totalCount = action.payload.data.info.totalCount;
+        const selectedCity = action.payload.selectedCity;
 
         if (currentPage === 1 || selectedCity) {
           state.deliveryCities.cities = newCities;
@@ -140,9 +113,9 @@ const deliverySlice = createSlice({
 
       .addCase(fetchDeliveryMethodsOfCity.pending, handlePending)
       .addCase(fetchDeliveryMethodsOfCity.fulfilled, (state, action) => {
-        state.deliveryAddress.warehousesTypes.hasBranch = action.payload.hasBranch;
-        state.deliveryAddress.warehousesTypes.hasPostomat = action.payload.hasPostomat;
-        state.deliveryAddress.warehousesTypes.hasCourier = action.payload.hasCourier;
+        state.warehousesTypes.hasBranch = action.payload.hasBranch;
+        state.warehousesTypes.hasPostomat = action.payload.hasPostomat;
+        state.warehousesTypes.hasCourier = action.payload.hasCourier;
         state.loading = false;
         state.error = null;
       })
@@ -204,15 +177,5 @@ const deliverySlice = createSlice({
   },
 });
 
-export const {
-  setFilterCities,
-  setSelectedCity,
-  clearWarehousesTypes,
-  setSelectedMethod,
-  setSelectedWarehouse,
-  setFilterWarehouses,
-  setSelectedDeliveryCost,
-  setFilterStreets,
-  setSelectedStreet,
-} = deliverySlice.actions;
+export const { setFilterCities, clearWarehousesTypes, setFilterWarehouses, setFilterStreets } = deliverySlice.actions;
 export const deliveryReducer = deliverySlice.reducer;

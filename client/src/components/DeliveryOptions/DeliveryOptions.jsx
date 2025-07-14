@@ -3,20 +3,10 @@ import { Box, Heading } from '@radix-ui/themes';
 import { LiaTruckSolid } from 'react-icons/lia';
 import { LiaMapMarkerSolid } from 'react-icons/lia';
 import { useDispatch, useSelector } from 'react-redux';
-import {
-  selectDeliveryAddress,
-  selectFilterStreets,
-  selectFilterWarehouses,
-  selectLoading,
-} from '../../redux/delivery/selectors.js';
-import {
-  setFilterStreets,
-  setFilterWarehouses,
-  setSelectedDeliveryCost,
-  setSelectedMethod,
-  setSelectedStreet,
-  setSelectedWarehouse,
-} from '../../redux/delivery/slice.js';
+import { selectFilterStreets, selectFilterWarehouses, selectLoading } from '../../redux/delivery/selectors.js';
+import { setFilterStreets, setFilterWarehouses } from '../../redux/delivery/slice.js';
+import { selectDeliveryAddress } from '../../redux/checkout/selectors.js';
+import { setSelectedDeliveryCost, setSelectedMethod, setSelectedWarehouse } from '../../redux/checkout/slice.js';
 import { fetchStreetsOfCity, fetchWarehousesOfCity } from '../../redux/delivery/operations.js';
 
 import BranchDeliverySection from '../BranchDeliverySection/BranchDeliverySection.jsx';
@@ -130,7 +120,6 @@ export default function DeliveryOptions({
       dispatch(setFilterWarehouses({ name: '', page: 1 }));
     } else {
       // в противному випадку викликати запит на список вулиць
-      dispatch(setSelectedStreet(null));
       dispatch(setFilterStreets({ name: '', page: 1 }));
     }
   };

@@ -4,7 +4,6 @@ import { selectCartData } from '../../redux/cart/selectors.js';
 import { useEffect } from 'react';
 import { fetchDeliveryCities, fetchDeliveryCost } from '../../redux/delivery/operations.js';
 import {
-  selectDeliveryAddress,
   selectDeliveryCities,
   selectDeliveryCost,
   selectDeliveryWarehouseTypes,
@@ -12,6 +11,7 @@ import {
   selectStreetsOfCity,
   selectWarehousesOfCity,
 } from '../../redux/delivery/selectors.js';
+import { selectDeliveryAddress } from '../../redux/checkout/selectors.js';
 
 import DeliveryOptions from '../../components/DeliveryOptions/DeliveryOptions.jsx';
 import OrderSummary from '../../components/OrderSummary/OrderSummary.jsx';

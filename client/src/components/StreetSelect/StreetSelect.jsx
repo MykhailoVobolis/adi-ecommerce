@@ -3,10 +3,11 @@ import { useCallback, useEffect, useRef, useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { TextField } from '@radix-ui/themes';
 import { MagnifyingGlassIcon } from '@radix-ui/react-icons';
-import { setFilterStreets, setSelectedStreet } from '../../redux/delivery/slice.js';
+import { setFilterStreets } from '../../redux/delivery/slice.js';
 import { useDropdownClose } from '../../hooks/useDropdownClose.js';
 import { useSearch } from '../../hooks/useSearch.js';
 import { usePaginated } from '../../hooks/usePaginated.js';
+import { setSelectedStreet } from '../../redux/checkout/slice.js';
 
 import AutocompleteDropdownList from '../AutocompleteDropdownList/AutocompleteDropdownList.jsx';
 

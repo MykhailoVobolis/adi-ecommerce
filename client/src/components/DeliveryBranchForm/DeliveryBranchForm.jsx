@@ -3,6 +3,8 @@ import { yupResolver } from '@hookform/resolvers/yup';
 import { branchDeliverySchema } from '../../utils/validationSchemas.js';
 import { Box } from '@radix-ui/themes';
 import { useEffect } from 'react';
+import { useSelector } from 'react-redux';
+import { selectCustomer } from '../../redux/checkout/selectors.js';
 
 import WarehouseSelect from '../WarehouseSelect/WarehouseSelect.jsx';
 import InputErrorMessage from '../InputErrorMessage/InputErrorMessage.jsx';
@@ -20,24 +22,56 @@ export default function DeliveryBranchForm({
   selectedCityName,
   selectedMethod,
 }) {
+  const customer = useSelector(selectCustomer);
+
   const methods = useForm({
     resolver: yupResolver(branchDeliverySchema),
     mode: 'onTouched',
     reValidateMode: 'onChange',
+    defaultValues: {
+      firstName: customer?.firstName || '',
+      lastName: customer?.lastName || '',
+      phone: customer?.phone || '',
+      email: customer?.email || '',
+      warehouseNumber: selectedWarehouse?.Description || '',
+    },
   });
 
   useEffect(() => {
-    if (!selectedWarehouse) {
-      methods.reset({
-        warehouseNumber: '',
-        firstName: '',
-        lastName: '',
-        phone: '',
-        email: '',
+    const shouldReset =
+      customer?.firstName || customer?.lastName || customer?.email || customer?.phone || selectedWarehouse;
+
+    if (shouldReset) {
+      methods.reset(
+        {
+          firstName: customer.firstName || '',
+          lastName: customer.lastName || '',
+          email: customer.email || '',
+          phone: customer.phone || '',
+          warehouseNumber: selectedWarehouse?.Description || '',
+        },
+        {
+          keepErrors: true,
+          keepDirty: true,
+          keepTouched: false,
+        },
+      );
+
+      const fieldsToTouch = {};
+      if (customer.firstName) fieldsToTouch.firstName = true;
+      if (customer.lastName) fieldsToTouch.lastName = true;
+      if (customer.email) fieldsToTouch.email = true;
+      if (customer.phone) fieldsToTouch.phone = true;
+      if (selectedWarehouse?.Description) fieldsToTouch.warehouseNumber = true;
+
+      Object.entries(fieldsToTouch).forEach(([field]) => {
+        methods.setValue(field, methods.getValues(field), {
+          shouldTouch: true,
+          shouldValidate: true,
+        });
       });
-      methods.clearErrors();
     }
-  }, [selectedMethod, selectedWarehouse, methods]);
+  }, [customer, selectedWarehouse, selectedMethod, methods]);
 
   return (
     <FormProvider {...methods}>
@@ -56,7 +90,7 @@ export default function DeliveryBranchForm({
                 onChange={field.onChange}
                 onBlur={field.onBlur}
                 hasError={!!fieldState.error}
-                isSuccess={methods.formState.touchedFields['warehouseNumber'] && !fieldState.error}
+                isSuccess={fieldState.isTouched && !fieldState.error}
               />
               <InputErrorMessage errors={methods.formState.errors} name="warehouseNumber" />
             </Box>

@@ -5,6 +5,7 @@ import { productsReduser } from './products/slice.js';
 import { favoritesReducer } from './favorites/slice.js';
 import { cartReducer } from './cart/slice.js';
 import { deliveryReducer } from './delivery/slice.js';
+import { checkoutReducer } from './checkout/slice.js';
 
 // Збереження токіна в Local Storage
 // const authPersistConfig = {
@@ -33,9 +34,16 @@ const cartPersistConfig = {
   whitelist: ['cartData'],
 };
 
+// const checkoutPersistConfig = {
+//   key: 'pre-order',
+//   storage,
+//   whitelist: ['deliveryAddress', 'customer', 'selectedDeliveryCost'],
+// };
+
 const persistedProductsReducer = persistReducer(productsPersistConfig, productsReduser);
 const persistedFavoritesReducer = persistReducer(favoritesPersistConfig, favoritesReducer);
 const persistedCartReducer = persistReducer(cartPersistConfig, cartReducer);
+// const persistedCheckoutReduser = persistReducer(checkoutPersistConfig, checkoutReducer);
 
 export const store = configureStore({
   reducer: {
@@ -44,6 +52,8 @@ export const store = configureStore({
     favorites: persistedFavoritesReducer,
     cart: persistedCartReducer,
     delivery: deliveryReducer,
+    // checkout: persistedCheckoutReduser,
+    checkout: checkoutReducer,
   },
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware({

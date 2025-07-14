@@ -3,6 +3,8 @@ import { yupResolver } from '@hookform/resolvers/yup';
 import { courierDeliverySchema } from '../../utils/validationSchemas.js';
 import { Box, Flex } from '@radix-ui/themes';
 import { useEffect } from 'react';
+import { useSelector } from 'react-redux';
+import { selectCustomer, selectDeliveryAddress } from '../../redux/checkout/selectors.js';
 
 import InputErrorMessage from '../InputErrorMessage/InputErrorMessage.jsx';
 import LocalityInfo from '../LocalityInfo/LocalityInfo.jsx';
@@ -21,26 +23,61 @@ export default function DeliveryCourierForm({
   selectedCityName,
   selectedMethod,
 }) {
+  const customer = useSelector(selectCustomer);
+  const { buildingUnit: selectedBuildingUnit, apartmentUnit: selectedApartmentUnit } =
+    useSelector(selectDeliveryAddress);
+
   const methods = useForm({
     resolver: yupResolver(courierDeliverySchema),
     mode: 'onTouched',
     reValidateMode: 'onChange',
+    defaultValues: {
+      firstName: customer?.firstName || '',
+      lastName: customer?.lastName || '',
+      phone: customer?.phone || '',
+      email: customer?.email || '',
+      streetName: selectedStreet?.Description || '',
+      buildingUnit: selectedBuildingUnit || '',
+      apartmentUnit: selectedApartmentUnit || '',
+    },
   });
 
   useEffect(() => {
-    if (!selectedStreet) {
-      methods.reset({
-        streetName: '',
-        buildingUnit: '',
-        apartmentUnit: '',
-        firstName: '',
-        lastName: '',
-        phone: '',
-        email: '',
-      });
+    const hasCustomer = customer?.firstName || customer?.lastName || customer?.email || customer?.phone;
+
+    const values = {
+      firstName: customer?.firstName || '',
+      lastName: customer?.lastName || '',
+      phone: customer?.phone || '',
+      email: customer?.email || '',
+      streetName: selectedStreet?.Description || '',
+      buildingUnit: selectedBuildingUnit || '',
+      apartmentUnit: selectedApartmentUnit || '',
+    };
+
+    // Коли selectedStreet очищено або змінився метод доставки — скидати форму
+    if (!selectedStreet && !hasCustomer) {
+      methods.reset(values);
       methods.clearErrors();
+      return;
     }
-  }, [selectedMethod, selectedStreet, methods]);
+
+    // Під час повернення або оновлення — проставити дані і торкнутись полів
+    methods.reset(values, {
+      keepErrors: true,
+      keepDirty: true,
+      keepTouched: false,
+    });
+
+    Object.entries(values).forEach(([field, value]) => {
+      if (value) {
+        methods.setValue(field, value, {
+          shouldTouch: true,
+          shouldValidate: true,
+        });
+      }
+    });
+  }, [customer, selectedStreet, selectedMethod, methods]);
 
   return (
     <FormProvider {...methods}>
@@ -58,7 +95,7 @@ export default function DeliveryCourierForm({
                 onChange={field.onChange}
                 onBlur={field.onBlur}
                 hasError={!!fieldState.error}
-                isSuccess={methods.formState.touchedFields['streetName'] && !fieldState.error}
+                isSuccess={fieldState.isTouched && !fieldState.error}
               />
               <InputErrorMessage errors={methods.formState.errors} name="streetName" />
             </Box>

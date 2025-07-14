@@ -1,7 +1,7 @@
 import { Box, Flex, Heading, Separator } from '@radix-ui/themes';
 import { useSelector } from 'react-redux';
 import { useLocation } from 'react-router-dom';
-import { selectDeliveryCost } from '../../redux/delivery/selectors.js';
+import { selectDeliveryCost } from '../../redux/checkout/selectors.js';
 
 import CheckoutButton from '../CheckoutButton/CheckoutButton.jsx';
 import SummaryItem from '../SummaryItem/SummaryItem.jsx';
@@ -10,8 +10,7 @@ import css from './OrderSummary.module.css';
 
 export default function OrderSummary({ totalPrice, totalQuantityProducts, onCheckout, discount = 0, isDelivery }) {
   const location = useLocation();
-  const deliveryCost = useSelector(selectDeliveryCost);
-  const { selectedDeliveryCost } = deliveryCost;
+  const selectedDeliveryCost = useSelector(selectDeliveryCost);
 
   const isDeliveryPage = location.pathname === '/delivery';
 

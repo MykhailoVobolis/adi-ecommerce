@@ -4,11 +4,18 @@ import instance from '../../utils/axiosInterceptor.js';
 
 export const fetchDeliveryCities = createAsyncThunk('delivery/fetchCities', async (filterParams, thunkAPI) => {
   try {
+    // Дістаємо значення selectedCity зі state.checkout та передаємо його у state.delivery з відповіддю !!!
+    const state = thunkAPI.getState();
+    const selectedCity = state.checkout.selectedCity;
+
     const response = await instance.get('/delivery', {
       params: filterParams,
     });
 
-    return response.data.data;
+    return {
+      data: response.data.data,
+      selectedCity,
+    };
   } catch (error) {
     const errorMessage = handleError(error);
     return thunkAPI.rejectWithValue({ message: errorMessage });

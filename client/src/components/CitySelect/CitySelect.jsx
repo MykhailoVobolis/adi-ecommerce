@@ -2,17 +2,17 @@ import { useCallback, useEffect, useRef, useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { TextField } from '@radix-ui/themes';
 import { MagnifyingGlassIcon } from '@radix-ui/react-icons';
-import {
-  clearWarehousesTypes,
-  setFilterCities,
-  setSelectedCity,
-  setSelectedMethod,
-  setSelectedWarehouse,
-} from '../../redux/delivery/slice.js';
+import { clearWarehousesTypes, setFilterCities } from '../../redux/delivery/slice.js';
 import { fetchDeliveryCities, fetchDeliveryCost, fetchDeliveryMethodsOfCity } from '../../redux/delivery/operations.js';
 import { useDropdownClose } from '../../hooks/useDropdownClose.js';
 import { useSearch } from '../../hooks/useSearch.js';
 import { usePaginated } from '../../hooks/usePaginated.js';
+import {
+  setSelectedCity,
+  setSelectedMethod,
+  setSelectedStreet,
+  setSelectedWarehouse,
+} from '../../redux/checkout/slice.js';
 
 import SelectDropdownList from '../SelectDropdownList/SelectDropdownList.jsx';
 
@@ -64,6 +64,7 @@ export default function CitySelect({ cities, totalCount, selectedCity, totalPric
   const handleSelect = (city) => {
     dispatch(setSelectedCity(city));
     dispatch(setSelectedWarehouse(null));
+    dispatch(setSelectedStreet(null));
     dispatch(clearWarehousesTypes());
     setIsOpen(false);
     dispatch(setSelectedMethod(''));

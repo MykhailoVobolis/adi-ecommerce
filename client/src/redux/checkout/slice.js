@@ -1,0 +1,87 @@
+import { createSlice } from '@reduxjs/toolkit';
+
+const initialState = {
+  deliveryAddress: {
+    selectedCity: null,
+    selectedWarehouse: null,
+    // selectedWarehouse: {
+    //   selectedBranch: null,
+    //   selectedPostomat: null,
+    // },
+    selectedStreet: null,
+    buildingUnit: null,
+    apartmentUnit: null,
+    selectedMethod: '',
+  },
+
+  customer: {
+    id: null, // userId з бази або null (гість)
+    isAuthorized: false,
+    firstName: '',
+    lastName: '',
+    phone: '',
+    email: '',
+    emailFromAuth: false, // true, якщо email з бази авторизованих юзерів
+  },
+
+  selectedDeliveryCost: null,
+};
+
+const checkoutSlice = createSlice({
+  name: 'checkout',
+  initialState,
+  reducers: {
+    setSelectedCity: (state, action) => {
+      state.deliveryAddress.selectedCity = action.payload;
+    },
+    setSelectedMethod: (state, action) => {
+      state.deliveryAddress.selectedMethod = action.payload;
+    },
+    setSelectedWarehouse: (state, action) => {
+      state.deliveryAddress.selectedWarehouse = action.payload;
+    },
+    setSelectedStreet: (state, action) => {
+      state.deliveryAddress.selectedStreet = action.payload;
+    },
+    setSelectedDeliveryCost: (state, action) => {
+      state.selectedDeliveryCost = action.payload
+        ? (parseFloat(action.payload.replace(',', '.')) / 41).toFixed(2)
+        : null;
+    },
+    setCustomerField: (state, action) => {
+      const { field, value } = action.payload;
+      state.customer[field] = value;
+    },
+    setDeliveryAddressField: (state, action) => {
+      const { field, value } = action.payload;
+      state.deliveryAddress[field] = value;
+    },
+    setCustomerEmailFromAuth: (state, action) => {
+      state.customer.emailFromAuth = action.payload;
+    },
+    // Встановити весь об'єкт customer (будемо використовувати при вході юзера)
+    setCustomerData: (state, action) => {
+      state.customer = {
+        ...state.customer,
+        ...action.payload,
+      };
+    },
+    // Повна очистка після оформлення замовлення
+    resetCheckout: () => initialState,
+  },
+});
+
+export const {
+  setSelectedCity,
+  setSelectedMethod,
+  setSelectedWarehouse,
+  setSelectedStreet,
+  setSelectedDeliveryCost,
+  setCustomerField,
+  setDeliveryAddressField,
+  setCustomerIsFromAuth,
+  setCustomerData,
+  resetCheckout,
+} = checkoutSlice.actions;
+
+export const checkoutReducer = checkoutSlice.reducer;
