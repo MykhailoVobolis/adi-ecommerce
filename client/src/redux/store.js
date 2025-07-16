@@ -34,16 +34,23 @@ const cartPersistConfig = {
   whitelist: ['cartData'],
 };
 
-// const checkoutPersistConfig = {
-//   key: 'pre-order',
-//   storage,
-//   whitelist: ['deliveryAddress', 'customer', 'selectedDeliveryCost'],
-// };
+const deliveryPersistConfig = {
+  key: 'delivery',
+  storage,
+  whitelist: ['warehousesTypes'],
+};
+
+const checkoutPersistConfig = {
+  key: 'pre-order',
+  storage,
+  whitelist: ['deliveryAddress', 'customer', 'selectedDeliveryCost'],
+};
 
 const persistedProductsReducer = persistReducer(productsPersistConfig, productsReduser);
 const persistedFavoritesReducer = persistReducer(favoritesPersistConfig, favoritesReducer);
 const persistedCartReducer = persistReducer(cartPersistConfig, cartReducer);
-// const persistedCheckoutReduser = persistReducer(checkoutPersistConfig, checkoutReducer);
+const persistedDeliveryReducer = persistReducer(deliveryPersistConfig, deliveryReducer);
+const persistedCheckoutReduser = persistReducer(checkoutPersistConfig, checkoutReducer);
 
 export const store = configureStore({
   reducer: {
@@ -51,9 +58,8 @@ export const store = configureStore({
     products: persistedProductsReducer,
     favorites: persistedFavoritesReducer,
     cart: persistedCartReducer,
-    delivery: deliveryReducer,
-    // checkout: persistedCheckoutReduser,
-    checkout: checkoutReducer,
+    delivery: persistedDeliveryReducer,
+    checkout: persistedCheckoutReduser,
   },
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware({

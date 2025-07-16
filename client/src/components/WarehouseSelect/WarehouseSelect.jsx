@@ -34,7 +34,10 @@ export default function WarehouseSelect({
   const observerRef = useRef();
 
   const handleFocus = () => setIsFocused(true);
-  const handleBlur = () => onBlur?.();
+  const handleBlur = () => {
+    setIsFocused(false);
+    onBlur?.();
+  };
 
   const onSearch = useCallback(
     (value, page) => {
@@ -109,6 +112,7 @@ export default function WarehouseSelect({
         value={isFocused ? query : visible}
         size="3"
         variant="surface"
+        id="warehouse"
         name="branch"
         onClick={openDrop}
         onChange={handleInputChange}

@@ -61,6 +61,10 @@ const checkoutSlice = createSlice({
       const { field, value } = action.payload;
       state.deliveryAddress[field] = value;
     },
+    clearDeliveryUnits: (state) => {
+      state.deliveryAddress.buildingUnit = null;
+      state.deliveryAddress.apartmentUnit = null;
+    },
     setCustomerEmailFromAuth: (state, action) => {
       state.customer.emailFromAuth = action.payload;
     },
@@ -88,6 +92,7 @@ export const {
   setCustomerIsFromAuth,
   setCustomerData,
   resetCheckout,
+  clearDeliveryUnits,
 } = checkoutSlice.actions;
 
 export const checkoutReducer = checkoutSlice.reducer;

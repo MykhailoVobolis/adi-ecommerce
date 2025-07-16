@@ -29,6 +29,7 @@ export default function CitySelect({ cities, totalCount, selectedCity, totalPric
   const observerRef = useRef();
 
   const handleFocus = () => setIsFocused(true);
+  const handleBlur = () => setIsFocused(false);
 
   const onSearch = useCallback(
     (value, page) => {
@@ -108,10 +109,12 @@ export default function CitySelect({ cities, totalCount, selectedCity, totalPric
         value={isFocused ? query : visible}
         size="3"
         variant="surface"
+        id="city"
         name="city"
         onClick={openDrop}
         onChange={handleInputChange}
         onFocus={handleFocus}
+        onBlur={handleBlur}
       >
         <TextField.Slot side="right">
           <MagnifyingGlassIcon height="24" width="24" />
