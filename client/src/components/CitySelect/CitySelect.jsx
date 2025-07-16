@@ -16,6 +16,7 @@ import {
 } from '../../redux/checkout/slice.js';
 
 import SelectDropdownList from '../SelectDropdownList/SelectDropdownList.jsx';
+import FloatingLabel from '../FloatingLabel/FloatingLabel.jsx';
 
 import css from './CitySelect.module.css';
 
@@ -23,11 +24,11 @@ export default function CitySelect({ cities, totalCount, selectedCity, totalPric
   const dispatch = useDispatch();
   const [isOpen, setIsOpen] = useState(false);
   const [isFocused, setIsFocused] = useState(false);
+
   const wrapperRef = useRef(null);
   const observerRef = useRef();
 
   const handleFocus = () => setIsFocused(true);
-  const handleBlur = () => setIsFocused(false);
 
   const onSearch = useCallback(
     (value, page) => {
@@ -97,19 +98,20 @@ export default function CitySelect({ cities, totalCount, selectedCity, totalPric
     dispatch(setFilterCities({ name: '', page }));
   }, [dispatch, page]);
 
+  const showFloatingLabel = isFocused || visible;
+
   return (
     <div className={css.selectWrapper} ref={wrapperRef}>
+      <FloatingLabel name="city" placeholder="City/Town *" showFloatingLabel={showFloatingLabel} />
       <TextField.Root
         className={css.textField}
         value={isFocused ? query : visible}
         size="3"
-        placeholder="City *"
         variant="surface"
         name="city"
         onClick={openDrop}
         onChange={handleInputChange}
         onFocus={handleFocus}
-        onBlur={handleBlur}
       >
         <TextField.Slot side="right">
           <MagnifyingGlassIcon height="24" width="24" />

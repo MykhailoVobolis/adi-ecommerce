@@ -1,6 +1,7 @@
 .selectWrapper {
   position: relative;
   margin-bottom: 30px;
+  width: 100%;
 }
 
 .textField {

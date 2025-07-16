@@ -106,7 +106,7 @@ export default function DeliveryCourierForm({
           <InputField name="apartmentUnit" placeholder="Apartment/Unit (optional)" />
         </Flex>
         <LocalityInfo cityName={selectedCityName} />
-        <CustomerContactsForm setValue={methods.setValue} />
+        <CustomerContactsForm />
         <SubmitDeliveryButton />
       </form>
     </FormProvider>

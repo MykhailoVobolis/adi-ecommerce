@@ -10,6 +10,7 @@ import { useSearch } from '../../hooks/useSearch.js';
 import { usePaginated } from '../../hooks/usePaginated.js';
 
 import AutocompleteDropdownList from '../AutocompleteDropdownList/AutocompleteDropdownList.jsx';
+import FloatingLabel from '../FloatingLabel/FloatingLabel.jsx';
 
 import css from './WarehouseSelect.module.css';
 
@@ -33,10 +34,7 @@ export default function WarehouseSelect({
   const observerRef = useRef();
 
   const handleFocus = () => setIsFocused(true);
-  const handleBlur = () => {
-    setIsFocused(false);
-    onBlur?.();
-  };
+  const handleBlur = () => onBlur?.();
 
   const onSearch = useCallback(
     (value, page) => {
@@ -98,8 +96,11 @@ export default function WarehouseSelect({
     dispatch(setFilterWarehouses({ name: '', page }));
   }, [dispatch, page]);
 
+  const showFloatingLabel = isFocused || visible;
+
   return (
     <div className={css.selectWrapper} ref={wrapperRef}>
+      <FloatingLabel name="warehouse" placeholder="Branch number *" showFloatingLabel={showFloatingLabel} />
       <TextField.Root
         className={clsx(css.textField, {
           [css.inputError]: hasError,
@@ -107,7 +108,6 @@ export default function WarehouseSelect({
         })}
         value={isFocused ? query : visible}
         size="3"
-        placeholder="Branch number *"
         variant="surface"
         name="branch"
         onClick={openDrop}

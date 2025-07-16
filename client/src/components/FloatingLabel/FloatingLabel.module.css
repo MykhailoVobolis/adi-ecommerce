@@ -1,0 +1,20 @@
+.floatingLabel {
+  position: absolute;
+  left: 13px;
+  top: 13px;
+  color: #888;
+  font-size: 16px;
+  pointer-events: none;
+  transition: all 0.2s ease;
+  background-color: transparent;
+  z-index: 1;
+}
+
+.labelActive {
+  top: -10px;
+  left: 8px;
+  font-size: 14px;
+  background-color: var(--accent-1);
+  padding: 0 4px;
+  color: var(--accent-11);
+}

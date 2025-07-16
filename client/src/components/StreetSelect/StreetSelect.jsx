@@ -10,6 +10,7 @@ import { usePaginated } from '../../hooks/usePaginated.js';
 import { setSelectedStreet } from '../../redux/checkout/slice.js';
 
 import AutocompleteDropdownList from '../AutocompleteDropdownList/AutocompleteDropdownList.jsx';
+import FloatingLabel from '../FloatingLabel/FloatingLabel.jsx';
 
 import css from './StreetSelect.module.css';
 
@@ -24,10 +25,7 @@ export default function StreetSelect({ streets, totalCount, selectedStreet, onCh
     setQuery('');
     setIsFocused(true);
   };
-  const handleBlur = () => {
-    setIsFocused(false);
-    onBlur?.();
-  };
+  const handleBlur = () => onBlur?.();
 
   const onSearch = useCallback(
     (value, page) => {
@@ -76,8 +74,11 @@ export default function StreetSelect({ streets, totalCount, selectedStreet, onCh
     dispatch(setFilterStreets({ name: '', page }));
   }, [dispatch, page]);
 
+  const showFloatingLabel = isFocused || visible;
+
   return (
     <div className={css.selectWrapper} ref={wrapperRef}>
+      <FloatingLabel name="street" placeholder="Street Address *" showFloatingLabel={showFloatingLabel} />
       <TextField.Root
         className={clsx(css.textField, {
           [css.inputError]: hasError,
@@ -85,7 +86,6 @@ export default function StreetSelect({ streets, totalCount, selectedStreet, onCh
         })}
         value={isFocused ? query : visible}
         size="3"
-        placeholder="Street name *"
         variant="surface"
         name="street"
         onClick={openDrop}

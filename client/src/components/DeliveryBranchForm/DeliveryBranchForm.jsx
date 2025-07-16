@@ -109,7 +109,7 @@ export default function DeliveryBranchForm({
           )}
         />
         <LocalityInfo cityName={selectedCityName} />
-        <CustomerContactsForm setValue={methods.setValue} />
+        <CustomerContactsForm />
         <SubmitDeliveryButton />
       </form>
     </FormProvider>
