@@ -10,6 +10,7 @@ const NotFoundPage = lazy(() => import('../../pages/NotFoundPage/NotFoundPage.js
 const FavoritesPage = lazy(() => import('../../pages/FavoritesPage/FavoritesPage.jsx'));
 const ProductCategoryPage = lazy(() => import('../../pages/ProductCategoryPage/ProductCategoryPage.jsx'));
 const DeliveryPage = lazy(() => import('../../pages/DeliveryPage/DeliveryPage.jsx'));
+const PaymentPage = lazy(() => import('../../pages/PaymentPage/PaymentPage.jsx'));
 
 export default function App() {
   return (
@@ -22,6 +23,7 @@ export default function App() {
           <Route path="products/:category" element={<ProductCategoryPage />} />
           <Route path="products/:category/:productId" element={<ProductPage />} />
           <Route path="delivery" element={<DeliveryPage />} />
+          <Route path="payment" element={<PaymentPage />} />
           <Route path="*" element={<NotFoundPage />} />
         </Routes>
       </Layout>

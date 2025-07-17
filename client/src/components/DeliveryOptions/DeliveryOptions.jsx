@@ -1,5 +1,5 @@
 import { useEffect, useRef } from 'react';
-import { Box, Heading } from '@radix-ui/themes';
+import { Box, Flex, Heading } from '@radix-ui/themes';
 import { LiaTruckSolid } from 'react-icons/lia';
 import { LiaMapMarkerSolid } from 'react-icons/lia';
 import { useDispatch, useSelector } from 'react-redux';
@@ -8,6 +8,7 @@ import { setFilterStreets, setFilterWarehouses } from '../../redux/delivery/slic
 import { selectDeliveryAddress } from '../../redux/checkout/selectors.js';
 import { setSelectedDeliveryCost, setSelectedMethod } from '../../redux/checkout/slice.js';
 import { fetchStreetsOfCity, fetchWarehousesOfCity } from '../../redux/delivery/operations.js';
+import { useNavigate } from 'react-router-dom';
 
 import BranchDeliverySection from '../BranchDeliverySection/BranchDeliverySection.jsx';
 import CourierDeliverySection from '../CourierDeliverySection/CourierDeliverySection.jsx';
@@ -52,6 +53,7 @@ export default function DeliveryOptions({
   deliveryCost,
 }) {
   const dispatch = useDispatch();
+  const navigate = useNavigate();
   const isLoading = useSelector(selectLoading);
   const { selectedMethod } = useSelector(selectDeliveryAddress);
 
@@ -137,6 +139,7 @@ export default function DeliveryOptions({
   const handleSubmit = (data) => {
     console.log('Form data:', data);
     // Тут можемо робити dispatch або перехід на сторінку payment
+    navigate('/payment');
   };
 
   return (
@@ -166,7 +169,9 @@ export default function DeliveryOptions({
         />
       )}
       {isReady && filteredOptions.length === 0 && (
-        <p className={css.noDeliveryMessage}>No delivery options available</p>
+        <Flex className={css.messageWrapper}>
+          <p className={css.noDeliveryMessage}>No delivery options available</p>
+        </Flex>
       )}
       <Box ref={formRef}>
         {(isBranch || isPostomat) && isReady && (

@@ -6,7 +6,12 @@
   margin-top: 38px;
 }
 
-.noDeliveryMessage {
+.messageWrapper {
+  padding: 20px;
   margin-top: 20px;
+  background-color: var(--accent-3);
+}
+
+.noDeliveryMessage {
   font-weight: 700;
 }
