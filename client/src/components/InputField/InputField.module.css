@@ -28,6 +28,10 @@
   transition: border 0.15s linear;
 }
 
+.authInput {
+  width: 478px;
+}
+
 .inputError {
   border-bottom: 2px solid #e32b2b;
 }

@@ -13,7 +13,7 @@ export default function CustomerContactsForm() {
       </Flex>
       <Flex className={css.inputContainer}>
         <InputField name="phone" placeholder="Phone Number *" type="tel" />
-        <InputField name="email" placeholder="Email *" type="email" />
+        <InputField name="email" placeholder="Email Address *" type="email" />
       </Flex>
     </>
   );

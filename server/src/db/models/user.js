@@ -8,7 +8,7 @@ const usersSchema = new Schema(
   {
     firstName: { type: String },
     lastName: { type: String },
-    phone: { type: String, match: phoneNumberRegexp, unique: true },
+    phone: { type: String, match: phoneNumberRegexp, unique: true, sparse: true },
     email: { type: String, match: emailRegexp, required: true, unique: true },
     password: { type: String, required: true },
   },

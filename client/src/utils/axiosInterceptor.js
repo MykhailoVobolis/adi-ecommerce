@@ -1,8 +1,7 @@
 import axios from 'axios';
-
-// import { refreshUser } from '../redux/auth/operations.js';
-// import { clearTokens } from '../redux/auth/slice.js';
-// import { store } from '../redux/store.js';
+import { refreshUser } from '../redux/auth/operations.js';
+import { clearTokens } from '../redux/auth/slice.js';
+import { getStore } from './refreshHandler.js';
 
 const instance = axios.create({
   baseURL: 'http://localhost:3000',
@@ -20,30 +19,30 @@ export const clearAuthHeader = () => {
 };
 
 // Інтерсептор для обробки відповіді
-// instance.interceptors.response.use(
-//   (response) => response,
-//   async (error) => {
-//     const originalRequest = error.config;
+instance.interceptors.response.use(
+  (response) => response,
+  async (error) => {
+    const originalRequest = error.config;
 
-//     if (error.response?.status === 401 && !originalRequest._retry) {
-//       originalRequest._retry = true;
+    if (error.response?.status === 401 && !originalRequest._retry) {
+      originalRequest._retry = true;
 
-//       try {
-//         const result = await store.dispatch(refreshUser());
+      try {
+        const result = await getStore().dispatch(refreshUser());
 
-//         if (result.payload.accessToken) {
-//           setAuthHeader(result.payload.accessToken);
-//           originalRequest.headers['Authorization'] = `Bearer ${result.payload.accessToken}`;
-//           return instance(originalRequest);
-//         }
-//       } catch (refreshError) {
-//         console.error('Failed to refresh token', refreshError);
-//         store.dispatch(clearTokens());
-//       }
-//     }
+        if (result.payload.accessToken) {
+          setAuthHeader(result.payload.accessToken);
+          originalRequest.headers['Authorization'] = `Bearer ${result.payload.accessToken}`;
+          return instance(originalRequest);
+        }
+      } catch (refreshError) {
+        console.error('Failed to refresh token', refreshError);
+        getStore().dispatch(clearTokens());
+      }
+    }
 
-//     return Promise.reject(error);
-//   },
-// );
+    return Promise.reject(error);
+  },
+);
 
 export default instance;

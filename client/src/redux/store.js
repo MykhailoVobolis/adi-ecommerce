@@ -6,15 +6,17 @@ import { favoritesReducer } from './favorites/slice.js';
 import { cartReducer } from './cart/slice.js';
 import { deliveryReducer } from './delivery/slice.js';
 import { checkoutReducer } from './checkout/slice.js';
+import { authReduser } from './auth/slice.js';
+import { setStore } from '../utils/refreshHandler.js';
 
 // Збереження токіна в Local Storage
-// const authPersistConfig = {
-//   key: "auth",
-//   storage,
-//   whitelist: ["accessToken", "refreshToken"],
-// };
+const authPersistConfig = {
+  key: 'auth',
+  storage,
+  whitelist: ['accessToken', 'refreshToken'],
+};
 
-// const persistedAuthReducer = persistReducer(authPersistConfig, authReduser);
+const persistedAuthReducer = persistReducer(authPersistConfig, authReduser);
 
 const productsPersistConfig = {
   key: 'products',
@@ -54,7 +56,7 @@ const persistedCheckoutReduser = persistReducer(checkoutPersistConfig, checkoutR
 
 export const store = configureStore({
   reducer: {
-    // auth: persistedAuthReducer,
+    auth: persistedAuthReducer,
     products: persistedProductsReducer,
     favorites: persistedFavoritesReducer,
     cart: persistedCartReducer,
@@ -68,5 +70,8 @@ export const store = configureStore({
       },
     }),
 });
+
+// записуємо актуальний стор для refresh
+setStore(store);
 
 export const persistor = persistStore(store);

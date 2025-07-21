@@ -34,3 +34,14 @@ export const courierDeliverySchema = yup.object().shape({
     .required('Please enter your email address')
     .matches(regex.emailRegexp, 'Invalid email address. Example: user@mail.com'),
 });
+
+export const authSchema = (emailAvailable) =>
+  yup.object().shape({
+    email: yup
+      .string()
+      .required('Please enter your email address')
+      .matches(regex.emailRegexp, 'Invalid email address. Example: user@mail.com'),
+    ...(emailAvailable !== null && {
+      password: yup.string().required('Password is required').min(8, 'Password must be at least 8 characters'),
+    }),
+  });

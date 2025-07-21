@@ -4,6 +4,7 @@ import { ctrlWrapper } from '../utils/ctrlWrapper.js';
 import { checkUserEmailSchema, loginUserSchema, registerUserSchema } from '../validation/auth.js';
 import {
   checkUserEmailController,
+  fetchUserInfoController,
   loginUserController,
   logoutUserController,
   refreshSessionController,
@@ -23,6 +24,6 @@ router.post('/logout', authenticate, ctrlWrapper(logoutUserController));
 
 router.post('/refresh', ctrlWrapper(refreshSessionController));
 
-// router.get('/user-info', authenticate, ctrlWrapper(fetchUserInfoController));
+router.get('/user-info', authenticate, ctrlWrapper(fetchUserInfoController));
 
 export default router;

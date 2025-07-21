@@ -1,11 +1,9 @@
 .submitBtn {
-  display: flex;
-  align-items: center;
   justify-content: space-between;
   width: 352px;
-  max-width: 603px;
   height: 45px;
   padding: 0 16px;
+  font-size: 16px;
   text-transform: uppercase;
   font-weight: 500;
   color: var(--main-white-color);
@@ -18,4 +16,8 @@
 .submitBtn:hover {
   color: var(--accent-12);
   background-color: var(--accent-0);
+}
+
+.authBtn {
+  width: 226px;
 }

@@ -9,7 +9,7 @@ import { selectCustomer, selectDeliveryAddress } from '../../redux/checkout/sele
 import InputErrorMessage from '../InputErrorMessage/InputErrorMessage.jsx';
 import LocalityInfo from '../LocalityInfo/LocalityInfo.jsx';
 import CustomerContactsForm from '../CustomerContactsForm/CustomerContactsForm.jsx';
-import SubmitDeliveryButton from '../SubmitDeliveryButton/SubmitDeliveryButton.jsx';
+import SubmitButton from '../SubmitButton/SubmitButton.jsx';
 import InputField from '../InputField/InputField.jsx';
 import StreetSelect from '../StreetSelect/StreetSelect.jsx';
 
@@ -107,7 +107,7 @@ export default function DeliveryCourierForm({
         </Flex>
         <LocalityInfo cityName={selectedCityName} />
         <CustomerContactsForm />
-        <SubmitDeliveryButton />
+        <SubmitButton />
       </form>
     </FormProvider>
   );

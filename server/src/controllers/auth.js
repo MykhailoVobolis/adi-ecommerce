@@ -18,10 +18,9 @@ export const registerUserController = async (req, res) => {
   const session = await loginUser(req.body);
 
   // Видалення паролю з відповіді на роуті POST /auth/register
-  const { _id, firstName = '', lastName = '', email, phone } = user;
+  const { firstName = '', lastName = '', email, phone = '' } = user;
 
   const data = {
-    userId: _id,
     firstName,
     lastName,
     email,
@@ -76,6 +75,22 @@ export const refreshSessionController = async (req, res) => {
     data: {
       accessToken: newSession.accessToken,
       refreshToken: newSession.refreshToken,
+    },
+  });
+};
+
+// Контролер отримання даних юзера
+export const fetchUserInfoController = async (req, res) => {
+  const { firstName = '', lastName = '', phone = '', email } = req.user;
+
+  res.status(200).json({
+    status: 200,
+    message: 'Successfully found user info!',
+    data: {
+      userFirstName: firstName,
+      userLastName: lastName,
+      userPhone: phone,
+      userEmail: email,
     },
   });
 };

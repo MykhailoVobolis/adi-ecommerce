@@ -10,7 +10,7 @@ import WarehouseSelect from '../WarehouseSelect/WarehouseSelect.jsx';
 import InputErrorMessage from '../InputErrorMessage/InputErrorMessage.jsx';
 import LocalityInfo from '../LocalityInfo/LocalityInfo.jsx';
 import CustomerContactsForm from '../CustomerContactsForm/CustomerContactsForm.jsx';
-import SubmitDeliveryButton from '../SubmitDeliveryButton/SubmitDeliveryButton.jsx';
+import SubmitButton from '../SubmitButton/SubmitButton.jsx';
 
 import css from './DeliveryBranchForm.module.css';
 
@@ -110,7 +110,7 @@ export default function DeliveryBranchForm({
         />
         <LocalityInfo cityName={selectedCityName} />
         <CustomerContactsForm />
-        <SubmitDeliveryButton />
+        <SubmitButton />
       </form>
     </FormProvider>
   );
