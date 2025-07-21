@@ -1,4 +1,5 @@
 import { createSlice } from '@reduxjs/toolkit';
+import { resetAppState } from '../actions/globalActions.js';
 
 const initialState = {
   deliveryAddress: {
@@ -77,6 +78,11 @@ const checkoutSlice = createSlice({
     },
     // Повна очистка після оформлення замовлення
     resetCheckout: () => initialState,
+  },
+  extraReducers: (builder) => {
+    builder
+      // Глобальне скидання стану при logout юзера
+      .addCase(resetAppState, () => initialState);
   },
 });
 

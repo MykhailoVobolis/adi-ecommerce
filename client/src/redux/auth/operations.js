@@ -1,6 +1,6 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import { handleError } from '../helpers.js';
-import instance, { setAuthHeader } from '../../utils/axiosInterceptor.js';
+import instance, { clearAuthHeader, setAuthHeader } from '../../utils/axiosInterceptor.js';
 import { setTokens } from './slice.js';
 
 // Перевірка email користувача guest or user
@@ -49,6 +49,18 @@ export const logIn = createAsyncThunk('auth/login', async (userInfo, thunkAPI) =
         email: userInfoResponse.data.data.userEmail,
       },
     };
+  } catch (error) {
+    const errorMessage = handleError(error);
+    return thunkAPI.rejectWithValue({ message: errorMessage });
+  }
+});
+
+// Вихід користувача
+export const logOut = createAsyncThunk('auth/logout', async (_, thunkAPI) => {
+  try {
+    await instance.post('/auth/logout');
+    // Видалення хедеру при виходу користувача з App
+    clearAuthHeader();
   } catch (error) {
     const errorMessage = handleError(error);
     return thunkAPI.rejectWithValue({ message: errorMessage });

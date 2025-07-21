@@ -1,4 +1,5 @@
 import { createSlice } from '@reduxjs/toolkit';
+import { resetAppState } from '../actions/globalActions.js';
 
 const initialState = {
   favoriteProducts: [],
@@ -22,6 +23,11 @@ const favoritesSlice = createSlice({
         (product) => !(product._id === action.payload._id && product.selectedColor === action.payload.selectedColor),
       );
     },
+  },
+  extraReducers: (builder) => {
+    builder
+      // Глобальне скидання стану при logout юзера
+      .addCase(resetAppState, () => initialState);
   },
 });
 

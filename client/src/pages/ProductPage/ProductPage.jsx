@@ -70,7 +70,6 @@ export default function ProductPage() {
     };
 
     dispatch(addProductsToCart(productToAdd));
-    toast.success('Product added to cart!');
   };
 
   const handleToggleFavorite = useToggleFavoriteProduct(isFavoriteProduct, curentProduct, selectedColor);

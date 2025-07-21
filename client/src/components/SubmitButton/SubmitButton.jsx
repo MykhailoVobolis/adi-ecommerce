@@ -8,7 +8,6 @@ export default function SubmitButton({ label = 'Continue checkout', variant }) {
   return (
     <Button
       type="submit"
-      // className={css.submitBtn}
       className={clsx(css.submitBtn, {
         [css.authBtn]: variant === 'auth',
       })}

@@ -47,17 +47,6 @@ export default function AuthPage() {
             )}
             <AuthForm emailAvailable={emailAvailable} />
           </Box>
-          {/* {totalQuantityProducts > 0 && (
-            <Flex direction="column">
-              <OrderSummary totalPrice={totalPrice} totalQuantityProducts={totalQuantityProducts} isDelivery="true" />
-              <CheckoutCart products={products} />
-              <DeliverySummary
-                customerPhone={phone}
-                deliveryAddress={deliveryAddress}
-                selectedDeliveryCost={selectedDeliveryCost}
-              />
-            </Flex>
-          )} */}
         </Flex>
       </Container>
     </Section>

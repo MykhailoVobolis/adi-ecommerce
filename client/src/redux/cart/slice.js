@@ -1,4 +1,5 @@
 import { createSlice } from '@reduxjs/toolkit';
+import { resetAppState } from '../actions/globalActions.js';
 
 const initialState = {
   cartData: {
@@ -66,6 +67,11 @@ const cartSlice = createSlice({
     addDeliveryParams: (state, action) => {
       state.cartData.delivery = action.payload;
     },
+  },
+  extraReducers: (builder) => {
+    builder
+      // Глобальне скидання стану при logout юзера
+      .addCase(resetAppState, () => initialState);
   },
 });
 

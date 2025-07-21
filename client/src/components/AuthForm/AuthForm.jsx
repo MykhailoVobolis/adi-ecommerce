@@ -16,16 +16,6 @@ import css from './AuthForm.module.css';
 export default function AuthForm({ emailAvailable }) {
   const dispatch = useDispatch();
 
-  //   const methods = useForm({
-  //     resolver: yupResolver(authSchema),
-  //     mode: 'onTouched',
-  //     reValidateMode: 'onChange',
-  //     defaultValues: {
-  //       email: '',
-  //       password: '',
-  //     },
-  //   });
-
   const validationSchema = useMemo(() => authSchema(emailAvailable), [emailAvailable]);
 
   const methods = useForm({
@@ -43,9 +33,6 @@ export default function AuthForm({ emailAvailable }) {
   const handleEmailSubmit = async ({ email }) => {
     dispatch(checkEmail(email))
       .unwrap()
-      .then((response) => {
-        // methods.reset();
-      })
       .catch((error) => {
         toast.error(error.message);
       });
@@ -54,7 +41,7 @@ export default function AuthForm({ emailAvailable }) {
   const handlePasswordSubmit = async (userData) => {
     dispatch(emailAvailable ? register(userData) : logIn(userData))
       .unwrap()
-      .then((response) => {
+      .then(() => {
         dispatch(clearEmailAvailable());
         // dispatch(getUserCart());
         methods.reset();

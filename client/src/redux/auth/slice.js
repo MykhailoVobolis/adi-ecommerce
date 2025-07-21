@@ -1,5 +1,6 @@
 import { createSlice } from '@reduxjs/toolkit';
-import { checkEmail, logIn, refreshUser, register } from './operations.js';
+import { checkEmail, logIn, logOut, refreshUser, register } from './operations.js';
+import { resetAppState } from '../actions/globalActions.js';
 
 const handlePending = (state) => {
   state.loading = true;
@@ -12,24 +13,26 @@ const handleRejected = (state) => {
   state.authProcess = false;
 };
 
+const initialState = {
+  user: {
+    email: null,
+    firstName: null,
+    lastName: null,
+    phone: null,
+  },
+  emailAvailable: null,
+  accessToken: null,
+  refreshToken: null,
+  isLoggedIn: false,
+  isRefrreshing: false,
+  loading: false,
+  authProcess: true,
+  error: null,
+};
+
 const authSlice = createSlice({
   name: 'auth',
-  initialState: {
-    user: {
-      email: null,
-      firstName: null,
-      lastName: null,
-      phone: null,
-    },
-    emailAvailable: null,
-    accessToken: null,
-    refreshToken: null,
-    isLoggedIn: false,
-    isRefrreshing: false,
-    loading: false,
-    authProcess: true,
-    error: null,
-  },
+  initialState,
   reducers: {
     setTokens(state, action) {
       state.accessToken = action.payload.accessToken;
@@ -71,7 +74,7 @@ const authSlice = createSlice({
       })
       .addCase(register.rejected, handleRejected)
 
-      //   // Обробка операції логіну користувача
+      // Обробка операції логіну користувача
       .addCase(logIn.pending, handlePending)
       .addCase(logIn.fulfilled, (state, action) => {
         state.loading = false;
@@ -84,24 +87,25 @@ const authSlice = createSlice({
       })
       .addCase(logIn.rejected, handleRejected)
 
-      //   // Обробка операції логауту (вихода користувача з облікового запису App)
-      //   .addCase(logOut.pending, handlePending)
-      //   .addCase(logOut.fulfilled, (state) => {
-      //     state.loading = false;
-      //     state.error = null;
-      //     state.user = {
-      //       name: null,
-      //       phone: null,
-      //       email: null,
-      //     };
-      //     state.accessToken = null;
-      //     state.refreshToken = null;
-      //     state.isLoggedIn = false;
-      //     state.authProcess = false;
-      //   })
-      //   .addCase(logOut.rejected, handleRejected)
+      // Обробка операції логауту (вихода користувача з облікового запису App)
+      .addCase(logOut.pending, handlePending)
+      .addCase(logOut.fulfilled, (state) => {
+        state.loading = false;
+        state.error = null;
+        state.user = {
+          email: null,
+          firstName: null,
+          lastName: null,
+          phone: null,
+        };
+        state.accessToken = null;
+        state.refreshToken = null;
+        state.isLoggedIn = false;
+        state.authProcess = false;
+      })
+      .addCase(logOut.rejected, handleRejected)
 
-      //   // Обробка операції рефрешу користувача
+      // Обробка операції рефрешу користувача
       .addCase(refreshUser.pending, (state) => {
         state.isRefrreshing = true;
       })
@@ -115,7 +119,9 @@ const authSlice = createSlice({
       .addCase(refreshUser.rejected, (state) => {
         state.isRefrreshing = false;
         state.authProcess = false;
-      });
+      })
+      // Глобальне скидання стану при logout юзера
+      .addCase(resetAppState, () => initialState);
   },
 });
 

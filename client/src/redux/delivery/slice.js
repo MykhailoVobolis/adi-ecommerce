@@ -6,6 +6,7 @@ import {
   fetchStreetsOfCity,
   fetchWarehousesOfCity,
 } from './operations.js';
+import { resetAppState } from '../actions/globalActions.js';
 
 const handlePending = (state) => {
   state.loading = true;
@@ -173,7 +174,10 @@ const deliverySlice = createSlice({
           state.deliveryCost.costRedelivery = format(costData.CostRedelivery);
         }
       })
-      .addCase(fetchDeliveryCost.rejected, handleRejected);
+      .addCase(fetchDeliveryCost.rejected, handleRejected)
+
+      // Глобальне скидання стану при logout юзера
+      .addCase(resetAppState, () => initialState);
   },
 });
 

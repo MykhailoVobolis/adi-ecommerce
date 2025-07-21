@@ -1,5 +1,6 @@
 import { createSlice } from '@reduxjs/toolkit';
 import { fetchProductById, fetchProductsByCategory } from './operations.js';
+import { resetAppState } from '../actions/globalActions.js';
 
 const handlePending = (state) => {
   state.loading = true;
@@ -74,7 +75,10 @@ const productsSlice = createSlice({
         state.loading = false;
         state.error = null;
       })
-      .addCase(fetchProductById.rejected, handleRejected);
+      .addCase(fetchProductById.rejected, handleRejected)
+
+      // Глобальне скидання стану при logout юзера
+      .addCase(resetAppState, () => initialState);
   },
 });
 
