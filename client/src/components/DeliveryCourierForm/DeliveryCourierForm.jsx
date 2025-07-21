@@ -7,7 +7,7 @@ import { useSelector } from 'react-redux';
 import { selectCustomer, selectDeliveryAddress } from '../../redux/checkout/selectors.js';
 
 import InputErrorMessage from '../InputErrorMessage/InputErrorMessage.jsx';
-import LocalityInfo from '../LocalityInfo/LocalityInfo.jsx';
+import InfoRow from '../InfoRow/InfoRow.jsx';
 import CustomerContactsForm from '../CustomerContactsForm/CustomerContactsForm.jsx';
 import SubmitButton from '../SubmitButton/SubmitButton.jsx';
 import InputField from '../InputField/InputField.jsx';
@@ -24,6 +24,7 @@ export default function DeliveryCourierForm({
   selectedMethod,
 }) {
   const customer = useSelector(selectCustomer);
+  const { email, emailFromAuth } = customer;
   const { buildingUnit: selectedBuildingUnit, apartmentUnit: selectedApartmentUnit } =
     useSelector(selectDeliveryAddress);
 
@@ -105,8 +106,9 @@ export default function DeliveryCourierForm({
           <InputField name="buildingUnit" placeholder="Building/Unit *" />
           <InputField name="apartmentUnit" placeholder="Apartment/Unit (optional)" />
         </Flex>
-        <LocalityInfo cityName={selectedCityName} />
+        <InfoRow label="Locality" value={selectedCityName} />
         <CustomerContactsForm />
+        {emailFromAuth && <InfoRow label="Email" value={email} />}
         <SubmitButton />
       </form>
     </FormProvider>

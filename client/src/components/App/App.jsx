@@ -1,10 +1,11 @@
 import { Route, Routes } from 'react-router-dom';
 import { lazy, Suspense, useEffect } from 'react';
-import { Toaster } from 'react-hot-toast';
+import toast, { Toaster } from 'react-hot-toast';
 import { useDispatch, useSelector } from 'react-redux';
-import { selectIsRefreshing } from '../../redux/auth/selectors.js';
+import { selectIsLoggedIn, selectIsRefreshing, selectUser } from '../../redux/auth/selectors.js';
 import { refreshUser } from '../../redux/auth/operations.js';
 import { finishAuthProcess } from '../../redux/auth/slice.js';
+import { setCustomerData } from '../../redux/checkout/slice.js';
 
 import Layout from '../Layout/Layout.jsx';
 import Loader from '../Loader/Loader.jsx';
@@ -25,12 +26,24 @@ const AccountPage = lazy(() => import('../../pages/AccountPage/AccountPage.jsx')
 export default function App() {
   const dispatch = useDispatch();
   const isRefreshing = useSelector(selectIsRefreshing);
+  const authUserData = useSelector(selectUser);
+  const isLoggedIn = useSelector(selectIsLoggedIn);
+
+  useEffect(() => {
+    if (isLoggedIn) {
+      dispatch(setCustomerData(authUserData));
+    }
+  }, [dispatch, authUserData, isLoggedIn]);
 
   useEffect(() => {
     dispatch(refreshUser())
       .unwrap()
       .then(() => {
         // dispatch(getUserCart());
+      })
+      .catch((error) => {
+        if (error.name === 'ConditionError') return;
+        toast.error(error.message);
       })
       .finally(() => {});
     dispatch(finishAuthProcess());

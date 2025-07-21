@@ -36,6 +36,9 @@ export default function InputField({ name, type = 'text', placeholder, variant }
 
   const handleChange = (value) => {
     setFormValue(name, value, { shouldTouch: true, shouldValidate: true });
+
+    if (variant === 'auth') return;
+
     if (name === 'buildingUnit' || name === 'apartmentUnit') {
       dispatch(setDeliveryAddressField({ field: name, value }));
     } else {

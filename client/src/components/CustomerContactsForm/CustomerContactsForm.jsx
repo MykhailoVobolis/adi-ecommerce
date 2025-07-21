@@ -1,10 +1,14 @@
 import { Flex } from '@radix-ui/themes';
+import { useSelector } from 'react-redux';
+import { selectCustomer } from '../../redux/checkout/selectors.js';
 
 import InputField from '../InputField/InputField.jsx';
 
 import css from './CustomerContactsForm.module.css';
 
 export default function CustomerContactsForm() {
+  const { emailFromAuth } = useSelector(selectCustomer);
+
   return (
     <>
       <Flex className={css.inputContainer}>
@@ -13,7 +17,7 @@ export default function CustomerContactsForm() {
       </Flex>
       <Flex className={css.inputContainer}>
         <InputField name="phone" placeholder="Phone Number *" type="tel" />
-        <InputField name="email" placeholder="Email Address *" type="email" />
+        {!emailFromAuth && <InputField name="email" placeholder="Email Address *" type="email" />}
       </Flex>
     </>
   );

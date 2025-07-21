@@ -8,7 +8,7 @@ import { selectCustomer } from '../../redux/checkout/selectors.js';
 
 import WarehouseSelect from '../WarehouseSelect/WarehouseSelect.jsx';
 import InputErrorMessage from '../InputErrorMessage/InputErrorMessage.jsx';
-import LocalityInfo from '../LocalityInfo/LocalityInfo.jsx';
+import InfoRow from '../InfoRow/InfoRow.jsx';
 import CustomerContactsForm from '../CustomerContactsForm/CustomerContactsForm.jsx';
 import SubmitButton from '../SubmitButton/SubmitButton.jsx';
 
@@ -23,6 +23,7 @@ export default function DeliveryBranchForm({
   selectedMethod,
 }) {
   const customer = useSelector(selectCustomer);
+  const { email, emailFromAuth } = customer;
   const { selectedBranch, selectedPostomat } = selectedWarehouse;
 
   const isBranch = selectedMethod === 'branch';
@@ -108,8 +109,9 @@ export default function DeliveryBranchForm({
             </Box>
           )}
         />
-        <LocalityInfo cityName={selectedCityName} />
+        <InfoRow label="Locality" value={selectedCityName} />
         <CustomerContactsForm />
+        {emailFromAuth && <InfoRow label="Email" value={email} />}
         <SubmitButton />
       </form>
     </FormProvider>

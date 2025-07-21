@@ -69,12 +69,18 @@ const checkoutSlice = createSlice({
     setCustomerEmailFromAuth: (state, action) => {
       state.customer.emailFromAuth = action.payload;
     },
-    // Встановити весь об'єкт customer (будемо використовувати при вході юзера)
+    // Встановити весь об'єкт customer (використовується при вході юзера)
     setCustomerData: (state, action) => {
-      state.customer = {
-        ...state.customer,
-        ...action.payload,
-      };
+      const incomingData = action.payload;
+
+      Object.entries(incomingData).forEach(([key, value]) => {
+        if (value !== undefined && value !== null && value !== '') {
+          state.customer[key] = value;
+        }
+      });
+
+      state.customer.isAuthorized = true;
+      state.customer.emailFromAuth = true;
     },
     // Повна очистка після оформлення замовлення
     resetCheckout: () => initialState,

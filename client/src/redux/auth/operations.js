@@ -43,10 +43,10 @@ export const logIn = createAsyncThunk('auth/login', async (userInfo, thunkAPI) =
       accessToken: loginResponse.data.data.accessToken,
       refreshToken: loginResponse.data.data.refreshToken,
       data: {
-        firstName: userInfoResponse.data.data.userFirstName,
-        lastName: userInfoResponse.data.data.userLastName,
-        phone: userInfoResponse.data.data.userPhone,
-        email: userInfoResponse.data.data.userEmail,
+        firstName: userInfoResponse.data.data.firstName,
+        lastName: userInfoResponse.data.data.lastName,
+        phone: userInfoResponse.data.data.phone,
+        email: userInfoResponse.data.data.email,
       },
     };
   } catch (error) {

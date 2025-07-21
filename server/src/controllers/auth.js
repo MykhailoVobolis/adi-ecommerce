@@ -87,10 +87,10 @@ export const fetchUserInfoController = async (req, res) => {
     status: 200,
     message: 'Successfully found user info!',
     data: {
-      userFirstName: firstName,
-      userLastName: lastName,
-      userPhone: phone,
-      userEmail: email,
+      firstName,
+      lastName,
+      phone,
+      email,
     },
   });
 };
