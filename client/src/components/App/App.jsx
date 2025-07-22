@@ -22,6 +22,7 @@ const DeliveryPage = lazy(() => import('../../pages/DeliveryPage/DeliveryPage.js
 const PaymentPage = lazy(() => import('../../pages/PaymentPage/PaymentPage.jsx'));
 const AuthPage = lazy(() => import('../../pages/AuthPage/AuthPage.jsx'));
 const AccountPage = lazy(() => import('../../pages/AccountPage/AccountPage.jsx'));
+const ConfirmGoogleAuth = lazy(() => import('../../pages/ConfirmGoogleAuth/ConfirmGoogleAuth.jsx'));
 
 export default function App() {
   const dispatch = useDispatch();
@@ -64,6 +65,7 @@ export default function App() {
           <Route path="payment" element={<PaymentPage />} />
           <Route path="auth" element={<RestrictedRoute component={<AuthPage />} redirectTo="/account" />} />
           <Route path="account" element={<PrivateRoute component={<AccountPage />} redirectTo="/auth" />} />
+          <Route path="confirm-google-auth" element={<ConfirmGoogleAuth />} />
           <Route path="*" element={<NotFoundPage />} />
         </Routes>
       </Layout>

@@ -38,7 +38,7 @@ export default function AccountPage() {
               <Heading as="h3" size="4" mb="3" weight="bold">
                 LOG OUT FROM ALL WEB BROWSERS
               </Heading>
-              <Text as="p" mb="5">
+              <Text as="p" mb="6">
                 This will log you out from all web browsers you have used to access the adidas website. To log in again,
                 you'll have to enter your credentials.
               </Text>

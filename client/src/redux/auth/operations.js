@@ -112,3 +112,39 @@ export const refreshUser = createAsyncThunk(
     },
   },
 );
+
+export const getGoogleAuthUrl = createAsyncThunk('auth/getGoogleAuthUrl', async (_, thunkAPI) => {
+  try {
+    const response = await instance.get('/auth/get-oauth-url');
+    const url = response.data.data.url;
+    window.location.href = url;
+  } catch (error) {
+    const errorMessage = handleError(error);
+    return thunkAPI.rejectWithValue({ message: errorMessage });
+  }
+});
+
+export const confirmGoogleAuth = createAsyncThunk('auth/confirmGoogleAuth', async (code, thunkAPI) => {
+  try {
+    const loginResponse = await instance.post('/auth/confirm-oauth', { code });
+    // Додавання хедерів з токіном до всіх наступних будь яких типів запитів (common)
+    setAuthHeader(loginResponse.data.data.accessToken);
+
+    // Отримання повної інформації про користувача
+    const userInfoResponse = await instance.get('/auth/user-info');
+
+    return {
+      accessToken: loginResponse.data.data.accessToken,
+      refreshToken: loginResponse.data.data.refreshToken,
+      data: {
+        firstName: userInfoResponse.data.data.firstName,
+        lastName: userInfoResponse.data.data.lastName,
+        phone: userInfoResponse.data.data.phone,
+        email: userInfoResponse.data.data.email,
+      },
+    };
+  } catch (error) {
+    const errorMessage = handleError(error);
+    return thunkAPI.rejectWithValue({ message: errorMessage });
+  }
+});

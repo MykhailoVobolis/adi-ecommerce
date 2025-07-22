@@ -3,6 +3,7 @@ import { useSelector } from 'react-redux';
 import { selectEmailAvailable } from '../../redux/auth/selectors.js';
 
 import AuthForm from '../../components/AuthForm/AuthForm.jsx';
+import GoogleLoginButton from '../../components/GoogleLoginButton/GoogleLoginButton.jsx';
 
 import css from './AuthPage.module.css';
 
@@ -46,6 +47,7 @@ export default function AuthPage() {
               </>
             )}
             <AuthForm emailAvailable={emailAvailable} />
+            <GoogleLoginButton />
           </Box>
         </Flex>
       </Container>

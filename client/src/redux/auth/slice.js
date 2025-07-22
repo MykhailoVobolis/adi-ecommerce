@@ -1,5 +1,5 @@
 import { createSlice } from '@reduxjs/toolkit';
-import { checkEmail, logIn, logOut, refreshUser, register } from './operations.js';
+import { checkEmail, confirmGoogleAuth, logIn, logOut, refreshUser, register } from './operations.js';
 import { resetAppState } from '../actions/globalActions.js';
 
 const handlePending = (state) => {
@@ -24,7 +24,7 @@ const initialState = {
   accessToken: null,
   refreshToken: null,
   isLoggedIn: false,
-  isRefrreshing: false,
+  isRefreshing: false,
   loading: false,
   authProcess: true,
   error: null,
@@ -87,6 +87,19 @@ const authSlice = createSlice({
       })
       .addCase(logIn.rejected, handleRejected)
 
+      // Обробка операції Google OAuth 2.0 логіну користувача
+      .addCase(confirmGoogleAuth.pending, handlePending)
+      .addCase(confirmGoogleAuth.fulfilled, (state, action) => {
+        state.loading = false;
+        state.error = null;
+        state.user = action.payload.data;
+        state.accessToken = action.payload.accessToken;
+        state.refreshToken = action.payload.refreshToken;
+        state.isLoggedIn = true;
+        state.authProcess = false;
+      })
+      .addCase(confirmGoogleAuth.rejected, handleRejected)
+
       // Обробка операції логауту (вихода користувача з облікового запису App)
       .addCase(logOut.pending, handlePending)
       .addCase(logOut.fulfilled, (state) => {
@@ -107,17 +120,17 @@ const authSlice = createSlice({
 
       // Обробка операції рефрешу користувача
       .addCase(refreshUser.pending, (state) => {
-        state.isRefrreshing = true;
+        state.isRefreshing = true;
       })
       .addCase(refreshUser.fulfilled, (state, action) => {
         state.user = action.payload.data;
         state.isLoggedIn = true;
         state.loading = false;
-        state.isRefrreshing = false;
+        state.isRefreshing = false;
         state.authProcess = false;
       })
       .addCase(refreshUser.rejected, (state) => {
-        state.isRefrreshing = false;
+        state.isRefreshing = false;
         state.authProcess = false;
       })
       // Глобальне скидання стану при logout юзера
