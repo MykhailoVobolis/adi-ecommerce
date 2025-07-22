@@ -39,3 +39,8 @@ export const loginUserSchema = Joi.object({
   'string.email': 'Field {#label} must be a valid email address.',
   'any.required': 'missing required {#label} field',
 });
+
+// Joi схема для валідації об'єкта юзера при GoogleOAuth2.0
+export const loginWithGoogleOAuthSchema = Joi.object({
+  code: Joi.string().required(),
+});

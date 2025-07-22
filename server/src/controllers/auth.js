@@ -1,4 +1,12 @@
-import { checkUserEmail, loginUser, logoutUser, refreshUsersSession, registerUser } from '../services/auth.js';
+import {
+  checkUserEmail,
+  loginOrSignupWithGoogle,
+  loginUser,
+  logoutUser,
+  refreshUsersSession,
+  registerUser,
+} from '../services/auth.js';
+import { generateAuthUrl } from '../utils/googleOAuth2.js';
 
 // Контроллер превірки наявності email користувача серед зареєстрованих
 export const checkUserEmailController = async (req, res) => {
@@ -42,7 +50,7 @@ export const registerUserController = async (req, res) => {
 export const loginUserController = async (req, res) => {
   const session = await loginUser(req.body);
 
-  res.json({
+  res.status(200).json({
     status: 200,
     message: 'Successfully logged in an user!',
     data: {
@@ -91,6 +99,31 @@ export const fetchUserInfoController = async (req, res) => {
       lastName,
       phone,
       email,
+    },
+  });
+};
+
+// Контроллер GoogleOAuth2.0
+export const getGoogleOAuthUrlController = async (req, res) => {
+  const url = generateAuthUrl();
+
+  res.status(200).json({
+    status: 200,
+    message: 'Successfully get Google OAuth url!',
+    data: {
+      url,
+    },
+  });
+};
+
+export const loginWithGoogleController = async (req, res) => {
+  const session = await loginOrSignupWithGoogle(req.body.code);
+
+  res.status(200).json({
+    status: 200,
+    message: 'Successfully logged in via Google OAuth!',
+    data: {
+      accessToken: session.accessToken,
     },
   });
 };

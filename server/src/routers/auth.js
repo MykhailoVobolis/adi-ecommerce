@@ -1,11 +1,18 @@
 import { Router } from 'express';
 import { validateBody } from '../middlewares/validateBody.js';
 import { ctrlWrapper } from '../utils/ctrlWrapper.js';
-import { checkUserEmailSchema, loginUserSchema, registerUserSchema } from '../validation/auth.js';
+import {
+  checkUserEmailSchema,
+  loginUserSchema,
+  loginWithGoogleOAuthSchema,
+  registerUserSchema,
+} from '../validation/auth.js';
 import {
   checkUserEmailController,
   fetchUserInfoController,
+  getGoogleOAuthUrlController,
   loginUserController,
+  loginWithGoogleController,
   logoutUserController,
   refreshSessionController,
   registerUserController,
@@ -25,5 +32,9 @@ router.post('/logout', authenticate, ctrlWrapper(logoutUserController));
 router.post('/refresh', ctrlWrapper(refreshSessionController));
 
 router.get('/user-info', authenticate, ctrlWrapper(fetchUserInfoController));
+
+router.get('/get-oauth-url', ctrlWrapper(getGoogleOAuthUrlController));
+
+router.post('/confirm-oauth', validateBody(loginWithGoogleOAuthSchema), ctrlWrapper(loginWithGoogleController));
 
 export default router;
