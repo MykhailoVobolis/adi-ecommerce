@@ -9,10 +9,19 @@ const PATH_JSON = path.join(process.cwd(), 'google-oauth.json');
 
 const oauthConfig = JSON.parse(await readFile(PATH_JSON));
 
+// Обробка двох URL-адрес залежно від того, запущено локальний сервер чи продакшен
+// Визначення оточення
+const isProduction = process.env.NODE_ENV === 'production';
+
+// Обробка першого чи другого redirect URL для локальної розробки чи продакшену
+// ПІСЛЯ ДЕПЛОЮ ОБОВ'ЯЗКОВО ПЕРЕВІРИТИ redirect URL https://top-e-commerce.vercel.app/confirm-google-auth google-oauth.json
+// також за потреби заінити redirect URL у
+const curentRedirectUrl = isProduction ? oauthConfig.web.redirect_uris[1] : oauthConfig.web.redirect_uris[0];
+
 const googleOAuthClient = new OAuth2Client({
   clientId: env(ENV_VARS.GOOGLE_AUTH_CLIENT_ID),
   clientSecret: env(ENV_VARS.GOOGLE_AUTH_CLIENT_SECRET),
-  redirectUri: oauthConfig.web.redirect_uris[0],
+  redirectUri: curentRedirectUrl,
 });
 
 export const generateAuthUrl = () =>
