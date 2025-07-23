@@ -6,11 +6,6 @@ const initialState = {
     products: [],
     totalPrice: 0,
     totalQuantityProducts: 0,
-    totalUniqueProducts: 0,
-    delivery: {
-      method: '',
-      cost: null,
-    },
   },
   loading: false,
   error: null,
@@ -63,10 +58,6 @@ const cartSlice = createSlice({
         recalculateCartTotals(state);
       }
     },
-
-    addDeliveryParams: (state, action) => {
-      state.cartData.delivery = action.payload;
-    },
   },
   extraReducers: (builder) => {
     builder
@@ -75,5 +66,5 @@ const cartSlice = createSlice({
   },
 });
 
-export const { addProductsToCart, removeProductCart, updateProductQuantity, addDeliveryParams } = cartSlice.actions;
+export const { addProductsToCart, removeProductCart, updateProductQuantity } = cartSlice.actions;
 export const cartReducer = cartSlice.reducer;
