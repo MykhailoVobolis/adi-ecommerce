@@ -1,8 +1,9 @@
 import toast from 'react-hot-toast';
 import { Box, Container, Flex, Heading, Section, Text } from '@radix-ui/themes';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { logOut } from '../../redux/auth/operations.js';
 import { resetAppState } from '../../redux/actions/globalActions.js';
+import { selectUser } from '../../redux/auth/selectors.js';
 
 import LogoutButton from '../../components/LogoutButton/LogoutButton.jsx';
 
@@ -10,6 +11,9 @@ import css from './AccountPage.module.css';
 
 export default function AccountPage() {
   const dispatch = useDispatch();
+  const { firstName } = useSelector(selectUser);
+
+  const greetingName = firstName ? firstName : 'Guest';
 
   const handleClick = () => {
     dispatch(logOut())
@@ -28,7 +32,7 @@ export default function AccountPage() {
         <Flex justify="between" mb="7">
           <Box className={css.wrapper}>
             <Heading as="h2" size="8" mb="4" weight="bold">
-              HELLO !
+              HI, {greetingName}
             </Heading>
             <Text as="p" mb="8">
               This is your personal space. Get the low down on your membership status and all the points and rewards
