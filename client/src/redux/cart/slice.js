@@ -1,5 +1,15 @@
 import { createSlice } from '@reduxjs/toolkit';
 import { resetAppState } from '../actions/globalActions.js';
+import { addProductsToCart, changeProductQuantity, getUserCart } from './operations.js';
+
+const handlePending = (state) => {
+  state.loading = true;
+};
+
+const handleRejected = (state) => {
+  state.loading = false;
+  state.error = true;
+};
 
 const initialState = {
   cartData: {
@@ -22,7 +32,7 @@ const cartSlice = createSlice({
   name: 'cart',
   initialState: initialState,
   reducers: {
-    addProductsToCart: (state, action) => {
+    addProductsToLocalCart: (state, action) => {
       const newItem = action.payload;
 
       const existingItem = state.cartData.products.find(
@@ -46,7 +56,7 @@ const cartSlice = createSlice({
       recalculateCartTotals(state);
     },
 
-    updateProductQuantity: (state, action) => {
+    updateLocalProductQuantity: (state, action) => {
       const { _id, size, color, quantity } = action.payload;
 
       const productToUpdate = state.cartData.products.find(
@@ -61,10 +71,34 @@ const cartSlice = createSlice({
   },
   extraReducers: (builder) => {
     builder
+      .addCase(getUserCart.pending, handlePending)
+      .addCase(getUserCart.fulfilled, (state, action) => {
+        state.cartData = action.payload.data;
+        state.loading = false;
+        state.error = null;
+      })
+      .addCase(getUserCart.rejected, handleRejected)
+
+      .addCase(addProductsToCart.pending, handlePending)
+      .addCase(addProductsToCart.fulfilled, (state, action) => {
+        state.cartData = action.payload.data;
+        state.loading = false;
+        state.error = null;
+      })
+      .addCase(addProductsToCart.rejected, handleRejected)
+
+      .addCase(changeProductQuantity.pending, handlePending)
+      .addCase(changeProductQuantity.fulfilled, (state, action) => {
+        state.cartData = action.payload.data;
+        state.loading = false;
+        state.error = null;
+      })
+      .addCase(changeProductQuantity.rejected, handleRejected)
+
       // Глобальне скидання стану при logout юзера
       .addCase(resetAppState, () => initialState);
   },
 });
 
-export const { addProductsToCart, removeProductCart, updateProductQuantity } = cartSlice.actions;
+export const { addProductsToLocalCart, removeProductCart, updateLocalProductQuantity } = cartSlice.actions;
 export const cartReducer = cartSlice.reducer;

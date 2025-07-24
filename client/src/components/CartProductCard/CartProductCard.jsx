@@ -1,9 +1,11 @@
 import { Link } from 'react-router-dom';
 import { Box, Card, Flex, Inset, Text } from '@radix-ui/themes';
-import { useDispatch } from 'react-redux';
-import { removeProductCart, updateProductQuantity } from '../../redux/cart/slice.js';
+import { useDispatch, useSelector } from 'react-redux';
+import { removeProductCart, updateLocalProductQuantity } from '../../redux/cart/slice.js';
 import { useIsFavoriteProduct } from '../../hooks/useIsFavoriteProduct.js';
 import { useToggleFavoriteProduct } from '../../hooks/useToggleFavoriteProduct.js';
+import { changeProductQuantity } from '../../redux/cart/operations.js';
+import { selectIsLoggedIn } from '../../redux/auth/selectors.js';
 
 import ButtonBarOfProductCard from '../ButtonBarOfProductCard/ButtonBarOfProductCard.jsx';
 import SelectQuantity from '../SelectQuantity/SelectQuantity.jsx';
@@ -12,6 +14,7 @@ import css from './CartProductCard.module.css';
 
 export default function CartProductCard({ product }) {
   const dispatch = useDispatch();
+  const isLoggedIn = useSelector(selectIsLoggedIn);
 
   const { _id: productId, category, image, price, productName, size, color, colorName, quantity } = product;
   const imageUrl = image.src;
@@ -27,14 +30,18 @@ export default function CartProductCard({ product }) {
   const handleQuantityChange = (value) => {
     const newQuantity = Number(value);
 
-    dispatch(
-      updateProductQuantity({
-        _id: productId,
-        color: color,
-        size: size,
-        quantity: newQuantity,
-      }),
-    );
+    const updatedProduct = {
+      _id: productId,
+      color,
+      size,
+      quantity: newQuantity,
+    };
+
+    if (isLoggedIn) {
+      dispatch(changeProductQuantity(updatedProduct));
+    } else {
+      dispatch(updateLocalProductQuantity(updatedProduct));
+    }
   };
 
   return (

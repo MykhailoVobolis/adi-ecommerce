@@ -25,6 +25,7 @@ const initialState = {
   refreshToken: null,
   isLoggedIn: false,
   isRefreshing: false,
+  wasRefreshed: false,
   loading: false,
   authProcess: true,
   error: null,
@@ -71,6 +72,7 @@ const authSlice = createSlice({
         state.refreshToken = action.payload.refreshToken;
         state.isLoggedIn = true;
         state.authProcess = false;
+        state.wasRefreshed = false;
       })
       .addCase(register.rejected, handleRejected)
 
@@ -84,6 +86,7 @@ const authSlice = createSlice({
         state.refreshToken = action.payload.refreshToken;
         state.isLoggedIn = true;
         state.authProcess = false;
+        state.wasRefreshed = false;
       })
       .addCase(logIn.rejected, handleRejected)
 
@@ -97,6 +100,7 @@ const authSlice = createSlice({
         state.refreshToken = action.payload.refreshToken;
         state.isLoggedIn = true;
         state.authProcess = false;
+        state.wasRefreshed = false;
       })
       .addCase(confirmGoogleAuth.rejected, handleRejected)
 
@@ -115,6 +119,7 @@ const authSlice = createSlice({
         state.refreshToken = null;
         state.isLoggedIn = false;
         state.authProcess = false;
+        state.wasRefreshed = false;
       })
       .addCase(logOut.rejected, handleRejected)
 
@@ -128,6 +133,7 @@ const authSlice = createSlice({
         state.loading = false;
         state.isRefreshing = false;
         state.authProcess = false;
+        state.wasRefreshed = true;
       })
       .addCase(refreshUser.rejected, (state) => {
         state.isRefreshing = false;

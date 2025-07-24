@@ -1,4 +1,4 @@
-import { addProductsToCart, getCartById } from '../services/cart.js';
+import { addProductsToCart, changeProductQuantity, getCartById } from '../services/cart.js';
 import { transformCartData } from '../utils/transformCartData.js';
 
 export const addProductsToCartController = async (req, res) => {
@@ -26,6 +26,21 @@ export const getCartByIdController = async (req, res) => {
   res.status(200).json({
     status: 200,
     message: `Successfully found user cart!`,
+    data,
+  });
+};
+
+export const changeProductQuantityController = async (req, res) => {
+  const userId = req.user._id;
+  const product = req.body;
+
+  const cart = await changeProductQuantity(userId, product);
+
+  const data = transformCartData(cart);
+
+  res.status(201).json({
+    status: 201,
+    message: 'Products successfully added to cart!',
     data,
   });
 };

@@ -97,6 +97,7 @@ export const refreshUser = createAsyncThunk(
 
       // Повертаємо нові дані користувача після успішного оновлення токенів
       const userResponse = await instance.get('/auth/user-info');
+
       return userResponse.data;
     } catch (error) {
       const errorMessage = handleError(error);

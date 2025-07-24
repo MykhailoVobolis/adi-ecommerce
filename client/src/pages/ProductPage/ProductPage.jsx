@@ -5,10 +5,12 @@ import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { setProductOptions } from '../../redux/products/slice.js';
 import { selectCurentProduct, selectLoading, selectSelectedOptionsById } from '../../redux/products/selectors.js';
-import { addProductsToCart } from '../../redux/cart/slice.js';
+import { addProductsToLocalCart } from '../../redux/cart/slice.js';
 import { fetchProductById } from '../../redux/products/operations.js';
 import { useIsFavoriteProduct } from '../../hooks/useIsFavoriteProduct.js';
 import { useToggleFavoriteProduct } from '../../hooks/useToggleFavoriteProduct.js';
+import { addProductsToCart } from '../../redux/cart/operations.js';
+import { selectIsLoggedIn } from '../../redux/auth/selectors.js';
 
 import toast from 'react-hot-toast';
 import AboutProduct from '../../components/AboutProduct/AboutProduct.jsx';
@@ -23,6 +25,7 @@ export default function ProductPage() {
 
   const isLoading = useSelector(selectLoading);
   const curentProduct = useSelector(selectCurentProduct);
+  const isLoggedIn = useSelector(selectIsLoggedIn);
 
   const location = useLocation();
   const { color: initialColor } = location.state || {};
@@ -69,7 +72,11 @@ export default function ProductPage() {
       image: curentProduct.images.variants[selectedColor].images[0],
     };
 
-    dispatch(addProductsToCart(productToAdd));
+    if (isLoggedIn) {
+      dispatch(addProductsToCart([productToAdd]));
+    } else {
+      dispatch(addProductsToLocalCart(productToAdd));
+    }
   };
 
   const handleToggleFavorite = useToggleFavoriteProduct(isFavoriteProduct, curentProduct, selectedColor);

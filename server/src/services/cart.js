@@ -1,4 +1,3 @@
-import createHttpError from 'http-errors';
 import { CartCollection } from '../db/models/cart.js';
 import { ProductsCollection } from '../db/models/product.js';
 
@@ -69,9 +68,6 @@ export const addProductsToCart = async (userId, products) => {
   const productIds = products.map((p) => p.productId);
   const dbProducts = await ProductsCollection.find({ _id: { $in: productIds } }).lean();
 
-  let totalQuantity = 0;
-  let totalPrice = 0;
-
   for (const cartItem of products) {
     const { productId, selectedColor, selectedSize, quantity } = cartItem;
 
@@ -88,10 +84,11 @@ export const addProductsToCart = async (userId, products) => {
 
     // Якщо товар уже є — оновлюємо кількість
     if (existingItem) {
+      existingItem.quantity += quantity;
       // Якщо кількість нового товару не дорівнює існуючій, оновлюємо кількість
-      if (quantity !== existingItem.quantity) {
-        existingItem.quantity = quantity;
-      }
+      // if (quantity !== existingItem.quantity) {
+      //   existingItem.quantity = quantity;
+      // }
     } else {
       // Якщо товару ще нема — додаємо
       cart.products.push({
@@ -106,9 +103,14 @@ export const addProductsToCart = async (userId, products) => {
         image,
       });
     }
+  }
 
-    totalPrice += curentProduct.price * quantity;
-    totalQuantity += quantity;
+  let totalQuantity = 0;
+  let totalPrice = 0;
+
+  for (const item of cart.products) {
+    totalPrice += item.price * item.quantity;
+    totalQuantity += item.quantity;
   }
 
   // Оновлюємо загальну кількість і суму
@@ -130,7 +132,11 @@ export const getCartById = async (userId) => {
   const cart = await CartCollection.findOne({ userId });
 
   if (!cart) {
-    throw createHttpError(404, 'Cart not found');
+    return {
+      products: [],
+      totalPrice: 0,
+      totalQuantityProducts: 0,
+    };
   }
 
   const populatedCart = await CartCollection.findById(cart._id).populate(
@@ -139,4 +145,48 @@ export const getCartById = async (userId) => {
   );
 
   return populatedCart;
+};
+
+export const changeProductQuantity = async (userId, product) => {
+  // Шукаємо кошик користувача за його унікальним ідентифікатором (userId)
+  const cart = await CartCollection.findOne({ userId });
+
+  const { productId, selectedColor, selectedSize, quantity } = product;
+
+  // Перевіряємо чи вже є такий товар (по id, кольору і розміру)
+  const existingItem = cart.products.find(
+    (p) => p.productId.toString() === productId.toString() && p.color === selectedColor && p.size === selectedSize,
+  );
+
+  // Якщо товар є — оновлюємо кількість
+  if (existingItem) {
+    // Якщо кількість нового товару не дорівнює існуючій, оновлюємо кількість
+    if (quantity !== existingItem.quantity) {
+      existingItem.quantity = quantity;
+    } else {
+      return; // Нічого не змінюємо, якщо кількість однакова
+    }
+  }
+
+  let totalQuantity = 0;
+  let totalPrice = 0;
+
+  for (const item of cart.products) {
+    totalPrice += item.price * item.quantity;
+    totalQuantity += item.quantity;
+  }
+
+  // Оновлюємо загальну кількість і суму
+  cart.totalQuantityProducts = totalQuantity;
+  cart.totalPrice = totalPrice.toFixed(2);
+
+  await cart.save();
+
+  // Повертаємо оновлений кошик з підвантаженими продуктами
+  const updatedCart = await CartCollection.findById(cart._id).populate(
+    'products.productId',
+    'photo name category price',
+  );
+
+  return updatedCart;
 };
