@@ -48,3 +48,22 @@ export const changeProductQuantity = createAsyncThunk('cart/changeProductQuantit
     return thunkAPI.rejectWithValue({ status: error.response?.status, message: errorMessage });
   }
 });
+
+export const deleteProductFromCart = createAsyncThunk('cart/deleteProductFromCart', async (product, thunkAPI) => {
+  try {
+    const response = await instance.delete('/cart/product-delete', {
+      // Обов'язково передаємо body через ключ `data`! Це правило передавати body у axios.delete.
+      data: {
+        productId: product._id,
+        quantity: product.quantity,
+        selectedColor: product.color,
+        selectedSize: product.size,
+      },
+    });
+
+    return response.data;
+  } catch (error) {
+    const errorMessage = handleError(error);
+    return thunkAPI.rejectWithValue({ status: error.response?.status, message: errorMessage });
+  }
+});

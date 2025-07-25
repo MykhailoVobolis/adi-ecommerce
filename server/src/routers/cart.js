@@ -6,6 +6,7 @@ import { ctrlWrapper } from '../utils/ctrlWrapper.js';
 import {
   addProductsToCartController,
   changeProductQuantityController,
+  deleteProductFromCartController,
   getCartByIdController,
 } from '../controllers/cart.js';
 
@@ -18,6 +19,12 @@ router.put(
   authenticate,
   validateBody(cartProductSchema),
   ctrlWrapper(changeProductQuantityController),
+);
+router.delete(
+  '/product-delete',
+  authenticate,
+  validateBody(cartProductSchema),
+  ctrlWrapper(deleteProductFromCartController),
 );
 
 export default router;

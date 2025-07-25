@@ -1,6 +1,6 @@
 import { createSlice } from '@reduxjs/toolkit';
 import { resetAppState } from '../actions/globalActions.js';
-import { addProductsToCart, changeProductQuantity, getUserCart } from './operations.js';
+import { addProductsToCart, changeProductQuantity, deleteProductFromCart, getUserCart } from './operations.js';
 
 const handlePending = (state) => {
   state.loading = true;
@@ -47,7 +47,7 @@ const cartSlice = createSlice({
       recalculateCartTotals(state);
     },
 
-    removeProductCart: (state, action) => {
+    deleteProductFromLocalCart: (state, action) => {
       const { _id, size, color } = action.payload;
 
       state.cartData.products = state.cartData.products.filter(
@@ -95,10 +95,18 @@ const cartSlice = createSlice({
       })
       .addCase(changeProductQuantity.rejected, handleRejected)
 
+      .addCase(deleteProductFromCart.pending, handlePending)
+      .addCase(deleteProductFromCart.fulfilled, (state, action) => {
+        state.cartData = action.payload.data;
+        state.loading = false;
+        state.error = null;
+      })
+      .addCase(deleteProductFromCart.rejected, handleRejected)
+
       // Глобальне скидання стану при logout юзера
       .addCase(resetAppState, () => initialState);
   },
 });
 
-export const { addProductsToLocalCart, removeProductCart, updateLocalProductQuantity } = cartSlice.actions;
+export const { addProductsToLocalCart, deleteProductFromLocalCart, updateLocalProductQuantity } = cartSlice.actions;
 export const cartReducer = cartSlice.reducer;

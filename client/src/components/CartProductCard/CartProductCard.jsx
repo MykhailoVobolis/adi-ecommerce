@@ -1,10 +1,10 @@
 import { Link } from 'react-router-dom';
 import { Box, Card, Flex, Inset, Text } from '@radix-ui/themes';
 import { useDispatch, useSelector } from 'react-redux';
-import { removeProductCart, updateLocalProductQuantity } from '../../redux/cart/slice.js';
+import { deleteProductFromLocalCart, updateLocalProductQuantity } from '../../redux/cart/slice.js';
 import { useIsFavoriteProduct } from '../../hooks/useIsFavoriteProduct.js';
 import { useToggleFavoriteProduct } from '../../hooks/useToggleFavoriteProduct.js';
-import { changeProductQuantity } from '../../redux/cart/operations.js';
+import { changeProductQuantity, deleteProductFromCart } from '../../redux/cart/operations.js';
 import { selectIsLoggedIn } from '../../redux/auth/selectors.js';
 
 import ButtonBarOfProductCard from '../ButtonBarOfProductCard/ButtonBarOfProductCard.jsx';
@@ -20,7 +20,11 @@ export default function CartProductCard({ product }) {
   const imageUrl = image.src;
 
   const handleRemoveFromCart = () => {
-    dispatch(removeProductCart(product));
+    if (isLoggedIn) {
+      dispatch(deleteProductFromCart(product));
+    } else {
+      dispatch(deleteProductFromLocalCart(product));
+    }
   };
 
   const isFavoriteProduct = useIsFavoriteProduct(productId, color);

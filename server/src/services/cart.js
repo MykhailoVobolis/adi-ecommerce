@@ -190,3 +190,40 @@ export const changeProductQuantity = async (userId, product) => {
 
   return updatedCart;
 };
+
+export const deleteProductFromCart = async (userId, product) => {
+  // Шукаємо кошик користувача за його унікальним ідентифікатором (userId)
+  const cart = await CartCollection.findOne({ userId });
+
+  const { productId, selectedColor, selectedSize } = product;
+
+  // Фільтруємо продукти, щоб видалити потрібний
+  const filteredProducts = cart.products.filter(
+    (p) => p.productId.toString() !== productId.toString() || p.color !== selectedColor || p.size !== selectedSize,
+  );
+
+  // Оновлюємо продукти
+  cart.products = filteredProducts;
+
+  let totalQuantity = 0;
+  let totalPrice = 0;
+
+  for (const item of cart.products) {
+    totalPrice += item.price * item.quantity;
+    totalQuantity += item.quantity;
+  }
+
+  // Оновлюємо загальну кількість і суму
+  cart.totalQuantityProducts = totalQuantity;
+  cart.totalPrice = totalPrice.toFixed(2);
+
+  await cart.save();
+
+  // Повертаємо оновлений кошик з підвантаженими продуктами
+  const filteredCart = await CartCollection.findById(cart._id).populate(
+    'products.productId',
+    'photo name category price',
+  );
+
+  return filteredCart;
+};
