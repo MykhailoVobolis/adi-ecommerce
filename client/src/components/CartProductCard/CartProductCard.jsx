@@ -29,7 +29,17 @@ export default function CartProductCard({ product }) {
 
   const isFavoriteProduct = useIsFavoriteProduct(productId, color);
 
-  const handleToggleFavorite = useToggleFavoriteProduct(isFavoriteProduct, product, color);
+  const selectedProduct = {
+    _id: product._id,
+    productName: product.productName,
+    category: product.category,
+    color: product.color,
+    colorName: product.colorName,
+    image: product.image,
+    price: product.price,
+  };
+
+  const handleToggleFavorite = useToggleFavoriteProduct(isLoggedIn, isFavoriteProduct, selectedProduct, color);
 
   const handleQuantityChange = (value) => {
     const newQuantity = Number(value);

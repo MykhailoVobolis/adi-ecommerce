@@ -1,16 +1,25 @@
 import { useDispatch } from 'react-redux';
-import { addFavorite, removeFavorite } from '../redux/favorites/slice.js';
+import { addFavoriteLocal, removeFavoriteLocal } from '../redux/favorites/slice.js';
+import { addFavorite, removeFavorite } from '../redux/favorites/operations.js';
 
-export function useToggleFavoriteProduct(isFavorite, curentProduct, selectedColor) {
+export function useToggleFavoriteProduct(isLoggedIn, isFavorite, selectedProduct, selectedColor) {
   const dispatch = useDispatch();
 
   const handleToggleFavorite = () => {
-    const productWithColor = { ...curentProduct, selectedColor };
+    const productWithColor = { ...selectedProduct, selectedColor };
 
-    if (isFavorite) {
-      dispatch(removeFavorite(productWithColor));
+    if (isLoggedIn) {
+      if (isFavorite) {
+        dispatch(removeFavorite(productWithColor));
+      } else {
+        dispatch(addFavorite([productWithColor]));
+      }
     } else {
-      dispatch(addFavorite(productWithColor));
+      if (isFavorite) {
+        dispatch(removeFavoriteLocal(productWithColor));
+      } else {
+        dispatch(addFavoriteLocal(productWithColor));
+      }
     }
   };
 

@@ -62,8 +62,6 @@ export const addProductsToCart = async (userId, products) => {
     return populatedCart;
   }
 
-  // ****************************
-
   // Якщо кошик існує, оновлюємо список продуктів
   const productIds = products.map((p) => p.productId);
   const dbProducts = await ProductsCollection.find({ _id: { $in: productIds } }).lean();
@@ -85,10 +83,6 @@ export const addProductsToCart = async (userId, products) => {
     // Якщо товар уже є — оновлюємо кількість
     if (existingItem) {
       existingItem.quantity += quantity;
-      // Якщо кількість нового товару не дорівнює існуючій, оновлюємо кількість
-      // if (quantity !== existingItem.quantity) {
-      //   existingItem.quantity = quantity;
-      // }
     } else {
       // Якщо товару ще нема — додаємо
       cart.products.push({
@@ -199,7 +193,7 @@ export const deleteProductFromCart = async (userId, product) => {
 
   // Фільтруємо продукти, щоб видалити потрібний
   const filteredProducts = cart.products.filter(
-    (p) => p.productId.toString() !== productId.toString() || p.color !== selectedColor || p.size !== selectedSize,
+    (p) => !(p.productId.toString() === productId.toString() && p.color === selectedColor && p.size === selectedSize),
   );
 
   // Оновлюємо продукти

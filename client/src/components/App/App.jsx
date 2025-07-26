@@ -3,11 +3,13 @@ import { lazy, Suspense, useEffect } from 'react';
 import toast, { Toaster } from 'react-hot-toast';
 import { useDispatch, useSelector } from 'react-redux';
 import { selectIsLoggedIn, selectIsRefreshing, selectUser, selectWasRefreshed } from '../../redux/auth/selectors.js';
+import { selectFavoriteProducts } from '../../redux/favorites/selectors.js';
 import { refreshUser } from '../../redux/auth/operations.js';
 import { finishAuthProcess } from '../../redux/auth/slice.js';
 import { setCustomerData } from '../../redux/checkout/slice.js';
 import { selectCartData } from '../../redux/cart/selectors.js';
 import { addProductsToCart, getUserCart } from '../../redux/cart/operations.js';
+import { addFavorite, getUserFavorites } from '../../redux/favorites/operations.js';
 
 import Layout from '../Layout/Layout.jsx';
 import Loader from '../Loader/Loader.jsx';
@@ -32,6 +34,7 @@ export default function App() {
   const authUserData = useSelector(selectUser);
   const isLoggedIn = useSelector(selectIsLoggedIn);
   const localCart = useSelector(selectCartData);
+  const localFavoriteProducts = useSelector(selectFavoriteProducts);
   const wasRefreshed = useSelector(selectWasRefreshed);
 
   useEffect(() => {
@@ -60,6 +63,12 @@ export default function App() {
       dispatch(addProductsToCart(localCart.products));
     } else {
       dispatch(getUserCart());
+    }
+
+    if (localFavoriteProducts?.length > 0) {
+      dispatch(addFavorite(localFavoriteProducts));
+    } else {
+      dispatch(getUserFavorites());
     }
   }, [dispatch, isLoggedIn, wasRefreshed]);
 

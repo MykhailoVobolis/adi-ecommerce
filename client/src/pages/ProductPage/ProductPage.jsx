@@ -79,7 +79,17 @@ export default function ProductPage() {
     }
   };
 
-  const handleToggleFavorite = useToggleFavoriteProduct(isFavoriteProduct, curentProduct, selectedColor);
+  const selectedProduct = {
+    _id: curentProduct._id,
+    productName: curentProduct.productName,
+    category: curentProduct.category,
+    color: selectedColor,
+    colorName: curentProduct.images?.variants[selectedColor].color,
+    image: curentProduct.images?.variants[selectedColor].images[0],
+    price: curentProduct.price,
+  };
+
+  const handleToggleFavorite = useToggleFavoriteProduct(isLoggedIn, isFavoriteProduct, selectedProduct, selectedColor);
 
   useEffect(() => {
     dispatch(setProductOptions({ productId: _id, color: selectedColor, size: selectedSize }));
