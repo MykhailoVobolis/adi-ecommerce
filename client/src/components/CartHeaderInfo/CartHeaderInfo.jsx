@@ -1,6 +1,6 @@
 import { Heading, Text } from '@radix-ui/themes';
-import { Link } from 'react-router-dom';
-import { HiOutlineArrowNarrowRight } from 'react-icons/hi';
+
+import LinkButton from '../LinkButton/LinkButton.jsx';
 
 import css from './CartHeaderInfo.module.css';
 
@@ -27,10 +27,7 @@ export default function CartHeaderInfo({ totalQuantityProducts, totalPrice }) {
           <Text as="p" size="3" mb="5">
             Once you add something to your bag, it will appear here. Ready to get started?
           </Text>
-          <Link to="/" className={css.getStartedLink}>
-            <span>GET STARTED</span>
-            <HiOutlineArrowNarrowRight size={24} />
-          </Link>
+          <LinkButton to="/" text="get started" />
         </>
       )}
     </>

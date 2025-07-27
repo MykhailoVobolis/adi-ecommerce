@@ -43,7 +43,6 @@ export default function AuthForm({ emailAvailable }) {
       .unwrap()
       .then(() => {
         dispatch(clearEmailAvailable());
-        // dispatch(getUserCart());
         methods.reset();
       })
       .catch((error) => {
@@ -53,10 +52,7 @@ export default function AuthForm({ emailAvailable }) {
 
   return (
     <FormProvider {...methods}>
-      <form
-        className={css.form}
-        onSubmit={handleSubmit(emailAvailable === null ? handleEmailSubmit : handlePasswordSubmit)}
-      >
+      <form onSubmit={handleSubmit(emailAvailable === null ? handleEmailSubmit : handlePasswordSubmit)}>
         {emailAvailable === null && (
           <Box mb="7">
             <InputField name="email" placeholder="Email Address *" type="email" variant="auth" />
