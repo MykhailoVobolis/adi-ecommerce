@@ -45,7 +45,7 @@ export const addFavoriteProducts = async (userId, products) => {
       );
 
       if (!exists) {
-        userFavorites.products.push(newProduct);
+        userFavorites.products.unshift(newProduct);
       }
     }
   }

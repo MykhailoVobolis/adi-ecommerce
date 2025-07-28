@@ -25,7 +25,7 @@ const favoritesSlice = createSlice({
       );
 
       if (!exists) {
-        state.favoriteProducts.push(action.payload);
+        state.favoriteProducts.unshift(action.payload);
       }
     },
     removeFavoriteLocal: (state, action) => {

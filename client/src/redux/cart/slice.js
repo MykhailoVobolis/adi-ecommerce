@@ -42,7 +42,7 @@ const cartSlice = createSlice({
       if (existingItem) {
         existingItem.quantity += newItem.quantity;
       } else {
-        state.cartData.products.push(newItem);
+        state.cartData.products.unshift(newItem);
       }
       recalculateCartTotals(state);
     },

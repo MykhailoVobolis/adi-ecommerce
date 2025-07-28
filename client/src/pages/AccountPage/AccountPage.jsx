@@ -4,11 +4,10 @@ import { useDispatch, useSelector } from 'react-redux';
 import { logOut } from '../../redux/auth/operations.js';
 import { resetAppState } from '../../redux/actions/globalActions.js';
 import { selectUser } from '../../redux/auth/selectors.js';
-import { selectCartData, selectIsLoading } from '../../redux/cart/selectors.js';
+import { selectCartData } from '../../redux/cart/selectors.js';
 
 import LogoutButton from '../../components/LogoutButton/LogoutButton.jsx';
 import AccountCartSummary from '../../components/AccountCartSummary/AccountCartSummary.jsx';
-import Loader from '../../components/Loader/Loader.jsx';
 
 import css from './AccountPage.module.css';
 
@@ -16,7 +15,6 @@ export default function AccountPage() {
   const dispatch = useDispatch();
   const { firstName } = useSelector(selectUser);
   const { products, totalQuantityProducts } = useSelector(selectCartData);
-  const isLoading = useSelector(selectIsLoading);
 
   const greetingName = firstName ? firstName : 'Guest';
 
@@ -31,13 +29,11 @@ export default function AccountPage() {
       });
   };
 
-  return isLoading ? (
-    <Loader heightValue={'calc(100vh - 64px)'} />
-  ) : (
+  return (
     <Container size={{ initial: '1', sm: '2', md: '3', lg: '4', xl: '5' }}>
       <Flex justify="between" mb="7">
         <Box className={css.wrapper}>
-          <Heading as="h2" size="8" mb="4" weight="bold">
+          <Heading as="h2" size="7" mb="4" weight="bold" style={{ textTransform: 'uppercase' }}>
             HI, {greetingName}
           </Heading>
           <Text as="p" mb="4">

@@ -85,7 +85,7 @@ export const addProductsToCart = async (userId, products) => {
       existingItem.quantity += quantity;
     } else {
       // Якщо товару ще нема — додаємо
-      cart.products.push({
+      cart.products.unshift({
         productId: curentProduct._id,
         productName: curentProduct.productName,
         category: curentProduct.category,
