@@ -1,5 +1,5 @@
 import toast from 'react-hot-toast';
-import { Box, Container, Flex, Heading, Section, Text } from '@radix-ui/themes';
+import { Box, Container, Flex, Heading, Text } from '@radix-ui/themes';
 import { useDispatch, useSelector } from 'react-redux';
 import { logOut } from '../../redux/auth/operations.js';
 import { resetAppState } from '../../redux/actions/globalActions.js';
@@ -34,33 +34,29 @@ export default function AccountPage() {
   return isLoading ? (
     <Loader heightValue={'calc(100vh - 64px)'} />
   ) : (
-    <Section size="4">
-      <Container size={{ initial: '1', sm: '2', md: '3', lg: '4', xl: '5' }}>
-        <Flex justify="between" mb="7">
-          <Box className={css.wrapper}>
-            <Heading as="h2" size="8" mb="4" weight="bold">
-              HI, {greetingName}
+    <Container size={{ initial: '1', sm: '2', md: '3', lg: '4', xl: '5' }}>
+      <Flex justify="between" mb="7">
+        <Box className={css.wrapper}>
+          <Heading as="h2" size="8" mb="4" weight="bold">
+            HI, {greetingName}
+          </Heading>
+          <Text as="p" mb="4">
+            This is your personal space. Get the low down on your membership status and all the points and rewards
+            you've earned.
+          </Text>
+          <AccountCartSummary products={products} totalQuantityProducts={totalQuantityProducts} />
+          <Box>
+            <Heading as="h3" size="4" mb="3" weight="bold">
+              LOG OUT FROM ALL WEB BROWSERS
             </Heading>
-            <Text as="p" mb="4">
-              This is your personal space. Get the low down on your membership status and all the points and rewards
-              you've earned.
+            <Text as="p" mb="6">
+              This will log you out from all web browsers you have used to access the adidas website. To log in again,
+              you'll have to enter your credentials.
             </Text>
-            {totalQuantityProducts > 0 && (
-              <AccountCartSummary products={products} totalQuantityProducts={totalQuantityProducts} />
-            )}
-            <Box>
-              <Heading as="h3" size="4" mb="3" weight="bold">
-                LOG OUT FROM ALL WEB BROWSERS
-              </Heading>
-              <Text as="p" mb="6">
-                This will log you out from all web browsers you have used to access the adidas website. To log in again,
-                you'll have to enter your credentials.
-              </Text>
-              <LogoutButton handleClick={handleClick} />
-            </Box>
+            <LogoutButton handleClick={handleClick} />
           </Box>
-        </Flex>
-      </Container>
-    </Section>
+        </Box>
+      </Flex>
+    </Container>
   );
 }

@@ -28,6 +28,11 @@ const AuthPage = lazy(() => import('../../pages/AuthPage/AuthPage.jsx'));
 const AccountPage = lazy(() => import('../../pages/AccountPage/AccountPage.jsx'));
 const ConfirmGoogleAuth = lazy(() => import('../../pages/ConfirmGoogleAuth/ConfirmGoogleAuth.jsx'));
 
+const AccountLayout = lazy(() => import('../../components/AccountLayout/AccountLayout.jsx'));
+const AccountProfilePage = lazy(() => import('../../pages/AccountProfilePage/AccountProfilePage.jsx'));
+const AccountHistoryPage = lazy(() => import('../../pages/AccountHistoryPage/AccountHistoryPage.jsx'));
+const AccountFavoritesPage = lazy(() => import('../../pages/AccountFavoritesPage/AccountFavoritesPage.jsx'));
+
 export default function App() {
   const dispatch = useDispatch();
   const isRefreshing = useSelector(selectIsRefreshing);
@@ -86,7 +91,14 @@ export default function App() {
           <Route path="delivery" element={<DeliveryPage />} />
           <Route path="payment" element={<PaymentPage />} />
           <Route path="auth" element={<RestrictedRoute component={<AuthPage />} redirectTo="/account" />} />
-          <Route path="account" element={<PrivateRoute component={<AccountPage />} redirectTo="/auth" />} />
+
+          <Route path="account" element={<PrivateRoute component={<AccountLayout />} redirectTo="/auth" />}>
+            <Route index element={<AccountPage />} />
+            <Route path="profile" element={<AccountProfilePage />} />
+            <Route path="history" element={<AccountHistoryPage />} />
+            <Route path="favorites" element={<AccountFavoritesPage />} />
+          </Route>
+
           <Route path="confirm-google-auth" element={<ConfirmGoogleAuth />} />
           <Route path="*" element={<NotFoundPage />} />
         </Routes>
