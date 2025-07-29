@@ -141,12 +141,11 @@ const authSlice = createSlice({
       })
 
       // Обробка операції оновлення даних користувача
-      .addCase(updateUser.pending, handlePending)
+
       .addCase(updateUser.fulfilled, (state, action) => {
         state.loading = false;
         state.error = null;
         state.user = action.payload.data;
-        state.authProcess = false;
       })
       .addCase(updateUser.rejected, handleRejected)
 
