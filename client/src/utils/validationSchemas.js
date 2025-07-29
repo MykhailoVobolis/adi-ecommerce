@@ -45,3 +45,12 @@ export const authSchema = (emailAvailable) =>
       password: yup.string().required('Password is required').min(8, 'Password must be at least 8 characters'),
     }),
   });
+
+export const editProfileSchema = yup.object().shape({
+  firstName: yup.string().required('Enter your first name').min(2, 'First name must be at least 2 characters'),
+  lastName: yup.string().required('Enter your last name').min(2, 'Last name must be at least 2 characters'),
+  phone: yup
+    .string()
+    .required('Please enter your phone number')
+    .matches(regex.phoneNumberRegexp, 'Number format: +380 00 000 00 00'),
+});

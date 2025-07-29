@@ -62,6 +62,7 @@ export default function InputField({ name, type = 'text', placeholder, variant }
             [css.inputError]: hasError,
             [css.inputSuccess]: isSuccess,
             [css.authInput]: variant === 'auth',
+            [css.editProfileInput]: variant === 'editProfile',
           })}
           value={fieldValue || ''}
           id={name}
@@ -77,6 +78,7 @@ export default function InputField({ name, type = 'text', placeholder, variant }
             [css.inputError]: hasError,
             [css.inputSuccess]: isSuccess,
             [css.authInput]: variant === 'auth',
+            [css.editProfileInput]: variant === 'editProfile',
           })}
           id={name}
           size="3"

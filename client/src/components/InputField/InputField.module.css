@@ -32,6 +32,10 @@
   width: 478px;
 }
 
+.editProfileInput {
+  width: 100%;
+}
+
 .inputError {
   border-bottom: 2px solid #e32b2b;
 }

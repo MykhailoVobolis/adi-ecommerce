@@ -129,3 +129,38 @@ export const loginOrSignupWithGoogle = async (code) => {
     ...newSession,
   });
 };
+
+export const updateUser = async (userId, payload) => {
+  const user = await UsersCollection.findById(userId);
+
+  if (!user) {
+    throw createHttpError(404, 'User not found');
+  }
+
+  if (payload.email && normalizeEmail(payload.email) !== user.email) {
+    const normalizedEmail = normalizeEmail(payload.email);
+
+    const existingUser = await UsersCollection.findOne({ email: normalizedEmail });
+    if (existingUser && existingUser._id.toString() !== userId) {
+      throw createHttpError(409, 'Email already in use');
+    }
+
+    user.email = normalizedEmail;
+  }
+
+  if (payload.firstName) {
+    user.firstName = payload.firstName;
+  }
+
+  if (payload.lastName) {
+    user.lastName = payload.lastName;
+  }
+
+  if (payload.phone) {
+    user.phone = payload.phone;
+  }
+
+  await user.save();
+
+  return user;
+};

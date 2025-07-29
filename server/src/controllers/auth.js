@@ -5,6 +5,7 @@ import {
   logoutUser,
   refreshUsersSession,
   registerUser,
+  updateUser,
 } from '../services/auth.js';
 import { generateAuthUrl } from '../utils/googleOAuth2.js';
 
@@ -126,5 +127,27 @@ export const loginWithGoogleController = async (req, res) => {
       accessToken: session.accessToken,
       refreshToken: session.refreshToken,
     },
+  });
+};
+
+export const updateUserController = async (req, res) => {
+  const userId = req.user._id;
+  const newUserDetails = req.body;
+
+  const user = await updateUser(userId, newUserDetails);
+
+  const { firstName = '', lastName = '', email, phone = '' } = user;
+
+  const data = {
+    firstName,
+    lastName,
+    email,
+    phone,
+  };
+
+  res.status(201).json({
+    status: 201,
+    message: 'Successfully updated user`s profile!',
+    data,
   });
 };

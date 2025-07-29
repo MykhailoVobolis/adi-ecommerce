@@ -149,3 +149,15 @@ export const confirmGoogleAuth = createAsyncThunk('auth/confirmGoogleAuth', asyn
     return thunkAPI.rejectWithValue({ message: errorMessage });
   }
 });
+
+// Оновлення даних користувача
+export const updateUser = createAsyncThunk('auth/updateUser', async (newUserDetails, thunkAPI) => {
+  try {
+    const response = await instance.put('/auth/update-user', newUserDetails);
+
+    return response.data;
+  } catch (error) {
+    const errorMessage = handleError(error);
+    return thunkAPI.rejectWithValue({ message: errorMessage });
+  }
+});

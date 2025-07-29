@@ -10,6 +10,7 @@ export default function SubmitButton({ label = 'Continue checkout', variant }) {
       type="submit"
       className={clsx(css.submitBtn, {
         [css.authBtn]: variant === 'auth',
+        [css.editProfileInput]: variant === 'editProfile',
       })}
     >
       {label}

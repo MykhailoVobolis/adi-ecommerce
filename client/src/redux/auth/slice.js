@@ -1,5 +1,5 @@
 import { createSlice } from '@reduxjs/toolkit';
-import { checkEmail, confirmGoogleAuth, logIn, logOut, refreshUser, register } from './operations.js';
+import { checkEmail, confirmGoogleAuth, logIn, logOut, refreshUser, register, updateUser } from './operations.js';
 import { resetAppState } from '../actions/globalActions.js';
 
 const handlePending = (state) => {
@@ -139,6 +139,17 @@ const authSlice = createSlice({
         state.isRefreshing = false;
         state.authProcess = false;
       })
+
+      // Обробка операції оновлення даних користувача
+      .addCase(updateUser.pending, handlePending)
+      .addCase(updateUser.fulfilled, (state, action) => {
+        state.loading = false;
+        state.error = null;
+        state.user = action.payload.data;
+        state.authProcess = false;
+      })
+      .addCase(updateUser.rejected, handleRejected)
+
       // Глобальне скидання стану при logout юзера
       .addCase(resetAppState, () => initialState);
   },

@@ -1,0 +1,19 @@
+.editButton {
+  padding: 0;
+  text-transform: uppercase;
+  text-decoration: underline;
+  font-size: 16px;
+  font-weight: 700;
+  line-height: 1.2;
+  height: 100%;
+  color: var(--accent-12);
+  background-color: transparent;
+  cursor: pointer;
+  transition: color var(--animation), background-color var(--animation), text-decoration var(--animation);
+}
+
+.editButton:hover {
+  color: var(--main-white-color);
+  background-color: black;
+  text-decoration: none;
+}
