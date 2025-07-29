@@ -145,8 +145,8 @@ export const updateUserController = async (req, res) => {
     phone,
   };
 
-  res.status(201).json({
-    status: 201,
+  res.status(200).json({
+    status: 200,
     message: 'Successfully updated user`s profile!',
     data,
   });
