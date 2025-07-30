@@ -1,6 +1,6 @@
 .cancelBtn {
   justify-content: space-between;
-  width: 100%;
+  width: 352px;
   height: 45px;
   padding: 0 16px;
   font-size: 16px;
@@ -14,5 +14,9 @@
 }
 
 .cancelBtn:hover {
-  color: var(--accent-11);
+  color: var(--accent-10);
+}
+
+.editProfile {
+  width: 100%;
 }

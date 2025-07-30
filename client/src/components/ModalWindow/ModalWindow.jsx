@@ -6,12 +6,12 @@ import clsx from 'clsx';
 
 import css from './ModalWindow.module.css';
 
-export default function ModalWindow({ children, label, isOpen, toggleModal }) {
+export default function ModalWindow({ children, label, isOpen, closeModal }) {
   return (
     <div>
       <Modal
         isOpen={isOpen}
-        onRequestClose={toggleModal}
+        onRequestClose={closeModal}
         contentLabel={label}
         overlayClassName={clsx(css.modalContainer, {
           [css.openedModalContainer]: isOpen,
@@ -22,7 +22,7 @@ export default function ModalWindow({ children, label, isOpen, toggleModal }) {
           [css.closedModalContent]: !isOpen,
         })}
       >
-        <Button className={css.closeButton} as="button" onClick={toggleModal}>
+        <Button className={css.closeButton} as="button" onClick={closeModal}>
           <AiOutlineClose size={24} />
         </Button>
         <Theme accentColor="gray" radius="none">

@@ -92,7 +92,9 @@ export default function InputField({ name, type = 'text', placeholder, variant }
         />
       )}
       <InputErrorMessage errors={errors} name={name} />
-      {name === 'password' && <PasswordVisibilityButton onClick={handleClick} visible={isPasswordVisible} />}
+      {(name === 'password' || name === 'oldPassword' || name === 'newPassword') && (
+        <PasswordVisibilityButton onClick={handleClick} visible={isPasswordVisible} />
+      )}
     </Box>
   );
 }

@@ -14,7 +14,7 @@ export default function AccountCartSummary({ products, totalQuantityProducts }) 
         TOTAL: ({totalQuantityProducts} items)
       </Text>
       {totalQuantityProducts <= 0 && (
-        <Text as="p" size="3" mb="5">
+        <Text as="p" size="3" mb="8">
           Once you add something to your bag, it will appear here. Ready to get started?
         </Text>
       )}

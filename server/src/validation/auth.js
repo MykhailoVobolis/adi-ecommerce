@@ -20,7 +20,7 @@ export const registerUserSchema = Joi.object({
   lastName: Joi.string().min(3).max(30),
   phone: Joi.string().pattern(phoneNumberRegexp),
   email: Joi.string().pattern(emailRegexp).required(),
-  password: Joi.string().min(6).required(),
+  password: Joi.string().min(8).required(),
 }).messages({
   'string.base': 'Field {#label} must be a string.',
   'string.empty': 'Field {#label} cannot be empty.',
@@ -32,7 +32,7 @@ export const registerUserSchema = Joi.object({
 // Joi схема для валідації об'єкта юзера при його login
 export const loginUserSchema = Joi.object({
   email: Joi.string().pattern(emailRegexp).required(),
-  password: Joi.string().min(6).required(),
+  password: Joi.string().min(8).required(),
 }).messages({
   'string.base': 'Field {#label} must be a string.',
   'string.empty': 'Field {#label} cannot be empty.',
@@ -55,5 +55,15 @@ export const updateUserSchema = Joi.object({
   'string.empty': 'Field {#label} cannot be empty.',
   'string.email': 'Field {#label} must be a valid email address.',
   'string.phone': 'Field {#label} must be a valid phone number.',
+  'any.required': 'missing required {#label} field',
+});
+
+export const changePasswordSchema = Joi.object({
+  oldPassword: Joi.string().min(8).required(),
+  newPassword: Joi.string().min(8).required(),
+}).messages({
+  'string.base': 'Field {#label} must be a string.',
+  'string.empty': 'Field {#label} cannot be empty.',
+  'string.email': 'Field {#label} must be a valid email address.',
   'any.required': 'missing required {#label} field',
 });

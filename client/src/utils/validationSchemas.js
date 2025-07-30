@@ -15,6 +15,7 @@ export const branchDeliverySchema = yup.object().shape({
     .matches(regex.phoneNumberRegexp, 'Number format: +380 00 000 00 00'),
   email: yup
     .string()
+    .trim()
     .required('Please enter your email address')
     .matches(regex.emailRegexp, 'Invalid email address. Example: user@mail.com'),
 });
@@ -31,6 +32,7 @@ export const courierDeliverySchema = yup.object().shape({
     .matches(regex.phoneNumberRegexp, 'Number format: +380 00 000 00 00'),
   email: yup
     .string()
+    .trim()
     .required('Please enter your email address')
     .matches(regex.emailRegexp, 'Invalid email address. Example: user@mail.com'),
 });
@@ -39,6 +41,7 @@ export const authSchema = (emailAvailable) =>
   yup.object().shape({
     email: yup
       .string()
+      .trim()
       .required('Please enter your email address')
       .matches(regex.emailRegexp, 'Invalid email address. Example: user@mail.com'),
     ...(emailAvailable !== null && {
@@ -53,4 +56,17 @@ export const editProfileSchema = yup.object().shape({
     .string()
     .required('Please enter your phone number')
     .matches(regex.phoneNumberRegexp, 'Number format: +380 00 000 00 00'),
+});
+
+export const editEmailSchema = yup.object().shape({
+  email: yup
+    .string()
+    .trim()
+    .required('Please enter your email address')
+    .matches(regex.emailRegexp, 'Invalid email address. Example: user@mail.com'),
+});
+
+export const changePasswordSchema = yup.object().shape({
+  oldPassword: yup.string().required('Password is required').min(8, 'Password must be at least 8 characters'),
+  newPassword: yup.string().required('Password is required').min(8, 'Password must be at least 8 characters'),
 });

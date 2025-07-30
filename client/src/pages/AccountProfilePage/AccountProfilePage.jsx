@@ -1,17 +1,20 @@
 import { Box, Container, Heading, Text } from '@radix-ui/themes';
 import { useSelector } from 'react-redux';
-import { selectUser } from '../../redux/auth/selectors.js';
+import { selectIsOAuth, selectUser } from '../../redux/auth/selectors.js';
 
 import useModal from '../../hooks/useModal.js';
 import ModalWindow from '../../components/ModalWindow/ModalWindow.jsx';
 import EditButton from '../../components/EditButton/EditButton.jsx';
 import EditProfileForm from '../../components/EditProfileForm/EditProfileForm.jsx';
+import EditEmailForm from '../../components/EditEmailForm/EditEmailForm.jsx';
+import ChangePasswordForm from '../../components/ChangePasswordForm/ChangePasswordForm.jsx';
 
 import css from './AccountProfilePage.module.css';
 
 export default function AccountProfilePage() {
   const { email, firstName = '', lastName = '', phone } = useSelector(selectUser);
-  const { isOpen, toggleModal } = useModal();
+  const { modalType, isOpen, openModal, closeModal } = useModal();
+  const isOAuth = useSelector(selectIsOAuth);
 
   return (
     <Container size={{ initial: '1', sm: '2', md: '3', lg: '4', xl: '5' }}>
@@ -31,24 +34,56 @@ export default function AccountProfilePage() {
         <Text className={css.userDetails} as="p" mb="3">
           {phone ? `${phone}` : 'phone'}
         </Text>
-        <EditButton toggleModal={toggleModal} />
+        <EditButton openModal={openModal} type="edit-profile" />
       </Box>
-      <Heading as="h2" size="7" mb="3" weight="bold">
-        LOGIN DETAILS
-      </Heading>
-      <Text className={css.userDetails} as="p" mb="3" size="5" weight="bold">
-        EMAIL
-      </Text>
-      <Text className={css.userDetails} as="p" mb="4">
-        {email}
-      </Text>
-      <ModalWindow isOpen={isOpen} toggleModal={toggleModal} label="User data change form">
-        <>
-          <Heading as="h2" size="7" mb="5" weight="bold">
-            EDIT YOUR DETAILS
-          </Heading>
-          <EditProfileForm toggleModal={toggleModal} />
-        </>
+      <Box mb="6">
+        <Heading as="h2" size="7" mb="3" weight="bold">
+          LOGIN DETAILS
+        </Heading>
+        <Text className={css.userDetails} as="p" mb="3" size="5" weight="bold">
+          EMAIL
+        </Text>
+        <Text className={css.userDetails} as="p" mb="4">
+          {email}
+        </Text>
+        {!isOAuth && <EditButton openModal={openModal} type="edit-email" />}
+      </Box>
+      {!isOAuth && (
+        <Box>
+          <Text className={css.userDetails} as="p" mb="3" size="5" weight="bold">
+            PASSWORD
+          </Text>
+          <Text className={css.userDetails} as="p" mb="4">
+            ************
+          </Text>
+          <EditButton openModal={openModal} type="change-password" />
+        </Box>
+      )}
+      <ModalWindow isOpen={isOpen} closeModal={closeModal} label="User data change form">
+        {modalType === 'edit-profile' && (
+          <>
+            <Heading as="h2" size="7" mb="5" weight="bold">
+              EDIT YOUR DETAILS
+            </Heading>
+            <EditProfileForm closeModal={closeModal} />
+          </>
+        )}
+        {modalType === 'edit-email' && (
+          <>
+            <Heading as="h2" size="7" mb="5" weight="bold">
+              EDIT YOUR EMAIL
+            </Heading>
+            <EditEmailForm closeModal={closeModal} />
+          </>
+        )}
+        {modalType === 'change-password' && (
+          <>
+            <Heading as="h2" size="7" mb="5" weight="bold">
+              EDIT YOUR PASSWORD
+            </Heading>
+            <ChangePasswordForm closeModal={closeModal} />
+          </>
+        )}
       </ModalWindow>
     </Container>
   );

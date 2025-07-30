@@ -2,6 +2,7 @@ import { Router } from 'express';
 import { validateBody } from '../middlewares/validateBody.js';
 import { ctrlWrapper } from '../utils/ctrlWrapper.js';
 import {
+  changePasswordSchema,
   checkUserEmailSchema,
   loginUserSchema,
   loginWithGoogleOAuthSchema,
@@ -9,6 +10,7 @@ import {
   updateUserSchema,
 } from '../validation/auth.js';
 import {
+  changePasswordController,
   checkUserEmailController,
   fetchUserInfoController,
   getGoogleOAuthUrlController,
@@ -40,5 +42,7 @@ router.get('/get-oauth-url', ctrlWrapper(getGoogleOAuthUrlController));
 router.post('/confirm-oauth', validateBody(loginWithGoogleOAuthSchema), ctrlWrapper(loginWithGoogleController));
 
 router.put('/update-user', authenticate, validateBody(updateUserSchema), ctrlWrapper(updateUserController));
+
+router.put('/change-password', authenticate, validateBody(changePasswordSchema), ctrlWrapper(changePasswordController));
 
 export default router;

@@ -1,4 +1,5 @@
 import {
+  changePassword,
   checkUserEmail,
   loginOrSignupWithGoogle,
   loginUser,
@@ -149,5 +150,17 @@ export const updateUserController = async (req, res) => {
     status: 200,
     message: 'Successfully updated user`s profile!',
     data,
+  });
+};
+
+export const changePasswordController = async (req, res) => {
+  const userId = req.user._id;
+  const passwords = req.body;
+
+  await changePassword(userId, passwords);
+
+  res.status(200).json({
+    status: 200,
+    message: 'Password changed successfully',
   });
 };

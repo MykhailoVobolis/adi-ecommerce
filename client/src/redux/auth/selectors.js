@@ -11,3 +11,5 @@ export const selectIsRefreshing = (state) => state.auth.isRefreshing;
 export const selectAuthProcess = (state) => state.auth.authProcess;
 
 export const selectWasRefreshed = (state) => state.auth.wasRefreshed;
+
+export const selectIsOAuth = (state) => state.auth.isOAuth;

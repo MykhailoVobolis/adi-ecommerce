@@ -164,3 +164,22 @@ export const updateUser = async (userId, payload) => {
 
   return user;
 };
+
+export const changePassword = async (userId, payload) => {
+  const user = await UsersCollection.findById(userId);
+
+  if (!user) {
+    throw createHttpError(404, 'User not found');
+  }
+
+  const isMatch = await bcrypt.compare(payload.oldPassword, user.password); // Порівнюємо хеші паролів
+
+  if (!isMatch) {
+    throw createHttpError(401, 'Old password is incorrect');
+  }
+
+  const hashedNewPassword = await bcrypt.hash(payload.newPassword, 10);
+  user.password = hashedNewPassword;
+
+  await user.save();
+};

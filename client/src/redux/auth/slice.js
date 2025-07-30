@@ -29,6 +29,7 @@ const initialState = {
   loading: false,
   authProcess: true,
   error: null,
+  isOAuth: false,
 };
 
 const authSlice = createSlice({
@@ -101,6 +102,7 @@ const authSlice = createSlice({
         state.isLoggedIn = true;
         state.authProcess = false;
         state.wasRefreshed = false;
+        state.isOAuth = true;
       })
       .addCase(confirmGoogleAuth.rejected, handleRejected)
 
@@ -141,7 +143,6 @@ const authSlice = createSlice({
       })
 
       // Обробка операції оновлення даних користувача
-
       .addCase(updateUser.fulfilled, (state, action) => {
         state.loading = false;
         state.error = null;

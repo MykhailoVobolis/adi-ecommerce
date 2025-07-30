@@ -13,7 +13,7 @@ import { setStore } from '../utils/refreshHandler.js';
 const authPersistConfig = {
   key: 'auth',
   storage,
-  whitelist: ['accessToken', 'refreshToken'],
+  whitelist: ['accessToken', 'refreshToken', 'wasRefreshed'],
 };
 
 const persistedAuthReducer = persistReducer(authPersistConfig, authReduser);

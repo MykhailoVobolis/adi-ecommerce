@@ -161,3 +161,15 @@ export const updateUser = createAsyncThunk('auth/updateUser', async (newUserDeta
     return thunkAPI.rejectWithValue({ message: errorMessage });
   }
 });
+
+// Зміна паролю
+export const changePassword = createAsyncThunk('auth/changePassword', async (passwords, thunkAPI) => {
+  try {
+    const response = await instance.put('/auth/change-password', passwords);
+
+    return response.data;
+  } catch (error) {
+    const errorMessage = handleError(error);
+    return thunkAPI.rejectWithValue({ message: errorMessage });
+  }
+});
