@@ -6,7 +6,7 @@ import css from './AddToCartButton.module.css';
 export default function AddToCartButton({ onAddToCartClick }) {
   return (
     <Button className={css.buyBtn} size="3" onClick={onAddToCartClick}>
-      <span>ADD TO CART</span>
+      <span>ADD TO BAG</span>
       <HiOutlineArrowNarrowRight size={24} />
     </Button>
   );

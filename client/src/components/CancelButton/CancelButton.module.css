@@ -17,6 +17,7 @@
   color: var(--accent-10);
 }
 
-.editProfile {
+.editProfile,
+.cartSummaryModal {
   width: 100%;
 }

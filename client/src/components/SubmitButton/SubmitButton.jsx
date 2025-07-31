@@ -6,13 +6,7 @@ import css from './SubmitButton.module.css';
 
 export default function SubmitButton({ label = 'Continue checkout', variant }) {
   return (
-    <Button
-      type="submit"
-      className={clsx(css.submitBtn, {
-        [css.authBtn]: variant === 'auth',
-        [css.editProfile]: variant === 'editProfile',
-      })}
-    >
+    <Button type="submit" className={clsx(css.submitBtn, css[variant])}>
       {label}
       <HiOutlineArrowNarrowRight size={24} />
     </Button>

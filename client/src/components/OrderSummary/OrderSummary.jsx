@@ -45,7 +45,9 @@ export default function OrderSummary({ totalPrice, totalQuantityProducts, discou
         <Separator my="4" size="2" />
         <SummaryItem
           label="Total"
-          value={`$${shouldShowDeliveryCost && totalWithDelivery && totalPrice < 300 ? totalWithDelivery : totalPrice}`}
+          value={`$${
+            shouldShowDeliveryCost && totalWithDelivery && totalPrice < 300 ? totalWithDelivery : totalPrice.toFixed(2)
+          }`}
           bold
         />
       </Box>

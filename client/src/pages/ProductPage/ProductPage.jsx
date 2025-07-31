@@ -1,4 +1,4 @@
-import { Box } from '@radix-ui/themes';
+import { Box, Heading } from '@radix-ui/themes';
 // import { products } from '../../assets/db/products_list.js';
 import { useLocation, useParams } from 'react-router-dom';
 import { useEffect, useState } from 'react';
@@ -13,15 +13,19 @@ import { addProductsToCart } from '../../redux/cart/operations.js';
 import { selectIsLoggedIn } from '../../redux/auth/selectors.js';
 
 import toast from 'react-hot-toast';
+import useModal from '../../hooks/useModal.js';
 import AboutProduct from '../../components/AboutProduct/AboutProduct.jsx';
 import ProductMainSection from '../../components/ProductMainSection/ProductMainSection.jsx';
 import Loader from '../../components/Loader/Loader.jsx';
+import ModalWindow from '../../components/ModalWindow/ModalWindow.jsx';
+import AddToCartModalContent from '../../components/AddToCartModalContent/AddToCartModalContent.jsx';
 
 import css from './ProductPage.module.css';
 
 export default function ProductPage() {
   const dispatch = useDispatch();
   const { productId } = useParams();
+  const { isOpen, openModal, closeModal } = useModal();
 
   const isLoading = useSelector(selectLoading);
   const curentProduct = useSelector(selectCurentProduct);
@@ -43,6 +47,7 @@ export default function ProductPage() {
 
   const [selectedColor, setSelectedColor] = useState(initialColor || currentProductOptions?.color || 'main');
   const [selectedSize, setSelectedSize] = useState(initialSize || currentProductOptions?.size || '');
+  const [addedProduct, setAddedProduct] = useState(null);
 
   const isFavoriteProduct = useIsFavoriteProduct(_id, selectedColor);
 
@@ -73,9 +78,19 @@ export default function ProductPage() {
     };
 
     if (isLoggedIn) {
-      dispatch(addProductsToCart([productToAdd]));
+      dispatch(addProductsToCart([productToAdd]))
+        .unwrap()
+        .then(() => {
+          setAddedProduct(productToAdd);
+          openModal('add-to-cart');
+        })
+        .catch((error) => {
+          toast.error(error.message);
+        });
     } else {
       dispatch(addProductsToLocalCart(productToAdd));
+      setAddedProduct(productToAdd);
+      openModal('add-to-cart');
     }
   };
 
@@ -113,6 +128,9 @@ export default function ProductPage() {
           <AboutProduct product={curentProduct} />
         </Box>
       )}
+      <ModalWindow isOpen={isOpen} closeModal={closeModal} label="Successfully added to bag">
+        <AddToCartModalContent product={addedProduct} closeModal={closeModal} />
+      </ModalWindow>
     </>
   );
 }
