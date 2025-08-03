@@ -1,9 +1,9 @@
-import * as RadioGroup from "@radix-ui/react-radio-group";
-import { Text } from "@radix-ui/themes";
+import * as RadioGroup from '@radix-ui/react-radio-group';
+import { Text } from '@radix-ui/themes';
 
-import RadioInput from "../RadioInput/RadioInput.jsx";
+import RadioInput from '../RadioInput/RadioInput.jsx';
 
-import css from "./SizePicker.module.css";
+import css from './SizePicker.module.css';
 
 export default function SizePicker({ sizes, selectedSize, onChange }) {
   return (
@@ -15,15 +15,17 @@ export default function SizePicker({ sizes, selectedSize, onChange }) {
         className={css.sizePickerRoot}
         value={selectedSize}
         onValueChange={onChange}
-        aria-label="Shoe Size">
+        aria-label="Shoe Size"
+      >
         {sizes.map((size) => (
           <RadioInput
             key={size}
             value={size}
-            label={`${size} UK`}
+            label={`${size}`}
             className={css.sizePickerItem}
-            indicatorClassName={css.sizePickerIndicator}>
-            <span>{size} UK</span>
+            indicatorClassName={css.sizePickerIndicator}
+          >
+            <span>{size}</span>
           </RadioInput>
         ))}
       </RadioGroup.Root>

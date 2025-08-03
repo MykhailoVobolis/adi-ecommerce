@@ -4,7 +4,7 @@ import Joi from 'joi';
 export const cartProductSchema = Joi.object({
   productId: Joi.string().hex().length(24).required(),
   selectedColor: Joi.string().required(),
-  selectedSize: Joi.number().min(1).required(),
+  selectedSize: Joi.string().required(),
   quantity: Joi.number().integer().min(1).required(),
 }).messages({
   'string.base': 'The field {#label} must be a string.',

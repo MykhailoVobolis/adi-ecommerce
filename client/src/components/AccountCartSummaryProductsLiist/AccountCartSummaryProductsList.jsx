@@ -12,7 +12,14 @@ import '../Slider/swiperStyles.css';
 export default function AccountCartSummaryProductsList({ products }) {
   return (
     <Box className="accountSliderContainer">
-      <Swiper slidesPerView={4} spaceBetween={10} navigation={true} modules={[Navigation]} className="mySwiper2">
+      <Swiper
+        slidesPerView={4}
+        spaceBetween={10}
+        navigation={true}
+        modules={[Navigation]}
+        className="mySwiper2"
+        cssMode={true} // дозволяє прокручувати слайди за допомогою стандартного скролу, як звичайний горизонтальний контейнер.
+      >
         {products.map((p) => (
           <SwiperSlide key={nanoid()} className={css.productItem}>
             <Link to={`/products/${p.category}/${p._id}`} state={{ color: p.color, size: p.size }}>

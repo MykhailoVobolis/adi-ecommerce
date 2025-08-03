@@ -101,7 +101,7 @@ export default function CartProductCard({ product }) {
                   {colorName}
                 </Text>
                 <Text as="p" size="3" className={css.productOption}>
-                  size: {size} uk
+                  size: {size}
                 </Text>
               </Box>
               <SelectQuantity quantity={quantity} handleQuantityChange={handleQuantityChange} />

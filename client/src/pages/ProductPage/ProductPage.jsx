@@ -1,4 +1,4 @@
-import { Box, Heading } from '@radix-ui/themes';
+import { Box } from '@radix-ui/themes';
 // import { products } from '../../assets/db/products_list.js';
 import { useLocation, useParams } from 'react-router-dom';
 import { useEffect, useState } from 'react';
@@ -49,6 +49,15 @@ export default function ProductPage() {
   const [selectedSize, setSelectedSize] = useState(initialSize || currentProductOptions?.size || '');
   const [addedProduct, setAddedProduct] = useState(null);
 
+  // Сбрасываем локальные состояния при смене продукта
+  useEffect(() => {
+    if (curentProduct?._id) {
+      const options = currentProductOptions ?? {};
+      setSelectedColor(initialColor || options.color || 'main');
+      setSelectedSize(initialSize || options.size || '');
+    }
+  }, [curentProduct?._id]);
+
   const isFavoriteProduct = useIsFavoriteProduct(_id, selectedColor);
 
   const changeColor = (color) => {
@@ -94,13 +103,15 @@ export default function ProductPage() {
     }
   };
 
+  const variant = curentProduct?.images?.variants?.[selectedColor];
+
   const selectedProduct = {
     _id: curentProduct._id,
     productName: curentProduct.productName,
     category: curentProduct.category,
     color: selectedColor,
-    colorName: curentProduct.images?.variants[selectedColor].color,
-    image: curentProduct.images?.variants[selectedColor].images[0],
+    colorName: curentProduct?.images?.variants[selectedColor]?.color,
+    image: variant?.images?.[0] ?? '',
     price: curentProduct.price,
   };
 

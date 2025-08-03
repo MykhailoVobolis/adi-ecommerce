@@ -23,6 +23,7 @@ export const addFavoriteProducts = async (userId, products) => {
         productId: currentProduct._id,
         productName: currentProduct.productName,
         category: currentProduct.category,
+        type: currentProduct.type,
         price: currentProduct.price,
         color: selectedColor,
         colorName: colorVariant.color || '',

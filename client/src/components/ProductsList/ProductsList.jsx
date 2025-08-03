@@ -4,7 +4,7 @@ import css from './ProductsList.module.css';
 
 export default function ProductsList({ products, category }) {
   return (
-    <ul>
+    <ul className={css.productsList}>
       {products.map((product) => (
         <ProductCard key={product._id} product={product} category={category} />
       ))}

@@ -36,7 +36,7 @@ export default function OrderProductCard({ product }) {
                   ${price.toFixed(2)}
                 </Text>
                 <Text as="p" size="3" className={css.productOption}>
-                  Size: {size} UK / Quantity: {quantity}
+                  Size: {size} / Quantity: {quantity}
                 </Text>
                 <Text as="p" size="3" className={css.productOption}>
                   Color: {capitalizedColor}

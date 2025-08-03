@@ -7,6 +7,7 @@ const favoriteProductSchema = new Schema(
     productId: { type: Schema.Types.ObjectId, required: true },
     productName: { type: String, required: true },
     category: { type: String, required: true, enum: ['MEN', 'WOMEN', 'CHILDREN'] },
+    type: { type: String, required: true, enum: ['SHOES', 'CLOTHING', 'ACCESSORIES'] },
     price: { type: Number, required: true },
     color: { type: String, required: true },
     colorName: { type: String, required: true },

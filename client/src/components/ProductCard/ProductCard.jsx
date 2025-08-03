@@ -33,41 +33,39 @@ export default function ProductCard({ product, category }) {
   const handleToggleFavorite = useToggleFavoriteProduct(isLoggedIn, isFavoriteProduct, selectedProduct, selectedColor);
 
   return (
-    <li>
-      <Box className={css.productBox}>
-        <Card size="2">
-          <Link to={`/products/${category}/${productId}`}>
-            <Inset clip="padding-box" side="top" pb="current">
-              <img
-                src={imageUrl}
-                alt="Product Image"
-                style={{
-                  display: 'block',
-                  objectFit: 'cover',
-                  width: '100%',
-                  height: 'auto',
-                  backgroundColor: 'var(--gray-5)',
-                }}
-              />
-            </Inset>
-            <Text as="p" size="3">
-              <Strong>${price}</Strong>
-            </Text>
-            <Text as="p" size="3" className={css.productName}>
-              {productName}
-            </Text>
-            <Text as="p" size="2" className={css.productOptions}>
-              {countColors} colors
-            </Text>
-          </Link>
-        </Card>
-        <Box className={css.toFavoritBtnWrapper}>
-          <AddToFavoriteButton
-            onAddToFavoriteClick={handleToggleFavorite}
-            isFavorite={isFavoriteProduct}
-            isInProductCard={true}
-          />
-        </Box>
+    <li className={css.productBox}>
+      <Card size="2">
+        <Link to={`/products/${category}/${productId}`}>
+          <Inset clip="padding-box" side="top" pb="current">
+            <img
+              src={imageUrl}
+              alt="Product Image"
+              style={{
+                display: 'block',
+                objectFit: 'cover',
+                width: '100%',
+                height: 'auto',
+                backgroundColor: 'var(--gray-5)',
+              }}
+            />
+          </Inset>
+          <Text as="p" size="3">
+            <Strong>${price}</Strong>
+          </Text>
+          <Text as="p" size="3" className={css.productName}>
+            {productName}
+          </Text>
+          <Text as="p" size="2" className={css.productOptions}>
+            {countColors} colors
+          </Text>
+        </Link>
+      </Card>
+      <Box className={css.toFavoritBtnWrapper}>
+        <AddToFavoriteButton
+          onAddToFavoriteClick={handleToggleFavorite}
+          isFavorite={isFavoriteProduct}
+          isInProductCard={true}
+        />
       </Box>
     </li>
   );

@@ -11,7 +11,7 @@ export default function ProductAddedInfo({ product }) {
 
   return (
     <Flex className={css.productInfoContainer} direction={{ initial: 'column', sm: 'row' }}>
-      <Inset side="left" clip="padding-box" pr="current">
+      <Inset side="left" clip="padding-box" pr="current" width="150px" style={{ flexShrink: 0 }}>
         <img
           src={imageUrl}
           alt="Product"
@@ -36,7 +36,7 @@ export default function ProductAddedInfo({ product }) {
           Color: {capitalizedColor}
         </Text>
         <Text as="p" size="3" className={css.productOption}>
-          Size: {size} UK
+          Size: {size}
         </Text>
         <Text as="p" size="3">
           Quantity: {quantity}
