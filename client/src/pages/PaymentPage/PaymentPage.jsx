@@ -1,22 +1,41 @@
-import { useSelector } from 'react-redux';
-import { Box, Container, Flex, Heading, Section } from '@radix-ui/themes';
+import { useDispatch, useSelector } from 'react-redux';
+import { Box, Container, Flex, Heading, Section, Text } from '@radix-ui/themes';
 import { selectCartData } from '../../redux/cart/selectors.js';
-import { selectCustomer, selectDeliveryAddress, selectDeliveryCost } from '../../redux/checkout/selectors.js';
+import {
+  selectCustomer,
+  selectDeliveryAddress,
+  selectDeliveryCost,
+  selectPaymentMethod,
+} from '../../redux/checkout/selectors.js';
+import { setPaymentMethod } from '../../redux/checkout/slice.js';
 
 import CheckoutCart from '../../components/CheckoutCart/CheckoutCart.jsx';
 import OrderSummary from '../../components/OrderSummary/OrderSummary.jsx';
 import DeliverySummary from '../../components/DeliverySummary/DeliverySummary.jsx';
+import PaymentMethodSelector from '../../components/PaymentMethodSelector/PaymentMethodSelector.jsx';
+import ActionButton from '../../components/ActionButton/ActionButton.jsx';
 
 import css from './PaymentPage.module.css';
 
 export default function PaymentPage() {
+  const dispatch = useDispatch();
+  const selectedPaymentMethod = useSelector(selectPaymentMethod);
   const cartData = useSelector(selectCartData);
   const deliveryAddress = useSelector(selectDeliveryAddress);
   const customerData = useSelector(selectCustomer);
   const selectedDeliveryCost = useSelector(selectDeliveryCost);
+  const { selectedMethod: selectedDeliveryMethod } = useSelector(selectDeliveryAddress);
 
   const { products, totalPrice, totalQuantityProducts } = cartData;
   const { phone } = customerData;
+
+  const handleChange = (value) => {
+    dispatch(setPaymentMethod(value));
+  };
+
+  const handlePlaceOrder = () => {
+    console.log('Place Order');
+  };
 
   return (
     <Section size="4">
@@ -26,6 +45,15 @@ export default function PaymentPage() {
             <Heading as="h1" size="7" mb="4" weight="bold">
               PAYMENT AND ORDER CONFIRMATION
             </Heading>
+            <Text as="p" size="3" mb="4">
+              Choose a convenient payment method
+            </Text>
+            <PaymentMethodSelector
+              selectedPaymentMethod={selectedPaymentMethod}
+              handleChange={handleChange}
+              selectedDeliveryMethod={selectedDeliveryMethod}
+            />
+            {selectedPaymentMethod && <ActionButton label="place order" handleClick={handlePlaceOrder} />}
           </Box>
           {totalQuantityProducts > 0 && (
             <Flex direction="column">

@@ -25,6 +25,7 @@ const initialState = {
   },
 
   selectedDeliveryCost: null,
+  paymentMethod: '',
 };
 
 const checkoutSlice = createSlice({
@@ -82,6 +83,11 @@ const checkoutSlice = createSlice({
       state.customer.isAuthorized = true;
       state.customer.emailFromAuth = true;
     },
+
+    setPaymentMethod: (state, action) => {
+      state.paymentMethod = action.payload;
+    },
+
     // Повна очистка після оформлення замовлення
     resetCheckout: () => initialState,
   },
@@ -105,6 +111,7 @@ export const {
   setCustomerData,
   resetCheckout,
   clearDeliveryUnits,
+  setPaymentMethod,
 } = checkoutSlice.actions;
 
 export const checkoutReducer = checkoutSlice.reducer;

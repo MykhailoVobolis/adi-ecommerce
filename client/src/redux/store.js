@@ -45,7 +45,7 @@ const deliveryPersistConfig = {
 const checkoutPersistConfig = {
   key: 'pre-order',
   storage,
-  whitelist: ['deliveryAddress', 'customer', 'selectedDeliveryCost'],
+  whitelist: ['deliveryAddress', 'customer', 'selectedDeliveryCost', 'paymentMethod'],
 };
 
 const persistedProductsReducer = persistReducer(productsPersistConfig, productsReduser);

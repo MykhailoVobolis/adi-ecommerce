@@ -137,8 +137,6 @@ export default function DeliveryOptions({
   }, [isBranch, isPostomat, isCourier]);
 
   const handleSubmit = (data) => {
-    console.log('Form data:', data);
-    // Тут можемо робити dispatch або перехід на сторінку payment
     navigate('/payment');
   };
 
