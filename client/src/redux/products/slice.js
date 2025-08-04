@@ -57,6 +57,28 @@ const productsSlice = createSlice({
       const { productId, color, size } = action.payload;
       state.selectedOptions[productId] = { color, size };
     },
+
+    setNewPage: (state, action) => {
+      const { newPage, category } = action.payload;
+      state.products.byCategory[category].page = newPage;
+    },
+
+    resetCategoryData: (state, action) => {
+      const category = action.payload.label.toLowerCase();
+      const currentPage = state.products.byCategory[category]?.page;
+
+      if (currentPage !== 1) {
+        state.products.byCategory[category] = {
+          data: [],
+          hasNextPage: null,
+          hasPreviousPage: null,
+          page: 1,
+          perPage: 12,
+          totalItems: null,
+          totalPages: null,
+        };
+      }
+    },
   },
   extraReducers: (builder) => {
     builder
@@ -82,5 +104,5 @@ const productsSlice = createSlice({
   },
 });
 
-export const { setProductOptions } = productsSlice.actions;
+export const { setProductOptions, setNewPage, resetCategoryData } = productsSlice.actions;
 export const productsReduser = productsSlice.reducer;

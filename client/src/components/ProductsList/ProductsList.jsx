@@ -6,7 +6,7 @@ export default function ProductsList({ products, category }) {
   return (
     <ul className={css.productsList}>
       {products.map((product) => (
-        <ProductCard key={product._id} product={product} category={category} />
+        <ProductCard key={`${product._id}-${product.variantKey}`} product={product} category={category} />
       ))}
     </ul>
   );

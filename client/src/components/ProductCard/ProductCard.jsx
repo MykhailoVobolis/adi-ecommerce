@@ -12,11 +12,10 @@ import css from './ProductCard.module.css';
 export default function ProductCard({ product, category }) {
   const isLoggedIn = useSelector(selectIsLoggedIn);
 
-  const { _id: productId, price, productName, images } = product;
+  const { _id: productId, price, productName, images, countColors, variantKey } = product;
 
-  const countColors = Object.keys(images.variants).length;
-  const imageUrl = images.variants.main.images[0].src;
-  const selectedColor = Object.keys(images.variants)[0];
+  const imageUrl = images[0].src;
+  const selectedColor = variantKey;
 
   const isFavoriteProduct = useIsFavoriteProduct(productId, selectedColor);
 
@@ -25,8 +24,8 @@ export default function ProductCard({ product, category }) {
     productName: product.productName,
     category: product.category,
     color: selectedColor,
-    colorName: product.images?.variants[selectedColor].color,
-    image: product.images?.variants[selectedColor].images[0],
+    colorName: product.color,
+    image: product.images?.[0],
     price: product.price,
   };
 
@@ -35,7 +34,7 @@ export default function ProductCard({ product, category }) {
   return (
     <li className={css.productBox}>
       <Card size="2">
-        <Link to={`/products/${category}/${productId}`}>
+        <Link to={`/products/${category}/${productId}?color=${selectedColor}`}>
           <Inset clip="padding-box" side="top" pb="current">
             <img
               src={imageUrl}

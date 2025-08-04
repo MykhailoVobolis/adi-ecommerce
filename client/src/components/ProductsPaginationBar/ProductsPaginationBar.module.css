@@ -1,0 +1,25 @@
+.btn {
+  justify-content: center;
+  width: 150px;
+  height: 45px;
+  padding: 0 16px;
+  font-size: 16px;
+  text-transform: uppercase;
+  font-weight: 600;
+  color: var(--main-white-color);
+  border: solid 1px var(--accent-12);
+  background-color: var(--accent-12);
+  cursor: pointer;
+  transition: color var(--animation), background-color var(--animation);
+
+  min-width: 100px;
+}
+
+.btn:hover {
+  color: var(--accent-12);
+  background-color: var(--accent-0);
+}
+
+.hidden {
+  visibility: hidden;
+}

@@ -63,7 +63,7 @@ export default function CartProductCard({ product }) {
       <Box className={css.productBox}>
         <Card size="2">
           <Flex direction={{ initial: 'column', sm: 'row' }} gap="3">
-            <Link to={`/products/${category}/${productId}`} state={{ color: color, size: size }}>
+            <Link to={`/products/${category}/${productId}?color=${color}&size=${size}`}>
               <Inset side="left" clip="padding-box" pr="current">
                 <img
                   src={imageUrl}
@@ -82,7 +82,7 @@ export default function CartProductCard({ product }) {
               <Box>
                 <Flex>
                   <Flex justify="between" width="400px">
-                    <Link to={`/products/${category}/${productId}`} state={{ color: color, size: size }}>
+                    <Link to={`/products/${category}/${productId}?color=${color}&size=${size}`}>
                       <Text as="p" size="3" className={css.productName}>
                         {productName}
                       </Text>

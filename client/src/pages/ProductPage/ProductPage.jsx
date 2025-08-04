@@ -1,6 +1,5 @@
 import { Box } from '@radix-ui/themes';
-// import { products } from '../../assets/db/products_list.js';
-import { useLocation, useParams } from 'react-router-dom';
+import { useLocation, useNavigate, useParams } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { setProductOptions } from '../../redux/products/slice.js';
@@ -25,47 +24,50 @@ import css from './ProductPage.module.css';
 export default function ProductPage() {
   const dispatch = useDispatch();
   const { productId } = useParams();
+  const navigate = useNavigate();
+  const location = useLocation();
   const { isOpen, openModal, closeModal } = useModal();
 
   const isLoading = useSelector(selectLoading);
   const curentProduct = useSelector(selectCurentProduct);
   const isLoggedIn = useSelector(selectIsLoggedIn);
+  const currentProductOptions = useSelector(selectSelectedOptionsById(curentProduct._id));
 
-  const location = useLocation();
-  const { color: initialColor } = location.state || {};
-  const { size: initialSize } = location.state || {};
+  const queryParams = new URLSearchParams(location.search);
+  const colorParam = queryParams.get('color');
+  const sizeParam = queryParams.get('size');
+
+  const [selectedColor, setSelectedColor] = useState(colorParam);
+  const [selectedSize, setSelectedSize] = useState(sizeParam);
+  const [addedProduct, setAddedProduct] = useState(null);
 
   useEffect(() => {
     dispatch(fetchProductById(productId));
   }, [productId, dispatch]);
 
-  // const [curentProduct, setCurentProduct] = useState(products[0]);
-
-  const { _id, productName, price, category } = curentProduct;
-
-  const currentProductOptions = useSelector(selectSelectedOptionsById(_id));
-
-  const [selectedColor, setSelectedColor] = useState(initialColor || currentProductOptions?.color || 'main');
-  const [selectedSize, setSelectedSize] = useState(initialSize || currentProductOptions?.size || '');
-  const [addedProduct, setAddedProduct] = useState(null);
-
-  // Сбрасываем локальные состояния при смене продукта
   useEffect(() => {
     if (curentProduct?._id) {
       const options = currentProductOptions ?? {};
-      setSelectedColor(initialColor || options.color || 'main');
-      setSelectedSize(initialSize || options.size || '');
+      setSelectedColor(colorParam || options.color || 'main');
+      setSelectedSize(sizeParam || options.size || '');
     }
   }, [curentProduct?._id]);
 
-  const isFavoriteProduct = useIsFavoriteProduct(_id, selectedColor);
+  // Update query string
+  const updateQueryParam = (key, value) => {
+    const params = new URLSearchParams(location.search);
+    params.set(key, value); // оновлюємо key значенням value
+    navigate(`${location.pathname}?${params.toString()}`, { replace: true }); // замінює URL без перезавантаження
+  };
 
-  const changeColor = (color) => {
-    setSelectedColor(color);
+  const changeColor = (colorKey) => {
+    setSelectedColor(colorKey);
+    updateQueryParam('color', colorKey);
   };
 
   const changeSize = (size) => {
     setSelectedSize(size);
+    updateQueryParam('size', size);
   };
 
   const handleAddToCart = () => {
@@ -74,16 +76,17 @@ export default function ProductPage() {
       return;
     }
 
+    const variant = curentProduct.images.variants[selectedColor];
     const productToAdd = {
-      _id: _id,
-      productName: productName,
-      category: category,
-      price: price,
+      _id: curentProduct._id,
+      productName: curentProduct.productName,
+      category: curentProduct.category,
+      price: curentProduct.price,
       color: selectedColor,
       size: selectedSize,
       quantity: 1,
-      colorName: curentProduct.images.variants[selectedColor].color,
-      image: curentProduct.images.variants[selectedColor].images[0],
+      colorName: variant?.color,
+      image: variant?.images?.[0],
     };
 
     if (isLoggedIn) {
@@ -103,6 +106,7 @@ export default function ProductPage() {
     }
   };
 
+  const isFavoriteProduct = useIsFavoriteProduct(curentProduct._id, selectedColor);
   const variant = curentProduct?.images?.variants?.[selectedColor];
 
   const selectedProduct = {
@@ -118,8 +122,8 @@ export default function ProductPage() {
   const handleToggleFavorite = useToggleFavoriteProduct(isLoggedIn, isFavoriteProduct, selectedProduct, selectedColor);
 
   useEffect(() => {
-    dispatch(setProductOptions({ productId: _id, color: selectedColor, size: selectedSize }));
-  }, [selectedColor, selectedSize, _id, dispatch]);
+    dispatch(setProductOptions({ productId: curentProduct._id, color: selectedColor, size: selectedSize }));
+  }, [selectedColor, selectedSize, curentProduct?._id, dispatch]);
 
   return (
     <>

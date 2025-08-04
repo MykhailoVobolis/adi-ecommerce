@@ -22,7 +22,7 @@ export default function AccountCartSummaryProductsList({ products }) {
       >
         {products.map((p) => (
           <SwiperSlide key={nanoid()} className={css.productItem}>
-            <Link to={`/products/${p.category}/${p._id}`} state={{ color: p.color, size: p.size }}>
+            <Link to={`/products/${p.category}/${p._id}?color=${p.color}&size=${p.size}`}>
               <img src={p.image.src} alt={p.image.alt} className={css.productImage} />
             </Link>
           </SwiperSlide>

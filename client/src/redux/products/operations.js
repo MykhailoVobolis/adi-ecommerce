@@ -4,9 +4,14 @@ import instance from '../../utils/axiosInterceptor.js';
 
 export const fetchProductsByCategory = createAsyncThunk(
   'products/fetchProductsBycategory',
-  async (category, thunkAPI) => {
+  async ({ category, page, perPage }, thunkAPI) => {
     try {
-      const response = await instance.get(`/products/${category}`);
+      const response = await instance.get(`/products/${category}`, {
+        params: {
+          page,
+          perPage,
+        },
+      });
 
       return {
         category,

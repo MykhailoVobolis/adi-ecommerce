@@ -21,7 +21,7 @@ const persistedAuthReducer = persistReducer(authPersistConfig, authReduser);
 const productsPersistConfig = {
   key: 'products',
   storage,
-  whitelist: ['selectedOptions'],
+  whitelist: ['selectedOptions', 'products'],
 };
 
 const favoritesPersistConfig = {
