@@ -98,7 +98,10 @@ export const refreshUser = createAsyncThunk(
       // Повертаємо нові дані користувача після успішного оновлення токенів
       const userResponse = await instance.get('/auth/user-info');
 
-      return userResponse.data;
+      return {
+        accessToken, // додаємо до відповіді accessToken який потрібен інтерцептору для повторного виклику запиту що визвав рефреш!
+        user: userResponse.data,
+      };
     } catch (error) {
       const errorMessage = handleError(error);
       return thunkAPI.rejectWithValue({ message: errorMessage });

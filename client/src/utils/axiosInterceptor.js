@@ -25,14 +25,16 @@ instance.interceptors.response.use(
     const originalRequest = error.config;
 
     if (error.response?.status === 401 && !originalRequest._retry) {
-      originalRequest._retry = true;
+      originalRequest._retry = true; // захист від зациклення
 
       try {
         const result = await getStore().dispatch(refreshUser());
-
         if (result.payload.accessToken) {
-          setAuthHeader(result.payload.accessToken);
-          originalRequest.headers['Authorization'] = `Bearer ${result.payload.accessToken}`;
+          // Оновлюємо токен
+          const newAccessToken = result.payload.accessToken;
+          setAuthHeader(newAccessToken);
+          originalRequest.headers['Authorization'] = `Bearer ${newAccessToken}`;
+
           return instance(originalRequest);
         }
       } catch (refreshError) {

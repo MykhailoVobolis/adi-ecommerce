@@ -13,7 +13,7 @@ import { setStore } from '../utils/refreshHandler.js';
 const authPersistConfig = {
   key: 'auth',
   storage,
-  whitelist: ['accessToken', 'refreshToken', 'wasRefreshed'],
+  whitelist: ['accessToken', 'refreshToken', 'wasRefreshed', 'isOAuth'],
 };
 
 const persistedAuthReducer = persistReducer(authPersistConfig, authReduser);
@@ -45,7 +45,7 @@ const deliveryPersistConfig = {
 const checkoutPersistConfig = {
   key: 'pre-order',
   storage,
-  whitelist: ['deliveryAddress', 'customer', 'selectedDeliveryCost', 'paymentMethod'],
+  whitelist: ['deliveryAddress', 'customer', 'selectedDeliveryCost'],
 };
 
 const persistedProductsReducer = persistReducer(productsPersistConfig, productsReduser);

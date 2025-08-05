@@ -97,7 +97,9 @@ export default function ProductPage() {
           openModal('add-to-cart');
         })
         .catch((error) => {
-          toast.error(error.message);
+          if (error.message !== 'Access token expired') {
+            toast.error(error.message);
+          }
         });
     } else {
       dispatch(addProductsToLocalCart(productToAdd));

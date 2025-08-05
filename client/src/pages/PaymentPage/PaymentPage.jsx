@@ -8,6 +8,7 @@ import {
   selectPaymentMethod,
 } from '../../redux/checkout/selectors.js';
 import { setPaymentMethod } from '../../redux/checkout/slice.js';
+import { useEffect } from 'react';
 
 import CheckoutCart from '../../components/CheckoutCart/CheckoutCart.jsx';
 import OrderSummary from '../../components/OrderSummary/OrderSummary.jsx';
@@ -27,14 +28,65 @@ export default function PaymentPage() {
   const { selectedMethod: selectedDeliveryMethod } = useSelector(selectDeliveryAddress);
 
   const { products, totalPrice, totalQuantityProducts } = cartData;
-  const { phone } = customerData;
+  const { id, firstName, lastName, phone, email } = customerData;
+  const {
+    selectedCity,
+    selectedMethod,
+    selectedWarehouse: { selectedBranch, selectedPostomat },
+    selectedStreet,
+    buildingUnit,
+    apartmentUnit,
+  } = deliveryAddress;
+
+  useEffect(() => {
+    dispatch(setPaymentMethod(''));
+  }, [dispatch]);
 
   const handleChange = (value) => {
     dispatch(setPaymentMethod(value));
   };
 
   const handlePlaceOrder = () => {
-    console.log('Place Order');
+    const city = selectedCity
+      ? `${selectedCity.SettlementTypeDescription?.slice(0, 1) || ''}. ${selectedCity.Description || ''}`
+      : '';
+
+    const isBranch = selectedMethod === 'branch';
+    const isPostomat = selectedMethod === 'postomat';
+    const isCourier = selectedMethod === 'courier';
+
+    let address = '';
+
+    if (isBranch && selectedBranch?.Description) {
+      address = `${city}, ${selectedBranch.Description}`;
+    } else if (isPostomat && selectedPostomat?.Description) {
+      address = `${city}, ${selectedPostomat.Description}`;
+    } else if (isCourier) {
+      address = `${city}, ${selectedStreet?.StreetsType || ''} ${selectedStreet?.Description || ''}, ${
+        buildingUnit || ''
+      }, кв. ${apartmentUnit || ''}`;
+    }
+
+    const deliveryCost = totalPrice < 300 ? Number(selectedDeliveryCost) : 0;
+
+    const orderData = {
+      contact: {
+        firstName,
+        lastName,
+        email,
+        phone,
+      },
+      delivery: {
+        method: selectedMethod,
+        address,
+        cost: deliveryCost,
+      },
+      paymentMethod: selectedPaymentMethod,
+      products,
+      totalPrice,
+    };
+
+    console.log('Order Data:', orderData);
   };
 
   return (
