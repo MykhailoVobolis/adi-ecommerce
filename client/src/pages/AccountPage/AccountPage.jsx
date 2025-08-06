@@ -33,7 +33,7 @@ export default function AccountPage() {
     <Container size={{ initial: '1', sm: '2', md: '3', lg: '4', xl: '5' }}>
       <Flex justify="between" mb="7">
         <Box className={css.wrapper}>
-          <Heading as="h2" size="7" mb="4" weight="bold" style={{ textTransform: 'uppercase' }}>
+          <Heading as="h2" size="8" mb="4" weight="bold" style={{ textTransform: 'uppercase' }}>
             HI, {greetingName}
           </Heading>
           <Text as="p" mb="4">

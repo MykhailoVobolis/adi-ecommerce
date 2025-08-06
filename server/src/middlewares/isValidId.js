@@ -2,10 +2,11 @@ import { isValidObjectId } from 'mongoose';
 import createHttpError from 'http-errors';
 
 export const isValidId = (req, res, next) => {
-  const { productId } = req.params;
+  const [paramKey] = Object.keys(req.params); // Витягуємо ключ, наприклад 'productId' або 'orderId'
+  const id = req.params[paramKey];
 
-  if (!isValidObjectId(productId)) {
-    return next(createHttpError(404, `${productId} not valid id`));
+  if (!isValidObjectId(id)) {
+    return next(createHttpError(404, `${id} not valid id`));
   }
 
   next();

@@ -68,6 +68,10 @@ const cartSlice = createSlice({
         recalculateCartTotals(state);
       }
     },
+
+    clearLocalCart: (state) => {
+      return initialState;
+    },
   },
   extraReducers: (builder) => {
     builder
@@ -108,5 +112,6 @@ const cartSlice = createSlice({
   },
 });
 
-export const { addProductsToLocalCart, deleteProductFromLocalCart, updateLocalProductQuantity } = cartSlice.actions;
+export const { addProductsToLocalCart, deleteProductFromLocalCart, updateLocalProductQuantity, clearLocalCart } =
+  cartSlice.actions;
 export const cartReducer = cartSlice.reducer;

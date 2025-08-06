@@ -32,6 +32,7 @@ const AccountLayout = lazy(() => import('../../components/AccountLayout/AccountL
 const AccountProfilePage = lazy(() => import('../../pages/AccountProfilePage/AccountProfilePage.jsx'));
 const AccountHistoryPage = lazy(() => import('../../pages/AccountHistoryPage/AccountHistoryPage.jsx'));
 const AccountFavoritesPage = lazy(() => import('../../pages/AccountFavoritesPage/AccountFavoritesPage.jsx'));
+const OrderConfirmationPage = lazy(() => import('../../pages/OrderConfirmationPage/OrderConfirmationPage.jsx'));
 
 export default function App() {
   const dispatch = useDispatch();
@@ -45,7 +46,6 @@ export default function App() {
   useEffect(() => {
     dispatch(refreshUser())
       .unwrap()
-      .then(() => {})
       .catch((error) => {
         if (error.name === 'ConditionError') return;
         toast.error(error.message);
@@ -90,6 +90,7 @@ export default function App() {
           <Route path="products/:category/:productId" element={<ProductPage />} />
           <Route path="delivery" element={<DeliveryPage />} />
           <Route path="payment" element={<PaymentPage />} />
+          <Route path="order-confirmation/:orderId" element={<OrderConfirmationPage />} />
           <Route path="auth" element={<RestrictedRoute component={<AuthPage />} redirectTo="/account" />} />
 
           <Route path="account" element={<PrivateRoute component={<AccountLayout />} redirectTo="/auth" />}>

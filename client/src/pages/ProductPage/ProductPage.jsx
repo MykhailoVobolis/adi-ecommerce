@@ -81,6 +81,7 @@ export default function ProductPage() {
       _id: curentProduct._id,
       productName: curentProduct.productName,
       category: curentProduct.category,
+      type: curentProduct.type,
       price: curentProduct.price,
       color: selectedColor,
       size: selectedSize,

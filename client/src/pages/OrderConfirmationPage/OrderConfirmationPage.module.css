@@ -1,0 +1,18 @@
+.optionWrapper {
+  width: 724px;
+}
+
+.wrapper {
+  background-color: var(--main-white-color);
+  padding: 20px;
+  border: solid 1px var(--accent-12);
+}
+
+.email {
+  font-weight: 700;
+}
+
+.title {
+  text-transform: uppercase;
+  line-height: 1.4;
+}

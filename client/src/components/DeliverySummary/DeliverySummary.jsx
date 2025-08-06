@@ -4,7 +4,7 @@ import EditLink from '../EditLink/EditLink.jsx';
 
 import css from './DeliverySummary.module.css';
 
-export default function DeliverySummary({ customerPhone, deliveryAddress, selectedDeliveryCost }) {
+export default function DeliverySummary({ customerPhone, deliveryAddress, selectedDeliveryCost, totalPrice }) {
   const {
     selectedCity,
     selectedMethod,
@@ -54,7 +54,7 @@ export default function DeliverySummary({ customerPhone, deliveryAddress, select
             <Text as="p">{isBranch ? `Доставка на відділення «Нова пошта»` : `Доставка в поштомат «Нова пошта»`}</Text>
           )}
           {isCourier && <Text as="p">Кур’єрська доставка «Нова пошта»</Text>}
-          <Text as="p">${selectedDeliveryCost}</Text>
+          <Text as="p">{totalPrice >= 300 ? 'FREE' : `$${selectedDeliveryCost}`}</Text>
         </Box>
         <Separator my="5" size="4" />
       </Box>

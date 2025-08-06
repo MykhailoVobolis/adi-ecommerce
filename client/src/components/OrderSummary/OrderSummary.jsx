@@ -12,8 +12,10 @@ import css from './OrderSummary.module.css';
 export default function OrderSummary({ totalPrice, totalQuantityProducts, discount = 0, isDelivery }) {
   const location = useLocation();
   const selectedDeliveryCost = useSelector(selectDeliveryCost);
+  const isOrderConfirmationPage = location.pathname.startsWith('/order-confirmation/');
 
-  const shouldShowDeliveryCost = location.pathname === '/delivery' || location.pathname === '/payment';
+  const shouldShowDeliveryCost =
+    location.pathname === '/delivery' || location.pathname === '/payment' || isOrderConfirmationPage;
 
   let totalWithDelivery;
 
@@ -29,7 +31,7 @@ export default function OrderSummary({ totalPrice, totalQuantityProducts, discou
           <Heading className={css.title} as="h2" size="5" weight="bold">
             {isDelivery ? <span>Your Order</span> : <span>Order Summary</span>}
           </Heading>
-          {isDelivery && <EditLink navTo="/cart" />}
+          {isDelivery && !isOrderConfirmationPage && <EditLink navTo="/cart" />}
         </Flex>
         <SummaryItem
           label={`${totalQuantityProducts} ${totalQuantityProducts === 1 ? 'item' : 'items'}`}

@@ -5,6 +5,7 @@ export const transformCartData = (cart) => {
     _id: product.productId,
     productName: product.productName,
     category: product.category,
+    type: product.type,
     price: product.price,
     color: product.color,
     size: product.size,

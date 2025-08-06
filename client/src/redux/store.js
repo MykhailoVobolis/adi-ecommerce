@@ -8,6 +8,7 @@ import { deliveryReducer } from './delivery/slice.js';
 import { checkoutReducer } from './checkout/slice.js';
 import { authReduser } from './auth/slice.js';
 import { setStore } from '../utils/refreshHandler.js';
+import { ordersReducer } from './orders/slice.js';
 
 // Збереження токіна в Local Storage
 const authPersistConfig = {
@@ -62,6 +63,7 @@ export const store = configureStore({
     cart: persistedCartReducer,
     delivery: persistedDeliveryReducer,
     checkout: persistedCheckoutReduser,
+    orders: ordersReducer,
   },
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware({

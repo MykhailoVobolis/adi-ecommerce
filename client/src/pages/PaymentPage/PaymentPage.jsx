@@ -1,4 +1,6 @@
+import toast from 'react-hot-toast';
 import { useDispatch, useSelector } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
 import { Box, Container, Flex, Heading, Section, Text } from '@radix-ui/themes';
 import { selectCartData } from '../../redux/cart/selectors.js';
 import {
@@ -9,6 +11,10 @@ import {
 } from '../../redux/checkout/selectors.js';
 import { setPaymentMethod } from '../../redux/checkout/slice.js';
 import { useEffect } from 'react';
+import { sendOrder } from '../../redux/orders/operations.js';
+import { selectIsLoggedIn } from '../../redux/auth/selectors.js';
+import { clearLocalCart } from '../../redux/cart/slice.js';
+import { getUserCart } from '../../redux/cart/operations.js';
 
 import CheckoutCart from '../../components/CheckoutCart/CheckoutCart.jsx';
 import OrderSummary from '../../components/OrderSummary/OrderSummary.jsx';
@@ -20,15 +26,17 @@ import css from './PaymentPage.module.css';
 
 export default function PaymentPage() {
   const dispatch = useDispatch();
+  const navigate = useNavigate();
   const selectedPaymentMethod = useSelector(selectPaymentMethod);
   const cartData = useSelector(selectCartData);
   const deliveryAddress = useSelector(selectDeliveryAddress);
   const customerData = useSelector(selectCustomer);
   const selectedDeliveryCost = useSelector(selectDeliveryCost);
+  const isLoggedIn = useSelector(selectIsLoggedIn);
   const { selectedMethod: selectedDeliveryMethod } = useSelector(selectDeliveryAddress);
 
   const { products, totalPrice, totalQuantityProducts } = cartData;
-  const { id, firstName, lastName, phone, email } = customerData;
+  const { firstName, lastName, phone, email } = customerData;
   const {
     selectedCity,
     selectedMethod,
@@ -69,6 +77,11 @@ export default function PaymentPage() {
 
     const deliveryCost = totalPrice < 300 ? Number(selectedDeliveryCost) : 0;
 
+    const formattedProducts = products.map(({ _id, ...rest }) => ({
+      productId: _id,
+      ...rest,
+    }));
+
     const orderData = {
       contact: {
         firstName,
@@ -82,11 +95,34 @@ export default function PaymentPage() {
         cost: deliveryCost,
       },
       paymentMethod: selectedPaymentMethod,
-      products,
+      products: formattedProducts,
+      totalQuantityProducts,
       totalPrice,
     };
 
-    console.log('Order Data:', orderData);
+    dispatch(sendOrder(orderData))
+      .unwrap()
+      .then((res) => {
+        const { orderId } = res.data;
+        navigate(`/order-confirmation/${orderId}`);
+        if (isLoggedIn) {
+          dispatch(getUserCart())
+            .unwrap()
+            .then(() => {})
+            .catch((error) => {
+              if (error.message !== 'Access token expired') {
+                toast.error(error.message);
+              }
+            });
+        } else {
+          dispatch(clearLocalCart());
+        }
+      })
+      .catch((error) => {
+        if (error.message !== 'Access token expired') {
+          toast.error(error.message);
+        }
+      });
   };
 
   return (
@@ -112,6 +148,7 @@ export default function PaymentPage() {
               <OrderSummary totalPrice={totalPrice} totalQuantityProducts={totalQuantityProducts} isDelivery="true" />
               <CheckoutCart products={products} />
               <DeliverySummary
+                totalPrice={totalPrice}
                 customerPhone={phone}
                 deliveryAddress={deliveryAddress}
                 selectedDeliveryCost={selectedDeliveryCost}

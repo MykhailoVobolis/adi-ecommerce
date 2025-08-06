@@ -68,7 +68,7 @@ export default function DeliveryPage() {
           />
           {totalQuantityProducts > 0 && (
             <Flex direction="column">
-              <OrderSummary totalPrice={totalPrice} totalQuantityProducts={totalQuantityProducts} isDelivery="true" />
+              <OrderSummary totalPrice={totalPrice} totalQuantityProducts={totalQuantityProducts} isDelivery={true} />
               <CheckoutCart products={products} />
             </Flex>
           )}
