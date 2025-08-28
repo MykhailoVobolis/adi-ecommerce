@@ -8,6 +8,7 @@ const categoryEnum = ['MEN', 'WOMEN', 'KIDS'];
 const typeEnum = ['SHOES', 'CLOTHING', 'ACCESSORIES'];
 const deliveryMethodEnum = ['branch', 'postomat', 'courier'];
 const paymentMethodEnum = ['online_card', 'on_delivery'];
+const orderStatusEnum = ['pending', 'paid', 'failed', 'canceled'];
 
 export const orderProductSchema = Joi.object({
   productId: Joi.string().hex().length(24).required(),
@@ -60,6 +61,9 @@ export const orderSchema = Joi.object({
   products: Joi.array().items(orderProductSchema).min(1).required(),
   totalQuantityProducts: Joi.number().min(0).required(),
   totalPrice: Joi.number().min(0).precision(2).required(),
+  status: Joi.string()
+    .valid(...orderStatusEnum)
+    .default('pending'),
 }).messages({
   'string.base': 'The field {#label} must be a string.',
   'string.length': 'The field {#label} must be exactly 24 characters long.',

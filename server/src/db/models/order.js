@@ -1,5 +1,6 @@
 import { model, Schema } from 'mongoose';
 import { mongooseSaveError, setUpdateSettings } from './hooks.js';
+import { type } from 'node:os';
 
 const orderProductSchema = new Schema(
   {
@@ -40,6 +41,7 @@ const orderSchema = new Schema(
     products: [orderProductSchema],
     totalQuantityProducts: { type: Number, required: true, default: 0 },
     totalPrice: { type: Number, required: true, default: 0 },
+    status: { type: String, enum: ['pending', 'paid', 'failed', 'canceled'], default: 'pending' },
   },
   { versionKey: false, timestamps: true },
 );

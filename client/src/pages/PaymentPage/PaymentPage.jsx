@@ -103,19 +103,33 @@ export default function PaymentPage() {
     dispatch(sendOrder(orderData))
       .unwrap()
       .then((res) => {
-        const { orderId } = res.data;
-        navigate(`/order-confirmation/${orderId}`);
-        if (isLoggedIn) {
-          dispatch(getUserCart())
-            .unwrap()
-            .then(() => {})
-            .catch((error) => {
-              if (error.message !== 'Access token expired') {
-                toast.error(error.message);
-              }
-            });
-        } else {
-          dispatch(clearLocalCart());
+        const { orderId, checkoutUrl } = res.data;
+
+        if (selectedPaymentMethod === 'on_delivery') {
+          if (isLoggedIn) {
+            dispatch(getUserCart())
+              .unwrap()
+              .catch(() => dispatch(clearLocalCart()));
+          } else {
+            dispatch(clearLocalCart());
+          }
+
+          navigate(`/order-confirmation/${orderId}`);
+        }
+
+        if (selectedPaymentMethod === 'online_card') {
+          if (isLoggedIn) {
+            dispatch(getUserCart())
+              .unwrap()
+              .then(() => {
+                // Онлайн-оплата → редірект на Fondy checkout
+                window.location.href = checkoutUrl;
+              })
+              .catch(() => dispatch(clearLocalCart()));
+          } else {
+            dispatch(clearLocalCart());
+            window.location.href = checkoutUrl;
+          }
         }
       })
       .catch((error) => {
@@ -141,7 +155,12 @@ export default function PaymentPage() {
               handleChange={handleChange}
               selectedDeliveryMethod={selectedDeliveryMethod}
             />
-            {selectedPaymentMethod && <ActionButton label="place order" handleClick={handlePlaceOrder} />}
+            {selectedPaymentMethod && (
+              <ActionButton
+                label={selectedPaymentMethod === 'on_delivery' ? 'place order' : 'pay online'}
+                handleClick={handlePlaceOrder}
+              />
+            )}
           </Box>
           {totalQuantityProducts > 0 && (
             <Flex direction="column">

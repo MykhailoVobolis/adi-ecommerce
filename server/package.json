@@ -21,6 +21,7 @@
   "dependencies": {
     "axios": "^1.10.0",
     "bcrypt": "^6.0.0",
+    "cloudipsp-node-js-sdk": "^1.0.8",
     "cors": "^2.8.5",
     "dotenv": "^16.6.1",
     "express": "^5.1.0",

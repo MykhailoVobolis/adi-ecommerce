@@ -8,6 +8,7 @@ import { OrderCollection } from '../db/models/order.js';
 import { sendEmail } from '../utils/sendMail.js';
 import { env } from '../utils/env.js';
 import { SMTP, TEMPLATES_DIR } from '../constants/index.js';
+import { fondy } from '../utils/fondy.js';
 
 export const createOrder = async (userId, orderDetails) => {
   let newOrder;
@@ -27,7 +28,6 @@ export const createOrder = async (userId, orderDetails) => {
     newOrder = await OrderCollection.create({
       userId,
       ...orderDetails,
-      status: 'confirmed',
     });
 
     // Очистити кошик
@@ -39,7 +39,6 @@ export const createOrder = async (userId, orderDetails) => {
     // Замовлення від неавторизованого користувача
     newOrder = await OrderCollection.create({
       ...orderDetails,
-      status: 'confirmed',
     });
   }
 
@@ -85,15 +84,33 @@ export const createOrder = async (userId, orderDetails) => {
     await sendEmail({
       from: env(SMTP.SMTP_FROM),
       to: email,
-      subject: `Ваше замовлення №${newOrder._id} підтверджено`,
+      subject: `Your order ID ${newOrder._id} successfully placed ✅`,
       html,
     });
   } catch (err) {
-    console.error('Помилка надсилання email:', err.message);
+    console.error('Error sending email:', err.message);
+  }
+
+  // --- Fondy Checkout ---
+  let checkoutUrl = null;
+
+  if (orderDetails.paymentMethod === 'online_card') {
+    const amountToPay = (orderDetails.totalPrice + orderDetails.delivery.cost) * 100; // в копійках
+    const fondyOrder = await fondy.Checkout({
+      order_id: String(newOrder._id),
+      order_desc: 'Test order',
+      amount: amountToPay,
+      currency: 'USD',
+      response_url: 'http://localhost:3000/order/fondy-response', // звертаємось до api бекенду для реалізації редіректу на сторінку Pay Successful
+      server_callback_url: 'http://localhost:3000/order/fondy-callback', // бекенд (в продакшені localhost:3000 змінюємо на URL хостінгу бекенда, при розробці замінюємо на тимчасовий URL від ngrok /команда ngrok http 3000/ Приклад: https://f2f295c4f399.ngrok-free.app/order/fondy-callback)
+    });
+
+    checkoutUrl = fondyOrder.checkout_url;
   }
 
   return {
     orderId: newOrder._id,
+    checkoutUrl,
   };
 };
 
