@@ -9,6 +9,7 @@ import { sendEmail } from '../utils/sendMail.js';
 import { env } from '../utils/env.js';
 import { SMTP, TEMPLATES_DIR } from '../constants/index.js';
 import { fondy } from '../utils/fondy.js';
+import { calculatePaginationData } from '../utils/calculatePaginationData.js';
 
 export const createOrder = async (userId, orderDetails) => {
   let newOrder;
@@ -68,11 +69,12 @@ export const createOrder = async (userId, orderDetails) => {
     const templatePath = path.join(TEMPLATES_DIR, 'orderConfirmation.html');
     const templateSource = (await fs.readFile(templatePath)).toString();
     const template = handlebars.compile(templateSource);
+    const shortOrderId = newOrder._id.toString().slice(-10);
 
     const html = template({
       firstName,
       lastName,
-      orderId: newOrder._id,
+      orderId: shortOrderId,
       products: productsForTemplate,
       paymentMethod,
       deliveryMethod: method,
@@ -84,7 +86,7 @@ export const createOrder = async (userId, orderDetails) => {
     await sendEmail({
       from: env(SMTP.SMTP_FROM),
       to: email,
-      subject: `Your order ID ${newOrder._id} successfully placed ✅`,
+      subject: `Your order ID ${shortOrderId} successfully placed ✅`,
       html,
     });
   } catch (err) {
@@ -95,14 +97,19 @@ export const createOrder = async (userId, orderDetails) => {
   let checkoutUrl = null;
 
   if (orderDetails.paymentMethod === 'online_card') {
-    const amountToPay = (orderDetails.totalPrice + orderDetails.delivery.cost) * 100; // в копійках
+    const amountToPay = Math.round((orderDetails.totalPrice + orderDetails.delivery.cost) * 100); // в копійках
+
+    const baseUrl = env('NODE_ENV') === 'production' ? 'https://yourdomain.com' : 'http://localhost:3000';
+
     const fondyOrder = await fondy.Checkout({
       order_id: String(newOrder._id),
       order_desc: 'Test order',
       amount: amountToPay,
       currency: 'USD',
-      response_url: 'http://localhost:3000/order/fondy-response', // звертаємось до api бекенду для реалізації редіректу на сторінку Pay Successful
-      server_callback_url: 'http://localhost:3000/order/fondy-callback', // бекенд (в продакшені localhost:3000 змінюємо на URL хостінгу бекенда, при розробці замінюємо на тимчасовий URL від ngrok /команда ngrok http 3000/ Приклад: https://f2f295c4f399.ngrok-free.app/order/fondy-callback)
+      response_url: `${baseUrl}/order/fondy-response`, // звертаємось до api бекенду для реалізації редіректу на сторінку Pay Successful
+      // server_callback_url: `${baseUrl}/order/fondy-callback`, // бекенд (в продакшені localhost:3000 змінюємо на URL хостінгу бекенда, при розробці замінюємо на тимчасовий URL від ngrok /команда ngrok http 3000/ Приклад: https://f2f295c4f399.ngrok-free.app/order/fondy-callback)
+
+      server_callback_url: 'https://c5ce72f9b0bd.ngrok-free.app/order/fondy-callback',
     });
 
     checkoutUrl = fondyOrder.checkout_url;
@@ -117,4 +124,20 @@ export const createOrder = async (userId, orderDetails) => {
 export const getOrderById = async (orderId) => {
   const order = await OrderCollection.findById(orderId);
   return order;
+};
+
+export const getOrdersByUserId = async ({ userId, page, perPage }) => {
+  const skip = (page - 1) * perPage;
+
+  const [orders, productsCount] = await Promise.all([
+    OrderCollection.find({ userId }).sort({ createdAt: -1 }).skip(skip).limit(perPage),
+    OrderCollection.countDocuments({ userId }),
+  ]);
+
+  const paginationData = calculatePaginationData(productsCount, perPage, page);
+
+  return {
+    data: orders,
+    ...paginationData,
+  };
 };

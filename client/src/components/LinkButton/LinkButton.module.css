@@ -21,6 +21,10 @@
   background-color: var(--accent-0);
 }
 
+.shopping {
+  width: 220px;
+}
+
 .text {
   text-transform: uppercase;
 }

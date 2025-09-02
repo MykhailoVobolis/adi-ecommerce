@@ -24,3 +24,19 @@ export const fetchOrderById = createAsyncThunk('orders/fetchOrderById', async (o
     return thunkAPI.rejectWithValue({ message: errorMessage });
   }
 });
+
+export const fetchOdersByUserId = createAsyncThunk('orders/getOdersByUserId', async ({ page, perPage }, thunkAPI) => {
+  try {
+    const response = await instance.get('/order/my-orders', {
+      params: {
+        page,
+        perPage,
+      },
+    });
+
+    return response.data;
+  } catch (error) {
+    const errorMessage = handleError(error);
+    return thunkAPI.rejectWithValue({ status: error.response?.status, message: errorMessage });
+  }
+});

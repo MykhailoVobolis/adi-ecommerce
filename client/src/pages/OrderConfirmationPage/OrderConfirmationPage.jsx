@@ -4,6 +4,7 @@ import { useEffect } from 'react';
 import { fetchOrderById } from '../../redux/orders/operations.js';
 import { useDispatch, useSelector } from 'react-redux';
 import { selectConfirmedOrder, selectIsLoading } from '../../redux/orders/selectors.js';
+import { formatDate } from '../../utils/formatDate.js';
 
 import useModal from '../../hooks/useModal.js';
 import OrderSummary from '../../components/OrderSummary/OrderSummary.jsx';
@@ -22,14 +23,6 @@ export default function OrderConfirmationPage() {
   const { isOpen, openModal, closeModal } = useModal();
   const { _id, createdAt, contact, products, delivery, totalQuantityProducts, totalPrice, status } = confirmedOrder;
 
-  const formatDate = (dateString) => {
-    const date = new Date(dateString);
-    const day = String(date.getDate()).padStart(2, '0');
-    const month = String(date.getMonth() + 1).padStart(2, '0');
-    const year = date.getFullYear();
-    return `${day}.${month}.${year}`;
-  };
-
   const orderData = formatDate(createdAt);
 
   useEffect(() => {
@@ -42,7 +35,7 @@ export default function OrderConfirmationPage() {
           openModal('payment-successful');
         }
       });
-  }, [orderId, status, dispatch]);
+  }, [orderId, dispatch]);
 
   return isLoading ? (
     <Loader heightValue={'calc(100vh - 64px)'} />
@@ -79,7 +72,7 @@ export default function OrderConfirmationPage() {
                       DETAILS
                     </Text>
                     <Text as="p" mb="1">
-                      Order ID: {_id}
+                      Order ID: {_id.slice(-10)}
                     </Text>
                     <Text as="p" mb="1">
                       Date: {orderData}

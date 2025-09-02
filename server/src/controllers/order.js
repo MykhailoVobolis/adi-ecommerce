@@ -1,6 +1,7 @@
 import createHttpError from 'http-errors';
-import { createOrder, getOrderById } from '../services/order.js';
+import { createOrder, getOrderById, getOrdersByUserId } from '../services/order.js';
 import { OrderCollection } from '../db/models/order.js';
+import { parsePaginationParams } from '../utils/parsePaginationParams.js';
 
 export const createOrderController = async (req, res) => {
   const userId = req.user?._id || null; // userId витягується через middleware authenticate
@@ -58,5 +59,25 @@ export const getOrderByIdController = async (req, res, next) => {
     status: 200,
     message: `Successfully found order with id ${orderId}!`,
     data: order,
+  });
+};
+
+export const getOrdersByUserIdController = async (req, res, next) => {
+  const userId = req.user._id;
+  const { page, perPage } = parsePaginationParams(req.query);
+
+  const orders = await getOrdersByUserId({
+    userId,
+    page,
+    perPage,
+  });
+
+  res.status(200).json({
+    status: 200,
+    message:
+      orders.length > 0
+        ? `Successfully found orders with user id ${userId}!`
+        : `No orders found for user id ${userId}.`,
+    ...orders,
   });
 };

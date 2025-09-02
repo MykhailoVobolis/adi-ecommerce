@@ -30,7 +30,9 @@ const ConfirmGoogleAuth = lazy(() => import('../../pages/ConfirmGoogleAuth/Confi
 
 const AccountLayout = lazy(() => import('../../components/AccountLayout/AccountLayout.jsx'));
 const AccountProfilePage = lazy(() => import('../../pages/AccountProfilePage/AccountProfilePage.jsx'));
-const AccountHistoryPage = lazy(() => import('../../pages/AccountHistoryPage/AccountHistoryPage.jsx'));
+const AccountOrdersHistoryPage = lazy(() =>
+  import('../../pages/AccountOrdersHistoryPage/AccountOrdersHistoryPage.jsx'),
+);
 const AccountFavoritesPage = lazy(() => import('../../pages/AccountFavoritesPage/AccountFavoritesPage.jsx'));
 const OrderConfirmationPage = lazy(() => import('../../pages/OrderConfirmationPage/OrderConfirmationPage.jsx'));
 
@@ -96,7 +98,7 @@ export default function App() {
           <Route path="account" element={<PrivateRoute component={<AccountLayout />} redirectTo="/auth" />}>
             <Route index element={<AccountPage />} />
             <Route path="profile" element={<AccountProfilePage />} />
-            <Route path="history" element={<AccountHistoryPage />} />
+            <Route path="history" element={<AccountOrdersHistoryPage />} />
             <Route path="favorites" element={<AccountFavoritesPage />} />
           </Route>
 

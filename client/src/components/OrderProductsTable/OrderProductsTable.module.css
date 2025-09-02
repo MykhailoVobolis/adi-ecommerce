@@ -1,0 +1,31 @@
+.ProductsTableWrapper {
+  overflow-x: auto;
+}
+
+.ProductsTable {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 14px;
+}
+
+.ProductsTable th,
+.ProductsTable td {
+  padding: 12px 0px 12px 12px;
+  text-align: left;
+  border-bottom: 1px solid #e5e7eb;
+}
+
+.ProductsTable th {
+  font-weight: 600;
+  background-color: #f9fafb;
+}
+
+.productImage {
+  width: 54px;
+  height: 54px;
+  objectfit: cover;
+}
+
+.ProductsTable tfoot tr:last-child td {
+  border-bottom: none;
+}

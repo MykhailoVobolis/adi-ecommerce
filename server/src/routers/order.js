@@ -8,6 +8,7 @@ import {
   fondyCallbackController,
   fondyResponseController,
   getOrderByIdController,
+  getOrdersByUserIdController,
 } from '../controllers/order.js';
 import { isValidId } from '../middlewares/isValidId.js';
 import { validateFondySignature } from '../middlewares/validateFondySignature.js';
@@ -15,6 +16,7 @@ import { validateFondySignature } from '../middlewares/validateFondySignature.js
 const router = Router();
 
 router.post('/create', authenticate, validateBody(orderSchema), ctrlWrapper(createOrderController));
+router.get('/my-orders', authenticate, ctrlWrapper(getOrdersByUserIdController));
 router.get('/:orderId', isValidId, ctrlWrapper(getOrderByIdController));
 router.post('/fondy-callback', validateFondySignature, ctrlWrapper(fondyCallbackController));
 router.post('/fondy-response', ctrlWrapper(fondyResponseController));
