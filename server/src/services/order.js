@@ -99,17 +99,25 @@ export const createOrder = async (userId, orderDetails) => {
   if (orderDetails.paymentMethod === 'online_card') {
     const amountToPay = Math.round((orderDetails.totalPrice + orderDetails.delivery.cost) * 100); // в копійках
 
-    const baseUrl = env('NODE_ENV') === 'production' ? 'https://yourdomain.com' : 'http://localhost:3000';
+    const isProd = env('NODE_ENV') === 'production';
+
+    const apiBaseUrl = isProd
+      ? 'https://yourdomain.com' // <-- заміни на реальний бекенд-домен
+      : 'http://localhost:3000';
+
+    // для callback беремо бекенд-URL
+    const baseUrl = isProd
+      ? 'https://api.yourdomain.com' // <-- заміни на реальний бекенд-домен
+      : 'https://c5ce72f9b0bd.ngrok-free.app'; // під час розробки завжди запускай `ngrok http 3000`
 
     const fondyOrder = await fondy.Checkout({
       order_id: String(newOrder._id),
       order_desc: 'Test order',
       amount: amountToPay,
       currency: 'USD',
-      response_url: `${baseUrl}/order/fondy-response`, // звертаємось до api бекенду для реалізації редіректу на сторінку Pay Successful
-      // server_callback_url: `${baseUrl}/order/fondy-callback`, // бекенд (в продакшені localhost:3000 змінюємо на URL хостінгу бекенда, при розробці замінюємо на тимчасовий URL від ngrok /команда ngrok http 3000/ Приклад: https://f2f295c4f399.ngrok-free.app/order/fondy-callback)
+      response_url: `${apiBaseUrl}/order/fondy-response`, // звертаємось до api бекенду для реалізації редіректу на сторінку Pay Successful
 
-      server_callback_url: 'https://c5ce72f9b0bd.ngrok-free.app/order/fondy-callback',
+      server_callback_url: `${baseUrl}/order/fondy-callback`, // цей URL викликає Fondy для підтвердження оплати
     });
 
     checkoutUrl = fondyOrder.checkout_url;

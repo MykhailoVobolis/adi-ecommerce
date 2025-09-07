@@ -14,7 +14,7 @@ const handleRejected = (state) => {
 const initialState = {
   confirmedOrder: {},
   userOrders: [],
-  pagination: { hasNextPage: null, hasPreviousPage: null, page: 1, perPage: 8, totalItems: null, totalPages: null },
+  pagination: { hasNextPage: null, hasPreviousPage: null, page: 1, perPage: 6, totalItems: null, totalPages: null },
   loading: false,
   error: null,
 };
