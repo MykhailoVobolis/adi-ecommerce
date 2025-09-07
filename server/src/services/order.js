@@ -101,14 +101,10 @@ export const createOrder = async (userId, orderDetails) => {
 
     const isProd = env('NODE_ENV') === 'production';
 
-    const apiBaseUrl = isProd
-      ? 'https://yourdomain.com' // <-- заміни на реальний бекенд-домен
-      : 'http://localhost:3000';
+    const apiBaseUrl = isProd ? env('BASE_URL_PROD') : env('BASE_URL_DEV');
 
     // для callback беремо бекенд-URL
-    const baseUrl = isProd
-      ? 'https://api.yourdomain.com' // <-- заміни на реальний бекенд-домен
-      : 'https://c5ce72f9b0bd.ngrok-free.app'; // під час розробки завжди запускай `ngrok http 3000`
+    const baseUrl = isProd ? env('BASE_URL_PROD') : env('BASE_URL_DEV_NGROK'); // під час розробки завжди запускай `ngrok http 3000`
 
     const fondyOrder = await fondy.Checkout({
       order_id: String(newOrder._id),
