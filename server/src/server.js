@@ -24,7 +24,7 @@ export const startServer = () => {
   app.use(express.urlencoded({ extended: true }));
 
   const corsOptions = {
-    origin: ['http://localhost:5173'],
+    origin: ['http://localhost:5173', 'https://top-e-commerce.vercel.app'],
     credentials: true,
   };
 
