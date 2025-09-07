@@ -2,6 +2,7 @@ import createHttpError from 'http-errors';
 import { createOrder, getOrderById, getOrdersByUserId } from '../services/order.js';
 import { OrderCollection } from '../db/models/order.js';
 import { parsePaginationParams } from '../utils/parsePaginationParams.js';
+import { env } from '../utils/env.js';
 
 export const createOrderController = async (req, res) => {
   const userId = req.user?._id || null; // userId витягується через middleware authenticate
@@ -41,8 +42,11 @@ export const fondyResponseController = async (req, res, next) => {
     return res.status(400).send('Missing order_id');
   }
 
+  const isProd = env('NODE_ENV') === 'production';
+  const baseUrl = isProd ? env('FRONT_BASE_URL_PROD') : env('FRONT_BASE_URL_DEV');
+
   // Редирект на фронт с GET
-  return res.redirect(302, `http://localhost:5173/order-confirmation/${order_id}`);
+  return res.redirect(302, `${baseUrl}/order-confirmation/${order_id}`);
 };
 
 export const getOrderByIdController = async (req, res, next) => {
