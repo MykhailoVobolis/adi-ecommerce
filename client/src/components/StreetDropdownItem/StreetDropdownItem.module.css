@@ -1,0 +1,17 @@
+.dropdownItem {
+  height: 63px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  border-bottom: 1px solid var(--accent-4);
+  cursor: pointer;
+  padding: 0 16px;
+}
+
+.dropdownItem:hover {
+  background-color: var(--accent-4);
+}
+
+.streetName {
+  line-height: 22px;
+}

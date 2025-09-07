@@ -1,0 +1,20 @@
+.checkoutBtn {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 365px;
+  max-width: 603px;
+  height: 45px;
+  padding: 0 16px;
+  font-weight: 600;
+  color: var(--main-white-color);
+  border: solid 1px var(--accent-12);
+  background-color: var(--accent-12);
+  cursor: pointer;
+  transition: color var(--animation), background-color var(--animation);
+}
+
+.checkoutBtn:hover {
+  color: var(--accent-12);
+  background-color: var(--accent-0);
+}

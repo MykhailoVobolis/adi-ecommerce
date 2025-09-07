@@ -1,0 +1,9 @@
+.previewContainer {
+  margin-left: 100px;
+}
+
+.productPreview {
+  width: 48px;
+  height: 48px;
+  objectfit: cover;
+}

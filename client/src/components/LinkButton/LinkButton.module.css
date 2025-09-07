@@ -1,0 +1,38 @@
+.linkButton {
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  width: 182px;
+  justify-content: space-between;
+  height: 45px;
+  border-radius: 0;
+  border: solid 1px var(--accent-12);
+  background-color: var(--accent-12);
+  padding: 0 16px;
+  font-size: 16px;
+  font-weight: 600;
+  line-height: 24px;
+  color: #ffffff;
+  transition: color var(--animation), background-color var(--animation);
+}
+
+.linkButton:hover {
+  color: var(--accent-12);
+  background-color: var(--accent-0);
+}
+
+.shopping {
+  width: 220px;
+}
+
+.text {
+  text-transform: uppercase;
+}
+
+.secondary {
+  width: 254px;
+}
+
+.cartSummaryModal {
+  width: 100%;
+}

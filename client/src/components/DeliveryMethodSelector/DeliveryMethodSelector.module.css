@@ -1,0 +1,84 @@
+.delyverySelectList {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  margin-top: 20px;
+  margin-bottom: 38px;
+}
+
+.deliveryItem {
+  position: relative;
+  border: 1px solid var(--accent-6);
+  padding: 20px;
+  cursor: pointer;
+}
+
+.isActive {
+  border: 1px solid var(--accent-12);
+}
+
+.label {
+  cursor: pointer;
+}
+
+.radioInput {
+  position: absolute;
+  top: 0;
+  right: 0;
+  opacity: 0;
+}
+
+.customRadio {
+  display: inline-block;
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  box-sizing: border-box;
+  position: absolute;
+  top: -10px;
+  right: -10px;
+}
+
+.customRadio::after {
+  content: '';
+  display: none;
+  width: 24px;
+  height: 24px;
+  background: var(--accent-12);
+  border-radius: 50%;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.checkActiveIcon {
+  position: absolute;
+  top: 5px;
+  left: 5px;
+  z-index: 1;
+  color: var(--main-white-color);
+}
+
+.radioInput:checked + .customRadio::after {
+  display: block;
+}
+
+.titleWrapper {
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 5px;
+}
+
+.methodTitle {
+  text-transform: uppercase;
+  font-weight: 700;
+}
+
+.descriptionWrqpper {
+  gap: 6px;
+}
+
+.description {
+  line-height: 22px;
+}

@@ -1,0 +1,18 @@
+.logoutBtn {
+  justify-content: space-between;
+  width: 226px;
+  height: 45px;
+  padding: 0 16px;
+  font-size: 16px;
+  text-transform: uppercase;
+  font-weight: 600;
+  color: var(--accent-12);
+  border: solid 1px var(--accent-12);
+  background-color: var(--main-white-color);
+  cursor: pointer;
+  transition: color var(--animation);
+}
+
+.logoutBtn:hover {
+  color: var(--accent-10);
+}

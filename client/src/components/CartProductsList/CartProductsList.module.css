@@ -1,0 +1,13 @@
+.productsList {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  width: 365px;
+}
+
+.cartProductsList {
+  display: flex;
+  flex-direction: column;
+  gap: 40px;
+  width: 726px;
+}

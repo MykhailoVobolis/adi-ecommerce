@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="uk">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Підтвердження замовлення</title>
+    <style>
+      body {
+        font-family: Roboto, sans-serif;
+        line-height: 1.5;
+      }
+      h1 {
+        color: #121417;
+      }
+      table {
+        width: 100%;
+        border-collapse: collapse;
+        margin-top: 20px;
+      }
+      th,
+      td {
+        border: 1px solid #ddd;
+        padding: 8px;
+        text-align: left;
+      }
+      th {
+        background-color: #f2f2f2;
+      }
+      tfoot td {
+        font-weight: bold;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>Доброго дня, {{firstName}} {{lastName}}!</h1>
+
+    <p>Ваше замовлення №<b>{{orderId}}</b> успішно оформлене.</p>
+
+    <table>
+      <thead>
+        <tr>
+          <th>Товар</th>
+          <th>Розмір</th>
+          <th>Колір</th>
+          <th>Кількість</th>
+          <th>Ціна за одиницю</th>
+          <th>Сума</th>
+        </tr>
+      </thead>
+      <tbody>
+        {{#each products}}
+        <tr>
+          <td>{{productName}}</td>
+          <td>{{size}}</td>
+          <td>{{colorName}}</td>
+          <td>{{quantity}}</td>
+          <td>${{price}}</td>
+          <td>${{total}}</td>
+        </tr>
+        {{/each}}
+      </tbody>
+      <tfoot>
+        <tr>
+          <td colspan="5">Вартість доставки</td>
+          <td>${{deliveryCost}}</td>
+        </tr>
+        <tr>
+          <td colspan="5">Загальна сума до оплати</td>
+          <td>${{amountToPay}}</td>
+        </tr>
+      </tfoot>
+    </table>
+
+    <p>Спосіб оплати: <b>{{paymentMethod}}</b></p>
+    <p>Доставка: <b>{{deliveryMethod}}</b>, {{deliveryAddress}}</p>
+
+    <p>Дякуємо, що обрали наш магазин!</p>
+  </body>
+</html>

@@ -1,0 +1,39 @@
+.RadioGroupItem {
+  width: 68px;
+  height: 68px;
+  cursor: pointer;
+  transition: transform var(--animation);
+  position: relative;
+}
+
+.RadioGroupItem:hover::after {
+  content: "";
+  position: absolute;
+  left: 0px;
+  bottom: 0px;
+  width: 68px;
+  height: 4px;
+  background-color: var(--accent-12);
+}
+
+.RadioGroupIndicator {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 2;
+}
+
+.RadioGroupIndicator::after {
+  content: "";
+  position: absolute;
+  left: 0px;
+  bottom: 0px;
+  width: 68px;
+  height: 4px;
+  background-color: var(--accent-12);
+}

@@ -1,0 +1,47 @@
+.RadioGroupRoot {
+  margin-bottom: 40px;
+}
+
+.RadioGroupRoot > :first-child .RadioItem {
+  border-top: 1px solid var(--accent-12);
+  border-bottom: 1px dashed var(--accent-12);
+}
+
+.RadioGroupRoot > :last-child .RadioItem {
+  border-bottom: 1px solid var(--accent-12);
+}
+
+.RadioItem {
+  align-items: center;
+  justify-content: space-between;
+  padding: 16px 0;
+  cursor: pointer;
+}
+
+.Item {
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  border: 1px solid var(--accent-12);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  position: relative;
+  box-sizing: border-box;
+  background-color: transparent;
+}
+
+.Item[data-state='checked'] {
+  border-color: var(--accent-12);
+  background-color: var(--accent-12);
+}
+
+.Item[data-state='checked']::after {
+  content: '';
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background-color: var(--main-white-color);
+  position: absolute;
+}

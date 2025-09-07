@@ -1,0 +1,10 @@
+.productBox {
+  max-width: 728px;
+  border: 1px solid var(--accent-12);
+  position: relative;
+}
+
+.productName,
+.productOption {
+  text-transform: uppercase;
+}

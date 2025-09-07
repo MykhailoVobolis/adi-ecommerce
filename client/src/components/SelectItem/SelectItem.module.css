@@ -1,0 +1,15 @@
+.selectItem {
+  padding: 24px 24px;
+  font-weight: 500;
+  color: var(--accent-12);
+  width: 100px;
+  cursor: pointer;
+}
+
+.selectItem:hover {
+  background-color: var(--accent-3);
+}
+
+.selectItem[data-state='checked'] {
+  background-color: var(--accent-3);
+}

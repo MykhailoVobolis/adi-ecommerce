@@ -1,0 +1,23 @@
+.productBox {
+  border: 1px solid transparent;
+  max-width: calc((100% - 24px) / 4);
+  position: relative;
+}
+
+.productBox:hover {
+  border: 1px solid var(--accent-12);
+}
+
+.productName {
+  text-transform: uppercase;
+}
+
+.productOptions {
+  color: var(--accent-10);
+}
+
+.toFavoritBtnWrapper {
+  position: absolute;
+  top: 4px;
+  right: 4px;
+}

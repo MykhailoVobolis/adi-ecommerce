@@ -1,0 +1,27 @@
+.sidebar {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  width: 265px;
+}
+
+.sidebar a {
+  align-self: flex-start;
+  display: inline-block;
+  text-decoration: none;
+  color: var(--accent-12);
+  transition: color var(--animation), background-color var(--animation);
+}
+
+.sidebar a:hover {
+  color: var(--main-white-color);
+  background-color: black;
+}
+
+.active {
+  font-weight: 700;
+}
+
+.title {
+  text-transform: uppercase;
+}

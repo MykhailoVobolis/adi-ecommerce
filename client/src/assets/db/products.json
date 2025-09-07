@@ -1,0 +1,721 @@
+[
+  {
+    "productName": "SL 72 RS Shoes",
+    "price": 100,
+    "category": "MEN",
+    "type": "SHOES",
+    "sizes": [
+      "5.5 UK",
+      "6 UK",
+      "6.5 UK",
+      "7 UK",
+      "7.5 UK",
+      "8 UK",
+      "8.5 UK",
+      "9 UK",
+      "9.5 UK",
+      "10 UK",
+      "10.5 UK",
+      "11 UK"
+    ],
+    "description": {
+      "main": {
+        "title": "Casual shoes with a sporty back story",
+        "text": "Rediscover a legend from the archives. The adidas SL 72 shoes were originally released in 1972 to give runners an edge on the track. Decades later, their design still turns heads. This version features a nylon upper with suede overlays that provides retro style. Your feet stay cushioned thanks to an EVA midsole while a grippy outsole keeps you grounded."
+      },
+      "additional1": {
+        "title": "Classic Casual Style with a Retro Twist",
+        "text": "The adidas SL 72 adds a touch of retro charm to any outfit, combining iconic design with casual versatility. It is perfect for creating a laid-back yet distinctive look that stands out every day."
+      },
+      "additional2": {
+        "title": "Effortless Style, Timeless Appeal",
+        "text": "An easygoing, classic look that effortlessly elevates everyday wear. With its timeless design, these sneakers add just the right touch of retro-inspired charm to any casual ensemble."
+      }
+    },
+    "details": "The upper is made of nylon with suede inserts for durability and a stylish look, while the synthetic lining ensures comfort and wear resistance. The EVA midsole provides lightweight cushioning, and the standard fit suits different foot types. The grippy, rugged rubber outsole offers excellent traction, and the laces allow for secure fastening. This model is available in Cloud White / Core Black / Spark.",
+    "images": {
+      "general": [
+        {
+          "src": "https://res.cloudinary.com/dfevedfwb/image/upload/v1748606820/SL_72_RS_Shoes_Desc_01_hau5gz.avif",
+          "alt": "Description Image 1"
+        },
+        {
+          "src": "https://res.cloudinary.com/dfevedfwb/image/upload/v1748606820/SL_72_RS_Shoes_Desc_02_celhu6.avif",
+          "alt": "Description Image 2"
+        }
+      ],
+      "variants": {
+        "main": {
+          "color": "white",
+          "images": [
+            {
+              "src": "https://res.cloudinary.com/dfevedfwb/image/upload/v1748606823/SL_72_RS_Shoes_White_01_dqj3wm.avif",
+              "alt": "Product Image 1"
+            },
+            {
+              "src": "https://res.cloudinary.com/dfevedfwb/image/upload/v1748606823/SL_72_RS_Shoes_White_02_b3auve.avif",
+              "alt": "Product Image 2"
+            },
+            {
+              "src": "https://res.cloudinary.com/dfevedfwb/image/upload/v1748606823/SL_72_RS_Shoes_White_03_schaed.avif",
+              "alt": "Product Image 3"
+            },
+            {
+              "src": "https://res.cloudinary.com/dfevedfwb/image/upload/v1748606823/SL_72_RS_Shoes_White_04_wnjprm.avif",
+              "alt": "Product Image 4"
+            },
+            {
+              "src": "https://res.cloudinary.com/dfevedfwb/image/upload/v1748606826/SL_72_RS_Shoes_White_05_wiojam.avif",
+              "alt": "Product Image 5"
+            },
+            {
+              "src": "https://res.cloudinary.com/dfevedfwb/image/upload/v1748606826/SL_72_RS_Shoes_White_06_geuz2j.avif",
+              "alt": "Product Image 6"
+            },
+            {
+              "src": "https://res.cloudinary.com/dfevedfwb/image/upload/v1748606827/SL_72_RS_Shoes_White_07_ivhdhf.avif",
+              "alt": "Product Image 7"
+            },
+            {
+              "src": "https://res.cloudinary.com/dfevedfwb/image/upload/v1748606827/SL_72_RS_Shoes_White_08_mqza00.avif",
+              "alt": "Product Image 8"
+            },
+            {
+              "src": "https://res.cloudinary.com/dfevedfwb/image/upload/v1748606827/SL_72_RS_Shoes_White_09_rztyfk.avif",
+              "alt": "Product Image 9"
+            }
+          ]
+        },
+        "blue": {
+          "color": "blue",
+          "images": [
+            {
+              "src": "https://res.cloudinary.com/dfevedfwb/image/upload/v1748606817/SL_72_RS_Shoes_Blue_01_y70amp.avif",
+              "alt": "Product Image 1"
+            },
+            {
+              "src": "https://res.cloudinary.com/dfevedfwb/image/upload/v1748606818/SL_72_RS_Shoes_Blue_02_dyqylo.avif",
+              "alt": "Product Image 2"
+            },
+            {
+              "src": "https://res.cloudinary.com/dfevedfwb/image/upload/v1748606818/SL_72_RS_Shoes_Blue_03_ewhydu.avif",
+              "alt": "Product Image 3"
+            },
+            {
+              "src": "https://res.cloudinary.com/dfevedfwb/image/upload/v1748606818/SL_72_RS_Shoes_Blue_04_ebmy58.avif",
+              "alt": "Product Image 4"
+            },
+            {
+              "src": "https://res.cloudinary.com/dfevedfwb/image/upload/v1748606818/SL_72_RS_Shoes_Blue_05_f5txlv.avif",
+              "alt": "Product Image 5"
+            },
+            {
+              "src": "https://res.cloudinary.com/dfevedfwb/image/upload/v1748606818/SL_72_RS_Shoes_Blue_06_za6wuq.avif",
+              "alt": "Product Image 6"
+            },
+            {
+              "src": "https://res.cloudinary.com/dfevedfwb/image/upload/v1748606818/SL_72_RS_Shoes_Blue_07_fgu19g.avif",
+              "alt": "Product Image 7"
+            },
+            {
+              "src": "https://res.cloudinary.com/dfevedfwb/image/upload/v1748606820/SL_72_RS_Shoes_Blue_08_i4krl8.avif",
+              "alt": "Product Image 8"
+            },
+            {
+              "src": "https://res.cloudinary.com/dfevedfwb/image/upload/v1748606820/SL_72_RS_Shoes_Blue_09_vpjd3t.avif",
+              "alt": "Product Image 9"
+            }
+          ]
+        },
+        "pureSulfur": {
+          "color": "Pure Sulfur",
+          "images": [
+            {
+              "src": "https://res.cloudinary.com/dfevedfwb/image/upload/v1754143550/SL_72_RS_Shoes_Pure_Sulfur_01_nbyqnu.avif",
+              "alt": "Product Image 1"
+            },
+            {
+              "src": "https://res.cloudinary.com/dfevedfwb/image/upload/v1754143551/SL_72_RS_Shoes_Pure_Sulfur_02_o2yqpj.avif",
+              "alt": "Product Image 2"
+            },
+            {
+              "src": "https://res.cloudinary.com/dfevedfwb/image/upload/v1754143552/SL_72_RS_Shoes_Pure_Sulfur_03_p8d2o1.avif",
+              "alt": "Product Image 3"
+            },
+            {
+              "src": "https://res.cloudinary.com/dfevedfwb/image/upload/v1754143554/SL_72_RS_Shoes_Pure_Sulfur_04_huxzvt.avif",
+              "alt": "Product Image 4"
+            },
+            {
+              "src": "https://res.cloudinary.com/dfevedfwb/image/upload/v1754143556/SL_72_RS_Shoes_Pure_Sulfur_05_xcruvz.avif",
+              "alt": "Product Image 5"
+            },
+            {
+              "src": "https://res.cloudinary.com/dfevedfwb/image/upload/v1754143559/SL_72_RS_Shoes_Pure_Sulfur_06_yo2shu.avif",
+              "alt": "Product Image 6"
+            },
+            {
+              "src": "https://res.cloudinary.com/dfevedfwb/image/upload/v1754143560/SL_72_RS_Shoes_Pure_Sulfur_07_gnekpx.avif",
+              "alt": "Product Image 7"
+            },
+            {
+              "src": "https://res.cloudinary.com/dfevedfwb/image/upload/v1754143563/SL_72_RS_Shoes_Pure_Sulfur_08_dchaak.avif",
+              "alt": "Product Image 8"
+            },
+            {
+              "src": "https://res.cloudinary.com/dfevedfwb/image/upload/v1754143564/SL_72_RS_Shoes_Pure_Sulfur_09_ybft88.avif",
+              "alt": "Product Image 9"
+            }
+          ]
+        },
+        "green": {
+          "color": "green",
+          "images": [
+            {
+              "src": "https://res.cloudinary.com/dfevedfwb/image/upload/v1748606820/SL_72_RS_Shoes_Green_01_suofwi.avif",
+              "alt": "Product Image 1"
+            },
+            {
+              "src": "https://res.cloudinary.com/dfevedfwb/image/upload/v1748606820/SL_72_RS_Shoes_Green_02_d9h8e6.avif",
+              "alt": "Product Image 2"
+            },
+            {
+              "src": "https://res.cloudinary.com/dfevedfwb/image/upload/v1748606821/SL_72_RS_Shoes_Green_03_pqnxp4.avif",
+              "alt": "Product Image 3"
+            },
+            {
+              "src": "https://res.cloudinary.com/dfevedfwb/image/upload/v1748606821/SL_72_RS_Shoes_Green_04_uap5g9.avif",
+              "alt": "Product Image 4"
+            },
+            {
+              "src": "https://res.cloudinary.com/dfevedfwb/image/upload/v1748606822/SL_72_RS_Shoes_Green_05_y0nbhv.avif",
+              "alt": "Product Image 5"
+            },
+            {
+              "src": "https://res.cloudinary.com/dfevedfwb/image/upload/v1748606821/SL_72_RS_Shoes_Green_06_wk8bhi.avif",
+              "alt": "Product Image 6"
+            },
+            {
+              "src": "https://res.cloudinary.com/dfevedfwb/image/upload/v1748606821/SL_72_RS_Shoes_Green_07_msh2u4.avif",
+              "alt": "Product Image 7"
+            },
+            {
+              "src": "https://res.cloudinary.com/dfevedfwb/image/upload/v1748606821/SL_72_RS_Shoes_Green_08_mvx96l.avif",
+              "alt": "Product Image 8"
+            },
+            {
+              "src": "https://res.cloudinary.com/dfevedfwb/image/upload/v1748606822/SL_72_RS_Shoes_Green_09_dau4q6.avif",
+              "alt": "Product Image 9"
+            }
+          ]
+        },
+        "prelovedRed": {
+          "color": "Preloved Red",
+          "images": [
+            {
+              "src": "https://res.cloudinary.com/dfevedfwb/image/upload/v1754141964/SL_72_RS_Shoes_Preloved_Red_01_nattbx.avif",
+              "alt": "Product Image 1"
+            },
+            {
+              "src": "https://res.cloudinary.com/dfevedfwb/image/upload/v1754141966/SL_72_RS_Shoes_Preloved_Red_02_kxwwek.avif",
+              "alt": "Product Image 2"
+            },
+            {
+              "src": "https://res.cloudinary.com/dfevedfwb/image/upload/v1754141969/SL_72_RS_Shoes_Preloved_Red_03_yjsxqi.avif",
+              "alt": "Product Image 3"
+            },
+            {
+              "src": "https://res.cloudinary.com/dfevedfwb/image/upload/v1754141972/SL_72_RS_Shoes_Preloved_Red_04_ocnsxi.avif",
+              "alt": "Product Image 4"
+            },
+            {
+              "src": "https://res.cloudinary.com/dfevedfwb/image/upload/v1754141974/SL_72_RS_Shoes_Preloved_Red_05_w1xeeq.avif",
+              "alt": "Product Image 5"
+            },
+            {
+              "src": "https://res.cloudinary.com/dfevedfwb/image/upload/v1754141977/SL_72_RS_Shoes_Preloved_Red_06_ooa7yv.avif",
+              "alt": "Product Image 6"
+            },
+            {
+              "src": "https://res.cloudinary.com/dfevedfwb/image/upload/v1754141979/SL_72_RS_Shoes_Preloved_Red_07_ssaeou.avif",
+              "alt": "Product Image 7"
+            },
+            {
+              "src": "https://res.cloudinary.com/dfevedfwb/image/upload/v1754141982/SL_72_RS_Shoes_Preloved_Red_08_coopyz.avif",
+              "alt": "Product Image 8"
+            },
+            {
+              "src": "https://res.cloudinary.com/dfevedfwb/image/upload/v1754141984/SL_72_RS_Shoes_Preloved_Red_09_dydcup.avif",
+              "alt": "Product Image 9"
+            }
+          ]
+        },
+        "solarSlime": {
+          "color": "Solar Slime",
+          "images": [
+            {
+              "src": "https://res.cloudinary.com/dfevedfwb/image/upload/v1754141987/SL_72_RS_Shoes_Solar_Slime_01_zhg7tj.avif",
+              "alt": "Product Image 1"
+            },
+            {
+              "src": "https://res.cloudinary.com/dfevedfwb/image/upload/v1754141990/SL_72_RS_Shoes_Solar_Slime_02_qgkwo7.avif",
+              "alt": "Product Image 2"
+            },
+            {
+              "src": "https://res.cloudinary.com/dfevedfwb/image/upload/v1754141992/SL_72_RS_Shoes_Solar_Slime_03_arx66n.avif",
+              "alt": "Product Image 3"
+            },
+            {
+              "src": "https://res.cloudinary.com/dfevedfwb/image/upload/v1754141995/SL_72_RS_Shoes_Solar_Slime_04_qshpoj.avif",
+              "alt": "Product Image 4"
+            },
+            {
+              "src": "https://res.cloudinary.com/dfevedfwb/image/upload/v1754141997/SL_72_RS_Shoes_Solar_Slime_05_kvhoec.avif",
+              "alt": "Product Image 5"
+            },
+            {
+              "src": "https://res.cloudinary.com/dfevedfwb/image/upload/v1754142000/SL_72_RS_Shoes_Solar_Slime_06_a2w616.avif",
+              "alt": "Product Image 6"
+            },
+            {
+              "src": "https://res.cloudinary.com/dfevedfwb/image/upload/v1754142003/SL_72_RS_Shoes_Solar_Slime_07_wu5e6y.avif",
+              "alt": "Product Image 7"
+            },
+            {
+              "src": "https://res.cloudinary.com/dfevedfwb/image/upload/v1754142005/SL_72_RS_Shoes_Solar_Slime_08_rfkbov.avif",
+              "alt": "Product Image 8"
+            },
+            {
+              "src": "https://res.cloudinary.com/dfevedfwb/image/upload/v1754142008/SL_72_RS_Shoes_Solar_Slime_09_xewwvh.avif",
+              "alt": "Product Image 9"
+            }
+          ]
+        },
+        "coreBlack": {
+          "color": "Core Black",
+          "images": [
+            {
+              "src": "https://res.cloudinary.com/dfevedfwb/image/upload/v1754141919/SL_72_RS_Shoes_Core_Black_01_bpvm5w.avif",
+              "alt": "Product Image 1"
+            },
+            {
+              "src": "https://res.cloudinary.com/dfevedfwb/image/upload/v1754141920/SL_72_RS_Shoes_Core_Black_02_pxbq8z.avif",
+              "alt": "Product Image 2"
+            },
+            {
+              "src": "https://res.cloudinary.com/dfevedfwb/image/upload/v1754141923/SL_72_RS_Shoes_Core_Black_03_mzrnzk.avif",
+              "alt": "Product Image 3"
+            },
+            {
+              "src": "https://res.cloudinary.com/dfevedfwb/image/upload/v1754141925/SL_72_RS_Shoes_Core_Black_04_lud6dp.avif",
+              "alt": "Product Image 4"
+            },
+            {
+              "src": "https://res.cloudinary.com/dfevedfwb/image/upload/v1754141928/SL_72_RS_Shoes_Core_Black_05_iqifys.avif",
+              "alt": "Product Image 5"
+            },
+            {
+              "src": "https://res.cloudinary.com/dfevedfwb/image/upload/v1754141931/SL_72_RS_Shoes_Core_Black_06_bebtwo.avif",
+              "alt": "Product Image 6"
+            },
+            {
+              "src": "https://res.cloudinary.com/dfevedfwb/image/upload/v1754141933/SL_72_RS_Shoes_Core_Black_07_ym8hie.avif",
+              "alt": "Product Image 7"
+            },
+            {
+              "src": "https://res.cloudinary.com/dfevedfwb/image/upload/v1754141936/SL_72_RS_Shoes_Core_Black_08_uoostd.avif",
+              "alt": "Product Image 8"
+            },
+            {
+              "src": "https://res.cloudinary.com/dfevedfwb/image/upload/v1754141938/SL_72_RS_Shoes_Core_Black_09_uc8rlq.avif",
+              "alt": "Product Image 9"
+            }
+          ]
+        },
+        "darkBlue": {
+          "color": "Dark Blue",
+          "images": [
+            {
+              "src": "https://res.cloudinary.com/dfevedfwb/image/upload/v1754141941/SL_72_RS_Shoes_Dark_Blue__01_m066aw.avif",
+              "alt": "Product Image 1"
+            },
+            {
+              "src": "https://res.cloudinary.com/dfevedfwb/image/upload/v1754141943/SL_72_RS_Shoes_Dark_Blue__02_o7hb2g.avif",
+              "alt": "Product Image 2"
+            },
+            {
+              "src": "https://res.cloudinary.com/dfevedfwb/image/upload/v1754141946/SL_72_RS_Shoes_Dark_Blue__03_vd2vew.avif",
+              "alt": "Product Image 3"
+            },
+            {
+              "src": "https://res.cloudinary.com/dfevedfwb/image/upload/v1754141948/SL_72_RS_Shoes_Dark_Blue__04_gbhpq4.avif",
+              "alt": "Product Image 4"
+            },
+            {
+              "src": "https://res.cloudinary.com/dfevedfwb/image/upload/v1754141951/SL_72_RS_Shoes_Dark_Blue__05_ct5mhp.avif",
+              "alt": "Product Image 5"
+            },
+            {
+              "src": "https://res.cloudinary.com/dfevedfwb/image/upload/v1754141953/SL_72_RS_Shoes_Dark_Blue__06_l0oxgf.avif",
+              "alt": "Product Image 6"
+            },
+            {
+              "src": "https://res.cloudinary.com/dfevedfwb/image/upload/v1754141956/SL_72_RS_Shoes_Dark_Blue__07_n9sqke.avif",
+              "alt": "Product Image 7"
+            },
+            {
+              "src": "https://res.cloudinary.com/dfevedfwb/image/upload/v1754141959/SL_72_RS_Shoes_Dark_Blue__08_nd7okg.avif",
+              "alt": "Product Image 8"
+            },
+            {
+              "src": "https://res.cloudinary.com/dfevedfwb/image/upload/v1754141961/SL_72_RS_Shoes_Dark_Blue__09_buv0rk.avif",
+              "alt": "Product Image 9"
+            }
+          ]
+        }
+      }
+    }
+  },
+
+  {
+    "productName": "Adizero EVO SL Shoes",
+    "price": 150,
+    "category": "MEN",
+    "type": "SHOES",
+    "sizes": [
+      "5.5 UK",
+      "6 UK",
+      "6.5 UK",
+      "7 UK",
+      "7.5 UK",
+      "8 UK",
+      "8.5 UK",
+      "9 UK",
+      "9.5 UK",
+      "10 UK",
+      "10.5 UK",
+      "11 UK"
+    ],
+    "description": {
+      "main": {
+        "title": "SPEED-INSPIRED SHOES DESIGNED FOR FAST CULTURE",
+        "text": "The Adizero Evo SL brings the energy of record-breaking Adizero shoes into your everyday look. Inspired by the Pro Evo 1, it features a sleek, fast aesthetic and advanced Adizero technology. LIGHTSTRIKE PRO foam in the midsole offers responsive cushioning and comfort with every move — whether you’re running or simply keeping pace with life."
+      },
+      "additional1": {
+        "title": "Bold Design Meets Performance Heritage",
+        "text": "The Adizero Evo SL isn't just about speed — it's about making a statement. Merging a race-day aesthetic with everyday wearability, these shoes bring athletic innovation to your street-ready style."
+      },
+      "additional2": {
+        "title": "Sport-Inspired Looks for Everyday Energy",
+        "text": "With dynamic lines and a lightweight build, the Evo SL energizes your daily routine. Designed for movement and made for life, it bridges performance design with bold, fashion-forward appeal."
+      }
+    },
+    "details": "The engineered mesh upper offers breathability and comfort, while the tongue design allows easy entry and a personalized fit. The LIGHTSTRIKE PRO midsole provides lightweight cushioning and responsive energy return. A clear CONTINENTAL™ rubber outsole ensures reliable grip, and the standard fit suits most foot types. Made with at least 20% recycled materials. Available in Lucid Lemon / Core Black / Matte Silver",
+    "images": {
+      "general": [
+        {
+          "src": "https://res.cloudinary.com/dfevedfwb/image/upload/v1754081950/Adizero_EVO_SL_Shoes_Desc_01_nthqzz.avif",
+          "alt": "Description Image 1"
+        },
+        {
+          "src": "https://res.cloudinary.com/dfevedfwb/image/upload/v1754081038/Adizero_EVO_SL_Shoes_Desc_02_p0xxxu.avif",
+          "alt": "Description Image 2"
+        }
+      ],
+      "variants": {
+        "main": {
+          "color": "white",
+          "images": [
+            {
+              "src": "https://res.cloudinary.com/dfevedfwb/image/upload/v1754081055/Adizero_EVO_SL_Shoes_White_01_lsnwgs.avif",
+              "alt": "Product Image 1"
+            },
+            {
+              "src": "https://res.cloudinary.com/dfevedfwb/image/upload/v1754081056/Adizero_EVO_SL_Shoes_White_02_ipdtvb.avif",
+              "alt": "Product Image 2"
+            },
+            {
+              "src": "https://res.cloudinary.com/dfevedfwb/image/upload/v1754081057/Adizero_EVO_SL_Shoes_White_03_da8xgt.avif",
+              "alt": "Product Image 3"
+            },
+            {
+              "src": "https://res.cloudinary.com/dfevedfwb/image/upload/v1754081057/Adizero_EVO_SL_Shoes_White_04_rkhqbx.avif",
+              "alt": "Product Image 4"
+            },
+            {
+              "src": "https://res.cloudinary.com/dfevedfwb/image/upload/v1754081058/Adizero_EVO_SL_Shoes_White_05_o7hijo.avif",
+              "alt": "Product Image 5"
+            },
+            {
+              "src": "https://res.cloudinary.com/dfevedfwb/image/upload/v1754081059/Adizero_EVO_SL_Shoes_White_06_dug14m.avif",
+              "alt": "Product Image 6"
+            },
+            {
+              "src": "https://res.cloudinary.com/dfevedfwb/image/upload/v1754081060/Adizero_EVO_SL_Shoes_White_07_yioj4m.avif",
+              "alt": "Product Image 7"
+            },
+            {
+              "src": "https://res.cloudinary.com/dfevedfwb/image/upload/v1754081061/Adizero_EVO_SL_Shoes_White_08_bsl6dn.avif",
+              "alt": "Product Image 8"
+            },
+            {
+              "src": "https://res.cloudinary.com/dfevedfwb/image/upload/v1754081062/Adizero_EVO_SL_Shoes_White_09_camwyn.avif",
+              "alt": "Product Image 9"
+            }
+          ]
+        },
+        "black": {
+          "color": "black",
+          "images": [
+            {
+              "src": "https://res.cloudinary.com/dfevedfwb/image/upload/v1754081033/Adizero_EVO_SL_Shoes_Black_01_kpnvzt.avif",
+              "alt": "Product Image 1"
+            },
+            {
+              "src": "https://res.cloudinary.com/dfevedfwb/image/upload/v1754081033/Adizero_EVO_SL_Shoes_Black_02_z71iu0.avif",
+              "alt": "Product Image 2"
+            },
+            {
+              "src": "https://res.cloudinary.com/dfevedfwb/image/upload/v1754081034/Adizero_EVO_SL_Shoes_Black_03_ipxnmz.avif",
+              "alt": "Product Image 3"
+            },
+            {
+              "src": "https://res.cloudinary.com/dfevedfwb/image/upload/v1754081034/Adizero_EVO_SL_Shoes_Black_04_vz7oaq.avif",
+              "alt": "Product Image 4"
+            },
+            {
+              "src": "https://res.cloudinary.com/dfevedfwb/image/upload/v1754081034/Adizero_EVO_SL_Shoes_Black_05_cpdboy.avif",
+              "alt": "Product Image 5"
+            },
+            {
+              "src": "https://res.cloudinary.com/dfevedfwb/image/upload/v1754081035/Adizero_EVO_SL_Shoes_Black_06_znydsm.avif",
+              "alt": "Product Image 6"
+            },
+            {
+              "src": "https://res.cloudinary.com/dfevedfwb/image/upload/v1754081036/Adizero_EVO_SL_Shoes_Black_07_jzoluu.avif",
+              "alt": "Product Image 7"
+            },
+            {
+              "src": "https://res.cloudinary.com/dfevedfwb/image/upload/v1754081036/Adizero_EVO_SL_Shoes_Black_08_k71d4k.avif",
+              "alt": "Product Image 8"
+            },
+            {
+              "src": "https://res.cloudinary.com/dfevedfwb/image/upload/v1754081037/Adizero_EVO_SL_Shoes_Black_09_qle99m.avif",
+              "alt": "Product Image 9"
+            }
+          ]
+        },
+        "green": {
+          "color": "green",
+          "images": [
+            {
+              "src": "https://res.cloudinary.com/dfevedfwb/image/upload/v1754081039/Adizero_EVO_SL_Shoes_Green_01_onabbo.avif",
+              "alt": "Product Image 1"
+            },
+            {
+              "src": "https://res.cloudinary.com/dfevedfwb/image/upload/v1754081040/Adizero_EVO_SL_Shoes_Green_02_lqaufn.avif",
+              "alt": "Product Image 2"
+            },
+            {
+              "src": "https://res.cloudinary.com/dfevedfwb/image/upload/v1754081040/Adizero_EVO_SL_Shoes_Green_03_ssemvr.avif",
+              "alt": "Product Image 3"
+            },
+            {
+              "src": "https://res.cloudinary.com/dfevedfwb/image/upload/v1754081041/Adizero_EVO_SL_Shoes_Green_04_swzfkq.avif",
+              "alt": "Product Image 4"
+            },
+            {
+              "src": "https://res.cloudinary.com/dfevedfwb/image/upload/v1754081042/Adizero_EVO_SL_Shoes_Green_05_qiaokp.avif",
+              "alt": "Product Image 5"
+            },
+            {
+              "src": "https://res.cloudinary.com/dfevedfwb/image/upload/v1754081043/Adizero_EVO_SL_Shoes_Green_06_fe9fdr.avif",
+              "alt": "Product Image 6"
+            },
+            {
+              "src": "https://res.cloudinary.com/dfevedfwb/image/upload/v1754081044/Adizero_EVO_SL_Shoes_Green_07_mtdyuq.avif",
+              "alt": "Product Image 7"
+            },
+            {
+              "src": "https://res.cloudinary.com/dfevedfwb/image/upload/v1754081045/Adizero_EVO_SL_Shoes_Green_08_kwyhtt.avif",
+              "alt": "Product Image 8"
+            },
+            {
+              "src": "https://res.cloudinary.com/dfevedfwb/image/upload/v1754081045/Adizero_EVO_SL_Shoes_Green_09_puwsko.avif",
+              "alt": "Product Image 9"
+            }
+          ]
+        },
+        "silver": {
+          "color": "silver",
+          "images": [
+            {
+              "src": "https://res.cloudinary.com/dfevedfwb/image/upload/v1754081046/Adizero_EVO_SL_Shoes_Silver_01_gryf6q.avif",
+              "alt": "Product Image 1"
+            },
+            {
+              "src": "https://res.cloudinary.com/dfevedfwb/image/upload/v1754081048/Adizero_EVO_SL_Shoes_Silver_02_bqm6ec.avif",
+              "alt": "Product Image 2"
+            },
+            {
+              "src": "https://res.cloudinary.com/dfevedfwb/image/upload/v1754081049/Adizero_EVO_SL_Shoes_Silver_03_ma2ahj.avif",
+              "alt": "Product Image 3"
+            },
+            {
+              "src": "https://res.cloudinary.com/dfevedfwb/image/upload/v1754081049/Adizero_EVO_SL_Shoes_Silver_04_sgil5c.avif",
+              "alt": "Product Image 4"
+            },
+            {
+              "src": "https://res.cloudinary.com/dfevedfwb/image/upload/v1754081051/Adizero_EVO_SL_Shoes_Silver_05_rvw4tw.avif",
+              "alt": "Product Image 5"
+            },
+            {
+              "src": "https://res.cloudinary.com/dfevedfwb/image/upload/v1754081051/Adizero_EVO_SL_Shoes_Silver_06_lecevx.avif",
+              "alt": "Product Image 6"
+            },
+            {
+              "src": "https://res.cloudinary.com/dfevedfwb/image/upload/v1754081052/Adizero_EVO_SL_Shoes_Silver_07_noinru.avif",
+              "alt": "Product Image 7"
+            },
+            {
+              "src": "https://res.cloudinary.com/dfevedfwb/image/upload/v1754081052/Adizero_EVO_SL_Shoes_Silver_08_hcvrye.avif",
+              "alt": "Product Image 8"
+            },
+            {
+              "src": "https://res.cloudinary.com/dfevedfwb/image/upload/v1754081054/Adizero_EVO_SL_Shoes_Silver_09_lga4sz.avif",
+              "alt": "Product Image 9"
+            }
+          ]
+        }
+      }
+    }
+  },
+
+  {
+    "productName": "Terrex Anylander Hiking Shoes",
+    "price": 75,
+    "category": "MEN",
+    "type": "SHOES",
+    "sizes": [
+      "5.5 UK",
+      "6 UK",
+      "6.5 UK",
+      "7 UK",
+      "7.5 UK",
+      "8 UK",
+      "8.5 UK",
+      "9 UK",
+      "9.5 UK",
+      "10 UK",
+      "10.5 UK",
+      "11 UK"
+    ],
+    "description": {
+      "main": {
+        "title": "Lightweight hiking shoes.",
+        "text": "From short forest walks to extended day hikes, these adidas Terrex hiking shoes offer support and comfort across a range of trails. From the easy-wearing feel of a low-cut fit to plush midsole cushioning, these shoes blend a lightweight feel with maximum comfort. A lugged Traxion outsole provides grip in all directions so you feel confident in your footing."
+      },
+      "additional1": {
+        "title": "Trail-Ready Design with Everyday Comfort",
+        "text": "Engineered for versatility, these adidas Terrex shoes combine outdoor performance with casual wearability. The low-cut fit and cushioned feel make them ideal for both rugged trails and daily adventures."
+      },
+      "additional2": {
+        "title": "Sustainable Steps Forward",
+        "text": "Crafted with a blend of recycled and renewable materials, these shoes reflect a commitment to the planet. Every step supports a future with less waste and more conscious design choices."
+      }
+    },
+    "details": "The textile upper with reinforced toe cap delivers durability and support, while the lace closure ensures a secure fit. An EVA midsole offers lightweight cushioning, and the Traxion outsole provides grip on various surfaces. Regular fit with 10 mm drop (27 mm heel / 17 mm forefoot). Made with at least 20% recycled content. Imported.",
+    "images": {
+      "general": [
+        {
+          "src": "https://res.cloudinary.com/dfevedfwb/image/upload/v1754169021/Terrex_Anylander_Hiking_Shoes_Desc_02_atumos.avif",
+          "alt": "Description Image 1"
+        },
+        {
+          "src": "https://res.cloudinary.com/dfevedfwb/image/upload/v1754169020/Terrex_Anylander_Hiking_Shoes_Desc_01_ie42ou.avif",
+          "alt": "Description Image 2"
+        }
+      ],
+      "variants": {
+        "main": {
+          "color": "Olive Strata",
+          "images": [
+            {
+              "src": "https://res.cloudinary.com/dfevedfwb/image/upload/v1754169024/Terrex_Anylander_Hiking_Shoes_Olive_Strata__01_qv6fzq.avif",
+              "alt": "Product Image 1"
+            },
+            {
+              "src": "https://res.cloudinary.com/dfevedfwb/image/upload/v1754169025/Terrex_Anylander_Hiking_Shoes_Olive_Strata__02_pfbqik.avif",
+              "alt": "Product Image 2"
+            },
+            {
+              "src": "https://res.cloudinary.com/dfevedfwb/image/upload/v1754169026/Terrex_Anylander_Hiking_Shoes_Olive_Strata__03_jh9s9e.avif",
+              "alt": "Product Image 3"
+            },
+            {
+              "src": "https://res.cloudinary.com/dfevedfwb/image/upload/v1754169026/Terrex_Anylander_Hiking_Shoes_Olive_Strata__04_w0jdzk.avif",
+              "alt": "Product Image 4"
+            },
+            {
+              "src": "https://res.cloudinary.com/dfevedfwb/image/upload/v1754169021/Terrex_Anylander_Hiking_Shoes_Olive_Strata__05_nfeztr.avif",
+              "alt": "Product Image 5"
+            },
+            {
+              "src": "https://res.cloudinary.com/dfevedfwb/image/upload/v1754169021/Terrex_Anylander_Hiking_Shoes_Olive_Strata__06_iwjuoc.avif",
+              "alt": "Product Image 6"
+            },
+            {
+              "src": "https://res.cloudinary.com/dfevedfwb/image/upload/v1754169021/Terrex_Anylander_Hiking_Shoes_Olive_Strata__07_fjldz2.avif",
+              "alt": "Product Image 7"
+            },
+            {
+              "src": "https://res.cloudinary.com/dfevedfwb/image/upload/v1754169021/Terrex_Anylander_Hiking_Shoes_Olive_Strata__08_l4jiwl.avif",
+              "alt": "Product Image 8"
+            },
+            {
+              "src": "https://res.cloudinary.com/dfevedfwb/image/upload/v1754169022/Terrex_Anylander_Hiking_Shoes_Olive_Strata__09_lv3oa6.avif",
+              "alt": "Product Image 9"
+            }
+          ]
+        },
+        "wonderSteel": {
+          "color": "Wonder Steel",
+          "images": [
+            {
+              "src": "https://res.cloudinary.com/dfevedfwb/image/upload/v1754169021/Terrex_Anylander_Hiking_Shoes_Wonder_Steel__01_ooprns.avif",
+              "alt": "Product Image 1"
+            },
+            {
+              "src": "https://res.cloudinary.com/dfevedfwb/image/upload/v1754169022/Terrex_Anylander_Hiking_Shoes_Wonder_Steel__02_acvmeg.avif",
+              "alt": "Product Image 2"
+            },
+            {
+              "src": "https://res.cloudinary.com/dfevedfwb/image/upload/v1754169022/Terrex_Anylander_Hiking_Shoes_Wonder_Steel__03_jnrqol.avif",
+              "alt": "Product Image 3"
+            },
+            {
+              "src": "https://res.cloudinary.com/dfevedfwb/image/upload/v1754169022/Terrex_Anylander_Hiking_Shoes_Wonder_Steel__04_dtjapd.avif",
+              "alt": "Product Image 4"
+            },
+            {
+              "src": "https://res.cloudinary.com/dfevedfwb/image/upload/v1754169022/Terrex_Anylander_Hiking_Shoes_Wonder_Steel__05_sm9xr2.avif",
+              "alt": "Product Image 5"
+            },
+            {
+              "src": "https://res.cloudinary.com/dfevedfwb/image/upload/v1754169022/Terrex_Anylander_Hiking_Shoes_Wonder_Steel__06_to1eaj.avif",
+              "alt": "Product Image 6"
+            },
+            {
+              "src": "https://res.cloudinary.com/dfevedfwb/image/upload/v1754169023/Terrex_Anylander_Hiking_Shoes_Wonder_Steel__07_cleluo.avif",
+              "alt": "Product Image 7"
+            },
+            {
+              "src": "https://res.cloudinary.com/dfevedfwb/image/upload/v1754169023/Terrex_Anylander_Hiking_Shoes_Wonder_Steel__08_rq8evi.avif",
+              "alt": "Product Image 8"
+            }
+          ]
+        }
+      }
+    }
+  }
+]
