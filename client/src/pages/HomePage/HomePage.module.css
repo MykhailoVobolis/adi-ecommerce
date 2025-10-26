@@ -3,7 +3,7 @@
 }
 
 .hero {
-  background-image: url("/img/background/hero-bg.webp");
+  background-image: url('/img/background/hero-bg.webp');
   background-size: cover;
   background-repeat: no-repeat;
   background-position: 50% 50%;
@@ -17,12 +17,8 @@
 
 @media screen and (min-resolution: 192dpi), screen and (min-resolution: 2dppx), screen and (min-devide-pixel-ratio: 2) {
   .hero {
-    background-image: url("/img/background/hero-bg@2x.webp");
+    background-image: url('/img/background/hero-bg@2x.webp');
   }
-}
-
-.descContainer {
-  max-width: 491px;
 }
 
 .heading {

@@ -1,9 +1,10 @@
+import clsx from 'clsx';
 import { useParams } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { useEffect } from 'react';
 import { fetchProductsByCategory } from '../../redux/products/operations.js';
 import { selectLoading, selectProductsByCategory } from '../../redux/products/selectors.js';
-import { Container, Heading, Section } from '@radix-ui/themes';
+import { Box, Container, Flex, Heading, Section, Text } from '@radix-ui/themes';
 import { setNewPage } from '../../redux/products/slice.js';
 
 import ProductsList from '../../components/ProductsList/ProductsList.jsx';
@@ -46,26 +47,46 @@ export default function ProductCategoryPage() {
     dispatch(setNewPage({ newPage, category }));
   };
 
+  const isMen = category.toLowerCase() === 'men';
+  const isWomen = category.toLowerCase() === 'women';
+  const isKids = category.toLowerCase() === 'kids';
+
   return isLoading ? (
     <Loader heightValue={'calc(100vh - 64px)'} />
   ) : (
-    <Section size="4">
-      <Container size={{ initial: '1', sm: '2', md: '3', lg: '4', xl: '5' }}>
-        <Heading as="h1" size="8" mb="6" weight="bold">
-          {category.toUpperCase() === 'KIDS' ? `KIDS' PRODUCTS` : `${category.toUpperCase()}'S PRODUCTS`}
-        </Heading>
-        {products.length > 0 && <ProductsList products={products} category={category} />}
-        {products.length > 0 && (hasNextPage || hasPreviousPage) && (
-          <ProductsPaginationBar
-            page={page}
-            totalPages={totalPages}
-            handlePrevClick={handlePrevClick}
-            handleNextClick={handleNextClick}
-            hasNextPage={hasNextPage}
-            hasPreviousPage={hasPreviousPage}
-          />
-        )}
-      </Container>
-    </Section>
+    <>
+      <Section className={css.sectionContainer}>
+        <Flex className={clsx(css.hero, isMen && css.heroMen, isWomen && css.heroWomen, isKids && css.heroKids)}>
+          <Box className={css.descContainer}>
+            <Heading as="h1" className={css.heading}>
+              {isMen && 'GAZELLE'}
+              {isKids && 'SUPERSTAR'}
+              {isWomen && 'ORIGINALS'}
+            </Heading>
+            <Text as="p" className={css.description}>
+              {(isMen || isKids) && ' the original'}
+            </Text>
+          </Box>
+        </Flex>
+      </Section>
+      <Section size="2">
+        <Container size={{ initial: '1', sm: '2', md: '3', lg: '4', xl: '5' }}>
+          <Heading as="h1" size="8" mb="6" weight="bold">
+            {category.toUpperCase() === 'KIDS' ? `KIDS' PRODUCTS` : `${category.toUpperCase()}'S PRODUCTS`}
+          </Heading>
+          {products.length > 0 && <ProductsList products={products} category={category} />}
+          {products.length > 0 && (hasNextPage || hasPreviousPage) && (
+            <ProductsPaginationBar
+              page={page}
+              totalPages={totalPages}
+              handlePrevClick={handlePrevClick}
+              handleNextClick={handleNextClick}
+              hasNextPage={hasNextPage}
+              hasPreviousPage={hasPreviousPage}
+            />
+          )}
+        </Container>
+      </Section>
+    </>
   );
 }

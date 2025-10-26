@@ -1,0 +1,68 @@
+.sectionContainer {
+  padding: 0px;
+}
+
+.hero {
+  background-size: cover;
+  background-repeat: no-repeat;
+  min-width: 320px;
+  max-width: 100%;
+  margin-left: auto;
+  margin-right: auto;
+  padding: 60px 40px 0px 40px;
+  height: 640px;
+  align-items: start;
+}
+
+.heroMen {
+  background-image: url('/img/background/men-hero-bg-v3.webp');
+  background-position: 50% 10%;
+}
+
+.heroWomen {
+  background-image: url('/img/background/women-hero-bg.webp');
+  background-position: 50% 70%;
+}
+
+.heroKids {
+  background-image: url('/img/background/kids-hero-bg.webp');
+  background-position: 50% 40%;
+}
+
+@media screen and (min-resolution: 192dpi), screen and (min-resolution: 2dppx), screen and (min-device-pixel-ratio: 2) {
+  .heroMen {
+    background-image: url('/img/background/men-hero-bg-v3@2x.webp');
+  }
+  .heroWomen {
+    background-image: url('/img/background/women-hero-bg@2x.webp');
+  }
+
+  .heroKids {
+    background-image: url('/img/background/kids-hero-bg@2x.webp');
+  }
+}
+
+.descContainer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 90%;
+  height: auto;
+}
+
+.heading {
+  color: var(--main-white-color);
+  font-size: 140px;
+  line-height: 0.85;
+  font-family: Bebas;
+}
+
+.description {
+  color: var(--main-white-color);
+  font-size: 44px;
+  line-height: 38px;
+  font-weight: 400;
+  font-weight: 800;
+  letter-spacing: 7.87px;
+  text-transform: uppercase;
+}
