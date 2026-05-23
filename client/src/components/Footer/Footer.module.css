@@ -5,8 +5,26 @@
 
 .footerContainer {
   display: flex;
-  align-items: center;
-  text-align: center;
+  flex-direction: column;
+  gap: 8px;
+  align-items: flex-start;
+  width: 100%;
+  max-width: 720px;
+  margin: 0 auto;
+}
+
+.metaText,
+.disclaimerText {
+  color: var(--accent-10);
+}
+
+.metaText {
+  line-height: 1.4;
+}
+
+.disclaimerText {
+  line-height: 1.5;
+  max-width: 68ch;
 }
 
 @media screen and (min-width: 768px) {
@@ -15,6 +33,6 @@
   }
 
   .footerContainer {
-    text-align: start;
+    margin: 0;
   }
 }
