@@ -23,7 +23,7 @@
 .productImage {
   width: 54px;
   height: 54px;
-  objectfit: cover;
+  object-fit: cover;
 }
 
 .ProductsTable tfoot tr:last-child td {

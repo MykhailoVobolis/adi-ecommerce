@@ -39,6 +39,9 @@ export default function ProductCard({ product, category }) {
             <img
               src={imageUrl}
               alt="Product Image"
+              loading="lazy"
+              decoding="async"
+              fetchPriority="low"
               style={{
                 display: 'block',
                 objectFit: 'cover',

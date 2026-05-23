@@ -5,5 +5,5 @@
 .productPreview {
   width: 48px;
   height: 48px;
-  objectfit: cover;
+  object-fit: cover;
 }

@@ -1,4 +1,4 @@
-import { Route, Routes } from 'react-router-dom';
+import { Route, Routes, useLocation, matchPath } from 'react-router-dom';
 import { lazy, Suspense, useEffect } from 'react';
 import toast, { Toaster } from 'react-hot-toast';
 import { useDispatch, useSelector } from 'react-redux';
@@ -10,6 +10,7 @@ import { setCustomerData } from '../../redux/checkout/slice.js';
 import { selectCartData } from '../../redux/cart/selectors.js';
 import { addProductsToCart, getUserCart } from '../../redux/cart/operations.js';
 import { addFavorite, getUserFavorites } from '../../redux/favorites/operations.js';
+import { destroyLenis, initLenis } from '../../utils/lenis.js';
 
 import Layout from '../Layout/Layout.jsx';
 import Loader from '../Loader/Loader.jsx';
@@ -30,20 +31,35 @@ const ConfirmGoogleAuth = lazy(() => import('../../pages/ConfirmGoogleAuth/Confi
 
 const AccountLayout = lazy(() => import('../../components/AccountLayout/AccountLayout.jsx'));
 const AccountProfilePage = lazy(() => import('../../pages/AccountProfilePage/AccountProfilePage.jsx'));
-const AccountOrdersHistoryPage = lazy(() =>
-  import('../../pages/AccountOrdersHistoryPage/AccountOrdersHistoryPage.jsx'),
+const AccountOrdersHistoryPage = lazy(
+  () => import('../../pages/AccountOrdersHistoryPage/AccountOrdersHistoryPage.jsx'),
 );
 const AccountFavoritesPage = lazy(() => import('../../pages/AccountFavoritesPage/AccountFavoritesPage.jsx'));
 const OrderConfirmationPage = lazy(() => import('../../pages/OrderConfirmationPage/OrderConfirmationPage.jsx'));
 
 export default function App() {
   const dispatch = useDispatch();
+  const location = useLocation();
   const isRefreshing = useSelector(selectIsRefreshing);
   const authUserData = useSelector(selectUser);
   const isLoggedIn = useSelector(selectIsLoggedIn);
   const localCart = useSelector(selectCartData);
   const localFavoriteProducts = useSelector(selectFavoriteProducts);
   const wasRefreshed = useSelector(selectWasRefreshed);
+  const isProductCategoryPage = Boolean(matchPath('/products/:category', location.pathname));
+
+  useEffect(() => {
+    if (isProductCategoryPage) {
+      destroyLenis();
+      return;
+    }
+
+    initLenis();
+
+    return () => {
+      destroyLenis();
+    };
+  }, [isProductCategoryPage]);
 
   useEffect(() => {
     dispatch(refreshUser())
