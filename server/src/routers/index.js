@@ -8,6 +8,10 @@ import orderRouter from './order.js';
 
 const router = Router();
 
+router.get('/health', (_req, res) => {
+  res.status(200).send('OK');
+});
+
 router.use('/products/men', productsRouter);
 router.use('/products/women', productsRouter);
 router.use('/products/kids', productsRouter);
