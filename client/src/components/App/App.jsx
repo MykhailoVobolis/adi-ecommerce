@@ -37,6 +37,19 @@ const AccountOrdersHistoryPage = lazy(
 const AccountFavoritesPage = lazy(() => import('../../pages/AccountFavoritesPage/AccountFavoritesPage.jsx'));
 const OrderConfirmationPage = lazy(() => import('../../pages/OrderConfirmationPage/OrderConfirmationPage.jsx'));
 
+function isSafariBrowser() {
+  if (typeof window === 'undefined') return false;
+
+  const { userAgent, vendor } = window.navigator;
+  const isAppleVendor = vendor.includes('Apple');
+  const isCriOS = userAgent.includes('CriOS');
+  const isFxiOS = userAgent.includes('FxiOS');
+  const isEdgiOS = userAgent.includes('EdgiOS');
+  const isChromeDesktop = userAgent.includes('Chrome');
+
+  return isAppleVendor && !isCriOS && !isFxiOS && !isEdgiOS && !isChromeDesktop;
+}
+
 export default function App() {
   const dispatch = useDispatch();
   const location = useLocation();
@@ -47,9 +60,10 @@ export default function App() {
   const localFavoriteProducts = useSelector(selectFavoriteProducts);
   const wasRefreshed = useSelector(selectWasRefreshed);
   const isProductCategoryPage = Boolean(matchPath('/products/:category', location.pathname));
+  const shouldDisableLenis = isProductCategoryPage || isSafariBrowser();
 
   useEffect(() => {
-    if (isProductCategoryPage) {
+    if (shouldDisableLenis) {
       destroyLenis();
       return;
     }
@@ -59,7 +73,7 @@ export default function App() {
     return () => {
       destroyLenis();
     };
-  }, [isProductCategoryPage]);
+  }, [shouldDisableLenis]);
 
   useEffect(() => {
     dispatch(refreshUser())
