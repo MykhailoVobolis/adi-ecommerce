@@ -10,3 +10,18 @@
   align-items: center;
   justify-content: space-between;
 }
+
+.menuButton {
+  border: none;
+  background-color: transparent;
+  cursor: pointer;
+  color: black;
+  width: 40px;
+  height: 40px;
+  padding: 0;
+}
+
+.menuButton:focus-visible {
+  outline: 2px solid var(--accent-a12);
+  outline-offset: 2px;
+}
