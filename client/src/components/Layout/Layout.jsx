@@ -5,11 +5,14 @@ import Footer from "../Footer/Footer.jsx";
 
 import css from "./Layout.module.css";
 
-export default function Layout({ children }) {
+export default function Layout({ children, isHomePage }) {
   return (
     <Box className={css.pageContainer}>
       <AppBar />
-      <Box as="main" className={css.mainContainer}>
+      <Box
+        as="main"
+        className={isHomePage ? `${css.mainContainer} ${css.homeMainContainer}` : css.mainContainer}
+      >
         <Suspense fallback={<div></div>}>{children}</Suspense>
       </Box>
       <Footer />

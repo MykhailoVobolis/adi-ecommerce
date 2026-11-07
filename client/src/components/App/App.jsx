@@ -113,7 +113,7 @@ export default function App() {
     <Loader heightValue={'calc(100vh - 64px)'} />
   ) : (
     <Suspense fallback={null}>
-      <Layout>
+      <Layout isHomePage={location.pathname === '/'}>
         <Routes>
           <Route path="/" element={<HomePage />} />
           <Route path="cart" element={<CartPage />} />

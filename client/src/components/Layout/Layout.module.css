@@ -12,3 +12,8 @@
 .mainContainer {
   flex-grow: 1;
 }
+
+.mainContainer.homeMainContainer {
+  display: flex;
+  flex-direction: column;
+}
