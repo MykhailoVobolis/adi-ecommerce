@@ -16,3 +16,9 @@
 .googleButton:hover {
   color: var(--accent-10);
 }
+
+@media screen and (max-width: 767px) {
+  .googleButton {
+    width: 100%;
+  }
+}

@@ -36,6 +36,13 @@
   width: 100%;
 }
 
+@media screen and (max-width: 1199px) {
+  .authInput {
+    box-sizing: border-box;
+    width: 100%;
+  }
+}
+
 .inputError {
   border-bottom: 2px solid #e32b2b;
 }

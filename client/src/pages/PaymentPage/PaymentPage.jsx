@@ -140,11 +140,11 @@ export default function PaymentPage() {
   };
 
   return (
-    <Section size="4">
+    <Section className={css.paymentSection} size="4">
       <Container size={{ initial: '1', sm: '2', md: '3', lg: '4', xl: '5' }}>
-        <Flex justify="between" mb="7">
+        <Flex className={css.paymentLayout} justify="between" mb="7">
           <Box className={css.optionWrapper}>
-            <Heading as="h1" size="7" mb="4" weight="bold">
+            <Heading className="responsivePageHeading responsivePageHeading--7" as="h1" size="7" mb="4" weight="bold">
               PAYMENT AND ORDER CONFIRMATION
             </Heading>
             <Text as="p" size="3" mb="4">
@@ -159,11 +159,12 @@ export default function PaymentPage() {
               <ActionButton
                 label={selectedPaymentMethod === 'on_delivery' ? 'place order' : 'pay online'}
                 handleClick={handlePlaceOrder}
+                variant="payment"
               />
             )}
           </Box>
           {totalQuantityProducts > 0 && (
-            <Flex direction="column">
+            <Flex className={css.orderColumn} direction="column">
               <OrderSummary totalPrice={totalPrice} totalQuantityProducts={totalQuantityProducts} isDelivery="true" />
               <CheckoutCart products={products} />
               <DeliverySummary

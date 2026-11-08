@@ -50,7 +50,7 @@ export default function AccountOrdersHistoryPage() {
       <Box className={css.wrapper}>
         {userOrders.length > 0 ? (
           <>
-            <Heading as="h2" size="7" mb="6" weight="bold">
+            <Heading className="responsivePageHeading responsivePageHeading--7" as="h2" size="7" mb="6" weight="bold">
               ORDERS HISTORY
             </Heading>
             <OrdersAccordion orders={userOrders} />
@@ -67,7 +67,7 @@ export default function AccountOrdersHistoryPage() {
           </>
         ) : (
           <>
-            <Heading as="h2" size="7" mb="3" weight="bold">
+            <Heading className="responsivePageHeading responsivePageHeading--7" as="h2" size="7" mb="3" weight="bold">
               NO ORDERS YET
             </Heading>
             <Text as="p" mb="5">

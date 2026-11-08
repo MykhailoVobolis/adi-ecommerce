@@ -41,11 +41,11 @@ export default function OrderConfirmationPage() {
     <Loader heightValue={'calc(100vh - 64px)'} />
   ) : (
     <>
-      <Section size="4">
+      <Section className={css.confirmationSection} size="4">
         <Container size={{ initial: '1', sm: '2', md: '3', lg: '4', xl: '5' }}>
-          <Flex justify="between" mb="7">
+          <Flex className={css.confirmationLayout} justify="between" mb="7">
             <Box className={css.optionWrapper}>
-              <Heading as="h2" size="8" mb="4" weight="bold">
+              <Heading className="responsivePageHeading responsivePageHeading--8" as="h2" size="8" mb="4" weight="bold">
                 THANK YOU FOR YOUR ORDER
               </Heading>
 
@@ -84,7 +84,7 @@ export default function OrderConfirmationPage() {
             </Box>
 
             {Object.keys(confirmedOrder).length > 0 && (
-              <Flex direction="column">
+              <Flex className={css.orderColumn} direction="column">
                 <OrderSummary totalPrice={totalPrice} totalQuantityProducts={totalQuantityProducts} isDelivery={true} />
                 <CheckoutCart products={products} />
               </Flex>

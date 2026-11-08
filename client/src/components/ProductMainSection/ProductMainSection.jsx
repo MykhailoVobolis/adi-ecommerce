@@ -32,7 +32,7 @@ export default function ProductMainSection({
         <Box className={css.aboutContainer}>
           <Box>
             <Box className={css.descContainer}>
-              <Heading as="h1" size="8" className={css.productTitle}>
+              <Heading as="h1" size="8" className={`${css.productTitle} responsivePageHeading responsivePageHeading--8`}>
                 {productName.toUpperCase()}
               </Heading>
               <Text as="p" size="6" weight="bold" className={css.productPrice}>

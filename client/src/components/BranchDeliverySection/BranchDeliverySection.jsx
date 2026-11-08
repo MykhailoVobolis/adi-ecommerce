@@ -2,8 +2,6 @@ import { Box, Heading, Text } from '@radix-ui/themes';
 
 import DeliveryBranchForm from '../DeliveryBranchForm/DeliveryBranchForm.jsx';
 
-import css from './BranchDeliverySection.module.css';
-
 export default function BranchDeliverySection({
   warehousesOfCity,
   selectedWarehouse,
@@ -15,7 +13,7 @@ export default function BranchDeliverySection({
 
   return (
     <Box>
-      <Heading className={css.sectionHeading} as="h2" size="7" mb="3" weight="bold">
+      <Heading className="responsivePageHeading responsivePageHeading--7" as="h2" size="7" mb="3" weight="bold">
         BRANCH ADDRESS
       </Heading>
       <Text as="p" mb="4">

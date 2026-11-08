@@ -82,7 +82,7 @@ export default function DeliveryCourierForm({
 
   return (
     <FormProvider {...methods}>
-      <form onSubmit={methods.handleSubmit(onSubmit)}>
+      <form id="delivery-form" onSubmit={methods.handleSubmit(onSubmit)}>
         <Controller
           name="streetName"
           control={methods.control}
@@ -109,7 +109,7 @@ export default function DeliveryCourierForm({
         <InfoRow label="Locality" value={selectedCityName} />
         <CustomerContactsForm />
         {emailFromAuth && <InfoRow label="Email" value={email} />}
-        <SubmitButton />
+        <SubmitButton variant="deliveryDesktop" />
       </form>
     </FormProvider>
   );

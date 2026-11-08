@@ -2,6 +2,10 @@
   width: 724px;
 }
 
+.orderColumn {
+  min-width: 0;
+}
+
 .wrapper {
   background-color: var(--main-white-color);
   padding: 20px;
@@ -15,4 +19,27 @@
 .title {
   text-transform: uppercase;
   line-height: 1.4;
+}
+
+@media screen and (max-width: 1199px) {
+  .confirmationSection {
+    padding: 48px 16px;
+  }
+
+  .confirmationLayout {
+    flex-direction: column;
+    gap: 40px;
+  }
+
+  .optionWrapper,
+  .orderColumn {
+    min-width: 0;
+    width: 100%;
+  }
+}
+
+@media screen and (min-width: 768px) and (max-width: 1199px) {
+  .confirmationSection {
+    padding: 64px 32px;
+  }
 }

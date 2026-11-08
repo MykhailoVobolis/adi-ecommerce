@@ -85,7 +85,7 @@ export default function DeliveryBranchForm({
 
   return (
     <FormProvider {...methods}>
-      <form onSubmit={methods.handleSubmit(onSubmit)}>
+      <form id="delivery-form" onSubmit={methods.handleSubmit(onSubmit)}>
         <Controller
           name="warehouseNumber"
           control={methods.control}
@@ -112,7 +112,7 @@ export default function DeliveryBranchForm({
         <InfoRow label="Locality" value={selectedCityName} />
         <CustomerContactsForm />
         {emailFromAuth && <InfoRow label="Email" value={email} />}
-        <SubmitButton />
+        <SubmitButton variant="deliveryDesktop" />
       </form>
     </FormProvider>
   );

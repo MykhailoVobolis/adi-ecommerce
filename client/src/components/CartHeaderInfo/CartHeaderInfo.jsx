@@ -10,7 +10,7 @@ export default function CartHeaderInfo({ totalQuantityProducts, totalPrice }) {
       {totalQuantityProducts > 0 ? (
         <div className={css.cartHeader}>
           <div className={css.titleRow}>
-            <Heading as="h1" size="8" weight="bold" className={css.title}>
+            <Heading as="h1" size="8" weight="bold" className={`${css.title} responsivePageHeading responsivePageHeading--8`}>
               YOUR BAG
             </Heading>
           </div>
@@ -24,7 +24,7 @@ export default function CartHeaderInfo({ totalQuantityProducts, totalPrice }) {
         </div>
       ) : (
         <>
-          <Heading as="h1" size="8" mb="4" weight="bold" className={css.emptyTitle}>
+          <Heading as="h1" size="8" mb="4" weight="bold" className={`${css.emptyTitle} responsivePageHeading responsivePageHeading--8`}>
             YOUR BAG IS EMPTY
           </Heading>
           <Text as="p" size="3" mb="5">

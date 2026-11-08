@@ -17,3 +17,9 @@
   color: var(--accent-12);
   background-color: var(--accent-0);
 }
+
+@media screen and (max-width: 1199px) {
+  .payment {
+    width: 100%;
+  }
+}

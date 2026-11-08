@@ -4,5 +4,12 @@
 }
 
 .orderSummaryWrapper {
-  width: 365px;
+  min-width: 0;
+  width: 100%;
+}
+
+@media screen and (min-width: 1200px) {
+  .orderSummaryWrapper {
+    width: 365px;
+  }
 }

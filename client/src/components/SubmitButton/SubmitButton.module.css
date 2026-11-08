@@ -22,6 +22,33 @@
   width: 226px;
 }
 
+@media screen and (max-width: 767px) {
+  .auth {
+    width: 100%;
+  }
+}
+
 .editProfile {
   width: 100%;
+}
+
+.deliveryMobile {
+  display: none;
+}
+
+.deliveryDesktop {
+  display: inline-flex;
+}
+
+@media screen and (max-width: 1199px) {
+  .deliveryMobile {
+    display: inline-flex;
+    width: 100%;
+    max-width: 100%;
+    margin-top: 8px;
+  }
+
+  .deliveryDesktop {
+    display: none;
+  }
 }

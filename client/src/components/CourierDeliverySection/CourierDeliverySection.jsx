@@ -2,8 +2,6 @@ import { Box, Heading, Text } from '@radix-ui/themes';
 
 import DeliveryCourierForm from '../DeliveryCourierForm/DeliveryCourierForm.jsx';
 
-import css from './CourierDeliverySection.module.css';
-
 export default function CourierDeliverySection({
   streetsOfCity,
   selectedStreet,
@@ -15,7 +13,7 @@ export default function CourierDeliverySection({
 
   return (
     <Box>
-      <Heading className={css.sectionHeading} as="h2" size="7" mb="3" weight="bold">
+      <Heading className="responsivePageHeading responsivePageHeading--7" as="h2" size="7" mb="3" weight="bold">
         DELIVERY ADDRESS
       </Heading>
       <Text as="p" mb="4">

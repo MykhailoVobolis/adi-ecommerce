@@ -18,14 +18,14 @@ export default function AccountProfilePage() {
 
   return (
     <Container size={{ initial: '1', sm: '2', md: '3', lg: '4', xl: '5' }}>
-      <Heading as="h2" size="7" mb="3" weight="bold">
+      <Heading className="responsivePageHeading responsivePageHeading--7" as="h2" size="7" mb="3" weight="bold">
         MY DETAILS
       </Heading>
       <Text as="p" mb="9">
         Feel free to edit any of your details below so your account is up to date.
       </Text>
       <Box mb="8">
-        <Heading as="h2" size="7" mb="3" weight="bold">
+        <Heading className="responsivePageHeading responsivePageHeading--7" as="h2" size="7" mb="3" weight="bold">
           DETAILS
         </Heading>
         <Text className={css.userDetails} as="p" mb="3">
@@ -37,7 +37,7 @@ export default function AccountProfilePage() {
         <EditButton openModal={openModal} type="edit-profile" />
       </Box>
       <Box mb="6">
-        <Heading as="h2" size="7" mb="3" weight="bold">
+        <Heading className="responsivePageHeading responsivePageHeading--7" as="h2" size="7" mb="3" weight="bold">
           LOGIN DETAILS
         </Heading>
         <Text className={css.userDetails} as="p" mb="3" size="5" weight="bold">
@@ -62,7 +62,7 @@ export default function AccountProfilePage() {
       <ModalWindow isOpen={isOpen} closeModal={closeModal} label="User data change form">
         {modalType === 'edit-profile' && (
           <>
-            <Heading as="h2" size="7" mb="5" weight="bold">
+            <Heading className="responsivePageHeading responsivePageHeading--7" as="h2" size="7" mb="5" weight="bold">
               EDIT YOUR DETAILS
             </Heading>
             <EditProfileForm closeModal={closeModal} />
@@ -70,7 +70,7 @@ export default function AccountProfilePage() {
         )}
         {modalType === 'edit-email' && (
           <>
-            <Heading as="h2" size="7" mb="5" weight="bold">
+            <Heading className="responsivePageHeading responsivePageHeading--7" as="h2" size="7" mb="5" weight="bold">
               EDIT YOUR EMAIL
             </Heading>
             <EditEmailForm closeModal={closeModal} />
@@ -78,7 +78,7 @@ export default function AccountProfilePage() {
         )}
         {modalType === 'change-password' && (
           <>
-            <Heading as="h2" size="7" mb="5" weight="bold">
+            <Heading className="responsivePageHeading responsivePageHeading--7" as="h2" size="7" mb="5" weight="bold">
               EDIT YOUR PASSWORD
             </Heading>
             <ChangePasswordForm closeModal={closeModal} />

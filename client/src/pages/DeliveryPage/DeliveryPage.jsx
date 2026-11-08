@@ -16,6 +16,7 @@ import { selectDeliveryAddress } from '../../redux/checkout/selectors.js';
 import DeliveryOptions from '../../components/DeliveryOptions/DeliveryOptions.jsx';
 import OrderSummary from '../../components/OrderSummary/OrderSummary.jsx';
 import CheckoutCart from '../../components/CheckoutCart/CheckoutCart.jsx';
+import SubmitButton from '../../components/SubmitButton/SubmitButton.jsx';
 
 import css from './DeliveryPage.module.css';
 
@@ -70,8 +71,12 @@ export default function DeliveryPage() {
           </Box>
           {totalQuantityProducts > 0 && (
             <Flex className={css.summaryColumn} direction="column">
+              <div className={css.mobileOrderDivider} aria-hidden="true" />
               <OrderSummary totalPrice={totalPrice} totalQuantityProducts={totalQuantityProducts} isDelivery={true} />
               <CheckoutCart products={products} />
+              {deliveryAddress.selectedMethod && (
+                <SubmitButton variant="deliveryMobile" formId="delivery-form" />
+              )}
             </Flex>
           )}
         </Flex>

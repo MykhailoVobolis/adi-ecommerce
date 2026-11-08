@@ -46,9 +46,3 @@
     aspect-ratio: 1;
   }
 }
-
-@media screen and (min-width: 768px) {
-  .productCard:global(.rt-Card.rt-r-size-1) {
-    padding: var(--space-3);
-  }
-}

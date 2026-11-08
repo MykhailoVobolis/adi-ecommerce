@@ -1,3 +1,33 @@
 .optionWrapper {
   width: 724px;
 }
+
+@media screen and (max-width: 1199px) {
+  .paymentSection {
+    padding: 48px 16px;
+  }
+
+  .paymentLayout {
+    flex-direction: column;
+    gap: 40px;
+  }
+
+  .optionWrapper,
+  .orderColumn {
+    min-width: 0;
+    width: 100%;
+  }
+}
+
+@media screen and (min-width: 768px) and (max-width: 1199px) {
+  .paymentSection {
+    padding: 64px 32px;
+  }
+}
+
+@media screen and (min-width: 1200px) {
+  .orderColumn {
+    flex: 0 0 365px;
+    width: 365px;
+  }
+}

@@ -71,7 +71,7 @@ export default function ProductCategoryPage() {
       </Section>
       <Section size="2" className={css.productsSection}>
         <Container size={{ initial: '1', sm: '2', md: '3', lg: '4', xl: '5' }}>
-          <Heading as="h1" size="8" weight="bold" className={css.productsHeading}>
+          <Heading as="h1" size="8" weight="bold" className={`${css.productsHeading} responsivePageHeading responsivePageHeading--8`}>
             {category.toUpperCase() === 'KIDS' ? `KIDS' PRODUCTS` : `${category.toUpperCase()}'S PRODUCTS`}
           </Heading>
           {products.length > 0 && <ProductsList products={products} category={category} />}

@@ -22,12 +22,25 @@
 
 .deliveryLayout {
   flex-direction: column;
-  gap: 48px;
+  gap: 24px;
+}
+
+.mobileOrderDivider {
+  display: none;
 }
 
 @media screen and (min-width: 768px) {
   .deliverySection {
     padding: 64px 32px;
+  }
+}
+
+@media screen and (max-width: 1199px) {
+  .mobileOrderDivider {
+    display: block;
+    width: 100%;
+    border-top: 1px solid var(--accent-5);
+    margin-bottom: 24px;
   }
 }
 

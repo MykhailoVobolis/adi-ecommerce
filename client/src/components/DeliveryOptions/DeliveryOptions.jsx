@@ -142,7 +142,7 @@ export default function DeliveryOptions({
 
   return (
     <Box className={css.optionWrapper}>
-      <Heading className={css.sectionHeading} as="h1" size="7" mb="4" weight="bold">
+      <Heading className="responsivePageHeading responsivePageHeading--7" as="h1" size="7" mb="4" weight="bold">
         {!selectedMethod && selectedCity ? 'CHOOSE A DELIVERY METHOD' : 'CHOOSE A DELIVERY ADDRESS'}
       </Heading>
       <CitySelect

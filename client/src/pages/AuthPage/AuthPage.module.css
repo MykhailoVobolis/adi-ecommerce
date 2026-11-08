@@ -1,3 +1,21 @@
 .authFormWrapper {
   width: 478px;
 }
+
+@media screen and (max-width: 1199px) {
+  .authSection {
+    padding: 48px 16px;
+  }
+
+  .authFormWrapper {
+    min-width: 0;
+    width: 100%;
+    max-width: 478px;
+  }
+}
+
+@media screen and (min-width: 768px) and (max-width: 1199px) {
+  .authSection {
+    padding: 64px 32px;
+  }
+}

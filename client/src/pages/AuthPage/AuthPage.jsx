@@ -11,13 +11,13 @@ export default function AuthPage() {
   const emailAvailable = useSelector(selectEmailAvailable);
 
   return (
-    <Section size="4">
+    <Section className={css.authSection} size="4">
       <Container size={{ initial: '1', sm: '2', md: '3', lg: '4', xl: '5' }}>
         <Flex justify="between" mb="7">
           <Box className={css.authFormWrapper}>
             {emailAvailable === null && (
               <>
-                <Heading as="h2" size="8" mb="4" weight="bold">
+                <Heading className="responsivePageHeading responsivePageHeading--8" as="h2" size="8" mb="4" weight="bold">
                   LOG IN OR SIGN UP
                 </Heading>
                 <Text as="p" mb="8">
@@ -27,7 +27,7 @@ export default function AuthPage() {
             )}
             {emailAvailable === true && (
               <>
-                <Heading as="h2" size="8" mb="4" weight="bold">
+                <Heading className="responsivePageHeading responsivePageHeading--8" as="h2" size="8" mb="4" weight="bold">
                   WELCOME TO ADICLUB!
                 </Heading>
                 <Text as="p" mb="8">
@@ -38,7 +38,7 @@ export default function AuthPage() {
             )}
             {emailAvailable === false && (
               <>
-                <Heading as="h2" size="8" mb="4" weight="bold">
+                <Heading className="responsivePageHeading responsivePageHeading--8" as="h2" size="8" mb="4" weight="bold">
                   LOGIN TO ADICLUB
                 </Heading>
                 <Text as="p" mb="8">
