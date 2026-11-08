@@ -89,3 +89,13 @@ h3 {
     margin-bottom: 10px;
   }
 }
+
+@media screen and (min-width: 1200px) {
+  .AccordionContentText {
+    max-height: 150px;
+    padding-right: 8px;
+    overflow-y: auto;
+    overscroll-behavior: contain;
+    scrollbar-gutter: stable;
+  }
+}

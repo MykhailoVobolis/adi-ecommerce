@@ -19,8 +19,6 @@ import Loader from '../../components/Loader/Loader.jsx';
 import ModalWindow from '../../components/ModalWindow/ModalWindow.jsx';
 import AddToCartModalContent from '../../components/AddToCartModalContent/AddToCartModalContent.jsx';
 
-import css from './ProductPage.module.css';
-
 export default function ProductPage() {
   const dispatch = useDispatch();
   const { productId } = useParams();
@@ -39,6 +37,7 @@ export default function ProductPage() {
 
   const [selectedColor, setSelectedColor] = useState(colorParam);
   const [selectedSize, setSelectedSize] = useState(sizeParam);
+  const [showSizeError, setShowSizeError] = useState(false);
   const [addedProduct, setAddedProduct] = useState(null);
 
   useEffect(() => {
@@ -50,6 +49,7 @@ export default function ProductPage() {
       const options = currentProductOptions ?? {};
       setSelectedColor(colorParam || options.color || 'main');
       setSelectedSize(sizeParam || options.size || '');
+      setShowSizeError(false);
     }
   }, [curentProduct?._id]);
 
@@ -67,12 +67,13 @@ export default function ProductPage() {
 
   const changeSize = (size) => {
     setSelectedSize(size);
+    setShowSizeError(false);
     updateQueryParam('size', size);
   };
 
   const handleAddToCart = () => {
     if (!selectedSize) {
-      toast.error('Please select a size before adding to cart.');
+      setShowSizeError(true);
       return;
     }
 
@@ -142,6 +143,7 @@ export default function ProductPage() {
             changeSize={changeSize}
             handleAddToCart={handleAddToCart}
             handleToggleFavorite={handleToggleFavorite}
+            showSizeError={showSizeError}
           />
           <AboutProduct product={curentProduct} />
         </Box>

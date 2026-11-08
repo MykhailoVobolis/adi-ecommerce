@@ -9,6 +9,7 @@
   display: flex;
   gap: 4px;
   flex-wrap: wrap;
+  height: auto;
   min-height: 84px;
 }
 
@@ -43,13 +44,26 @@
   display: none;
 }
 
+.errorMessage {
+  display: block;
+  margin: 8px 0 0;
+  color: #d71920;
+  font-size: 13px;
+  line-height: 18px;
+  visibility: hidden;
+}
+
+.visibleError {
+  visibility: visible;
+}
+
 @media screen and (min-width: 1200px) {
   .sizePickerContainer {
     width: auto;
   }
 
   .sizePickerRoot {
-    height: 84px;
-    min-height: 0;
+    height: auto;
+    min-height: 84px;
   }
 }

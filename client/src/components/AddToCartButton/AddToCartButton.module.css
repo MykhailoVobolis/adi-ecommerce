@@ -1,6 +1,7 @@
 .buyBtn {
-  width: 100%;
-  max-width: 603px;
+  flex: 1 1 0;
+  width: auto;
+  min-width: 0;
   height: 45px;
   justify-content: space-between;
   font-weight: 600;

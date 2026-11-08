@@ -19,6 +19,7 @@ export default function ProductMainSection({
   handleAddToCart,
   handleToggleFavorite,
   isFavoriteProduct,
+  showSizeError,
 }) {
   const isDesktop = useMedia('(min-width: 1200px)');
 
@@ -52,7 +53,12 @@ export default function ProductMainSection({
                   selectedColor={selectedColor}
                 />
                 <Separator className={css.selectorDivider} size="2" decorative orientation="vertical" />
-                <SizePicker sizes={sizes} selectedSize={selectedSize} onChange={changeSize} />
+                <SizePicker
+                  sizes={sizes}
+                  selectedSize={selectedSize}
+                  onChange={changeSize}
+                  hasError={showSizeError}
+                />
               </Flex>
               <Flex className={css.btnsContainer}>
                 <AddToCartButton onAddToCartClick={handleAddToCart} />
