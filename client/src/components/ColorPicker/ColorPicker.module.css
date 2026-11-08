@@ -7,7 +7,7 @@ button {
 }
 
 .RadioGroupRoot {
-  height: 140px;
+  height: auto;
   width: 284px;
   display: flex;
   flex-wrap: wrap;
