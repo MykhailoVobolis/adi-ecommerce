@@ -82,3 +82,28 @@
 .description {
   line-height: 22px;
 }
+
+@media screen and (max-width: 767px) {
+  .delyverySelectList {
+    gap: 12px;
+    margin-top: 16px;
+    margin-bottom: 28px;
+  }
+
+  .deliveryItem {
+    padding: 16px;
+  }
+
+  .titleWrapper {
+    align-items: flex-start;
+    gap: 12px;
+  }
+
+  .methodTitle {
+    min-width: 0;
+  }
+
+  .descriptionWrqpper {
+    align-items: flex-start;
+  }
+}

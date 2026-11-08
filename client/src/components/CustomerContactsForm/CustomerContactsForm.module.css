@@ -1,4 +1,26 @@
 .inputContainer {
-  justify-content: space-between;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: 16px;
   margin-bottom: 28px;
+}
+
+.field {
+  min-width: 0;
+}
+
+.field > :global(.rt-Box.rt-r-mb-3) {
+  width: 100%;
+  margin-bottom: 0;
+}
+
+.field :global(.rt-TextFieldRoot),
+.field input {
+  width: 100%;
+}
+
+@media screen and (min-width: 768px) {
+  .inputContainer {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
 }

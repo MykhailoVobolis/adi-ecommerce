@@ -15,7 +15,7 @@ export default function BranchDeliverySection({
 
   return (
     <Box>
-      <Heading as="h2" size="7" mb="3" weight="bold">
+      <Heading className={css.sectionHeading} as="h2" size="7" mb="3" weight="bold">
         BRANCH ADDRESS
       </Heading>
       <Text as="p" mb="4">

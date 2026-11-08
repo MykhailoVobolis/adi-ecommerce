@@ -1,10 +1,54 @@
+.productCard:global(.rt-Card.rt-r-size-1) {
+  min-width: 0;
+  width: 100%;
+  padding: 0;
+}
+
+.productLayout,
+.productDetails {
+  min-width: 0;
+  width: 100%;
+}
+
+.productLayout {
+  align-items: stretch;
+}
+
+.productImage {
+  display: block;
+  flex: 0 0 128px;
+  width: 128px;
+  height: 128px;
+  object-fit: contain;
+  background-color: var(--gray-5);
+}
+
+.productDetails {
+  flex: 1 1 0;
+}
+
 .productOption {
   color: var(--accent-10);
 }
 
 .productName {
-  max-width: 210px;
+  min-width: 0;
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
+}
+
+@media screen and (max-width: 519px) {
+  .productImage {
+    flex-basis: min(38vw, 128px);
+    width: min(38vw, 128px);
+    height: auto;
+    aspect-ratio: 1;
+  }
+}
+
+@media screen and (min-width: 768px) {
+  .productCard:global(.rt-Card.rt-r-size-1) {
+    padding: var(--space-3);
+  }
 }

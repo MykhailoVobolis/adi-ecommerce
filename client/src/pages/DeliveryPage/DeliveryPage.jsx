@@ -1,4 +1,4 @@
-import { Container, Flex, Section } from '@radix-ui/themes';
+import { Box, Container, Flex, Section } from '@radix-ui/themes';
 import { useDispatch, useSelector } from 'react-redux';
 import { selectCartData } from '../../redux/cart/selectors.js';
 import { useEffect } from 'react';
@@ -53,21 +53,23 @@ export default function DeliveryPage() {
   }, [dispatch, totalQuantityProducts]);
 
   return (
-    <Section size="4">
-      <Container size={{ initial: '1', sm: '2', md: '3', lg: '4', xl: '5' }}>
-        <Flex justify="between" mb="7">
-          <DeliveryOptions
-            deliveryCities={deliveryCities}
-            deliveryAddress={deliveryAddress}
-            warehouseTypes={warehouseTypes}
-            warehousesOfCity={warehousesOfCity}
-            streetsOfCity={streetsOfCity}
-            totalPrice={totalPrice}
-            totalQuantityProducts={totalQuantityProducts}
-            deliveryCost={deliveryCost}
-          />
+    <Section size="4" className={css.deliverySection}>
+      <Container className={css.deliveryContainer} size={{ initial: '1', sm: '2', md: '3', lg: '4', xl: '5' }}>
+        <Flex className={css.deliveryLayout} justify="between">
+          <Box className={css.deliveryColumn}>
+            <DeliveryOptions
+              deliveryCities={deliveryCities}
+              deliveryAddress={deliveryAddress}
+              warehouseTypes={warehouseTypes}
+              warehousesOfCity={warehousesOfCity}
+              streetsOfCity={streetsOfCity}
+              totalPrice={totalPrice}
+              totalQuantityProducts={totalQuantityProducts}
+              deliveryCost={deliveryCost}
+            />
+          </Box>
           {totalQuantityProducts > 0 && (
-            <Flex direction="column">
+            <Flex className={css.summaryColumn} direction="column">
               <OrderSummary totalPrice={totalPrice} totalQuantityProducts={totalQuantityProducts} isDelivery={true} />
               <CheckoutCart products={products} />
             </Flex>
