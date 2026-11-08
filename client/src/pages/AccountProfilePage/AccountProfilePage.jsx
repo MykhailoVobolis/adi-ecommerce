@@ -1,4 +1,4 @@
-import { Box, Container, Heading, Text } from '@radix-ui/themes';
+import { Box, Heading, Text } from '@radix-ui/themes';
 import { useSelector } from 'react-redux';
 import { selectIsOAuth, selectUser } from '../../redux/auth/selectors.js';
 
@@ -17,11 +17,11 @@ export default function AccountProfilePage() {
   const isOAuth = useSelector(selectIsOAuth);
 
   return (
-    <Container size={{ initial: '1', sm: '2', md: '3', lg: '4', xl: '5' }}>
+    <Box className={css.profilePage}>
       <Heading className="responsivePageHeading responsivePageHeading--7" as="h2" size="7" mb="3" weight="bold">
         MY DETAILS
       </Heading>
-      <Text as="p" mb="9">
+      <Text className={css.intro} as="p">
         Feel free to edit any of your details below so your account is up to date.
       </Text>
       <Box mb="8">
@@ -85,6 +85,6 @@ export default function AccountProfilePage() {
           </>
         )}
       </ModalWindow>
-    </Container>
+    </Box>
   );
 }

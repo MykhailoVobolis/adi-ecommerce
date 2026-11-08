@@ -4,9 +4,9 @@ import clsx from 'clsx';
 
 import css from './LinkButton.module.css';
 
-export default function LinkButton({ to, text, variant = 'primary' }) {
+export default function LinkButton({ to, text, variant = 'primary', className }) {
   return (
-    <Link to={to} className={clsx(css.linkButton, css[variant])}>
+    <Link to={to} className={clsx(css.linkButton, css[variant], className)}>
       <span className={css.text}>{text}</span>
       <HiOutlineArrowNarrowRight size={24} />
     </Link>

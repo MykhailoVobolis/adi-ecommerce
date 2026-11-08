@@ -1,3 +1,11 @@
 .wrapper {
-  width: 824px;
+  width: 100%;
+  max-width: 824px;
+  min-width: 0;
+}
+
+@media screen and (max-width: 767px) {
+  .startShoppingButton.startShoppingButton {
+    width: 100%;
+  }
 }

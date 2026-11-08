@@ -1,7 +1,7 @@
 import toast from 'react-hot-toast';
 import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { Box, Container, Heading, Text } from '@radix-ui/themes';
+import { Box, Heading, Text } from '@radix-ui/themes';
 import { fetchOdersByUserId } from '../../redux/orders/operations.js';
 import { selectIsLoading, selectPaginationOrders, selectUserOrders } from '../../redux/orders/selectors.js';
 import { setNewPage } from '../../redux/orders/slice.js';
@@ -46,37 +46,35 @@ export default function AccountOrdersHistoryPage() {
   return isLoading ? (
     <Loader heightValue={'calc(100vh - 224px)'} />
   ) : (
-    <Container size={{ initial: '1', sm: '2', md: '3', lg: '4', xl: '5' }}>
-      <Box className={css.wrapper}>
-        {userOrders.length > 0 ? (
-          <>
-            <Heading className="responsivePageHeading responsivePageHeading--7" as="h2" size="7" mb="6" weight="bold">
-              ORDERS HISTORY
-            </Heading>
-            <OrdersAccordion orders={userOrders} />
-            {(hasNextPage || hasPreviousPage) && (
-              <ProductsPaginationBar
-                page={page}
-                totalPages={totalPages}
-                handlePrevClick={handlePrevClick}
-                handleNextClick={handleNextClick}
-                hasNextPage={hasNextPage}
-                hasPreviousPage={hasPreviousPage}
-              />
-            )}
-          </>
-        ) : (
-          <>
-            <Heading className="responsivePageHeading responsivePageHeading--7" as="h2" size="7" mb="3" weight="bold">
-              NO ORDERS YET
-            </Heading>
-            <Text as="p" mb="5">
-              Ready to get started?
-            </Text>
-            <LinkButton to="/" text="Start Shopping" variant="shopping" />
-          </>
-        )}
-      </Box>
-    </Container>
+    <Box className={css.wrapper}>
+      {userOrders.length > 0 ? (
+        <>
+          <Heading className="responsivePageHeading responsivePageHeading--7" as="h2" size="7" mb="6" weight="bold">
+            ORDERS HISTORY
+          </Heading>
+          <OrdersAccordion orders={userOrders} />
+          {(hasNextPage || hasPreviousPage) && (
+            <ProductsPaginationBar
+              page={page}
+              totalPages={totalPages}
+              handlePrevClick={handlePrevClick}
+              handleNextClick={handleNextClick}
+              hasNextPage={hasNextPage}
+              hasPreviousPage={hasPreviousPage}
+            />
+          )}
+        </>
+      ) : (
+        <>
+          <Heading className="responsivePageHeading responsivePageHeading--7" as="h2" size="7" mb="3" weight="bold">
+            NO ORDERS YET
+          </Heading>
+          <Text as="p" mb="5">
+            Ready to get started?
+          </Text>
+          <LinkButton to="/" text="Start Shopping" variant="shopping" className={css.startShoppingButton} />
+        </>
+      )}
+    </Box>
   );
 }

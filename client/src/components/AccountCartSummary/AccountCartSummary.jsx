@@ -20,9 +20,9 @@ export default function AccountCartSummary({ products, totalQuantityProducts }) 
       )}
       {totalQuantityProducts > 0 && <AccountCartSummaryProductsList products={products} />}
       {totalQuantityProducts > 0 ? (
-        <LinkButton to="/cart" text="go to bag" variant="secondary" />
+        <LinkButton to="/cart" text="go to bag" variant="secondary" className={css.bagButton} />
       ) : (
-        <LinkButton to="/" text="get started" variant="secondary" />
+        <LinkButton to="/" text="get started" variant="secondary" className={css.bagButton} />
       )}
     </Box>
   );

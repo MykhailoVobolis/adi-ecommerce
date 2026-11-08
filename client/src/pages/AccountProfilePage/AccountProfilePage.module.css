@@ -1,3 +1,18 @@
+.profilePage {
+  width: 100%;
+  min-width: 0;
+}
+
+.intro {
+  margin-bottom: 36px;
+}
+
 .userDetails {
   text-transform: uppercase;
+}
+
+@media screen and (max-width: 767px) {
+  .intro {
+    margin-bottom: 24px;
+  }
 }

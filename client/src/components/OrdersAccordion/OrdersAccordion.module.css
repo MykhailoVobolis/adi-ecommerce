@@ -6,6 +6,7 @@ h3 {
 .AccordionRoot {
   background-color: var(--accent-1);
   width: 100%;
+  min-width: 0;
   margin-bottom: 80px;
 }
 
@@ -41,6 +42,28 @@ h3 {
   cursor: pointer;
 }
 
+.orderSummaryRow {
+  width: 100%;
+  min-width: 0;
+}
+
+.orderMeta {
+  width: min(300px, 45%);
+  min-width: 0;
+  flex-shrink: 0;
+}
+
+.orderId {
+  overflow-wrap: anywhere;
+}
+
+@media screen and (max-width: 1023px) {
+  .orderId.orderId {
+    font-size: 16px;
+    line-height: 1.3;
+  }
+}
+
 .AccordionContent {
   overflow: hidden;
 }
@@ -69,9 +92,67 @@ h3 {
   line-height: 1.4;
 }
 
+.detailText {
+  font-size: 16px;
+  line-height: 1.4;
+}
+
+@media screen and (max-width: 1023px) {
+  .detailText {
+    font-size: 14px;
+  }
+
+  .title.title {
+    font-size: 16px;
+  }
+}
+
 .productsPreviewWrapper {
+  min-width: 0;
+  overflow: hidden;
   transition: opacity 0.3s ease;
   opacity: 1;
+}
+
+@media screen and (max-width: 767px) {
+  .AccordionRoot {
+    margin-bottom: 48px;
+  }
+
+  .AccordionTrigger {
+    padding: 16px 0;
+  }
+
+  .orderSummaryRow {
+    gap: 8px;
+  }
+
+  .orderMeta {
+    width: 100%;
+    flex: 1;
+  }
+
+  .orderId.orderId {
+    font-size: 14px;
+  }
+
+  .detailText {
+    font-size: 13px;
+  }
+
+  .title.title {
+    font-size: 14px;
+  }
+
+  .productsPreviewWrapper {
+    display: none;
+  }
+
+  .AccordionChevron {
+    width: 18px;
+    height: 18px;
+    flex-shrink: 0;
+  }
 }
 
 .AccordionItem[data-state='open'] .productsPreviewWrapper {

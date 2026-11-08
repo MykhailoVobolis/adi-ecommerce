@@ -8,3 +8,9 @@
   text-transform: uppercase;
   line-height: 1.4;
 }
+
+@media screen and (max-width: 767px) {
+  .bagButton.bagButton {
+    width: 100%;
+  }
+}

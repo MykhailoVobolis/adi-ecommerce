@@ -6,11 +6,11 @@ import css from './AccountSidebar.module.css';
 
 export default function AccountSidebar() {
   return (
-    <Flex direction="column">
+    <Flex className={css.sidebarContainer} direction="column">
       <Heading className={css.title} as="h2" size="5" mb="5" weight="bold">
         account overview
       </Heading>
-      <nav className={css.sidebar}>
+      <nav className={css.sidebar} aria-label="Account navigation">
         <NavLink to="/account" end className={({ isActive }) => (isActive ? css.active : '')}>
           Account
         </NavLink>

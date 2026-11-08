@@ -1,9 +1,12 @@
 .ProductsTableWrapper {
+  max-width: 100%;
   overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
 }
 
 .ProductsTable {
   width: 100%;
+  min-width: 620px;
   border-collapse: collapse;
   font-size: 14px;
 }
@@ -28,4 +31,26 @@
 
 .ProductsTable tfoot tr:last-child td {
   border-bottom: none;
+}
+
+@media screen and (max-width: 1023px) {
+  .ProductsTable {
+    font-size: 13px;
+  }
+}
+
+@media screen and (max-width: 767px) {
+  .ProductsTable {
+    font-size: 12px;
+  }
+
+  .ProductsTable th,
+  .ProductsTable td {
+    padding: 10px 0 10px 10px;
+  }
+
+  .productImage {
+    width: 44px;
+    height: 44px;
+  }
 }

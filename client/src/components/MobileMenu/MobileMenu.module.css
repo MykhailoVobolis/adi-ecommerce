@@ -63,6 +63,44 @@
   padding: 16px 24px 24px;
 }
 
+.accountDivider {
+  height: 1px;
+  margin: 0 24px;
+  background-color: var(--accent-5);
+}
+
+.accountSection {
+  padding: 20px 24px 24px;
+}
+
+.accountTitle {
+  margin: 0 0 8px;
+  color: var(--accent-a12);
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+}
+
+.accountNav {
+  display: flex;
+  flex-direction: column;
+}
+
+.accountNav a {
+  display: flex;
+  align-items: center;
+  min-height: 52px;
+  color: var(--accent-a12);
+  font-size: 16px;
+  line-height: 1.25;
+  text-decoration: none;
+}
+
+.accountNav a[aria-current='page'] {
+  font-weight: 700;
+}
+
 .nav ul {
   flex-direction: column;
   align-items: stretch;

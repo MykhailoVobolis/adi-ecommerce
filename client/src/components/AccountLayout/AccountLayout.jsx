@@ -14,9 +14,9 @@ export default function AccountLayout() {
   return isLoading ? (
     <Loader heightValue={'calc(100vh - 64px)'} />
   ) : (
-    <Section size="4">
+    <Section className={css.accountSection} size="4">
       <Container size="4">
-        <Flex justify="between">
+        <Flex className={css.accountLayout} justify="between">
           <main className={css.content}>
             <Outlet />
           </main>

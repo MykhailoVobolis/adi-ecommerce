@@ -38,12 +38,12 @@ export default function OrdersAccordion({ orders }) {
         return (
           <Accordion.Item key={order._id} className={css.AccordionItem} value={`item-${index}`}>
             <AccordionTrigger>
-              <Flex align="center" style={{ width: '100%' }}>
-                <Flex direction="column" style={{ width: '300px' }} gap="1">
-                  <Text as="span" size="4" weight="bold">
+              <Flex align="center" className={css.orderSummaryRow}>
+                <Flex direction="column" className={css.orderMeta} gap="1">
+                  <Text className={css.orderId} as="span" size="4" weight="bold">
                     ORDER ID: {order._id.slice(-10)}
                   </Text>
-                  <Text as="span" size="3">
+                  <Text className={css.orderDate} as="span" size="3">
                     Date: {orderDate}
                   </Text>
                 </Flex>
@@ -56,13 +56,13 @@ export default function OrdersAccordion({ orders }) {
               <Text className={css.title} as="p" size="4" mb="3" weight="bold">
                 Delivery address
               </Text>
-              <Text as="p" mb="1" weight="bold">
+              <Text className={css.detailText} as="p" mb="1" weight="bold">
                 {order.contact.firstName} {order.contact.lastName}
               </Text>
-              <Text as="p" mb="1">
+              <Text className={css.detailText} as="p" mb="1">
                 {order.delivery.address}
               </Text>
-              <Text as="p" mb="5">
+              <Text className={css.detailText} as="p" mb="5">
                 {order.contact.phone}
               </Text>
               <Text className={css.title} as="p" size="4" mb="3" weight="bold">
