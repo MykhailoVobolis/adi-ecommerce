@@ -1,8 +1,9 @@
 .productInfoContainer {
-  width: 324px;
+  box-sizing: border-box;
+  width: 100%;
   gap: 20px;
-  padding-right: 20px;
-  border-right: solid 1px var(--accent-12);
+  padding-bottom: 24px;
+  border-bottom: solid 1px var(--accent-12);
 }
 
 .productName {
@@ -11,4 +12,14 @@
 
 .productOption {
   margin-bottom: 2px;
+}
+
+@media screen and (min-width: 768px) {
+  .productInfoContainer {
+    width: 50%;
+    padding-right: 20px;
+    padding-bottom: 0;
+    border-right: solid 1px var(--accent-12);
+    border-bottom: 0;
+  }
 }

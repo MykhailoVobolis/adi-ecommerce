@@ -1,0 +1,21 @@
+.title {
+  margin-bottom: 24px;
+  font-size: clamp(26px, 7vw, 30px);
+  line-height: 1.05;
+}
+
+.content {
+  flex-direction: column;
+  gap: 24px;
+}
+
+@media screen and (min-width: 768px) {
+  .title {
+    font-size: var(--font-size-7);
+  }
+
+  .content {
+    flex-direction: row;
+    gap: 0;
+  }
+}

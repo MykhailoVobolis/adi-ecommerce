@@ -1,11 +1,19 @@
 .sliderContainer {
   width: 100%;
+  min-width: 0;
   height: auto;
-  margin-bottom: 60px;
+  margin-bottom: 40px;
+}
+
+.mainSwiper {
+  width: 100%;
+  aspect-ratio: 1 / 1;
 }
 
 .mainImage {
   width: 100%;
+  height: 100%;
+  object-fit: cover;
   cursor: cell;
 }
 
@@ -73,9 +81,9 @@
 
 @media screen and (min-width: 768px) {
   .sliderContainer {
-    width: 50%;
-    height: auto;
-    margin-bottom: 0;
+    width: 100%;
+    max-width: none;
+    margin-bottom: 32px;
   }
 
   .swiper-button-next::after,
@@ -86,5 +94,24 @@
     background-color: var(--main-white-color);
     transition: background-color var(--animation);
     display: block;
+  }
+}
+
+@media screen and (min-width: 1024px) and (max-width: 1199px) {
+  .mySwiper {
+    margin-top: -96px;
+  }
+}
+
+@media screen and (min-width: 1200px) {
+  .sliderContainer {
+    width: 50%;
+    height: auto;
+    max-width: none;
+    margin-bottom: 0;
+  }
+
+  .mySwiper {
+    margin-top: -75px;
   }
 }

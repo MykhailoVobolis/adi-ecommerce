@@ -18,12 +18,13 @@ export default function Slider({ product, selectedColor }) {
 
   const slides = product.images.variants[selectedColor]?.images || [];
 
-  const isProduction = process.env.NODE_ENV === 'production';
+  const isProduction = import.meta.env.PROD;
   const thumbsConfig = isProduction ? { swiper: thumbsSwiper } : thumbsSwiper ? { swiper: thumbsSwiper } : undefined;
 
   return (
     <Box className="sliderContainer">
       <Swiper
+        className="mainSwiper"
         loop={true}
         navigation={true}
         thumbs={thumbsConfig}

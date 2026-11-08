@@ -12,10 +12,10 @@ export default function AddToCartModalContent({ product, closeModal }) {
 
   return (
     <>
-      <Heading as="h2" size="7" mb="6" weight="bold">
+      <Heading as="h2" size="7" weight="bold" className={css.title}>
         SUCCESSFULLY ADDED TO BAG!
       </Heading>
-      <Flex>
+      <Flex className={css.content}>
         <ProductAddedInfo product={product} />
         <CartSummaryModal cartData={cartData} closeModal={closeModal} />
       </Flex>

@@ -20,56 +20,47 @@ export default function ProductMainSection({
   handleToggleFavorite,
   isFavoriteProduct,
 }) {
-  const isTablet = useMedia('(min-width: 768px)');
+  const isDesktop = useMedia('(min-width: 1200px)');
 
   const { productName, price, sizes, images } = curentProduct;
 
   return (
     <Section className={css.container}>
-      <Flex>
-        <Flex minWidth="0" direction={isTablet ? 'row' : 'column-reverse'}>
-          {isTablet && <Slider product={curentProduct} selectedColor={selectedColor} />}
-          <Box className={css.aboutContainer}>
-            <Box>
-              <Box className={css.descContainer}>
-                <Heading as="h1" size="8" mb="4">
-                  {productName.toUpperCase()}
-                </Heading>
-                <Text as="p" size="6" mb="5" weight="bold">
-                  ${price}
-                </Text>
-              </Box>
-              {!isTablet && <Slider product={curentProduct} selectedColor={selectedColor} />}
+      <Flex className={css.mainLayout} minWidth="0" direction={isDesktop ? 'row' : 'column'}>
+        {isDesktop && <Slider product={curentProduct} selectedColor={selectedColor} />}
+        <Box className={css.aboutContainer}>
+          <Box>
+            <Box className={css.descContainer}>
+              <Heading as="h1" size="8" className={css.productTitle}>
+                {productName.toUpperCase()}
+              </Heading>
+              <Text as="p" size="6" weight="bold" className={css.productPrice}>
+                ${price}
+              </Text>
+            </Box>
+            {!isDesktop && <Slider product={curentProduct} selectedColor={selectedColor} />}
+            <Box className={css.accordionContainer}>
               <ProductAccordion product={curentProduct} />
             </Box>
-            <Box className={css.secondAboutContainer}>
-              {!isTablet && <ColorPicker changeColor={changeColor} productImagesVariants={images} />}
-              <Box>
-                <Flex className={css.selectContainer}>
-                  {isTablet && (
-                    <ColorPicker
-                      changeColor={changeColor}
-                      productImagesVariants={images}
-                      selectedColor={selectedColor}
-                    />
-                  )}
-                  <Separator
-                    className="SeparatorRoot"
-                    size="2"
-                    decorative
-                    orientation="vertical"
-                    style={{ height: '100%', margin: '20px 20px 0 20px' }}
-                  />
-                  <SizePicker sizes={sizes} selectedSize={selectedSize} onChange={changeSize} />
-                </Flex>
-                <Flex className={css.btnsContainer}>
-                  <AddToCartButton onAddToCartClick={handleAddToCart} />
-                  <AddToFavoriteButton onAddToFavoriteClick={handleToggleFavorite} isFavorite={isFavoriteProduct} />
-                </Flex>
-              </Box>
+          </Box>
+          <Box className={css.secondAboutContainer}>
+            <Box>
+              <Flex className={css.selectContainer}>
+                <ColorPicker
+                  changeColor={changeColor}
+                  productImagesVariants={images}
+                  selectedColor={selectedColor}
+                />
+                <Separator className={css.selectorDivider} size="2" decorative orientation="vertical" />
+                <SizePicker sizes={sizes} selectedSize={selectedSize} onChange={changeSize} />
+              </Flex>
+              <Flex className={css.btnsContainer}>
+                <AddToCartButton onAddToCartClick={handleAddToCart} />
+                <AddToFavoriteButton onAddToFavoriteClick={handleToggleFavorite} isFavorite={isFavoriteProduct} />
+              </Flex>
             </Box>
           </Box>
-        </Flex>
+        </Box>
       </Flex>
     </Section>
   );

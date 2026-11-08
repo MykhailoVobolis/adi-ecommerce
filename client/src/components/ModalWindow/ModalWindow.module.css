@@ -1,4 +1,5 @@
 .modalContainer {
+  box-sizing: border-box;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -7,8 +8,10 @@
   left: 0;
   bottom: 0;
   right: 0;
-  width: 100vw;
-  height: 100vh;
+  width: 100%;
+  min-height: 100dvh;
+  padding: 16px;
+  overflow-y: auto;
   background-color: rgb(0, 0, 0, 0.7);
   opacity: 0;
 }
@@ -23,12 +26,14 @@
 }
 
 .modalContent {
+  box-sizing: border-box;
   position: relative;
-  width: 718px;
+  width: 100%;
   height: auto;
-  padding: 20px 35px 35px 35px;
-  max-height: 700px;
-  max-width: 1200px;
+  padding: 48px 16px 24px;
+  max-height: calc(100dvh - 32px);
+  max-width: 718px;
+  overflow-y: auto;
   outline: transparent;
   outline-offset: 4px;
   background-color: var(--main-white-color);
@@ -44,6 +49,29 @@
   background-color: var(--main-white-color);
   cursor: pointer;
   position: absolute;
-  top: -22px;
-  right: -22px;
+  top: 8px;
+  right: 8px;
+}
+
+@media screen and (min-width: 768px) {
+  .modalContainer {
+    padding: 32px;
+  }
+
+  .modalContent {
+    padding: 48px 32px 32px;
+    max-height: calc(100dvh - 64px);
+  }
+}
+
+@media screen and (min-width: 1200px) {
+  .modalContent {
+    padding: 20px 35px 35px;
+    max-height: 700px;
+  }
+
+  .closeButton {
+    top: -22px;
+    right: -22px;
+  }
 }
