@@ -1,3 +1,55 @@
-.totalPrise {
+.cartHeader {
+  margin-bottom: 48px;
+}
+
+.titleRow {
+  display: flex;
+  align-items: baseline;
+  gap: 16px;
+  margin-bottom: 12px;
+}
+
+.title,
+.emptyTitle {
+  font-size: 32px;
+}
+
+.description {
+  max-width: 620px;
+}
+
+.desktopTotal {
+  display: block;
+  margin-bottom: 8px;
+}
+
+.totalPrice {
   font-weight: 700;
+}
+
+@media screen and (min-width: 768px) {
+  .cartHeader {
+    margin-bottom: 56px;
+  }
+
+  .title,
+  .emptyTitle {
+    font-size: 36px;
+  }
+}
+
+@media screen and (min-width: 1200px) {
+  .cartHeader {
+    margin-bottom: 32px;
+  }
+
+  .titleRow {
+    margin-bottom: 16px;
+  }
+
+  .title,
+  .emptyTitle {
+    font-size: var(--font-size-8);
+  }
+
 }

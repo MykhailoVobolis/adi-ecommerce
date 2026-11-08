@@ -8,6 +8,34 @@
 .cartProductsList {
   display: flex;
   flex-direction: column;
-  gap: 40px;
-  width: 726px;
+  gap: 24px;
+  width: 100%;
+}
+
+.cartProductsList > li {
+  padding-bottom: 32px;
+  border-bottom: 1px solid var(--accent-5);
+}
+
+@media screen and (min-width: 768px) {
+  .cartProductsList {
+    gap: 32px;
+  }
+
+  .cartProductsList > li {
+    padding-bottom: 40px;
+  }
+}
+
+@media screen and (min-width: 1200px) {
+  .cartProductsList {
+    gap: 40px;
+    width: 726px;
+    max-width: 726px;
+  }
+
+  .cartProductsList > li {
+    padding-bottom: 0;
+    border-bottom: 0;
+  }
 }

@@ -7,7 +7,13 @@ export default function SelectQuantity({ quantity, handleQuantityChange }) {
   return (
     <Select.Root defaultValue={quantity.toString()} onValueChange={handleQuantityChange}>
       <Select.Trigger className={css.selectTrigger} />
-      <Select.Content>
+      <Select.Content
+        className={css.quantityContent}
+        position="popper"
+        align="start"
+        sideOffset={4}
+        hideWhenDetached
+      >
         <SelectItem value="1">1</SelectItem>
         <SelectItem value="2">2</SelectItem>
         <SelectItem value="3">3</SelectItem>

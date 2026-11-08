@@ -8,20 +8,23 @@ export default function CartHeaderInfo({ totalQuantityProducts, totalPrice }) {
   return (
     <>
       {totalQuantityProducts > 0 ? (
-        <>
-          <Heading as="h1" size="8" mb="4" weight="bold">
-            YOUR BAG
-          </Heading>
-          <Text as="p" size="3" mb="2">
-            TOTAL: ({totalQuantityProducts} items) <span className={css.totalPrise}>${totalPrice.toFixed(2)}</span>
+        <div className={css.cartHeader}>
+          <div className={css.titleRow}>
+            <Heading as="h1" size="8" weight="bold" className={css.title}>
+              YOUR BAG
+            </Heading>
+          </div>
+          <Text as="p" size="3" className={css.desktopTotal}>
+            TOTAL: ({totalQuantityProducts} items){' '}
+            <span className={css.totalPrice}>${totalPrice.toFixed(2)}</span>
           </Text>
-          <Text as="p" size="3" mb="7">
+          <Text as="p" size="3" className={css.description}>
             Items in your bag are not reserved — check out now to make them yours.
           </Text>
-        </>
+        </div>
       ) : (
         <>
-          <Heading as="h1" size="8" mt="9" mb="4" weight="bold">
+          <Heading as="h1" size="8" mb="4" weight="bold" className={css.emptyTitle}>
             YOUR BAG IS EMPTY
           </Heading>
           <Text as="p" size="3" mb="5">

@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom';
-import { Box, Card, Flex, Inset, Text } from '@radix-ui/themes';
+import { Box, Card, Flex, Text } from '@radix-ui/themes';
 import { useDispatch, useSelector } from 'react-redux';
 import { deleteProductFromLocalCart, updateLocalProductQuantity } from '../../redux/cart/slice.js';
 import { useIsFavoriteProduct } from '../../hooks/useIsFavoriteProduct.js';
@@ -61,52 +61,50 @@ export default function CartProductCard({ product }) {
   return (
     <li>
       <Box className={css.productBox}>
-        <Card size="2">
-          <Flex direction={{ initial: 'column', sm: 'row' }} gap="3">
-            <Link to={`/products/${category}/${productId}?color=${color}&size=${size}`}>
-              <Inset side="left" clip="padding-box" pr="current">
-                <img
-                  src={imageUrl}
-                  alt="Product"
-                  style={{
-                    display: 'block',
-                    width: 240,
-                    height: 240,
-                    objectFit: 'cover',
-                    backgroundColor: 'var(--gray-5)',
-                  }}
-                />
-              </Inset>
+        <Card size="2" className={css.productCard}>
+          <Flex className={css.cardContent} direction="row">
+            <Link className={css.imageLink} to={`/products/${category}/${productId}?color=${color}&size=${size}`}>
+              <img src={imageUrl} alt={productName} className={css.productImage} />
             </Link>
-            <Flex direction="column" justify="between">
-              <Box>
-                <Flex>
-                  <Flex justify="between" width="400px">
-                    <Link to={`/products/${category}/${productId}?color=${color}&size=${size}`}>
-                      <Text as="p" size="3" className={css.productName}>
-                        {productName}
-                      </Text>
-                    </Link>
-                    <Text as="p" size="3">
-                      ${price.toFixed(2)}
+            <Flex className={css.productDetails} direction="column" justify="between">
+              <Box className={css.productInfo}>
+                <Flex className={css.productHeading}>
+                  <Link to={`/products/${category}/${productId}?color=${color}&size=${size}`}>
+                    <Text as="p" size="3" className={css.productName}>
+                      {productName}
                     </Text>
-                  </Flex>
-                  <ButtonBarOfProductCard
-                    handleRemoveFromCart={handleRemoveFromCart}
-                    handleToggleFavorite={handleToggleFavorite}
-                    isFavoriteProduct={isFavoriteProduct}
-                  />
+                  </Link>
+                  <Text as="p" size="3" className={`${css.productPrice} ${css.desktopPrice}`}>
+                    ${price.toFixed(2)}
+                  </Text>
                 </Flex>
-                <Text as="p" size="3" mb="3" className={css.productOption}>
-                  {colorName}
-                </Text>
-                <Text as="p" size="3" className={css.productOption}>
-                  size: {size}
-                </Text>
+                <Box className={css.productOptions}>
+                  <Text as="p" size="3" className={css.productOption}>
+                    {colorName}
+                  </Text>
+                  <Text as="p" size="3" className={`${css.productOption} ${css.sizeOption}`}>
+                    size: {size}
+                  </Text>
+                </Box>
               </Box>
-              <SelectQuantity quantity={quantity} handleQuantityChange={handleQuantityChange} />
+              <Flex className={css.productFooter} align="center">
+                <Flex className={css.quantityGroup} align="center">
+                  <Text as="span" size="2" className={css.quantityLabel}>
+                    QTY:
+                  </Text>
+                  <SelectQuantity quantity={quantity} handleQuantityChange={handleQuantityChange} />
+                </Flex>
+                <Text as="p" size="3" className={`${css.productPrice} ${css.mobilePrice}`}>
+                  ${price.toFixed(2)}
+                </Text>
+              </Flex>
             </Flex>
           </Flex>
+          <ButtonBarOfProductCard
+            handleRemoveFromCart={handleRemoveFromCart}
+            handleToggleFavorite={handleToggleFavorite}
+            isFavoriteProduct={isFavoriteProduct}
+          />
         </Card>
       </Box>
     </li>

@@ -1,0 +1,13 @@
+.buttonBar {
+  top: 0;
+  right: -8px;
+  transform: translateY(-4px);
+}
+
+@media screen and (min-width: 768px) {
+  .buttonBar {
+    top: var(--space-1);
+    right: var(--space-1);
+    transform: none;
+  }
+}
