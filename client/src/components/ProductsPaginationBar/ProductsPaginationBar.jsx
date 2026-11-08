@@ -17,7 +17,7 @@ export default function ProductsPaginationBar({
     <Flex direction="column" align="center" gap="4">
       <Text as="p" size="2">{`Page: ${page} of ${totalPages} `}</Text>
       <PaginationProgressBar page={page} totalPages={totalPages} />
-      <Flex justify="between" width="100%">
+      <Flex justify="between" width="100%" gap="3" className={css.actions}>
         <Button
           className={clsx(css.btn, {
             [css.hidden]: !hasPreviousPage,

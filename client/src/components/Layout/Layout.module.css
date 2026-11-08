@@ -1,9 +1,12 @@
 .pageContainer {
+  box-sizing: border-box;
   min-width: 320px;
+  width: 100%;
   max-width: 1440px;
   min-height: 100vh;
   display: flex;
   flex-direction: column;
+  overflow-x: clip;
   margin-left: auto;
   margin-right: auto;
   background-color: var(--accent-1);

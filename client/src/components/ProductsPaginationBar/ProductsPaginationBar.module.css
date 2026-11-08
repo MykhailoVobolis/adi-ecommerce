@@ -1,6 +1,7 @@
 .btn {
   justify-content: center;
-  width: 150px;
+  width: 100%;
+  max-width: 150px;
   height: 45px;
   padding: 0 16px;
   font-size: 16px;
@@ -12,7 +13,7 @@
   cursor: pointer;
   transition: color var(--animation), background-color var(--animation);
 
-  min-width: 100px;
+  min-width: 0;
 }
 
 .btn:hover {
@@ -22,4 +23,25 @@
 
 .hidden {
   visibility: hidden;
+}
+
+.actions {
+  box-sizing: border-box;
+  max-width: 100%;
+  padding-right: 16px;
+  padding-left: 16px;
+}
+
+@media screen and (min-width: 768px) {
+  .actions {
+    padding-right: 32px;
+    padding-left: 32px;
+  }
+}
+
+@media screen and (min-width: 1200px) {
+  .actions {
+    padding-right: 0;
+    padding-left: 0;
+  }
 }

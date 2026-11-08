@@ -69,9 +69,9 @@ export default function ProductCategoryPage() {
           </Box>
         </Flex>
       </Section>
-      <Section size="2">
+      <Section size="2" className={css.productsSection}>
         <Container size={{ initial: '1', sm: '2', md: '3', lg: '4', xl: '5' }}>
-          <Heading as="h1" size="8" mb="6" weight="bold">
+          <Heading as="h1" size="8" weight="bold" className={css.productsHeading}>
             {category.toUpperCase() === 'KIDS' ? `KIDS' PRODUCTS` : `${category.toUpperCase()}'S PRODUCTS`}
           </Heading>
           {products.length > 0 && <ProductsList products={products} category={category} />}

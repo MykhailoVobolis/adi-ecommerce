@@ -3,20 +3,30 @@
 }
 
 .hero {
+  position: relative;
+  box-sizing: border-box;
   background-size: cover;
   background-repeat: no-repeat;
   min-width: 320px;
-  max-width: 100%;
+  width: 100%;
   margin-left: auto;
   margin-right: auto;
-  padding: 60px 40px 0px 40px;
-  height: 640px;
-  align-items: start;
+  height: clamp(420px, 70svh, 560px);
+  padding: 32px 16px;
+  align-items: flex-end;
+}
+
+.hero::before {
+  content: '';
+  position: absolute;
+  inset: 45% 0 0;
+  background: linear-gradient(transparent, rgb(0 0 0 / 58%));
+  pointer-events: none;
 }
 
 .heroMen {
   background-image: url('/img/background/men-hero-bg-v3.webp');
-  background-position: 50% 10%;
+  background-position: 48% center;
 }
 
 .heroWomen {
@@ -43,26 +53,122 @@
 }
 
 .descContainer {
+  position: relative;
   display: flex;
-  align-items: center;
-  justify-content: space-between;
-  width: 90%;
-  height: auto;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 8px;
+  width: 100%;
 }
 
 .heading {
   color: var(--main-white-color);
-  font-size: 140px;
+  font-size: clamp(72px, 24vw, 110px);
   line-height: 0.85;
   font-family: Bebas;
 }
 
 .description {
   color: var(--main-white-color);
-  font-size: 44px;
-  line-height: 38px;
-  font-weight: 400;
+  font-size: clamp(18px, 5vw, 24px);
+  line-height: 1;
   font-weight: 800;
-  letter-spacing: 7.87px;
+  letter-spacing: 0.14em;
   text-transform: uppercase;
+}
+
+.productsSection {
+  padding-top: 32px;
+  padding-bottom: 48px;
+}
+
+.productsHeading {
+  margin-bottom: 24px;
+  margin-left: 16px;
+  font-size: clamp(28px, 7.5vw, 32px);
+  line-height: 1;
+}
+
+@media screen and (min-width: 768px) {
+  .hero {
+    height: 560px;
+    padding: 40px 32px;
+  }
+
+  .heroMen {
+    background-position: 50% center;
+  }
+
+  .descContainer {
+    flex-direction: row;
+    align-items: flex-end;
+    justify-content: space-between;
+  }
+
+  .heading {
+    font-size: 110px;
+  }
+
+  .description {
+    padding-bottom: 8px;
+    font-size: 24px;
+  }
+
+  .productsSection {
+    padding-top: 48px;
+    padding-bottom: 64px;
+  }
+
+  .productsHeading {
+    margin-bottom: 32px;
+    margin-left: 0;
+    font-size: 34px;
+  }
+}
+
+@media screen and (min-width: 1024px) {
+  .hero {
+    height: 600px;
+  }
+
+  .heading {
+    font-size: 120px;
+  }
+}
+
+@media screen and (min-width: 1200px) {
+  .hero {
+    height: 640px;
+    padding: 60px 40px 0;
+    align-items: flex-start;
+  }
+
+  .hero::before {
+    display: none;
+  }
+
+  .heroMen {
+    background-position: 50% 10%;
+  }
+
+  .descContainer {
+    align-items: center;
+    width: 90%;
+  }
+
+  .heading {
+    font-size: 140px;
+  }
+
+  .description {
+    padding-bottom: 0;
+    font-size: 44px;
+    line-height: 38px;
+    letter-spacing: 7.87px;
+  }
+
+  .productsHeading {
+    margin-bottom: 48px;
+    font-size: var(--font-size-8);
+  }
 }

@@ -1,7 +1,13 @@
 .productBox {
+  box-sizing: border-box;
   border: 1px solid transparent;
-  max-width: calc((100% - 24px) / 4);
+  min-width: 0;
+  width: 100%;
   position: relative;
+}
+
+.productBox > :global(.rt-Card) {
+  height: 100%;
 }
 
 .productBox:hover {
