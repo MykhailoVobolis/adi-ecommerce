@@ -1,9 +1,22 @@
 .header {
-  max-width: 100%;
+  position: fixed;
+  top: 0;
+  right: 0;
+  left: 0;
+  box-sizing: border-box;
+  width: 100%;
+  max-width: 1440px;
+  margin-right: auto;
+  margin-left: auto;
   background-color: var(--main-white-color);
-  position: sticky;
-  top: 0px;
   z-index: 999;
+  transform: translateY(0);
+  transition: transform 350ms cubic-bezier(0.22, 1, 0.36, 1);
+  will-change: transform;
+}
+
+.hidden {
+  transform: translateY(-100%);
 }
 
 .navContainer {
@@ -27,5 +40,11 @@
   .navContainer {
     padding-right: 40px;
     padding-left: 40px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .header {
+    transition: none;
   }
 }
