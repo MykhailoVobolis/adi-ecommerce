@@ -27,6 +27,12 @@
   font-weight: 700;
 }
 
+@media screen and (max-width: 767px) {
+  .emptyBagButton {
+    width: 100%;
+  }
+}
+
 @media screen and (min-width: 768px) {
   .cartHeader {
     margin-bottom: 56px;

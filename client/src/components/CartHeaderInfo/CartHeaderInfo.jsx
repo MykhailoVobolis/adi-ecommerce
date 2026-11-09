@@ -30,7 +30,7 @@ export default function CartHeaderInfo({ totalQuantityProducts, totalPrice }) {
           <Text as="p" size="3" mb="5">
             Once you add something to your bag, it will appear here. Ready to get started?
           </Text>
-          <LinkButton to="/" text="get started" />
+          <LinkButton to="/" text="get started" className={css.emptyBagButton} />
         </>
       )}
     </>
