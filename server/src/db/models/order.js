@@ -1,6 +1,5 @@
 import { model, Schema } from 'mongoose';
 import { mongooseSaveError, setUpdateSettings } from './hooks.js';
-import { type } from 'node:os';
 
 const orderProductSchema = new Schema(
   {
@@ -25,6 +24,7 @@ const orderProductSchema = new Schema(
 
 const orderSchema = new Schema(
   {
+    orderNumber: { type: String, required: true },
     userId: { type: Schema.Types.ObjectId, ref: 'user', default: null },
     contact: {
       firstName: { type: String, required: true },
@@ -44,6 +44,11 @@ const orderSchema = new Schema(
     status: { type: String, enum: ['pending', 'paid', 'failed', 'canceled'], default: 'pending' },
   },
   { versionKey: false, timestamps: true },
+);
+
+orderSchema.index(
+  { orderNumber: 1 },
+  { unique: true, partialFilterExpression: { orderNumber: { $type: 'string' } } },
 );
 
 // Використання Mongoose хук mongooseSaveError при додаванні("save") об'єкта що не відповідає схемі валідації

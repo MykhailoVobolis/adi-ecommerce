@@ -5,6 +5,7 @@ import fs from 'node:fs/promises';
 
 import { CartCollection } from '../db/models/cart.js';
 import { OrderCollection } from '../db/models/order.js';
+import { getNextOrderNumber } from '../db/models/orderCounter.js';
 import { sendEmail } from '../utils/sendMail.js';
 import { env } from '../utils/env.js';
 import { SMTP, TEMPLATES_DIR } from '../constants/index.js';
@@ -29,6 +30,7 @@ export const createOrder = async (userId, orderDetails) => {
     newOrder = await OrderCollection.create({
       userId,
       ...orderDetails,
+      orderNumber: await getNextOrderNumber(),
     });
 
     // Очистити кошик
@@ -40,6 +42,7 @@ export const createOrder = async (userId, orderDetails) => {
     // Замовлення від неавторизованого користувача
     newOrder = await OrderCollection.create({
       ...orderDetails,
+      orderNumber: await getNextOrderNumber(),
     });
   }
 
@@ -49,6 +52,7 @@ export const createOrder = async (userId, orderDetails) => {
       contact: { firstName, lastName, email },
       products,
       totalPrice,
+      orderNumber,
       delivery: { method, address, cost },
       paymentMethod,
     } = newOrder;
@@ -69,12 +73,10 @@ export const createOrder = async (userId, orderDetails) => {
     const templatePath = path.join(TEMPLATES_DIR, 'orderConfirmation.html');
     const templateSource = (await fs.readFile(templatePath)).toString();
     const template = handlebars.compile(templateSource);
-    const shortOrderId = newOrder._id.toString().slice(-10);
-
     const html = template({
       firstName,
       lastName,
-      orderId: shortOrderId,
+      orderNumber,
       products: productsForTemplate,
       paymentMethod,
       deliveryMethod: method,
@@ -86,7 +88,7 @@ export const createOrder = async (userId, orderDetails) => {
     await sendEmail({
       from: env(SMTP.SMTP_FROM),
       to: email,
-      subject: `Your order ID ${shortOrderId} successfully placed ✅`,
+      subject: `Your order ${orderNumber} successfully placed ✅`,
       html,
     });
   } catch (err) {
@@ -121,6 +123,7 @@ export const createOrder = async (userId, orderDetails) => {
 
   return {
     orderId: newOrder._id,
+    orderNumber: newOrder.orderNumber,
     checkoutUrl,
   };
 };

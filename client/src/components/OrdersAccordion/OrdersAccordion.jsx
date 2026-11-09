@@ -41,7 +41,7 @@ export default function OrdersAccordion({ orders }) {
               <Flex align="center" className={css.orderSummaryRow}>
                 <Flex direction="column" className={css.orderMeta} gap="1">
                   <Text className={css.orderId} as="span" size="4" weight="bold">
-                    ORDER ID: {order._id.slice(-10)}
+                    ORDER ID: {order.orderNumber || order._id.slice(-10)}
                   </Text>
                   <Text className={css.orderDate} as="span" size="3">
                     Date: {orderDate}

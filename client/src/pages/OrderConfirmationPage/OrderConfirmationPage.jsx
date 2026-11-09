@@ -21,7 +21,7 @@ export default function OrderConfirmationPage() {
   const isLoading = useSelector(selectIsLoading);
   const confirmedOrder = useSelector(selectConfirmedOrder);
   const { isOpen, openModal, closeModal } = useModal();
-  const { _id, createdAt, contact, products, delivery, totalQuantityProducts, totalPrice, status } = confirmedOrder;
+  const { _id, orderNumber, createdAt, contact, products, delivery, totalQuantityProducts, totalPrice, status } = confirmedOrder;
 
   const orderData = formatDate(createdAt);
 
@@ -72,7 +72,7 @@ export default function OrderConfirmationPage() {
                       DETAILS
                     </Text>
                     <Text as="p" mb="1">
-                      Order ID: {_id.slice(-10)}
+                      Order ID: {orderNumber || _id.slice(-10)}
                     </Text>
                     <Text as="p" mb="1">
                       Date: {orderData}
